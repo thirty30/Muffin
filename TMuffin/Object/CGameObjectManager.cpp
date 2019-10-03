@@ -8,8 +8,4 @@ tbool CGameObjectManager::RegisterGameObject(CGameObject* a_pGameObject)
 	return true;
 }
 
-void TMuffin_RegisterGameObjects(CGameObject* a_pGameObject)
-{
-	CGameObjectManager::GetSingleton().RegisterGameObject(a_pGameObject);
-}
 

@@ -26,9 +26,9 @@ struct SMeshTriangel
 	}
 };
 
-class CMesh
+class T_DLL_EXPORT CMesh
 {
-private:
+public:
 	n32 m_nVertexCount;
 	SMeshVertex* m_pVertices;	//store the vertices
 
@@ -38,10 +38,4 @@ private:
 public:
 	CMesh();
 	~CMesh();
-
-	tbool LoadPlyModel(tstring aFileName);
-	n32 GetVertexCount() { return this->m_nVertexCount; }
-	n32 GetTriangelCount() { return this->m_nTriangelCount; }
-	const SMeshVertex* GetVertex(n32 a_nIndex);
-	const SMeshTriangel* GetTriangel(n32 a_nIndex);
 };

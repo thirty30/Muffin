@@ -11,12 +11,29 @@
 #include <glm/gtc/type_ptr.hpp>				// glm::value_ptr
 
 #include "./CommonDefine.h"
-#include "./Camera/CCamera.h"
-#include "./Mesh/CMesh.h"
 #include "./Window/CWindow.h"
-#include "./VAOManager/CVAOManager.h"
+#include "./Object/CMuffinObject.h"
+#include "./Camera/CCamera.h"
+#include "./Camera/CCameraManager.h"
+#include "./Mesh/CMesh.h"
+#include "./Renderer/CMeshRenderer.h"
 #include "./ShaderHelper/CShaderHelper.h"
-#include "./GameObject/CGameObject.h"
-#include "./GameObject/CGameObjectManager.h"
+#include "./Object/CGameObject.h"
+#include "./Object/CGameObjectManager.h"
+#include "./ResourceLoader/CResourceLoader.h"
 
+
+extern CWindow* pMuffinWindow;
+extern CGameObjectManager* pMuffinGameObjectManager;
+extern CCameraManager* pMuffinCameraManager;
+
+T_DLL_EXPORT tbool InitMuffin();
+T_DLL_EXPORT tbool InitMuffinWindow(n32 a_nWinWidth, n32 a_nWinHigh, tstring a_strWinName);
+T_DLL_EXPORT void ClearMuffin();
+T_DLL_EXPORT void LoopMuffin();
+void LoopMuffinPhysics();
+void LoopMuffinGraphics();
+
+T_DLL_EXPORT void TMuffin_AddGameObjects(CGameObject* a_pGameObject);
+T_DLL_EXPORT void TMuffin_AddCamera(CCamera* a_pCamera);
 

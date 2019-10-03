@@ -13,17 +13,27 @@
     <ClCompile Include="Window\CWindow.cpp">
       <Filter>Window</Filter>
     </ClCompile>
-    <ClCompile Include="VAOManager\CVAOManager.cpp">
-      <Filter>VAOManager</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\CGameObject.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\CGameObjectManager.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="ShaderHelper\CShaderHelper.cpp">
       <Filter>ShaderHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CGameObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CGameObjectManager.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\CMuffinObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TMuffin.cpp" />
+    <ClCompile Include="ResourceLoader\CResourceLoader.cpp">
+      <Filter>ResourceLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\CMeshRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\CCameraManager.cpp">
+      <Filter>Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -37,19 +47,28 @@
     <ClInclude Include="Window\CWindow.h">
       <Filter>Window</Filter>
     </ClInclude>
-    <ClInclude Include="VAOManager\CVAOManager.h">
-      <Filter>VAOManager</Filter>
-    </ClInclude>
     <ClInclude Include="CommonDefine.h" />
-    <ClInclude Include="GameObject\CGameObject.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="TMuffin.h" />
-    <ClInclude Include="GameObject\CGameObjectManager.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="ShaderHelper\CShaderHelper.h">
       <Filter>ShaderHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CGameObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CGameObjectManager.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\CMuffinObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceLoader\CResourceLoader.h">
+      <Filter>ResourceLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\CMeshRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\CCameraManager.h">
+      <Filter>Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -62,14 +81,17 @@
     <Filter Include="Mesh">
       <UniqueIdentifier>{260fad13-f622-4893-9931-2a861c6cba4a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="VAOManager">
-      <UniqueIdentifier>{f1c628f2-5ff9-4f6e-ac3f-19ecc0474161}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject">
-      <UniqueIdentifier>{390d20b4-0d11-4373-a5a3-b66d7866744d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ShaderHelper">
       <UniqueIdentifier>{83303453-8bd8-4a6b-9fae-49ea5e53e396}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{215db145-0094-43ed-baa5-1d06b9cdfbc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ResourceLoader">
+      <UniqueIdentifier>{6afbc6ee-cc89-4009-ac7a-4c84215e7e5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{67e98573-1cac-458f-a18d-6502059f9ce3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

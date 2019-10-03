@@ -1,8 +1,10 @@
 #include "pch.h"
 
+T_IMPLEMENT_SINGLETON(CWindow)
+
 void CWindow::ErrorCallback(n32 a_nErrorCode, const tcchar* a_strDesc)
 {
-	printf("Error Code: %d, Error: %s\n", a_nErrorCode, a_strDesc);
+
 }
 
 void CWindow::KeyCallback(GLFWwindow* a_pWindow, n32 a_nKey, n32 a_nScancode, n32 a_nAction, n32 a_nMods)
@@ -27,23 +29,22 @@ tbool CWindow::InitWindow()
 	}
 	//register key back
 	glfwSetKeyCallback(this->m_pWindow, CWindow::KeyCallback);
-
 	glfwMakeContextCurrent(this->m_pWindow);
 	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 	glfwSwapInterval(1);
-
 	glEnable(GL_DEPTH);			//write to the depth buffer
 	glEnable(GL_DEPTH_TEST);	//Test with buffer when drawing
-	CGameObjectManager* pGameObjectManager = new CGameObjectManager();
 	return true;
 }
 
 void CWindow::Loop()
 {
-	glm::vec3 vCameraEye = glm::vec3(0.0, 0.0, -10.0f);
-	glm::vec3 vCameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
-	glm::vec3 vVector = glm::vec3(0.0f, 1.0f, 0.0f);
 	glm::vec3 lightPos = glm::vec3(0.0f, 0.0f, 0.0f);
+	CCamera* pCamera = pMuffinCameraManager->GetTopCamera();
+	if (pCamera == NULL)
+	{
+		return;
+	}
 
 	while (glfwWindowShouldClose(this->m_pWindow) == false)
 	{
@@ -51,24 +52,21 @@ void CWindow::Loop()
 		//{
 		//	printf("P\n");
 		//}
-		n32 nWidth = 0;
-		n32 nHeight = 0;
-		glfwGetFramebufferSize(this->m_pWindow, &nWidth, &nHeight);
-		f32 nRatio = (f32)nWidth / (f32)nHeight;
 
-		glm::mat4 matM, matV, matP, matMVP;
-		matP = glm::perspective(0.6f, nRatio, 0.1f, 1000.0f);	//Projection Matrix
-		matV = glm::mat4(1.0f);	//View Matrix
-		matV = glm::lookAt(vCameraEye, vCameraTarget, vVector);
-		matMVP = matP * matV * matM;
-		glViewport(0, 0, nWidth, nHeight);
-		//clear both the colour(what we see) buffer and  the depth(z) buffer
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		//n32 nWidth, nHeight = 0;
+		//glfwGetFramebufferSize(this->m_pWindow, &nWidth, &nHeight);
+		//glViewport(0, 0, nWidth, nHeight);
+
+		glViewport(0, 0, this->m_nWindowWidth, this->m_nWindowHigh);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		//clear both the colour(what we see) buffer and  the depth(z) buffer
 		
+		glm::mat4 matV = pCamera->GetView();
+		glm::mat4 matP = pCamera->GetPerspective();
+
 		for (int i = 0; i < CGameObjectManager::GetSingleton().m_vList.size(); i++)
 		{
 			CGameObject* pCurGameObj = CGameObjectManager::GetSingleton().m_vList[i];
-			matM = glm::mat4(1.0f);
+			glm::mat4 matM = glm::mat4(1.0f);
 
 			glm::mat4 rotateX = glm::rotate(glm::mat4(1.0f), pCurGameObj->m_vRotation.x, glm::vec3(1.0f, 0.0, 0.0f));
 			matM *= rotateX;
@@ -85,11 +83,11 @@ void CWindow::Loop()
 			glm::mat4 scale = glm::scale(glm::mat4(1.0f), pCurGameObj->m_vScale);
 			matM *= scale;
 
-			n32 nShaderProgramID = pCurGameObj->m_nShaderProgramID;
+			n32 nShaderProgramID = pCurGameObj->m_pMeshRenderer->m_nShaderProgramID;
 			glUseProgram(nShaderProgramID);
-			GLint mvp_location = glGetUniformLocation(nShaderProgramID, "MVP");
+			//GLint mvp_location = glGetUniformLocation(nShaderProgramID, "MVP");
 			//glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*) mvp);
-			glUniformMatrix4fv(mvp_location, 1, GL_FALSE, glm::value_ptr(matMVP));
+			//glUniformMatrix4fv(mvp_location, 1, GL_FALSE, glm::value_ptr(matMVP));
 
 			GLint matModel_UL = glGetUniformLocation(nShaderProgramID, "matModel");
 			GLint matView_UL = glGetUniformLocation(nShaderProgramID, "matView");
@@ -114,7 +112,7 @@ void CWindow::Loop()
 
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-			CModelDrawInfo* pDrawInfo = pCurGameObj->m_pDrawInfo;
+			CMeshDrawInfo* pDrawInfo = pCurGameObj->m_pMeshRenderer->m_pMeshDrawInfo;
 			glBindVertexArray(pDrawInfo->m_nVAOID);
 			glDrawElements(GL_TRIANGLES, pDrawInfo->m_nTriangelIndexCount, GL_UNSIGNED_INT, NULL);
 			glBindVertexArray(0);

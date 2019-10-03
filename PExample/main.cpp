@@ -13,8 +13,16 @@ tbool Init()
 
 n32 main(n32 argc, tcchar** argv)
 {
-	CWindow* pWindow = new CWindow(1600, 900, "PExample");
-	pWindow->InitWindow();
+	f32 fScreenWidth = 1600.0f;
+	f32 fScreenHigh = 900.0f;
+	if (InitMuffin() == false)
+	{
+		return 0;
+	}
+	if (InitMuffinWindow(fScreenWidth, fScreenHigh, "PExample") == false)
+	{
+		return 0;
+	}
 
 	if (Init() == false)
 	{
@@ -22,22 +30,29 @@ n32 main(n32 argc, tcchar** argv)
 		return false;
 	}
 
+	CCamera* pCamera = new CCamera();
+	pCamera->m_fFieldOfViewRadians = 0.6f;
+	pCamera->m_fViewDisBegin = 0.01f;
+	pCamera->m_fViewDisEnd = 1000.0f;
+	pCamera->m_fScreenRatio = fScreenWidth / fScreenHigh;
+	TMuffin_AddCamera(pCamera);
+
 	CShaderProgram* pShaderPro = CShaderManager::GetSingleton().FindShaderProgramByCustomID(E_SHADER_ID_DEFAULT);
 	n32 nShaderProgramID = pShaderPro->m_nOpenGLID;
 
-	CVAOManager* pVAO = new CVAOManager();
-	pVAO->LoadModel(E_MODEL_ID_BUNNY, "./Assets/models/bun_zipper_res4_xyz.ply", nShaderProgramID);
+	CMesh* pMesh = new CMesh();
+	CResourceLoader* pResMgr = new CResourceLoader();
+	pResMgr->LoadModelFromPly("./Assets/models/bun_zipper_res4_xyz.ply", pMesh);
 
 	CGameObject* pGameObj = new CGameObject();
-	pGameObj->m_nShaderProgramID = nShaderProgramID;
-	pGameObj->m_pDrawInfo = pVAO->FindModel(E_MODEL_ID_BUNNY);
-	pGameObj->m_vPosition = glm::vec3(0, 0, 0);
 	pGameObj->m_vScale = glm::vec3(6, 6, 6);
+	pGameObj->InitMeshRenderer(pMesh, nShaderProgramID);
 
-	TMuffin_RegisterGameObjects(pGameObj);
+	delete pMesh;
+	TMuffin_AddGameObjects(pGameObj);
 
-	pWindow->Loop();
-	pWindow->Clear();
+	LoopMuffin();
+	ClearMuffin();
 	return 0;
 }
 

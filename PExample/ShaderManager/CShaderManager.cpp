@@ -5,29 +5,25 @@ T_IMPLEMENT_SINGLETON(CShaderManager)
 tbool CShaderManager::Init()
 {
 	this->m_mapCustomID2Program.clear();
+	tbool bRes = false;
 
+	//Default Shader with light////////////////////////////////////////////////////
 	CShader* pDefaultVertexShader = new CShader(E_SHADER_TYPE_VERTEX, "./Assets/shaders/DefaultVertexShader.glsl");
-	if (pDefaultVertexShader->InitShader() == false) { return false; }
+	bRes = pDefaultVertexShader->InitShader();
+	if (bRes == false) { return false; }
 
 	CShader* pDefaultFragmentShader = new CShader(E_SHADER_TYPE_FRAGMENT, "./Assets/shaders/DefaultFragmentShader.glsl");
-	if (pDefaultFragmentShader->InitShader() == false) { return false; }
+	bRes = pDefaultFragmentShader->InitShader();
+	if (bRes == false) { return false; }
 
 	CShaderProgram* pDefaultShaderProgram = new CShaderProgram();
-	CreateShaderProgram(pDefaultVertexShader, pDefaultFragmentShader, pDefaultShaderProgram);
+	bRes = CreateShaderProgram(pDefaultVertexShader, pDefaultFragmentShader, pDefaultShaderProgram);
+	if (bRes == false) { return false; }
 
 	this->m_mapCustomID2Program[E_SHADER_ID_DEFAULT] = pDefaultShaderProgram;
 
-
-	CShader* pTestVertexShader = new CShader(E_SHADER_TYPE_VERTEX, "./Assets/shaders/Test_VertexShader.glsl");
-	if (pTestVertexShader->InitShader() == false) { return false; }
-
-	CShader* pTestFragmentShader = new CShader(E_SHADER_TYPE_FRAGMENT, "./Assets/shaders/Test_FragmentShader.glsl");
-	if (pTestFragmentShader->InitShader() == false) { return false; }
-
-	CShaderProgram* pTestShaderProgram = new CShaderProgram();
-	CreateShaderProgram(pTestVertexShader, pTestFragmentShader, pTestShaderProgram);
-
-	this->m_mapCustomID2Program[E_SHADER_ID_TEST] = pTestShaderProgram;
+	//Other Shaders////////////////////////////////////////////////////
+	
 	return true;
 }
 
