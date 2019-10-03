@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="CommonDefine.h" />
+    <ClInclude Include="ShaderManager\CShaderManager.h">
+      <Filter>ShaderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ShaderManager\CShaderManager.cpp">
+      <Filter>ShaderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ShaderManager">
+      <UniqueIdentifier>{7936c3bd-ba3c-4292-9b85-1a2528239189}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

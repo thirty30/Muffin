@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="TFile\TFileConfig.cpp">
+      <Filter>TFile</Filter>
+    </ClCompile>
+    <ClCompile Include="TFile\TFileObject.cpp">
+      <Filter>TFile</Filter>
+    </ClCompile>
+    <ClCompile Include="TDataStructure\TBinaryTree\TBinaryTree.cpp">
+      <Filter>TDataStructure\TBinaryTree</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TSystemInclude.h" />
+    <ClInclude Include="TTypeDefine.h" />
+    <ClInclude Include="TArithmetic\TArithmetic.h">
+      <Filter>TArithmetic</Filter>
+    </ClInclude>
+    <ClInclude Include="TArithmetic\TBinarySearch.h">
+      <Filter>TArithmetic</Filter>
+    </ClInclude>
+    <ClInclude Include="TArithmetic\TInsertionSort.h">
+      <Filter>TArithmetic</Filter>
+    </ClInclude>
+    <ClInclude Include="TArithmetic\TQuickSort.h">
+      <Filter>TArithmetic</Filter>
+    </ClInclude>
+    <ClInclude Include="TArithmetic\TSelectionSort.h">
+      <Filter>TArithmetic</Filter>
+    </ClInclude>
+    <ClInclude Include="TArithmetic\TShellSort.h">
+      <Filter>TArithmetic</Filter>
+    </ClInclude>
+    <ClInclude Include="TCommonFunction\TBitArray.h">
+      <Filter>TCommonFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="TCommonFunction\TCommonFunction.h">
+      <Filter>TCommonFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="TCommonFunction\TSingleton.h">
+      <Filter>TCommonFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="TCommonFunction\TUtilityFunction.h">
+      <Filter>TCommonFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="TFile\TFile.h">
+      <Filter>TFile</Filter>
+    </ClInclude>
+    <ClInclude Include="TFile\TFileConfig.h">
+      <Filter>TFile</Filter>
+    </ClInclude>
+    <ClInclude Include="TFile\TFileObject.h">
+      <Filter>TFile</Filter>
+    </ClInclude>
+    <ClInclude Include="TDateTime\TTime.h">
+      <Filter>TDateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="TDateTime\TTimeCounter.h">
+      <Filter>TDateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="TDateTime\TTimeDate.h">
+      <Filter>TDateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="TDateTime\TTimeFunction.h">
+      <Filter>TDateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="TDateTime\TTimestamp.h">
+      <Filter>TDateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="TDataStructure\TDataStructure.h">
+      <Filter>TDataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="TDataStructure\TStack\TStack.h">
+      <Filter>TDataStructure\TStack</Filter>
+    </ClInclude>
+    <ClInclude Include="TDataStructure\TQueue\TQueue.h">
+      <Filter>TDataStructure\TQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="TDataStructure\TBinaryTree\TBinaryTree.h">
+      <Filter>TDataStructure\TBinaryTree</Filter>
+    </ClInclude>
+    <ClInclude Include="TCommonFunction\TThreadHelper.h">
+      <Filter>TCommonFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="TCore.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="TDataStructure">
+      <UniqueIdentifier>{5b9ea7f4-9464-4801-a7b3-12ae18cbf678}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TDateTime">
+      <UniqueIdentifier>{adc452d2-6b15-4cab-94a3-1abbef3d7fb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TArithmetic">
+      <UniqueIdentifier>{d3f6d004-4bce-43c3-a39d-f3c6e400e6a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TCommonFunction">
+      <UniqueIdentifier>{a143c2d6-d804-4506-bfa0-a61eeae45647}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TFile">
+      <UniqueIdentifier>{5d7e5dff-25d4-422d-b3e2-aefa14793356}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TDataStructure\TBinaryTree">
+      <UniqueIdentifier>{b5b2c944-99bf-48fe-ba27-a92eeec4f63a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TDataStructure\TQueue">
+      <UniqueIdentifier>{03dd2e37-1c19-4cd5-84f7-612206423c27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TDataStructure\TStack">
+      <UniqueIdentifier>{9b8f0783-e9d0-4021-a28f-34f87ad28dd5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

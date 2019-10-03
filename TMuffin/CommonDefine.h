@@ -1,0 +1,9 @@
+#pragma once
+
+enum EShaderType
+{
+	E_SHADER_TYPE_UNKNOWN = 0,
+	E_SHADER_TYPE_VERTEX,
+	E_SHADER_TYPE_FRAGMENT,
+};
+
