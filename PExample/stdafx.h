@@ -5,7 +5,8 @@
 #include "./CommonDefine.h"
 
 #include "./ShaderManager/CShaderManager.h"
-#include "./Game/CControl.h"
+#include "./Control/CControl.h"
+#include "./Control/CCameraControl.h"
 #include "./Scene/CScene.h"
 #include "./Scene/CSceneManager.h"
 

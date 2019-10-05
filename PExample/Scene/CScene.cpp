@@ -13,6 +13,7 @@ CScene::~CScene()
 
 tbool CScene::Init()
 {
+	m_pCameraControl = new CCameraControl();
 	return true;
 }
 

@@ -9,14 +9,17 @@
     <ClInclude Include="Game\CGame.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Game\CControl.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Scene\CScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Scene\CSceneManager.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\CCameraControl.h">
+      <Filter>Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\CControl.h">
+      <Filter>Control</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -28,14 +31,17 @@
     <ClCompile Include="Game\CGame.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Game\CControl.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Scene\CScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Scene\CSceneManager.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Control\CCameraControl.cpp">
+      <Filter>Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Control\CControl.cpp">
+      <Filter>Control</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -47,6 +53,9 @@
     </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{8d681608-1b65-49b1-ad06-63fa6e893d28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Control">
+      <UniqueIdentifier>{962d1d76-0e3e-4f80-a067-7c5cf5c44b6c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

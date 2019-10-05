@@ -1,6 +1,19 @@
 #include "stdafx.h"
+T_IMPLEMENT_SINGLETON(CCameraControl)
 
-void ControlKeyEvent(n32 a_nKey, n32 a_nScancode, n32 a_nAction, n32 a_nMods)
+
+CCameraControl::CCameraControl()
+{
+	this->m_bReadyRotateCamera = false;
+	this->m_vLastCursor = glm::vec2(0, 0);
+}
+
+CCameraControl::~CCameraControl()
+{
+
+}
+
+void CCameraControl::CameraControlKeyPress(n32 a_nKey, n32 a_nScancode, n32 a_nAction, n32 a_nMods)
 {
 	f32 fCameraSpeed = 0.2f;
 	switch (a_nKey)
@@ -54,10 +67,7 @@ void ControlKeyEvent(n32 a_nKey, n32 a_nScancode, n32 a_nAction, n32 a_nMods)
 	}
 }
 
-tbool bReadyRotateCamera = false;
-glm::vec2 vOriginCursor = glm::vec2(-1, -1);
-
-void ControlMouseEvent(n32 a_nKey, n32 a_nAction, n32 a_nMods)
+void CCameraControl::CameraControlMousePress(n32 a_nKey, n32 a_nAction, n32 a_nMods)
 {
 	switch (a_nKey)
 	{
@@ -65,12 +75,12 @@ void ControlMouseEvent(n32 a_nKey, n32 a_nAction, n32 a_nMods)
 	{
 		if (a_nAction == GLFW_PRESS)
 		{
-			bReadyRotateCamera = true;
+			this->m_bReadyRotateCamera = true;
 		}
 		if (a_nAction == GLFW_RELEASE)
 		{
-			bReadyRotateCamera = false;
-			vOriginCursor = glm::vec2(-1, -1);
+			this->m_bReadyRotateCamera = false;
+			this->m_vLastCursor = glm::vec2(0, 0);
 		}
 	}
 	break;
@@ -79,28 +89,31 @@ void ControlMouseEvent(n32 a_nKey, n32 a_nAction, n32 a_nMods)
 	}
 }
 
-void ControlCursorEvent(f64 a_fX, f64 a_fY)
+void CCameraControl::CameraControlCursor(f64 a_fX, f64 a_fY)
 {
-	if (bReadyRotateCamera == true)
+	if (this->m_bReadyRotateCamera == true)
 	{
-		if (vOriginCursor.x < 0)
+		glm::vec2 vNowCursor = glm::vec2(a_fX, a_fY);
+		if (this->m_vLastCursor == glm::vec2(0, 0))
 		{
-			vOriginCursor = glm::vec2(a_fX, a_fY);
+			this->m_vLastCursor = vNowCursor;
 		}
-		glm::vec2 vNewCursor = glm::vec2(a_fX, a_fY);
-		glm::vec2 vTempCursor = vNewCursor - vOriginCursor;
-		if (vTempCursor == glm::vec2(0, 0))
+		if (this->m_vLastCursor != vNowCursor)
 		{
-			return;
-		}
-		glm::vec2 vTorwards = glm::normalize(vTempCursor);
+			glm::vec2 vTempCursor = vNowCursor - this->m_vLastCursor;
+			glm::vec2 vTorwards = glm::normalize(vTempCursor);
 
-		CCamera* pCamera = CGame::GetSingleton().GetCurrentScene()->GetCamera();
-		if (pCamera == NULL)
-		{
-			return;
+			CCamera* pCamera = CGame::GetSingleton().GetCurrentScene()->GetCamera();
+			if (pCamera == NULL)
+			{
+				return;
+			}
+			pCamera->m_vTowards.x -= vTorwards.x * 0.03;
+			pCamera->m_vTowards.y -= vTorwards.y * 0.03;
+			this->m_vLastCursor = vNowCursor;
 		}
-		pCamera->m_vTowards.x -= vTorwards.x * 0.03;
-		pCamera->m_vTowards.y -= vTorwards.y * 0.03;
 	}
 }
+
+
+
