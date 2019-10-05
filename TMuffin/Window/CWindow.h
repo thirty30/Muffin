@@ -10,19 +10,21 @@ private:
 
 public:
 	static void ErrorCallback(n32 a_nErrorCode, const tcchar* a_strDesc);
-	static void KeyCallback(GLFWwindow* a_pWindow, n32 a_nKey, n32 a_nScancode, n32 a_nAction, n32 a_nMods);
+
 public:
-	CWindow(n32 a_nWinWidth, n32 a_nWinHigh, tstring a_strWinName) :
-		m_nWindowWidth(a_nWinWidth),
-		m_nWindowHigh(a_nWinHigh),
-		m_strWindowTitle(a_strWinName)
+	CWindow()
 	{
+		this->m_nWindowWidth = 0;
+		this->m_nWindowHigh = 0;
+		this->m_strWindowTitle = "";
 		this->m_pWindow = NULL;
 	}
 	~CWindow() {}
 
-	tbool InitWindow();
-	void Loop();
+	tbool InitWindow(n32 a_nWinWidth, n32 a_nWinHigh, tstring a_strWinName);
+	void DrawWindow();
 	void Clear();
+	GLFWwindow* GetGLFWWindow() { return this->m_pWindow; }
+	tbool WindowShouldClose();
 };
 

@@ -3,16 +3,16 @@
 class T_DLL_EXPORT CCamera : public CMuffinObject
 {
 public:
-	float m_fFieldOfViewRadians;
-	float m_fScreenRatio;
-	float m_fViewDisBegin;
-	float m_fViewDisEnd;
+	f32 m_fFieldOfViewRadians;
+	f32 m_fScreenRatio;
+	f32 m_fViewDisBegin;
+	f32 m_fViewDisEnd;
 	glm::vec3 m_vTowards;
 	glm::vec3 m_vUpwards;
 
 	n32 m_nDepth;
 public:
-	CCamera();
+	CCamera(f32 a_fViewRadians, f32 a_fScreenRatio, f32 a_fViewDisBegin, f32 a_fViewDisEnd);
 	~CCamera();
 
 	inline glm::mat4 GetPerspective()

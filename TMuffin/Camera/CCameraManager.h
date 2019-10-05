@@ -3,16 +3,16 @@
 class CCameraManager
 {
 private:
-	CCamera* m_pCamera;
+	CCamera* m_pSceneCamera;
 public:
 	CCameraManager() 
 	{
-		this->m_pCamera = NULL;
+		this->m_pSceneCamera = NULL;
 	};
 	~CCameraManager() {};
 
-	inline void AddCamera(CCamera* a_pCamera) { m_pCamera = a_pCamera; }
-	inline CCamera* GetTopCamera() { return m_pCamera; }
+	inline void AddCamera(CCamera* a_pCamera) { m_pSceneCamera = a_pCamera; }
+	inline CCamera* GetTopCamera() { return m_pSceneCamera; }
 };
 
 

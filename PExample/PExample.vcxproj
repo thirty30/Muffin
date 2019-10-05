@@ -130,11 +130,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CommonDefine.h" />
+    <ClInclude Include="Game\CControl.h" />
+    <ClInclude Include="Game\CGame.h" />
+    <ClInclude Include="Scene\CScene.h" />
+    <ClInclude Include="Scene\CSceneManager.h" />
     <ClInclude Include="ShaderManager\CShaderManager.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Game\CControl.cpp" />
+    <ClCompile Include="Game\CGame.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Scene\CScene.cpp" />
+    <ClCompile Include="Scene\CSceneManager.cpp" />
     <ClCompile Include="ShaderManager\CShaderManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

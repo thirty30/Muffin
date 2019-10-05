@@ -10,6 +10,8 @@
 #include <glm/gtc/matrix_transform.hpp>		// glm::translate, glm::rotate, glm::scale, glm::perspective
 #include <glm/gtc/type_ptr.hpp>				// glm::value_ptr
 
+///////////////////////////////////////////////////////////////////////////////////////
+
 #include "./CommonDefine.h"
 #include "./Window/CWindow.h"
 #include "./Object/CMuffinObject.h"
@@ -22,18 +24,5 @@
 #include "./Object/CGameObjectManager.h"
 #include "./ResourceLoader/CResourceLoader.h"
 
-
-extern CWindow* pMuffinWindow;
-extern CGameObjectManager* pMuffinGameObjectManager;
-extern CCameraManager* pMuffinCameraManager;
-
-T_DLL_EXPORT tbool InitMuffin();
-T_DLL_EXPORT tbool InitMuffinWindow(n32 a_nWinWidth, n32 a_nWinHigh, tstring a_strWinName);
-T_DLL_EXPORT void ClearMuffin();
-T_DLL_EXPORT void LoopMuffin();
-void LoopMuffinPhysics();
-void LoopMuffinGraphics();
-
-T_DLL_EXPORT void TMuffin_AddGameObjects(CGameObject* a_pGameObject);
-T_DLL_EXPORT void TMuffin_AddCamera(CCamera* a_pCamera);
+#include "./TMuffinDeclare.h"
 

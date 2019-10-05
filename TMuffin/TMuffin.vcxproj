@@ -52,6 +52,7 @@
     <ClInclude Include="ResourceLoader\CResourceLoader.h" />
     <ClInclude Include="ShaderHelper\CShaderHelper.h" />
     <ClInclude Include="TMuffin.h" />
+    <ClInclude Include="TMuffinDeclare.h" />
     <ClInclude Include="Window\CWindow.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

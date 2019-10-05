@@ -13,3 +13,10 @@ enum EShaderID
 
 	E_SHADER_ID_DEFAULT,
 };
+
+enum EGameStatus
+{
+	E_GAME_STATUS_INIT = 0,
+
+	E_GAME_STATUS_LOAD_SCENE,
+};
