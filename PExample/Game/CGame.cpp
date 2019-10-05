@@ -3,8 +3,9 @@ T_IMPLEMENT_SINGLETON(CGame)
 
 CGame::CGame()
 {
-	this->m_nScreenWidth = 0;
-	this->m_nScreenHigh = 0;
+	this->m_nScreenWidth = 1600;
+	this->m_nScreenHigh = 900;
+	this->m_strWindowName = "pExample";
 	this->m_pShaderMgr = NULL;
 	this->m_pScene = NULL;
 }
@@ -14,28 +15,18 @@ CGame::~CGame()
 
 }
 
-void CGame::LogicCallBack()
-{
-
-}
-
 tbool CGame::InitGame()
 {
 	TMuffin_RegisterKeyCallback(ControlKeyEvent);
 	TMuffin_RegisterMouseCallback(ControlMouseEvent);
 	TMuffin_RegisterCursorCallback(ControlCursorEvent);
-	TMuffin_RegisterLogicCallBack(CGame::LogicCallBack);
+	TMuffin_RegisterPhysicsCallBack(CGame::PhysicsCallBack);
+	TMuffin_RegisterGameLogicCallBack(CGame::GameLogicCallBack);
 
-	if (InitMuffin() == false)
+	if (TMuffin_Initialize(this->m_nScreenWidth, this->m_nScreenHigh, this->m_strWindowName.c_str()) == false)
 	{
 		return 0;
 	}
-
-	if (InitMuffinWindow(this->m_nScreenWidth, this->m_nScreenHigh, "PExample") == false)
-	{
-		return 0;
-	}
-
 	this->m_pShaderMgr = new CShaderManager();
 	if (this->m_pShaderMgr->Init() == false)
 	{
@@ -65,11 +56,26 @@ void CGame::ClearGame()
 	}
 
 	//release engine
-	ClearMuffin();
+	TMuffin_Clear();
+}
+
+void CGame::LoopGame()
+{
+	TMuffin_Loop();
 }
 
 void CGame::SetScreenSize(n32 a_nWidth, n32 a_nHigh)
 {
 	this->m_nScreenWidth = a_nWidth;
 	this->m_nScreenHigh = a_nHigh;
+}
+
+void CGame::PhysicsCallBack()
+{
+
+}
+
+void CGame::GameLogicCallBack()
+{
+
 }

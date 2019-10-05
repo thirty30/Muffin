@@ -35,6 +35,24 @@
     <ClCompile Include="Camera\CCameraManager.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Engine.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ExportFunction.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Light\CLight.cpp">
+      <Filter>Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Light\CLightManager.cpp">
+      <Filter>Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\CPhysics.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\CObjectRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -70,7 +88,24 @@
     <ClInclude Include="Camera\CCameraManager.h">
       <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="TMuffinDeclare.h" />
+    <ClInclude Include="Engine\Engine.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ExportFunction.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Light\CLight.h">
+      <Filter>Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Light\CLightManager.h">
+      <Filter>Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\CPhysics.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\CObjectRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Camera">
@@ -93,6 +128,15 @@
     </Filter>
     <Filter Include="Renderer">
       <UniqueIdentifier>{67e98573-1cac-458f-a18d-6502059f9ce3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Light">
+      <UniqueIdentifier>{14370ee5-43ca-4129-b56c-1d53dfdbc5af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{e53ca5d0-b7a1-418a-88d2-c97a586ae396}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{a4c53223-3d74-4a77-b352-a40fa8b53a28}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

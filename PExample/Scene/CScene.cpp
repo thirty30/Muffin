@@ -37,9 +37,16 @@ tbool CScene::LoadScene()
 	pGameObj->m_vPosition = glm::vec3(0, 0, 10);
 	pGameObj->m_vScale = glm::vec3(6, 6, 6);
 	pGameObj->InitMeshRenderer(pMesh, nShaderProgramID);
+	TMuffin_AddGameObjects(pGameObj);
+
+	CGameObject* pGameObj2 = new CGameObject();
+	pGameObj2->m_vPosition = glm::vec3(4, 0, 10);
+	pGameObj2->m_vScale = glm::vec3(6, 6, 6);
+	pGameObj2->InitMeshRenderer(pMesh, nShaderProgramID);
+	TMuffin_AddGameObjects(pGameObj2);
 
 	delete pMesh;
-	TMuffin_AddGameObjects(pGameObj);
+	
 	return true;
 }
 

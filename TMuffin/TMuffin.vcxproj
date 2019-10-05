@@ -22,9 +22,13 @@
     <ClCompile Include="Camera\CCamera.cpp" />
     <ClCompile Include="Camera\CCameraManager.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="Engine\Engine.cpp" />
+    <ClCompile Include="Engine\ExportFunction.cpp" />
     <ClCompile Include="glad.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Light\CLight.cpp" />
+    <ClCompile Include="Light\CLightManager.cpp" />
     <ClCompile Include="Mesh\CMesh.cpp" />
     <ClCompile Include="Object\CMuffinObject.cpp" />
     <ClCompile Include="Object\CGameObject.cpp" />
@@ -33,7 +37,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Physics\CPhysics.cpp" />
     <ClCompile Include="Renderer\CMeshRenderer.cpp" />
+    <ClCompile Include="Renderer\CObjectRenderer.cpp" />
     <ClCompile Include="ResourceLoader\CResourceLoader.cpp" />
     <ClCompile Include="ShaderHelper\CShaderHelper.cpp" />
     <ClCompile Include="TMuffin.cpp" />
@@ -43,16 +49,21 @@
     <ClInclude Include="Camera\CCamera.h" />
     <ClInclude Include="Camera\CCameraManager.h" />
     <ClInclude Include="CommonDefine.h" />
+    <ClInclude Include="Engine\Engine.h" />
+    <ClInclude Include="Engine\ExportFunction.h" />
+    <ClInclude Include="Light\CLight.h" />
+    <ClInclude Include="Light\CLightManager.h" />
     <ClInclude Include="Mesh\CMesh.h" />
     <ClInclude Include="Object\CMuffinObject.h" />
     <ClInclude Include="Object\CGameObject.h" />
     <ClInclude Include="Object\CGameObjectManager.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Physics\CPhysics.h" />
     <ClInclude Include="Renderer\CMeshRenderer.h" />
+    <ClInclude Include="Renderer\CObjectRenderer.h" />
     <ClInclude Include="ResourceLoader\CResourceLoader.h" />
     <ClInclude Include="ShaderHelper\CShaderHelper.h" />
     <ClInclude Include="TMuffin.h" />
-    <ClInclude Include="TMuffinDeclare.h" />
     <ClInclude Include="Window\CWindow.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

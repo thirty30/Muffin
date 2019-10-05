@@ -15,4 +15,8 @@ public:
 	void Clear();
 
 	CCamera* GetCamera() { return this->m_pCamera; }
+
+	//void CameraControl();
 };
+
+

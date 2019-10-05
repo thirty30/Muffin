@@ -9,9 +9,6 @@ private:
 	tstring m_strWindowTitle;
 
 public:
-	static void ErrorCallback(n32 a_nErrorCode, const tcchar* a_strDesc);
-
-public:
 	CWindow()
 	{
 		this->m_nWindowWidth = 0;
@@ -21,7 +18,7 @@ public:
 	}
 	~CWindow() {}
 
-	tbool InitWindow(n32 a_nWinWidth, n32 a_nWinHigh, tstring a_strWinName);
+	tbool InitWindow(n32 a_nWinWidth, n32 a_nWinHigh, const tcchar* a_strWinName);
 	void DrawWindow();
 	void Clear();
 	GLFWwindow* GetGLFWWindow() { return this->m_pWindow; }

@@ -13,16 +13,22 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 
 #include "./CommonDefine.h"
-#include "./Window/CWindow.h"
 #include "./Object/CMuffinObject.h"
 #include "./Camera/CCamera.h"
 #include "./Camera/CCameraManager.h"
 #include "./Mesh/CMesh.h"
 #include "./Renderer/CMeshRenderer.h"
+#include "./Renderer/CObjectRenderer.h"
 #include "./ShaderHelper/CShaderHelper.h"
 #include "./Object/CGameObject.h"
 #include "./Object/CGameObjectManager.h"
+#include "./Physics/CPhysics.h"
+#include "./Light/CLight.h"
+#include "./Light/CLightManager.h"
 #include "./ResourceLoader/CResourceLoader.h"
+#include "./Window/CWindow.h"
 
-#include "./TMuffinDeclare.h"
+#include "./Engine/ExportFunction.h"
+#include "./Engine/Engine.h"
+
 
