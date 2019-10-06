@@ -1,7 +1,6 @@
 #include "stdafx.h"
 T_IMPLEMENT_SINGLETON(CCameraControl)
 
-
 CCameraControl::CCameraControl()
 {
 	this->m_bReadyRotateCamera = false;

@@ -4,6 +4,7 @@
 #include "../TMuffin/TMuffin.h"
 #include "./CommonDefine.h"
 
+#include "./ResourceManager/CResourceManager.h"
 #include "./ShaderManager/CShaderManager.h"
 #include "./Control/CControl.h"
 #include "./Control/CCameraControl.h"

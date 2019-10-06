@@ -133,6 +133,7 @@
     <ClInclude Include="Control\CCameraControl.h" />
     <ClInclude Include="Control\CControl.h" />
     <ClInclude Include="Game\CGame.h" />
+    <ClInclude Include="ResourceManager\CResourceManager.h" />
     <ClInclude Include="Scene\CScene.h" />
     <ClInclude Include="Scene\CSceneManager.h" />
     <ClInclude Include="ShaderManager\CShaderManager.h" />
@@ -143,6 +144,7 @@
     <ClCompile Include="Control\CControl.cpp" />
     <ClCompile Include="Game\CGame.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ResourceManager\CResourceManager.cpp" />
     <ClCompile Include="Scene\CScene.cpp" />
     <ClCompile Include="Scene\CSceneManager.cpp" />
     <ClCompile Include="ShaderManager\CShaderManager.cpp" />

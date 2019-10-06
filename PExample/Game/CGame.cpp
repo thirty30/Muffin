@@ -6,7 +6,7 @@ CGame::CGame()
 	this->m_nScreenWidth = 1600;
 	this->m_nScreenHigh = 900;
 	this->m_strWindowName = "pExample";
-	this->m_pResourceLoader = NULL;
+	this->m_pResManager = NULL;
 	this->m_pShaderMgr = NULL;
 	this->m_pScene = NULL;
 	this->m_eGameStatus = E_GAME_STATUS_INIT;
@@ -29,11 +29,16 @@ tbool CGame::InitGame()
 	{
 		return 0;
 	}
+
+	this->m_pResManager = new CResourceManager();
+	this->m_pResManager->Init();
+
 	this->m_pShaderMgr = new CShaderManager();
 	if (this->m_pShaderMgr->Init() == false)
 	{
 		return false;
 	}
+	
 	this->m_pScene = new CScene();
 	if (m_pScene->Init() == false)
 	{
@@ -45,10 +50,10 @@ tbool CGame::InitGame()
 void CGame::ClearGame()
 {
 	//release game data
-	if (this->m_pResourceLoader != NULL)
+	if (this->m_pResManager != NULL)
 	{
-		delete this->m_pResourceLoader;
-		this->m_pResourceLoader = NULL;
+		delete this->m_pResManager;
+		this->m_pResManager = NULL;
 	}
 	if (this->m_pShaderMgr != NULL)
 	{

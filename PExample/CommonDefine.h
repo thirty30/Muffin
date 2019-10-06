@@ -4,7 +4,9 @@ enum EModelID
 {
 	E_MODEL_ID_UNKNOWN = 0,
 
-	E_MODEL_ID_BUNNY,
+	E_MODEL_ID_TERRAIN,
+	E_MODEL_ID_CUBE,
+	E_MODEL_ID_SPHERE,
 };
 
 enum EShaderID

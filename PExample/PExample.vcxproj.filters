@@ -21,6 +21,9 @@
     <ClInclude Include="Control\CControl.h">
       <Filter>Control</Filter>
     </ClInclude>
+    <ClInclude Include="ResourceManager\CResourceManager.h">
+      <Filter>ResourceManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -43,6 +46,9 @@
     <ClCompile Include="Control\CControl.cpp">
       <Filter>Control</Filter>
     </ClCompile>
+    <ClCompile Include="ResourceManager\CResourceManager.cpp">
+      <Filter>ResourceManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ShaderManager">
@@ -56,6 +62,9 @@
     </Filter>
     <Filter Include="Control">
       <UniqueIdentifier>{962d1d76-0e3e-4f80-a067-7c5cf5c44b6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ResourceManager">
+      <UniqueIdentifier>{489dae04-512a-468f-a455-96d97f9fa927}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
