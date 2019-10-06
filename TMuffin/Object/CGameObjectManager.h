@@ -3,10 +3,13 @@
 class CGameObjectManager : public CSingleton<CGameObjectManager>
 {
 public:
-	vector<CGameObject*> m_vList;
+	hash_map<n32, CGameObject*> m_mapID2GameObj;
 
 public:
-	tbool RegisterGameObject(CGameObject* a_pGameObject);
-};
+	CGameObjectManager();
+	~CGameObjectManager();
 
+	tbool AddGameObject(u64 a_nGUID, CGameObject* a_pGameObject);
+	CGameObject* FindGameObjectByID(n32 a_nID);
+};
 

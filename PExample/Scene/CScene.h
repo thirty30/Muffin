@@ -6,6 +6,10 @@ private:
 	u64 m_nSceneID;
 	CCamera* m_pCamera;
 	CCameraControl* m_pCameraControl;
+	u64 m_nGUIDIdx;
+
+private:
+	u64 GenGUID();
 
 public:
 	CScene();

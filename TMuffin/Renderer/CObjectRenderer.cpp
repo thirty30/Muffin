@@ -15,9 +15,10 @@ void CObjectRenderer::RenderObjects()
 	glm::mat4 matV = pCamera->GetView();
 	glm::mat4 matP = pCamera->GetPerspective();
 
-	for (int i = 0; i < CGameObjectManager::GetSingleton().m_vList.size(); i++)
+	hash_map<n32, CGameObject*>::iterator iter = CGameObjectManager::GetSingleton().m_mapID2GameObj.begin();
+	for (; iter != CGameObjectManager::GetSingleton().m_mapID2GameObj.end(); iter++)
 	{
-		CGameObject* pCurGameObj = CGameObjectManager::GetSingleton().m_vList[i];
+		CGameObject* pCurGameObj = iter->second;
 		glm::mat4 matM = glm::mat4(1.0f);
 
 		glm::mat4 rotateX = glm::rotate(glm::mat4(1.0f), pCurGameObj->m_vRotation.x, glm::vec3(1.0f, 0.0, 0.0f));

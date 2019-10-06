@@ -21,7 +21,7 @@ T_DLL_EXPORT void TMuffin_RegisterGameLogicCallBack(MuffinGameLogicCallBack a_fu
 //------------Register call back function end------------//
 
 
-T_DLL_EXPORT void TMuffin_AddGameObjects(CGameObject* a_pGameObject);
+T_DLL_EXPORT void TMuffin_AddGameObjects(u64 a_nGUID, CGameObject* a_pGameObject);
 T_DLL_EXPORT void TMuffin_AddCamera(CCamera* a_pCamera);
 
 

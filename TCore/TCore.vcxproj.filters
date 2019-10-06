@@ -87,6 +87,9 @@
       <Filter>TCommonFunction</Filter>
     </ClInclude>
     <ClInclude Include="TCore.h" />
+    <ClInclude Include="TDataStructure\TLinkedList\CTLinkedList.h">
+      <Filter>TDataStructure\TLinkedList</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="TDataStructure">
@@ -112,6 +115,9 @@
     </Filter>
     <Filter Include="TDataStructure\TStack">
       <UniqueIdentifier>{9b8f0783-e9d0-4021-a28f-34f87ad28dd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TDataStructure\TLinkedList">
+      <UniqueIdentifier>{7a4eb8df-950c-44ca-aba6-18b8d4f3ea2a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -24,9 +24,9 @@ TMUFFIN_REGISTER_CALLBACK(TMuffin_RegisterGameLogicCallBack, MuffinGameLogicCall
 
 
 
-void TMuffin_AddGameObjects(CGameObject* a_pGameObject)
+void TMuffin_AddGameObjects(u64 a_nGUID, CGameObject* a_pGameObject)
 {
-	pMuffinGameObjectManager->RegisterGameObject(a_pGameObject);
+	pMuffinGameObjectManager->AddGameObject(a_nGUID, a_pGameObject);
 }
 void TMuffin_AddCamera(CCamera* a_pCamera)
 {

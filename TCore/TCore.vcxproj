@@ -167,6 +167,7 @@
     <ClInclude Include="TCommonFunction\TUtilityFunction.h" />
     <ClInclude Include="TDataStructure\TBinaryTree\TBinaryTree.h" />
     <ClInclude Include="TDataStructure\TDataStructure.h" />
+    <ClInclude Include="TDataStructure\TLinkedList\CTLinkedList.h" />
     <ClInclude Include="TDataStructure\TQueue\TQueue.h" />
     <ClInclude Include="TDataStructure\TStack\TStack.h" />
     <ClInclude Include="TDateTime\TTime.h" />
