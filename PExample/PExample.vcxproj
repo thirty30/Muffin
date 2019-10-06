@@ -77,7 +77,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin_release_x64</OutDir>
     <IncludePath>$(SolutionDir)Dependence/include;$(ProjectDir);$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependence/lib/x64;$(SolutionDir)bin_debug_x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Dependence/lib/x64;$(SolutionDir)bin_release_x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
