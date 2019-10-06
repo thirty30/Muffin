@@ -4,6 +4,7 @@ class T_DLL_EXPORT CGameObject : public CMuffinObject
 {
 public:
 	CMeshRenderer* m_pMeshRenderer;
+	CPhysicsAttribute m_pPhysicsAttribute;
 
 public:
 	CGameObject()

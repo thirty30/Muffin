@@ -49,7 +49,6 @@ tbool CScene::LoadScene()
 	pObjSphere->InitMeshRenderer(pMeshSphere, nShaderProgramID);
 	pObjSphere->m_pMeshRenderer->SetRenderMode(E_RENDER_MODE_LINE);
 	TMuffin_AddGameObjects(pObjSphere);
-
 	
 	return true;
 }

@@ -47,11 +47,14 @@
     <ClCompile Include="Light\CLightManager.cpp">
       <Filter>Light</Filter>
     </ClCompile>
-    <ClCompile Include="Physics\CPhysics.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer\CObjectRenderer.cpp">
       <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\CObjectPhysics.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\CPhysicsAttribute.cpp">
+      <Filter>Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -100,11 +103,14 @@
     <ClInclude Include="Light\CLightManager.h">
       <Filter>Light</Filter>
     </ClInclude>
-    <ClInclude Include="Physics\CPhysics.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer\CObjectRenderer.h">
       <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\CObjectPhysics.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\CPhysicsAttribute.h">
+      <Filter>Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

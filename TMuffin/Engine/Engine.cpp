@@ -5,6 +5,7 @@ CWindow* pMuffinWindow = NULL;
 CGameObjectManager* pMuffinGameObjectManager = NULL;
 CCameraManager* pMuffinCameraManager = NULL;
 CObjectRenderer* pObjectRenderer = NULL;
+CObjectPhysics* pObjectPhysics = NULL;
 ///////////////////-------------global variables end-------------///////////////////
 
 tbool MuffinInit(n32 a_nWinWidth, n32 a_nWinHigh, const tcchar* a_strWinName)
@@ -12,6 +13,7 @@ tbool MuffinInit(n32 a_nWinWidth, n32 a_nWinHigh, const tcchar* a_strWinName)
 	pMuffinGameObjectManager = new CGameObjectManager();
 	pMuffinCameraManager = new CCameraManager();
 	pObjectRenderer = new CObjectRenderer();
+	pObjectPhysics = new CObjectPhysics();
 	pMuffinWindow = new CWindow();
 	if (pMuffinWindow->InitWindow(a_nWinWidth, a_nWinHigh, a_strWinName) == false)
 	{
@@ -27,16 +29,26 @@ void MuffinClear()
 		delete pMuffinGameObjectManager;
 		pMuffinGameObjectManager = NULL;
 	}
+	if (pMuffinCameraManager != NULL)
+	{
+		delete pMuffinCameraManager;
+		pMuffinCameraManager = NULL;
+	}
+	if (pObjectPhysics != NULL)
+	{
+		delete pObjectPhysics;
+		pObjectPhysics = NULL;
+	}
+	if (pObjectRenderer != NULL)
+	{
+		delete pObjectRenderer;
+		pObjectRenderer = NULL;
+	}
 	if (pMuffinWindow != NULL)
 	{
 		pMuffinWindow->Clear();
 		delete pMuffinWindow;
 		pMuffinWindow = NULL;
-	}
-	if (pMuffinCameraManager != NULL)
-	{
-		delete pMuffinCameraManager;
-		pMuffinCameraManager = NULL;
 	}
 }
 
@@ -60,6 +72,7 @@ void MuffinPhysicsLoop()
 	{
 		pExternalPhysicsCallBack();
 	}
+	pObjectPhysics->PhysicsObjects();
 }
 
 void MuffinGameLogicLoop()

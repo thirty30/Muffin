@@ -22,6 +22,15 @@ enum ERenderMode
 	E_RENDER_MODE_FILL
 };
 
+enum EPhysicsType
+{
+	E_PHYSICS_TYPE_INIT = 0,
+	
+	E_PHYSICS_TYPE_AABB,
+	E_PHYSICS_TYPE_SPHERE,
+	E_PHYSICS_TYPE_MESH,
+};
+
 
 typedef void (*MuffinKeyCallBack)(n32 a_nKey, n32 a_nScancode, n32 a_nAction, n32 a_nMods);
 typedef void (*MuffinMouseCallBack)(n32 a_nKey, n32 a_nAction, n32 a_nMods);

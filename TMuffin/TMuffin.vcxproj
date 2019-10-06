@@ -37,7 +37,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Physics\CPhysics.cpp" />
+    <ClCompile Include="Physics\CPhysicsAttribute.cpp" />
+    <ClCompile Include="Physics\CObjectPhysics.cpp" />
     <ClCompile Include="Renderer\CMeshRenderer.cpp" />
     <ClCompile Include="Renderer\CObjectRenderer.cpp" />
     <ClCompile Include="ResourceLoader\CResourceLoader.cpp" />
@@ -58,7 +59,8 @@
     <ClInclude Include="Object\CGameObject.h" />
     <ClInclude Include="Object\CGameObjectManager.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Physics\CPhysics.h" />
+    <ClInclude Include="Physics\CPhysicsAttribute.h" />
+    <ClInclude Include="Physics\CObjectPhysics.h" />
     <ClInclude Include="Renderer\CMeshRenderer.h" />
     <ClInclude Include="Renderer\CObjectRenderer.h" />
     <ClInclude Include="ResourceLoader\CResourceLoader.h" />
