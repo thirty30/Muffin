@@ -5,7 +5,6 @@ tbool CMeshRenderer::InitRenderer(const CMesh* a_pMesh, n32 a_nShaderProgramID)
 	this->m_pMeshDrawInfo = new CMeshDrawInfo();
 	this->m_pMeshDrawInfo->m_nVertexCount = a_pMesh->m_nVertexCount;
 	this->m_pMeshDrawInfo->m_pVertices = new SDrawVertex[this->m_pMeshDrawInfo->m_nVertexCount];
-	TMemzero(this->m_pMeshDrawInfo->m_pVertices, this->m_pMeshDrawInfo->m_nVertexCount);
 	for (n32 i = 0; i < this->m_pMeshDrawInfo->m_nVertexCount; i++)
 	{
 		const SMeshVertex* pVertex = &a_pMesh->m_pVertices[i];
@@ -69,4 +68,20 @@ tbool CMeshRenderer::InitRenderer(const CMesh* a_pMesh, n32 a_nShaderProgramID)
 	glDisableVertexAttribArray(nColorLocation);
 
 	return true;
+}
+
+void CMeshRenderer::SetRenderMode(ERenderMode a_eMode)
+{
+	if (a_eMode == E_RENDER_MODE_POINT)
+	{
+		this->m_nRenderMode = GL_POINT;
+	}
+	else if (a_eMode == E_RENDER_MODE_LINE)
+	{
+		this->m_nRenderMode = GL_LINE;
+	}
+	else
+	{
+		this->m_nRenderMode = GL_FILL;
+	}
 }

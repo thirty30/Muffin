@@ -6,8 +6,10 @@ CGame::CGame()
 	this->m_nScreenWidth = 1600;
 	this->m_nScreenHigh = 900;
 	this->m_strWindowName = "pExample";
+	this->m_pResourceLoader = NULL;
 	this->m_pShaderMgr = NULL;
 	this->m_pScene = NULL;
+	this->m_eGameStatus = E_GAME_STATUS_INIT;
 }
 
 CGame::~CGame()
@@ -37,22 +39,28 @@ tbool CGame::InitGame()
 	{
 		return false;
 	}
-	this->m_pScene->LoadScene();
 	return true;
 }
 
 void CGame::ClearGame()
 {
 	//release game data
+	if (this->m_pResourceLoader != NULL)
+	{
+		delete this->m_pResourceLoader;
+		this->m_pResourceLoader = NULL;
+	}
 	if (this->m_pShaderMgr != NULL)
 	{
 		this->m_pShaderMgr->Clear();
 		delete this->m_pShaderMgr;
+		this->m_pShaderMgr = NULL;
 	}
 	if (this->m_pScene != NULL)
 	{
 		this->m_pScene->Clear();
 		delete this->m_pScene;
+		this->m_pScene = NULL;
 	}
 
 	//release engine
@@ -70,12 +78,26 @@ void CGame::SetScreenSize(n32 a_nWidth, n32 a_nHigh)
 	this->m_nScreenHigh = a_nHigh;
 }
 
-void CGame::PhysicsCallBack()
+void CGame::PhysicsLoop()
 {
 
 }
 
-void CGame::GameLogicCallBack()
+void CGame::GameLogicLoop()
 {
+	if (this->m_eGameStatus == E_GAME_STATUS_INIT)
+	{
+		this->m_eGameStatus = E_GAME_STATUS_LOAD_SCENE_START;
+	}
+	else if (this->m_eGameStatus == E_GAME_STATUS_LOAD_SCENE_START)
+	{
+		this->m_pScene->LoadScene();
+		this->m_eGameStatus = E_GAME_STATUS_LOAD_SCENE_FINISH;
+	}
+	else if (this->m_eGameStatus == E_GAME_STATUS_LOAD_SCENE_FINISH)
+	{
 
+	}
 }
+
+

@@ -3,13 +3,11 @@
 class T_DLL_EXPORT CGameObject : public CMuffinObject
 {
 public:
-	glm::vec4 m_vRGBA;
 	CMeshRenderer* m_pMeshRenderer;
 
 public:
 	CGameObject()
 	{
-		this->m_vRGBA = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 		this->m_pMeshRenderer = NULL;
 	}
 

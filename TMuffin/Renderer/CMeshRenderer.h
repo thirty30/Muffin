@@ -10,9 +10,9 @@ struct SDrawVertex
 		this->Y = 0;
 		this->Z = 0;
 
-		this->R = 1;
-		this->G = 1;
-		this->B = 1;
+		this->R = 1.0f;
+		this->G = 1.0f;
+		this->B = 1.0f;
 	}
 };
 
@@ -63,16 +63,19 @@ class T_DLL_EXPORT CMeshRenderer
 public:
 	n32 m_nShaderProgramID;
 	CMeshDrawInfo* m_pMeshDrawInfo;
+	n32 m_nRenderMode;
 
 public:
 	CMeshRenderer() 
 	{
 		this->m_nShaderProgramID = 0;
 		this->m_pMeshDrawInfo = NULL;
+		this->m_nRenderMode = GL_FILL;
 	}
 	~CMeshRenderer(){}
 
 	tbool InitRenderer(const CMesh* a_pMesh, n32 a_nShaderProgramID);
+	void SetRenderMode(ERenderMode a_eMode);
 };
 
 

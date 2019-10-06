@@ -4,11 +4,12 @@ T_IMPLEMENT_SINGLETON(CObjectRenderer)
 
 void CObjectRenderer::RenderObjects()
 {
-	glm::vec3 lightPos = glm::vec3(0.0f, 0.0f, 10.0f);
+	glm::vec3 vLightPos = glm::vec3(0.0f, 0.0f, 2.0f);
+	glm::vec3 vLightColor = glm::vec3(1.0f, 1.0f, 1.0f);
 	CCamera* pCamera = pMuffinCameraManager->GetTopCamera();
 	if (pCamera == NULL)
 	{
-		cout << "No Camera!!" << endl;
+		//cout << "No Scene Camera!!" << endl;
 		return;
 	}
 	glm::mat4 matV = pCamera->GetView();
@@ -44,21 +45,13 @@ void CObjectRenderer::RenderObjects()
 		glUniformMatrix4fv(matView_UL, 1, GL_FALSE, glm::value_ptr(matV));
 		glUniformMatrix4fv(matProj_UL, 1, GL_FALSE, glm::value_ptr(matP));
 
-		//GLint newColour_location = glGetUniformLocation(shaderProgID, "newColour");
-		//glUniform3f(newColour_location, pGameObj->mRGBA.r, pGameObj->mRGBA.g, pGameObj->mRGBA.b);
+		GLint nLightColor_UL = glGetUniformLocation(nShaderProgramID, "LightColor");
+		glUniform3f(nLightColor_UL, vLightColor.x, vLightColor.y, vLightColor.z);
 
-		GLint newColourR_location = glGetUniformLocation(nShaderProgramID, "newColourR");
-		GLint newColourG_location = glGetUniformLocation(nShaderProgramID, "newColourG");
-		GLint newColourB_location = glGetUniformLocation(nShaderProgramID, "newColourB");
-		glUniform1f(newColourG_location, pCurGameObj->m_vRGBA.g);
-		glUniform1f(newColourB_location, pCurGameObj->m_vRGBA.b);
-		glUniform1f(newColourR_location, pCurGameObj->m_vRGBA.r);
+		GLint nLightPosition_UL = glGetUniformLocation(nShaderProgramID, "LightPosition");
+		glUniform3f(nLightPosition_UL, vLightPos.x, vLightPos.y, vLightPos.z);
 
-		GLint lightPosition_UL = glGetUniformLocation(nShaderProgramID, "lightPosition");
-		glUniform3f(lightPosition_UL, lightPos.x, lightPos.y, lightPos.z);
-
-
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glPolygonMode(GL_FRONT_AND_BACK, pCurGameObj->m_pMeshRenderer->m_nRenderMode);
 
 		CMeshDrawInfo* pDrawInfo = pCurGameObj->m_pMeshRenderer->m_pMeshDrawInfo;
 		glBindVertexArray(pDrawInfo->m_nVAOID);

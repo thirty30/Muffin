@@ -15,7 +15,7 @@ CCameraControl::~CCameraControl()
 
 void CCameraControl::CameraControlKeyPress(n32 a_nKey, n32 a_nScancode, n32 a_nAction, n32 a_nMods)
 {
-	f32 fCameraSpeed = 0.2f;
+	f32 fCameraSpeed = 0.15f;
 	switch (a_nKey)
 	{
 	case GLFW_KEY_W:
@@ -108,8 +108,8 @@ void CCameraControl::CameraControlCursor(f64 a_fX, f64 a_fY)
 			{
 				return;
 			}
-			pCamera->m_vTowards.x -= vTorwards.x * 0.03;
-			pCamera->m_vTowards.y -= vTorwards.y * 0.03;
+			pCamera->m_vTowards.x -= vTorwards.x * 0.05;
+			pCamera->m_vTowards.y -= vTorwards.y * 0.05;
 			this->m_vLastCursor = vNowCursor;
 		}
 	}

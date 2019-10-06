@@ -24,29 +24,40 @@ tbool CScene::LoadScene()
 	n32 nScreenHigh = CGame::GetSingleton().GetScreenHigh();
 	f32 fScreenRatio = 1.0f * nScreenWidth / nScreenHigh;
 	this->m_pCamera = new CCamera(0.6f, fScreenRatio, 0.01f, 1000.0f);
+	this->m_pCamera->m_vPosition = glm::vec3(0, 20, -20);
 	TMuffin_AddCamera(this->m_pCamera);
 
 	//initialize items
 	CShaderProgram* pShaderPro = CShaderManager::GetSingleton().FindShaderProgramByCustomID(E_SHADER_ID_DEFAULT);
 	n32 nShaderProgramID = pShaderPro->m_nOpenGLID;
 
-	CMesh* pMesh = new CMesh();
-	CResourceLoader* pResMgr = new CResourceLoader();
-	pResMgr->LoadModelFromPly("./Assets/models/bun_zipper_res4_xyz.ply", pMesh);
+	CResourceLoader* pResLoader = CGame::GetSingleton().GetResourceLoader();
 
-	CGameObject* pGameObj = new CGameObject();
-	pGameObj->m_vPosition = glm::vec3(0, 0, 10);
-	pGameObj->m_vScale = glm::vec3(6, 6, 6);
-	pGameObj->InitMeshRenderer(pMesh, nShaderProgramID);
-	TMuffin_AddGameObjects(pGameObj);
+	//CMesh* pMeshTerrain = new CMesh();
+	//pResLoader->LoadModelFromPly("./Assets/Models/Terrain.ply", pMeshTerrain);
+	//CGameObject* pObjTerrain = new CGameObject();
+	//pObjTerrain->m_vScale = glm::vec3(0.1f, 0.1f, 0.1f);
+	//pObjTerrain->InitMeshRenderer(pMeshTerrain, nShaderProgramID);
+	//TMuffin_AddGameObjects(pObjTerrain);
+	//delete pMeshTerrain;
 
-	CGameObject* pGameObj2 = new CGameObject();
-	pGameObj2->m_vPosition = glm::vec3(4, 0, 10);
-	pGameObj2->m_vScale = glm::vec3(6, 6, 6);
-	pGameObj2->InitMeshRenderer(pMesh, nShaderProgramID);
-	TMuffin_AddGameObjects(pGameObj2);
+	CMesh* pMeshCube = new CMesh();
+	pResLoader->LoadModelFromPly("./Assets/Models/Cube.ply", pMeshCube);
+	CGameObject* pObjCube = new CGameObject();
+	pObjCube->InitMeshRenderer(pMeshCube, nShaderProgramID);
+	pObjCube->m_pMeshRenderer->SetRenderMode(E_RENDER_MODE_LINE);
+	TMuffin_AddGameObjects(pObjCube);
+	delete pMeshCube;
 
-	delete pMesh;
+	CMesh* pMeshSphere = new CMesh();
+	pResLoader->LoadModelFromPly("./Assets/Models/Sphere.ply", pMeshSphere);
+	CGameObject* pObjSphere = new CGameObject();
+	pObjSphere->m_vPosition = glm::vec3(0, 2, 0);
+	pObjSphere->InitMeshRenderer(pMeshSphere, nShaderProgramID);
+	pObjSphere->m_pMeshRenderer->SetRenderMode(E_RENDER_MODE_LINE);
+	TMuffin_AddGameObjects(pObjSphere);
+	delete pMeshSphere;
+
 	
 	return true;
 }

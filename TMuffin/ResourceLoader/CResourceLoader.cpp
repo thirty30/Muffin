@@ -35,6 +35,7 @@ tbool CResourceLoader::LoadModelFromPly(const tcchar* a_strFileName, CMesh* a_pM
 			{
 				SMeshVertex& rTemp = a_pMesh->m_pVertices[i];
 				objFile >> rTemp.X >> rTemp.Y >> rTemp.Z;
+				objFile >> rTemp.NX >> rTemp.NY >> rTemp.NZ;
 			}
 
 			//read all triangels

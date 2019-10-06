@@ -15,6 +15,13 @@ enum ELightType
 	E_LIGHT_TYPE_SPOT,
 };
 
+enum ERenderMode
+{
+	E_RENDER_MODE_POINT,
+	E_RENDER_MODE_LINE,
+	E_RENDER_MODE_FILL
+};
+
 
 typedef void (*MuffinKeyCallBack)(n32 a_nKey, n32 a_nScancode, n32 a_nAction, n32 a_nMods);
 typedef void (*MuffinMouseCallBack)(n32 a_nKey, n32 a_nAction, n32 a_nMods);
