@@ -31,7 +31,9 @@ void TMuffin_AddGameObjects(u64 a_nGUID, CGameObject* a_pGameObject)
 void TMuffin_AddCamera(CCamera* a_pCamera)
 {
 	pMuffinCameraManager->AddCamera(a_pCamera);
-
-
-
 }
+f64 TMuffin_GetNowFrameTime()
+{
+	return fNowFrameTime;
+}
+

@@ -3,11 +3,11 @@
 class CObjectPhysics : public CSingleton<CObjectPhysics>
 {
 private:
-	f32 m_gravity;
+	glm::vec3 m_vGravity;
 
 public:
 	CObjectPhysics();
 	~CObjectPhysics();
 
-	void PhysicsObjects();
+	void PhysicsObjects(f32 a_fDeltaTime);
 };

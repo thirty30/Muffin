@@ -6,6 +6,7 @@ CGameObjectManager* pMuffinGameObjectManager = NULL;
 CCameraManager* pMuffinCameraManager = NULL;
 CObjectRenderer* pObjectRenderer = NULL;
 CObjectPhysics* pObjectPhysics = NULL;
+f64 fNowFrameTime = 0;
 ///////////////////-------------global variables end-------------///////////////////
 
 tbool MuffinInit(n32 a_nWinWidth, n32 a_nWinHigh, const tcchar* a_strWinName)
@@ -56,6 +57,8 @@ void MuffinMainLoop()
 {
 	while (pMuffinWindow->WindowShouldClose() == false)
 	{
+		fNowFrameTime = glfwGetTime();
+
 		MuffinPhysicsLoop();
 
 		glfwPollEvents();
@@ -72,7 +75,7 @@ void MuffinPhysicsLoop()
 	{
 		pExternalPhysicsCallBack();
 	}
-	pObjectPhysics->PhysicsObjects();
+	pObjectPhysics->PhysicsObjects(0.01f);
 }
 
 void MuffinGameLogicLoop()
@@ -81,6 +84,7 @@ void MuffinGameLogicLoop()
 	{
 		pExternalGameLogicCallBack();
 	}
+
 }
 
 void MuffinRenderingLoop()

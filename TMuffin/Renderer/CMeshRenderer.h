@@ -61,6 +61,7 @@ public:
 class T_DLL_EXPORT CMeshRenderer
 {
 public:
+	tbool m_bIsRendering;
 	n32 m_nShaderProgramID;
 	CMeshDrawInfo* m_pMeshDrawInfo;
 	n32 m_nRenderMode;
@@ -68,6 +69,7 @@ public:
 public:
 	CMeshRenderer() 
 	{
+		this->m_bIsRendering = false;
 		this->m_nShaderProgramID = 0;
 		this->m_pMeshDrawInfo = NULL;
 		this->m_nRenderMode = GL_FILL;

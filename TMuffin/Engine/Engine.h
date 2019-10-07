@@ -6,6 +6,7 @@ extern CGameObjectManager* pMuffinGameObjectManager;
 extern CCameraManager* pMuffinCameraManager;
 extern CObjectRenderer* pObjectRenderer;
 extern CObjectPhysics* pObjectPhysics;
+extern f64 fNowFrameTime;
 ///////////////////-------------global variables end-------------///////////////////
 
 tbool MuffinInit(n32 a_nWinWidth, n32 a_nWinHigh, const tcchar* a_strWinName);

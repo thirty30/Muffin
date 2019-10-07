@@ -31,7 +31,7 @@ tbool CScene::LoadScene()
 	n32 nScreenHigh = CGame::GetSingleton().GetScreenHigh();
 	f32 fScreenRatio = 1.0f * nScreenWidth / nScreenHigh;
 	this->m_pCamera = new CCamera(this->GenGUID(), 0.6f, fScreenRatio, 0.01f, 1000.0f);
-	this->m_pCamera->m_vPosition = glm::vec3(0, 10, -20);
+	this->m_pCamera->m_vPosition = glm::vec3(0, 10, -40);
 	TMuffin_AddCamera(this->m_pCamera);
 
 	//initialize items
@@ -47,14 +47,18 @@ tbool CScene::LoadScene()
 	CMesh* pMeshCube = CGame::GetSingleton().GetResourceManager()->LoadMesh(E_MODEL_ID_CUBE, "./Assets/Models/Cube.ply");
 	CGameObject* pObjCube = new CGameObject(this->GenGUID());
 	pObjCube->InitMeshRenderer(pMeshCube, nShaderProgramID);
-	pObjCube->m_pMeshRenderer->SetRenderMode(E_RENDER_MODE_LINE);
+	pObjCube->m_pMeshRenderer.SetRenderMode(E_RENDER_MODE_LINE);
+	pObjCube->m_pPhysicsAttribute.m_bIsPhysics = true;
 	TMuffin_AddGameObjects(pObjCube->GetGUID(), pObjCube);
 
 	CMesh* pMeshSphere = CGame::GetSingleton().GetResourceManager()->LoadMesh(E_MODEL_ID_SPHERE, "./Assets/Models/Sphere.ply");
 	CGameObject* pObjSphere = new CGameObject(this->GenGUID());
-	pObjSphere->m_vPosition = glm::vec3(0, 2, 0);
+	pObjSphere->m_vPosition = glm::vec3(0, 10, 0);
 	pObjSphere->InitMeshRenderer(pMeshSphere, nShaderProgramID);
-	pObjSphere->m_pMeshRenderer->SetRenderMode(E_RENDER_MODE_LINE);
+	pObjSphere->m_pMeshRenderer.SetRenderMode(E_RENDER_MODE_LINE);
+	pObjSphere->m_pPhysicsAttribute.m_bIsPhysics = true;
+	pObjSphere->m_pPhysicsAttribute.m_fInverseMass = 0.1;
+	pObjSphere->m_pPhysicsAttribute.m_vVelocity = glm::vec3(2, 0, 0);
 	TMuffin_AddGameObjects(pObjSphere->GetGUID(), pObjSphere);
 	
 	return true;
