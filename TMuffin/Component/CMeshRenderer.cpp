@@ -17,6 +17,10 @@ tbool CMeshRenderer::InitRenderer(const CMesh* a_pMesh, n32 a_nShaderProgramID)
 		this->m_pMeshDrawInfo->m_pVertices[i].X = pVertex->X;
 		this->m_pMeshDrawInfo->m_pVertices[i].Y = pVertex->Y;
 		this->m_pMeshDrawInfo->m_pVertices[i].Z = pVertex->Z;
+
+		this->m_pMeshDrawInfo->m_pVertices[i].R = this->m_vRGB.r;
+		this->m_pMeshDrawInfo->m_pVertices[i].G = this->m_vRGB.g;
+		this->m_pMeshDrawInfo->m_pVertices[i].B = this->m_vRGB.b;
 	}
 
 	this->m_pMeshDrawInfo->m_nTriangelCount = a_pMesh->m_nTriangelCount;

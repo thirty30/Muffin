@@ -16,21 +16,9 @@
     <ClCompile Include="ShaderHelper\CShaderHelper.cpp">
       <Filter>ShaderHelper</Filter>
     </ClCompile>
-    <ClCompile Include="Object\CGameObject.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\CGameObjectManager.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\CMuffinObject.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="TMuffin.cpp" />
     <ClCompile Include="ResourceLoader\CResourceLoader.cpp">
       <Filter>ResourceLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\CMeshRenderer.cpp">
-      <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Camera\CCameraManager.cpp">
       <Filter>Camera</Filter>
@@ -53,8 +41,17 @@
     <ClCompile Include="Physics\CObjectPhysics.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Physics\CPhysicsAttribute.cpp">
-      <Filter>Physics</Filter>
+    <ClCompile Include="Component\CMeshRenderer.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\CRigidBody.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\CGameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\CGameObjectManager.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -73,20 +70,8 @@
     <ClInclude Include="ShaderHelper\CShaderHelper.h">
       <Filter>ShaderHelper</Filter>
     </ClInclude>
-    <ClInclude Include="Object\CGameObject.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Object\CGameObjectManager.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Object\CMuffinObject.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="ResourceLoader\CResourceLoader.h">
       <Filter>ResourceLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\CMeshRenderer.h">
-      <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Camera\CCameraManager.h">
       <Filter>Camera</Filter>
@@ -109,8 +94,26 @@
     <ClInclude Include="Physics\CObjectPhysics.h">
       <Filter>Physics</Filter>
     </ClInclude>
-    <ClInclude Include="Physics\CPhysicsAttribute.h">
-      <Filter>Physics</Filter>
+    <ClInclude Include="Component\CComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\ComponentDef.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\CCollider.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\CMeshRenderer.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\CRigidBody.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\CGameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\CGameObjectManager.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -126,9 +129,6 @@
     <Filter Include="ShaderHelper">
       <UniqueIdentifier>{83303453-8bd8-4a6b-9fae-49ea5e53e396}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object">
-      <UniqueIdentifier>{215db145-0094-43ed-baa5-1d06b9cdfbc3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ResourceLoader">
       <UniqueIdentifier>{6afbc6ee-cc89-4009-ac7a-4c84215e7e5c}</UniqueIdentifier>
     </Filter>
@@ -143,6 +143,12 @@
     </Filter>
     <Filter Include="Engine">
       <UniqueIdentifier>{a4c53223-3d74-4a77-b352-a40fa8b53a28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{d0b52922-c8e4-4ff4-b086-481dfaf401cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{215db145-0094-43ed-baa5-1d06b9cdfbc3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

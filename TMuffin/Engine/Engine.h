@@ -21,5 +21,6 @@ void GLFWErrorCallback(n32 a_nErrorCode, const tcchar* a_strDesc);
 void KeyCallBack(GLFWwindow* a_pWindow, n32 a_nKey, n32 a_nScancode, n32 a_nAction, n32 a_nMods);
 void MouseCallBack(GLFWwindow* a_pWindow, n32 a_nKey, n32 a_nAction, n32 a_nMods);
 void CursorCallBack(GLFWwindow* a_pWindow, f64 a_fX, f64 a_fY);
+void ScrollCallBack(GLFWwindow* a_pWindow, f64 a_fX, f64 a_fY);
 
 

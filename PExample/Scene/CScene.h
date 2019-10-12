@@ -7,6 +7,7 @@ private:
 	CCamera* m_pCamera;
 	CCameraControl* m_pCameraControl;
 	u64 m_nGUIDIdx;
+	hash_map<u64, CGameObject*> m_mapID2GameObj;
 
 private:
 	u64 GenGUID();
@@ -18,8 +19,10 @@ public:
 	tbool Init();
 	tbool LoadScene();
 	void Clear();
+	void Loop();
 
 	CCamera* GetCamera() { return this->m_pCamera; }
+	void AddGameObject();
 };
 
 

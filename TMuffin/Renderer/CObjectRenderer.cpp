@@ -19,7 +19,8 @@ void CObjectRenderer::RenderObjects()
 	for (; iter != CGameObjectManager::GetSingleton().m_mapID2GameObj.end(); iter++)
 	{
 		CGameObject* pCurGameObj = iter->second;
-		if (pCurGameObj->NeedRendering() == false)
+		CMeshRenderer* pMeshRenderer = pCurGameObj->GetComponent<CMeshRenderer>(E_COMPONENT_MESH_RENDER);
+		if (pMeshRenderer == NULL)
 		{
 			continue;
 		}
@@ -40,7 +41,7 @@ void CObjectRenderer::RenderObjects()
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), pCurGameObj->m_vScale);
 		matM *= scale;
 
-		n32 nShaderProgramID = pCurGameObj->m_pMeshRenderer.m_nShaderProgramID;
+		n32 nShaderProgramID = pMeshRenderer->m_nShaderProgramID;
 		glUseProgram(nShaderProgramID);
 
 		GLint matModel_UL = glGetUniformLocation(nShaderProgramID, "matModel");
@@ -56,9 +57,9 @@ void CObjectRenderer::RenderObjects()
 		GLint nLightPosition_UL = glGetUniformLocation(nShaderProgramID, "LightPosition");
 		glUniform3f(nLightPosition_UL, vLightPos.x, vLightPos.y, vLightPos.z);
 
-		glPolygonMode(GL_FRONT_AND_BACK, pCurGameObj->m_pMeshRenderer.m_nRenderMode);
+		glPolygonMode(GL_FRONT_AND_BACK, pMeshRenderer->m_nRenderMode);
 
-		CMeshDrawInfo* pDrawInfo = pCurGameObj->m_pMeshRenderer.m_pMeshDrawInfo;
+		CMeshDrawInfo* pDrawInfo = pMeshRenderer->m_pMeshDrawInfo;
 		glBindVertexArray(pDrawInfo->m_nVAOID);
 		glDrawElements(GL_TRIANGLES, pDrawInfo->m_nTriangelIndexCount, GL_UNSIGNED_INT, NULL);
 		glBindVertexArray(0);

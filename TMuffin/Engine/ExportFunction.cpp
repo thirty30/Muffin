@@ -19,14 +19,19 @@ void TMuffin_Clear()
 TMUFFIN_REGISTER_CALLBACK(TMuffin_RegisterKeyCallback, MuffinKeyCallBack, pExternalKeyCallBack)
 TMUFFIN_REGISTER_CALLBACK(TMuffin_RegisterMouseCallback, MuffinMouseCallBack, pExternalMouseCallBack)
 TMUFFIN_REGISTER_CALLBACK(TMuffin_RegisterCursorCallback, MuffinCursorCallBack, pExternalCursorCallBack)
+TMUFFIN_REGISTER_CALLBACK(TMuffin_RegisterScrollCallback, MuffinScrollCallBack, pExternalScrollCallBack)
 TMUFFIN_REGISTER_CALLBACK(TMuffin_RegisterPhysicsCallBack, MuffinPhysicsCallBack, pExternalGameLogicCallBack)
 TMUFFIN_REGISTER_CALLBACK(TMuffin_RegisterGameLogicCallBack, MuffinGameLogicCallBack, pExternalPhysicsCallBack)
 
 
 
-void TMuffin_AddGameObjects(u64 a_nGUID, CGameObject* a_pGameObject)
+void TMuffin_AddGameObjects(CGameObject* a_pGameObject)
 {
-	pMuffinGameObjectManager->AddGameObject(a_nGUID, a_pGameObject);
+	pMuffinGameObjectManager->AddGameObject(a_pGameObject);
+}
+void TMuffin_DeleteGameObjects(CGameObject* a_pGameObject)
+{
+	pMuffinGameObjectManager->DeleteGameObject(a_pGameObject);
 }
 void TMuffin_AddCamera(CCamera* a_pCamera)
 {
@@ -37,3 +42,11 @@ f64 TMuffin_GetNowFrameTime()
 	return fNowFrameTime;
 }
 
+void TMuffin_DrawPoint()
+{
+	glPointSize(5.0f);
+	glBegin(GL_POINTS);
+	glColor3f(1.0, 1.0, 1.0);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glEnd();
+}

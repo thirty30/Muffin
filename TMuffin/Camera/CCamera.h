@@ -1,8 +1,12 @@
 #pragma once
 
-class T_DLL_EXPORT CCamera : public CMuffinObject
+class T_DLL_EXPORT CCamera
 {
 public:
+	glm::vec3 m_vPosition;
+	glm::vec3 m_vRotation;
+	glm::vec3 m_vScale;
+
 	f32 m_fFieldOfViewRadians;
 	f32 m_fScreenRatio;
 	f32 m_fViewDisBegin;

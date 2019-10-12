@@ -15,4 +15,7 @@ void ControlCursorEvent(f64 a_fX, f64 a_fY)
 	CCameraControl::GetSingleton().CameraControlCursor(a_fX, a_fY);
 }
 
-
+void ControlScrollEvent(f64 a_fX, f64 a_fY)
+{
+	CCameraControl::GetSingleton().CameraControlScroll(a_fX, a_fY);
+}

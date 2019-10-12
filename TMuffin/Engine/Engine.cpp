@@ -12,9 +12,14 @@ f64 fNowFrameTime = 0;
 tbool MuffinInit(n32 a_nWinWidth, n32 a_nWinHigh, const tcchar* a_strWinName)
 {
 	pMuffinGameObjectManager = new CGameObjectManager();
+
 	pMuffinCameraManager = new CCameraManager();
+
 	pObjectRenderer = new CObjectRenderer();
+
 	pObjectPhysics = new CObjectPhysics();
+	pObjectPhysics->Init();
+
 	pMuffinWindow = new CWindow();
 	if (pMuffinWindow->InitWindow(a_nWinWidth, a_nWinHigh, a_strWinName) == false)
 	{
@@ -59,11 +64,11 @@ void MuffinMainLoop()
 	{
 		fNowFrameTime = glfwGetTime();
 
-		MuffinPhysicsLoop();
-
 		glfwPollEvents();
 
 		MuffinGameLogicLoop();
+
+		MuffinPhysicsLoop();
 
 		MuffinRenderingLoop();
 	}
@@ -118,6 +123,14 @@ void CursorCallBack(GLFWwindow* a_pWindow, f64 a_fX, f64 a_fY)
 		pExternalCursorCallBack(a_fX, a_fY);
 	}
 }
+void ScrollCallBack(GLFWwindow* a_pWindow, f64 a_fX, f64 a_fY)
+{
+	if (pExternalScrollCallBack != NULL)
+	{
+		pExternalScrollCallBack(a_fX, a_fY);
+	}
+}
+
 
 
 

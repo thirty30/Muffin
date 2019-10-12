@@ -58,21 +58,24 @@ public:
 	}
 };
 
-class T_DLL_EXPORT CMeshRenderer
+class T_DLL_EXPORT CMeshRenderer : public CComponent
 {
 public:
 	tbool m_bIsRendering;
 	n32 m_nShaderProgramID;
 	CMeshDrawInfo* m_pMeshDrawInfo;
 	n32 m_nRenderMode;
+	glm::vec3 m_vRGB;
 
 public:
 	CMeshRenderer() 
 	{
+		this->m_eComponentType = E_COMPONENT_MESH_RENDER;
 		this->m_bIsRendering = false;
 		this->m_nShaderProgramID = 0;
 		this->m_pMeshDrawInfo = NULL;
 		this->m_nRenderMode = GL_FILL;
+		this->m_vRGB = glm::vec3(1.0f, 1.0f, 1.0f);
 	}
 	~CMeshRenderer(){}
 

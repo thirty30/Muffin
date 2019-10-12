@@ -24,6 +24,7 @@ tbool CWindow::InitWindow(n32 a_nWinWidth, n32 a_nWinHigh, const tcchar* a_strWi
 	glfwSetKeyCallback(this->m_pWindow, KeyCallBack);	//register key back
 	glfwSetMouseButtonCallback(this->m_pWindow, MouseCallBack);
 	glfwSetCursorPosCallback(this->m_pWindow, CursorCallBack);
+	glfwSetScrollCallback(this->m_pWindow, ScrollCallBack);
 	glfwMakeContextCurrent(this->m_pWindow);
 	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 	glfwSwapInterval(1);

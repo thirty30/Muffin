@@ -8,12 +8,14 @@ T_DLL_EXPORT void TMuffin_Clear();
 extern MuffinKeyCallBack pExternalKeyCallBack;
 extern MuffinMouseCallBack pExternalMouseCallBack;
 extern MuffinCursorCallBack pExternalCursorCallBack;
+extern MuffinScrollCallBack pExternalScrollCallBack;
 extern MuffinPhysicsCallBack pExternalPhysicsCallBack;
 extern MuffinGameLogicCallBack pExternalGameLogicCallBack;
 
 T_DLL_EXPORT void TMuffin_RegisterKeyCallback(MuffinKeyCallBack a_func);
 T_DLL_EXPORT void TMuffin_RegisterMouseCallback(MuffinMouseCallBack a_func);
 T_DLL_EXPORT void TMuffin_RegisterCursorCallback(MuffinCursorCallBack a_func);
+T_DLL_EXPORT void TMuffin_RegisterScrollCallback(MuffinScrollCallBack a_func);
 T_DLL_EXPORT void TMuffin_RegisterPhysicsCallBack(MuffinPhysicsCallBack a_func);
 T_DLL_EXPORT void TMuffin_RegisterGameLogicCallBack(MuffinGameLogicCallBack a_func);
 
@@ -21,10 +23,11 @@ T_DLL_EXPORT void TMuffin_RegisterGameLogicCallBack(MuffinGameLogicCallBack a_fu
 //------------Register call back function end------------//
 
 
-T_DLL_EXPORT void TMuffin_AddGameObjects(u64 a_nGUID, CGameObject* a_pGameObject);
+T_DLL_EXPORT void TMuffin_AddGameObjects(CGameObject* a_pGameObject);
+T_DLL_EXPORT void TMuffin_DeleteGameObjects(CGameObject* a_pGameObject);
 T_DLL_EXPORT void TMuffin_AddCamera(CCamera* a_pCamera);
 T_DLL_EXPORT f64 TMuffin_GetNowFrameTime();
-
+T_DLL_EXPORT void TMuffin_DrawPoint();
 
 
 

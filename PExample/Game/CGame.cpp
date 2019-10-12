@@ -22,6 +22,7 @@ tbool CGame::InitGame()
 	TMuffin_RegisterKeyCallback(ControlKeyEvent);
 	TMuffin_RegisterMouseCallback(ControlMouseEvent);
 	TMuffin_RegisterCursorCallback(ControlCursorEvent);
+	TMuffin_RegisterScrollCallback(ControlScrollEvent);
 	TMuffin_RegisterPhysicsCallBack(CGame::PhysicsCallBack);
 	TMuffin_RegisterGameLogicCallBack(CGame::GameLogicCallBack);
 
@@ -101,7 +102,7 @@ void CGame::GameLogicLoop()
 	}
 	else if (this->m_eGameStatus == E_GAME_STATUS_LOAD_SCENE_FINISH)
 	{
-
+		this->m_pScene->Loop();
 	}
 }
 
