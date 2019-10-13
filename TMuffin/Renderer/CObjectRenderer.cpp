@@ -6,7 +6,7 @@ void CObjectRenderer::RenderObjects()
 {
 	glm::vec3 vLightPos = glm::vec3(0.0f, 0.0f, 2.0f);
 	glm::vec3 vLightColor = glm::vec3(1.0f, 1.0f, 1.0f);
-	CCamera* pCamera = pMuffinCameraManager->GetTopCamera();
+	CCamera* pCamera = g_pMuffinCameraManager->GetTopCamera();
 	if (pCamera == NULL)
 	{
 		//cout << "No Scene Camera!!" << endl;

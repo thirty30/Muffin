@@ -1,27 +1,27 @@
 #include "pch.h"
 
 ///////////////////-------------global variables stat-------------///////////////////
-CWindow* pMuffinWindow = NULL;
-CGameObjectManager* pMuffinGameObjectManager = NULL;
-CCameraManager* pMuffinCameraManager = NULL;
-CObjectRenderer* pObjectRenderer = NULL;
-CObjectPhysics* pObjectPhysics = NULL;
-f64 fNowFrameTime = 0;
+CWindow* g_pMuffinWindow = NULL;
+CGameObjectManager* g_pMuffinGameObjectManager = NULL;
+CCameraManager* g_pMuffinCameraManager = NULL;
+CObjectRenderer* g_pObjectRenderer = NULL;
+CObjectPhysics* g_pObjectPhysics = NULL;
+f64 g_fNowFrameTime = 0;
 ///////////////////-------------global variables end-------------///////////////////
 
 tbool MuffinInit(n32 a_nWinWidth, n32 a_nWinHigh, const tcchar* a_strWinName)
 {
-	pMuffinGameObjectManager = new CGameObjectManager();
+	g_pMuffinGameObjectManager = new CGameObjectManager();
 
-	pMuffinCameraManager = new CCameraManager();
+	g_pMuffinCameraManager = new CCameraManager();
 
-	pObjectRenderer = new CObjectRenderer();
+	g_pObjectRenderer = new CObjectRenderer();
 
-	pObjectPhysics = new CObjectPhysics();
-	pObjectPhysics->Init();
+	g_pObjectPhysics = new CObjectPhysics();
+	g_pObjectPhysics->Init();
 
-	pMuffinWindow = new CWindow();
-	if (pMuffinWindow->InitWindow(a_nWinWidth, a_nWinHigh, a_strWinName) == false)
+	g_pMuffinWindow = new CWindow();
+	if (g_pMuffinWindow->InitWindow(a_nWinWidth, a_nWinHigh, a_strWinName) == false)
 	{
 		return false;
 	}
@@ -30,39 +30,39 @@ tbool MuffinInit(n32 a_nWinWidth, n32 a_nWinHigh, const tcchar* a_strWinName)
 
 void MuffinClear()
 {
-	if (pMuffinGameObjectManager != NULL)
+	if (g_pMuffinGameObjectManager != NULL)
 	{
-		delete pMuffinGameObjectManager;
-		pMuffinGameObjectManager = NULL;
+		delete g_pMuffinGameObjectManager;
+		g_pMuffinGameObjectManager = NULL;
 	}
-	if (pMuffinCameraManager != NULL)
+	if (g_pMuffinCameraManager != NULL)
 	{
-		delete pMuffinCameraManager;
-		pMuffinCameraManager = NULL;
+		delete g_pMuffinCameraManager;
+		g_pMuffinCameraManager = NULL;
 	}
-	if (pObjectPhysics != NULL)
+	if (g_pObjectPhysics != NULL)
 	{
-		delete pObjectPhysics;
-		pObjectPhysics = NULL;
+		delete g_pObjectPhysics;
+		g_pObjectPhysics = NULL;
 	}
-	if (pObjectRenderer != NULL)
+	if (g_pObjectRenderer != NULL)
 	{
-		delete pObjectRenderer;
-		pObjectRenderer = NULL;
+		delete g_pObjectRenderer;
+		g_pObjectRenderer = NULL;
 	}
-	if (pMuffinWindow != NULL)
+	if (g_pMuffinWindow != NULL)
 	{
-		pMuffinWindow->Clear();
-		delete pMuffinWindow;
-		pMuffinWindow = NULL;
+		g_pMuffinWindow->Clear();
+		delete g_pMuffinWindow;
+		g_pMuffinWindow = NULL;
 	}
 }
 
 void MuffinMainLoop()
 {
-	while (pMuffinWindow->WindowShouldClose() == false)
+	while (g_pMuffinWindow->WindowShouldClose() == false)
 	{
-		fNowFrameTime = glfwGetTime();
+		g_fNowFrameTime = glfwGetTime();
 
 		glfwPollEvents();
 
@@ -80,7 +80,7 @@ void MuffinPhysicsLoop()
 	{
 		pExternalPhysicsCallBack();
 	}
-	pObjectPhysics->PhysicsObjects(0.01f);
+	g_pObjectPhysics->PhysicsObjects(0.01f);
 }
 
 void MuffinGameLogicLoop()
@@ -94,7 +94,7 @@ void MuffinGameLogicLoop()
 
 void MuffinRenderingLoop()
 {
-	pMuffinWindow->DrawWindow();
+	g_pMuffinWindow->DrawWindow();
 }
 
 void GLFWErrorCallback(n32 a_nErrorCode, const tcchar* a_strDesc)

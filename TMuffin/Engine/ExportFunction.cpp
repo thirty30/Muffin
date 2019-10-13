@@ -27,19 +27,19 @@ TMUFFIN_REGISTER_CALLBACK(TMuffin_RegisterGameLogicCallBack, MuffinGameLogicCall
 
 void TMuffin_AddGameObjects(CGameObject* a_pGameObject)
 {
-	pMuffinGameObjectManager->AddGameObject(a_pGameObject);
+	g_pMuffinGameObjectManager->AddGameObject(a_pGameObject);
 }
 void TMuffin_DeleteGameObjects(CGameObject* a_pGameObject)
 {
-	pMuffinGameObjectManager->DeleteGameObject(a_pGameObject);
+	g_pMuffinGameObjectManager->DeleteGameObject(a_pGameObject);
 }
 void TMuffin_AddCamera(CCamera* a_pCamera)
 {
-	pMuffinCameraManager->AddCamera(a_pCamera);
+	g_pMuffinCameraManager->AddCamera(a_pCamera);
 }
 f64 TMuffin_GetNowFrameTime()
 {
-	return fNowFrameTime;
+	return g_fNowFrameTime;
 }
 
 void TMuffin_DrawPoint()

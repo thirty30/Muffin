@@ -1,12 +1,12 @@
 #pragma once
 
 ///////////////////-------------global variables stat-------------///////////////////
-extern CWindow* pMuffinWindow;
-extern CGameObjectManager* pMuffinGameObjectManager;
-extern CCameraManager* pMuffinCameraManager;
-extern CObjectRenderer* pObjectRenderer;
-extern CObjectPhysics* pObjectPhysics;
-extern f64 fNowFrameTime;
+extern CWindow* g_pMuffinWindow;
+extern CGameObjectManager* g_pMuffinGameObjectManager;
+extern CCameraManager* g_pMuffinCameraManager;
+extern CObjectRenderer* g_pObjectRenderer;
+extern CObjectPhysics* g_pObjectPhysics;
+extern f64 g_fNowFrameTime;
 ///////////////////-------------global variables end-------------///////////////////
 
 tbool MuffinInit(n32 a_nWinWidth, n32 a_nWinHigh, const tcchar* a_strWinName);
