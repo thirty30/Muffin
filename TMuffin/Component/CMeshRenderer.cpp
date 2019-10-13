@@ -2,7 +2,6 @@
 
 tbool CMeshRenderer::InitRenderer(const CMesh* a_pMesh, n32 a_nShaderProgramID)
 {
-	this->m_bIsRendering = true;
 	this->m_pMeshDrawInfo = new CMeshDrawInfo();
 	this->m_pMeshDrawInfo->m_nVertexCount = a_pMesh->m_nVertexCount;
 	this->m_pMeshDrawInfo->m_pVertices = new SDrawVertex[this->m_pMeshDrawInfo->m_nVertexCount];

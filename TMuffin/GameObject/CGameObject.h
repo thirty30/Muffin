@@ -10,8 +10,8 @@ private:
 private:
 	void RefreshColliderPostion();
 	void InitComponentIdx();
-	n32 GetComponentIdxByType(EComponentType a_eType) { return this->m_nComponentIdx[a_eType]; }
 	CBaseCollider* GetBaseCollider() { return dynamic_cast<CBaseCollider*>(this->m_pComponentArray[2]); }
+	n32 GetComponentIdxByType(EComponentType a_eType) { return this->m_nComponentIdx[a_eType]; }
 
 public:
 	friend class CGameObjectManager;

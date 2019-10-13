@@ -48,7 +48,6 @@ tbool CScene::LoadScene()
 	pMeshCubeRenderer->InitRenderer(pMeshCube, nShaderProgramID);
 	pMeshCubeRenderer->SetRenderMode(E_RENDER_MODE_LINE);
 	pObjCube->AddComponent<CRigidBody>(E_COMPONENT_RIGIDBODY);
-	TMuffin_AddGameObjects(pObjCube);
 	
 
 	CGameObject* pObjSphere = new CGameObject();
@@ -61,7 +60,6 @@ tbool CScene::LoadScene()
 	pSphereRB->m_bIsPassive = false;
 	CSphereCollider* pSphereCollider = pObjSphere->AddComponent<CSphereCollider>(E_COMPONENT_SPHERE_COLLIDER);
 	pSphereCollider->m_vCenter = pObjSphere->m_vPosition;
-	TMuffin_AddGameObjects(pObjSphere);
 
 	//CGameObject* pObjDebugSphere = new CGameObject();
 	//pObjDebugSphere->m_vPosition = glm::vec3(0, 0, 0);

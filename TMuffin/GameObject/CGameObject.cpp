@@ -8,6 +8,8 @@ CGameObject::CGameObject()
 	TMemzero(this->m_pComponentArray, sizeof(CComponent*) * E_COMPONENT_MAX);
 	TMemzero(this->m_nComponentIdx, sizeof(n32) * E_COMPONENT_MAX);
 	this->InitComponentIdx();
+
+	CGameObjectManager::GetSingleton().AddGameObject(this);
 }
 
 CGameObject::~CGameObject()
