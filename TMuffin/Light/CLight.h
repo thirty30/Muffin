@@ -85,6 +85,10 @@ class T_DLL_EXPORT CSpotLight : public CLight
 {
 public:
 	glm::vec3 m_vDirection;
+	f32 m_fConstant;
+	f32 m_fLinear;
+	f32 m_fQuadratic;
+	f32 m_fDistanceCutOff;
 	f32 m_fInnerAngle;
 	f32 m_fOuterAngle;
 	f32 m_fTBD;
@@ -93,6 +97,10 @@ public:
 	CSpotLight() : CLight(E_LIGHT_TYPE_SPOT)
 	{
 		this->m_vDirection = glm::vec3(0.0f, -1.0f, 0.0f);
+		this->m_fConstant = 0.0f;
+		this->m_fLinear = 0.1f;
+		this->m_fQuadratic = 0.00001f;
+		this->m_fDistanceCutOff = 100.0f;
 		this->m_fInnerAngle = 0.0f;
 		this->m_fOuterAngle = 0.0f;
 		this->m_fTBD = 0.0f;

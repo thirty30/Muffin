@@ -86,19 +86,18 @@ void main()
 		}
 		else if (objCurLight.nLightType == LIGHT_TYPE_SPOT)
 		{
-			/*
-			vec3 vLightToVertex = vVertexWorldPos.xyz - objCurLight.position.xyz;
+			vec3 vLightToVertex = vVertexWorldPos.xyz - objCurLight.vPosition.xyz;
 			float fDistanceToLight = length(vLightToVertex);
 			vec3 vLightDirection = normalize(vLightToVertex);
 			float fDotProduct = dot(-vLightDirection, vVertexNormal.xyz);	 
-			vLightDiffuse = objCurLight.diffuse.rgb * max(0.0f, fDotProduct);
+			vLightDiffuse = objCurLight.vDiffuse.rgb * max(0.0f, fDotProduct);
 
 			// Specular
 			vec3 vReflectVector = reflect(vLightDirection, vVertexNormal);
 			vec3 vEyeVector = normalize(un_vEyeLocation.xyz - vVertexWorldPos.xyz);
 			float objectSpecularPower = un_vSpecularColour.w; 
-			vLightSpecular = pow(max(0.0f, dot(vEyeVector, vReflectVector)), objectSpecularPower) * objCurLight.specular.rgb;
-			//vLightSpecular = pow(max(0.0f, dot(vEyeVector, vReflectVector)), objectSpecularPower) * un_vSpecularColour.rgb;
+			//vLightSpecular = pow(max(0.0f, dot(vEyeVector, vReflectVector)), objectSpecularPower) * objCurLight.vSpecular.rgb;
+			vLightSpecular = pow(max(0.0f, dot(vEyeVector, vReflectVector)), objectSpecularPower) * un_vSpecularColour.rgb;
 
 			// Attenuation
 			float fAttenuation = 1.0f /  (objCurLight.vAttenuation.x + objCurLight.vAttenuation.y * fDistanceToLight + objCurLight.vAttenuation.z * fDistanceToLight * fDistanceToLight );
@@ -107,42 +106,32 @@ void main()
 			vLightDiffuse *= fAttenuation;
 			vLightSpecular *= fAttenuation;
 
-			vec3 vertexToLight = vertexWorldPos.xyz - objCurLight.position.xyz;
+			vec3 vVertexToLight = normalize(vVertexWorldPos.xyz - objCurLight.vPosition.xyz);
+			float fLightRayAngle = dot( vVertexToLight.xyz, objCurLight.vDirection.xyz );	
+			fLightRayAngle = max(0.0f, fLightRayAngle);
+			float fInnerConeAngleCos = cos(radians(objCurLight.vParm1.x));
+			float fOuterConeAngleCos = cos(radians(objCurLight.vParm1.y));
 
-			vertexToLight = normalize(vertexToLight);
-
-			float currentLightRayAngle = dot( vertexToLight.xyz, objCurLight.direction.xyz );
-					
-			currentLightRayAngle = max(0.0f, currentLightRayAngle);
-
-			//vec4 param1;	
-			// x = lightType, y = inner angle, z = outer angle, w = TBD
-
-			// Is this inside the cone? 
-			float outerConeAngleCos = cos(radians(objCurLight.param1.z));
-			float innerConeAngleCos = cos(radians(objCurLight.param1.y));
-							
 			// Is it completely outside of the spot?
-			if ( currentLightRayAngle < outerConeAngleCos )
+			if (fLightRayAngle < fOuterConeAngleCos)
 			{
-				// Nope. so it's in the dark
-				lightDiffuseContrib = vec3(0.0f, 0.0f, 0.0f);
-				lightSpecularContrib = vec3(0.0f, 0.0f, 0.0f);
+				// Dark
+				vLightDiffuse = vec3(0.0f, 0.0f, 0.0f);
+				vLightSpecular = vec3(0.0f, 0.0f, 0.0f);
 			}
-			else if ( currentLightRayAngle < innerConeAngleCos )
+			else if ( fLightRayAngle < fInnerConeAngleCos )
 			{
 				// Angle is between the inner and outer cone
 				// (this is called the penumbra of the spot light, by the way)
 				// 
 				// This blends the brightness from full brightness, near the inner cone
 				//	to black, near the outter cone
-				float penumbraRatio = (currentLightRayAngle - outerConeAngleCos) / (innerConeAngleCos - outerConeAngleCos);
-									  
-				lightDiffuseContrib *= penumbraRatio;
-				lightSpecularContrib *= penumbraRatio;
+
+				float fPenumbraRatio = (fLightRayAngle - fOuterConeAngleCos) / (fInnerConeAngleCos - fOuterConeAngleCos);				  
+				vLightDiffuse *= fPenumbraRatio;
+				vLightSpecular *= fPenumbraRatio;
 			}
-			finalObjectColour.rgb += (vertexMaterialColour.rgb * lightDiffuseContrib.rgb) + (vertexSpecular.rgb  * lightSpecularContrib.rgb );
-			*/
+			vFinalObjectColour.rgb += (vVertexMaterialColour.rgb * vLightDiffuse.rgb) + (un_vSpecularColour.rgb * vLightSpecular.rgb);
 		}
 	}
 	out_pixelColour = vFinalObjectColour;

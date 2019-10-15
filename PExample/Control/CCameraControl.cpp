@@ -19,7 +19,7 @@ CCameraControl::~CCameraControl()
 
 void CCameraControl::CameraControlKeyPress(n32 a_nKey, n32 a_nScancode, n32 a_nAction, n32 a_nMods)
 {
-/*
+	f32 fSpeed = 1.1f;
 	switch (a_nKey)
 	{
 	case GLFW_KEY_W:
@@ -61,7 +61,7 @@ void CCameraControl::CameraControlKeyPress(n32 a_nKey, n32 a_nScancode, n32 a_nA
 	default:
 		break;
 	}
-*/
+
 }
 
 void CCameraControl::CameraControlMousePress(n32 a_nKey, n32 a_nAction, n32 a_nMods)

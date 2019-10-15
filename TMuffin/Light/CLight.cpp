@@ -10,6 +10,8 @@ void CLight::InitGLSLName(n32 a_nIdx)
 	TSprintf(this->m_objName.m_strSpecularPower, GLSL_STRUCT_NAME_LEN, "un_LightArray[%d].fSpecularPower", a_nIdx);
 	TSprintf(this->m_objName.m_strAttenuation, GLSL_STRUCT_NAME_LEN, "un_LightArray[%d].vAttenuation", a_nIdx);
 	TSprintf(this->m_objName.m_strDirection, GLSL_STRUCT_NAME_LEN, "un_LightArray[%d].vDirection", a_nIdx);
+	TSprintf(this->m_objName.m_strParm1, GLSL_STRUCT_NAME_LEN, "un_LightArray[%d].vParm1", a_nIdx);
+	TSprintf(this->m_objName.m_strParm2, GLSL_STRUCT_NAME_LEN, "un_LightArray[%d].vParm2", a_nIdx);
 }
 
 CLight::CLight(ELightType a_eType)
@@ -60,6 +62,9 @@ void CSpotLight::BindShader(n32 a_nShaderProgramID)
 {
 	GLint nDirection = glGetUniformLocation(a_nShaderProgramID, this->m_objName.m_strDirection);
 	glUniform4f(nDirection, this->m_vDirection.x, this->m_vDirection.y, this->m_vDirection.z, 1.0f);
+
+	GLint nAttenuation = glGetUniformLocation(a_nShaderProgramID, this->m_objName.m_strAttenuation);
+	glUniform4f(nAttenuation, this->m_fConstant, this->m_fLinear, this->m_fQuadratic, this->m_fDistanceCutOff);
 
 	GLint nParm1 = glGetUniformLocation(a_nShaderProgramID, this->m_objName.m_strParm1);
 	glUniform4f(nParm1, this->m_fInnerAngle, this->m_fOuterAngle, this->m_fTBD, 0.0f);

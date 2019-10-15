@@ -53,6 +53,17 @@ tbool CScene::LoadScene()
 	pPointLight->m_fLinear = 0.01f;
 	pPointLight->m_fDistanceCutOff = 1000.0f;
 
+	CSpotLight* pSpotLight = new CSpotLight();
+	pSpotLight->m_vColor = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
+	pSpotLight->m_vPosition = glm::vec3(-20.0f, 50.0f, 0.0f);
+	pSpotLight->m_fInnerAngle = 15.0f;
+	pSpotLight->m_fOuterAngle = 30.0f;
+	pSpotLight->m_fTBD = 1.0f;
+	pSpotLight->m_vDirection = glm::vec3(0.0f, -1.0f, 0.0f);
+	pSpotLight->m_fLinear = 0.01f;
+	pSpotLight->m_fQuadratic = 0.0f;
+	pSpotLight->m_fDistanceCutOff = 1000.0f;
+
 	CGameObject* pObjTerrain = new CGameObject();
 	CMeshRenderer* pMeshTerrainRenderer = pObjTerrain->AddComponent<CMeshRenderer>(E_COMPONENT_MESH_RENDER);
 	pMeshTerrainRenderer->m_vRGB = glm::vec3(1.0f, 1.0f, 1.0f);
