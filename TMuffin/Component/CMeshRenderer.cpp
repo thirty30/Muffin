@@ -13,13 +13,20 @@ tbool CMeshRenderer::InitRenderer(const CMesh* a_pMesh, n32 a_nShaderProgramID)
 			delete this->m_pMeshDrawInfo;
 			return false;
 		}
-		this->m_pMeshDrawInfo->m_pVertices[i].X = pVertex->X;
-		this->m_pMeshDrawInfo->m_pVertices[i].Y = pVertex->Y;
-		this->m_pMeshDrawInfo->m_pVertices[i].Z = pVertex->Z;
+		this->m_pMeshDrawInfo->m_pVertices[i].x = pVertex->x;
+		this->m_pMeshDrawInfo->m_pVertices[i].y = pVertex->y;
+		this->m_pMeshDrawInfo->m_pVertices[i].z = pVertex->z;
+		this->m_pMeshDrawInfo->m_pVertices[i].w = 1.0f;
 
-		this->m_pMeshDrawInfo->m_pVertices[i].R = this->m_vRGB.r;
-		this->m_pMeshDrawInfo->m_pVertices[i].G = this->m_vRGB.g;
-		this->m_pMeshDrawInfo->m_pVertices[i].B = this->m_vRGB.b;
+		this->m_pMeshDrawInfo->m_pVertices[i].r = this->m_vRGB.r;
+		this->m_pMeshDrawInfo->m_pVertices[i].g = this->m_vRGB.g;
+		this->m_pMeshDrawInfo->m_pVertices[i].b = this->m_vRGB.b;
+		this->m_pMeshDrawInfo->m_pVertices[i].a = 1.0f;
+
+		this->m_pMeshDrawInfo->m_pVertices[i].nx = pVertex->nx;
+		this->m_pMeshDrawInfo->m_pVertices[i].ny = pVertex->ny;
+		this->m_pMeshDrawInfo->m_pVertices[i].nz = pVertex->nz;
+		this->m_pMeshDrawInfo->m_pVertices[i].nw = 1.0f;
 	}
 
 	this->m_pMeshDrawInfo->m_nTriangelCount = a_pMesh->m_nTriangelCount;
@@ -56,13 +63,21 @@ tbool CMeshRenderer::InitRenderer(const CMesh* a_pMesh, n32 a_nShaderProgramID)
 	// Set the vertex attributes.
 	GLint nPositionLocation = glGetAttribLocation(a_nShaderProgramID, "vPosition");
 	GLint nColorLocation = glGetAttribLocation(a_nShaderProgramID, "vColor");
+	GLint nNormalLocation = glGetAttribLocation(a_nShaderProgramID, "vNormal");
+	GLint nUVLocation = glGetAttribLocation(a_nShaderProgramID, "vUVx2");
 
 	// Set the vertex attributes for this shader
 	glEnableVertexAttribArray(nPositionLocation);
-	glVertexAttribPointer(nPositionLocation, 3, GL_FLOAT, GL_FALSE, sizeof(SDrawVertex), (void*)(offsetof(SDrawVertex, X)));
+	glVertexAttribPointer(nPositionLocation, 4, GL_FLOAT, GL_FALSE, sizeof(SDrawVertex), (void*)(offsetof(SDrawVertex, x)));
 
 	glEnableVertexAttribArray(nColorLocation);
-	glVertexAttribPointer(nColorLocation, 3, GL_FLOAT, GL_FALSE, sizeof(SDrawVertex), (void*)(offsetof(SDrawVertex, R)));
+	glVertexAttribPointer(nColorLocation, 4, GL_FLOAT, GL_FALSE, sizeof(SDrawVertex), (void*)(offsetof(SDrawVertex, r)));
+
+	glEnableVertexAttribArray(nNormalLocation);
+	glVertexAttribPointer(nNormalLocation, 4, GL_FLOAT, GL_FALSE, sizeof(SDrawVertex), (void*)(offsetof(SDrawVertex, nx)));
+
+	glEnableVertexAttribArray(nUVLocation);
+	glVertexAttribPointer(nUVLocation, 4, GL_FLOAT, GL_FALSE, sizeof(SDrawVertex), (void*)(offsetof(SDrawVertex, u0)));
 
 	// Now that all the parts are set up, set the VAO to zero
 	glBindVertexArray(0);

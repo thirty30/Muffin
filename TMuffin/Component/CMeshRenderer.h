@@ -2,17 +2,31 @@
 
 struct SDrawVertex
 {
-	float X, Y, Z;
-	float R, G, B;
+	f32 x, y, z, w;
+	f32 r, g, b, a;
+	f32 nx, ny, nz, nw;
+	f32 u0, v0, u1, v1;
 	SDrawVertex()
 	{
-		this->X = 0;
-		this->Y = 0;
-		this->Z = 0;
+		this->x = 0;
+		this->y = 0;
+		this->z = 0;
+		this->w = 1;
 
-		this->R = 1.0f;
-		this->G = 1.0f;
-		this->B = 1.0f;
+		this->r = 1;
+		this->g = 1;
+		this->b = 1;
+		this->a = 1;
+
+		this->nx = 0;
+		this->ny = 0;
+		this->nz = 0;
+		this->nw = 1;
+
+		this->u0 = 1;
+		this->v0 = 1;
+		this->u1 = 1;
+		this->v1 = 1;
 	}
 };
 

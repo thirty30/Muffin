@@ -4,8 +4,6 @@ T_IMPLEMENT_SINGLETON(CObjectRenderer)
 
 void CObjectRenderer::RenderObjects()
 {
-	glm::vec3 vLightPos = glm::vec3(0.0f, 0.0f, 2.0f);
-	glm::vec3 vLightColor = glm::vec3(1.0f, 1.0f, 1.0f);
 	CCamera* pCamera = g_pMuffinCameraManager->GetTopCamera();
 	if (pCamera == NULL)
 	{
@@ -44,18 +42,23 @@ void CObjectRenderer::RenderObjects()
 		n32 nShaderProgramID = pMeshRenderer->m_nShaderProgramID;
 		glUseProgram(nShaderProgramID);
 
+		GLint nDiffuseColour = glGetUniformLocation(nShaderProgramID, "un_vDiffuseColour");
+		glUniform4f(nDiffuseColour, pMeshRenderer->m_vRGB.r, pMeshRenderer->m_vRGB.g, pMeshRenderer->m_vRGB.b, 1.0f);
+
+		GLint nSpecularColour = glGetUniformLocation(nShaderProgramID, "un_vSpecularColour");
+		glUniform4f(nSpecularColour, 1.0f, 1.0f, 1.0f, 100.0f);
+
+		GLint nEyeLocation = glGetUniformLocation(nShaderProgramID, "un_vEyeLocation");
+		glUniform4f(nEyeLocation, pCamera->m_vPosition.x, pCamera->m_vPosition.y, pCamera->m_vPosition.z, 1.0f);
+
+		CLightManager::GetSingleton().RenderLights(nShaderProgramID);
+
 		GLint matModel_UL = glGetUniformLocation(nShaderProgramID, "matModel");
 		GLint matView_UL = glGetUniformLocation(nShaderProgramID, "matView");
 		GLint matProj_UL = glGetUniformLocation(nShaderProgramID, "matProj");
 		glUniformMatrix4fv(matModel_UL, 1, GL_FALSE, glm::value_ptr(matM));
 		glUniformMatrix4fv(matView_UL, 1, GL_FALSE, glm::value_ptr(matV));
 		glUniformMatrix4fv(matProj_UL, 1, GL_FALSE, glm::value_ptr(matP));
-
-		GLint nLightColor_UL = glGetUniformLocation(nShaderProgramID, "LightColor");
-		glUniform3f(nLightColor_UL, vLightColor.x, vLightColor.y, vLightColor.z);
-
-		GLint nLightPosition_UL = glGetUniformLocation(nShaderProgramID, "LightPosition");
-		glUniform3f(nLightPosition_UL, vLightPos.x, vLightPos.y, vLightPos.z);
 
 		glPolygonMode(GL_FRONT_AND_BACK, pMeshRenderer->m_nRenderMode);
 

@@ -6,8 +6,10 @@ private:
 	tbool m_bMidPress;
 	tbool m_bReadyRotateCamera;
 	glm::vec2 m_vLastCursor;
-	f32 m_fCameraMoveSpeed;
+	f32 m_fCameraYMoveSpeed;
+	f32 m_fCameraXMoveSpeed;
 	f32 m_fCameraRotationSpeed;
+	f32 m_fCameraScrollSpeed;
 	
 public:
 	CCameraControl();

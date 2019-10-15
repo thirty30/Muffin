@@ -14,6 +14,7 @@ enum EShaderID
 	E_SHADER_ID_UNKNOWN = 0,
 
 	E_SHADER_ID_DEFAULT,
+	E_SHADER_ID_LIGHT,
 };
 
 enum EGameStatus

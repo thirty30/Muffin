@@ -2,16 +2,16 @@
 
 struct SMeshVertex
 {
-	f32 X, Y, Z;
-	f32 NX, NY, NZ;
+	f32 x, y, z;
+	f32 nx, ny, nz;
 	SMeshVertex()
 	{
-		this->X = 0;
-		this->Y = 0;
-		this->Z = 0;
-		this->NX = 0;
-		this->NY = 0;
-		this->NZ = 0;
+		this->x = 0;
+		this->y = 0;
+		this->z = 0;
+		this->nx = 0;
+		this->ny = 0;
+		this->nz = 0;
 	}
 };
 

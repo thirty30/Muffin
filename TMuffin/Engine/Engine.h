@@ -6,6 +6,7 @@ extern CGameObjectManager* g_pMuffinGameObjectManager;
 extern CCameraManager* g_pMuffinCameraManager;
 extern CObjectRenderer* g_pObjectRenderer;
 extern CObjectPhysics* g_pObjectPhysics;
+extern CLightManager* g_pLightManager;
 extern f64 g_fNowFrameTime;
 ///////////////////-------------global variables end-------------///////////////////
 

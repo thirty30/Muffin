@@ -27,8 +27,9 @@ tbool CResourceManager::Init()
 	this->m_pResourceLoader = new CResourceLoader();
 	this->m_mapID2Mesh.clear();
 
-	this->LoadMesh(E_MODEL_ID_CUBE, "./Assets/Models/Cube.ply");
-	this->LoadMesh(E_MODEL_ID_SPHERE, "./Assets/Models/Sphere.ply");
+	this->LoadMesh(E_MODEL_ID_CUBE, "../Assets/Models/Cube.ply");
+	this->LoadMesh(E_MODEL_ID_SPHERE, "../Assets/Models/Sphere.ply");
+	this->LoadMesh(E_MODEL_ID_TERRAIN, "../Assets/Models/Terrain.ply");
 
 	return true;
 }

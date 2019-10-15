@@ -6,6 +6,7 @@ CGameObjectManager* g_pMuffinGameObjectManager = NULL;
 CCameraManager* g_pMuffinCameraManager = NULL;
 CObjectRenderer* g_pObjectRenderer = NULL;
 CObjectPhysics* g_pObjectPhysics = NULL;
+CLightManager* g_pLightManager = NULL;
 f64 g_fNowFrameTime = 0;
 ///////////////////-------------global variables end-------------///////////////////
 
@@ -19,6 +20,8 @@ tbool MuffinInit(n32 a_nWinWidth, n32 a_nWinHigh, const tcchar* a_strWinName)
 
 	g_pObjectPhysics = new CObjectPhysics();
 	g_pObjectPhysics->Init();
+
+	g_pLightManager = new CLightManager();
 
 	g_pMuffinWindow = new CWindow();
 	if (g_pMuffinWindow->InitWindow(a_nWinWidth, a_nWinHigh, a_strWinName) == false)

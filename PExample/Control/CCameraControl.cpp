@@ -5,9 +5,11 @@ CCameraControl::CCameraControl()
 {
 	this->m_bMidPress = false;
 	this->m_bReadyRotateCamera = false;
-	this->m_vLastCursor = glm::vec2(0, 0);
-	this->m_fCameraMoveSpeed = 1.0f;
-	this->m_fCameraRotationSpeed = 0.5f;
+	this->m_vLastCursor = glm::vec2(-1, -1);
+	this->m_fCameraYMoveSpeed = 2.5f;
+	this->m_fCameraXMoveSpeed = 5.0f;
+	this->m_fCameraRotationSpeed = 0.6f;
+	this->m_fCameraScrollSpeed = 10.0f;
 }
 
 CCameraControl::~CCameraControl()
@@ -17,7 +19,7 @@ CCameraControl::~CCameraControl()
 
 void CCameraControl::CameraControlKeyPress(n32 a_nKey, n32 a_nScancode, n32 a_nAction, n32 a_nMods)
 {
-	/*
+/*
 	switch (a_nKey)
 	{
 	case GLFW_KEY_W:
@@ -27,8 +29,6 @@ void CCameraControl::CameraControlKeyPress(n32 a_nKey, n32 a_nScancode, n32 a_nA
 		{
 			break;
 		}
-		pCamera->m_vPosition.z += fCameraSpeed;
-		pCamera->m_vTowards.z += fCameraSpeed;
 	}
 	break;
 	case GLFW_KEY_A:
@@ -38,8 +38,6 @@ void CCameraControl::CameraControlKeyPress(n32 a_nKey, n32 a_nScancode, n32 a_nA
 		{
 			break;
 		}
-		pCamera->m_vPosition.x += fCameraSpeed;
-		pCamera->m_vTowards.x += fCameraSpeed;
 	}
 	break;
 	case GLFW_KEY_S:
@@ -49,8 +47,6 @@ void CCameraControl::CameraControlKeyPress(n32 a_nKey, n32 a_nScancode, n32 a_nA
 		{
 			break;
 		}
-		pCamera->m_vPosition.z -= fCameraSpeed;
-		pCamera->m_vTowards.z -= fCameraSpeed;
 	}
 	break;
 	case GLFW_KEY_D:
@@ -60,14 +56,12 @@ void CCameraControl::CameraControlKeyPress(n32 a_nKey, n32 a_nScancode, n32 a_nA
 		{
 			break;
 		}
-		pCamera->m_vPosition.x -= fCameraSpeed;
-		pCamera->m_vTowards.x -= fCameraSpeed;
 	}
 	break;
 	default:
 		break;
 	}
-	*/
+*/
 }
 
 void CCameraControl::CameraControlMousePress(n32 a_nKey, n32 a_nAction, n32 a_nMods)
@@ -83,7 +77,7 @@ void CCameraControl::CameraControlMousePress(n32 a_nKey, n32 a_nAction, n32 a_nM
 		if (a_nAction == GLFW_RELEASE)
 		{
 			this->m_bReadyRotateCamera = false;
-			this->m_vLastCursor = glm::vec2(0, 0);
+			this->m_vLastCursor = glm::vec2(-1, -1);
 		}
 	}
 	break;
@@ -96,6 +90,7 @@ void CCameraControl::CameraControlMousePress(n32 a_nKey, n32 a_nAction, n32 a_nM
 		if (a_nAction == GLFW_RELEASE)
 		{
 			this->m_bMidPress = false;
+			this->m_vLastCursor = glm::vec2(-1, -1);
 		}
 	}
 	break;
@@ -111,10 +106,37 @@ void CCameraControl::CameraControlCursor(f64 a_fX, f64 a_fY)
 	{
 		return;
 	}
+
 	if (this->m_bReadyRotateCamera == true)
 	{
 		glm::vec2 vNowCursor = glm::vec2(a_fX, a_fY);
-		if (this->m_vLastCursor == glm::vec2(0, 0))
+		if (this->m_vLastCursor == glm::vec2(-1, -1))
+		{
+			this->m_vLastCursor = vNowCursor;
+		}
+		if (this->m_vLastCursor != vNowCursor)
+		{
+			glm::vec2 vTempCursor = vNowCursor - this->m_vLastCursor;
+			glm::vec2 vTorwards = glm::normalize(vTempCursor);
+			glm::vec4 vFront = glm::vec4(pCamera->m_vTowards, 1.0f);
+
+			f32 fYAngle = glm::radians(this->m_fCameraRotationSpeed * (-vTorwards.x));
+			glm::mat4 matRotY = glm::rotate(glm::mat4(1.0f), fYAngle, glm::vec3(0.0f, 1.0f, 0.0f));
+			vFront = matRotY * vFront;
+			pCamera->m_vTowards = vFront;
+
+			f32 fXAngle = glm::radians(this->m_fCameraRotationSpeed * vTorwards.y);
+			glm::mat4 matRotX = glm::rotate(glm::mat4(1.0f), fXAngle, glm::vec3(1.0f, 0.0f, 0.0f));
+			vFront = matRotX * vFront;
+
+			pCamera->m_vTowards = vFront;
+			this->m_vLastCursor = vNowCursor;
+		}
+	}
+	if (this->m_bMidPress == true)
+	{
+		glm::vec2 vNowCursor = glm::vec2(a_fX, a_fY);
+		if (this->m_vLastCursor == glm::vec2(-1, -1))
 		{
 			this->m_vLastCursor = vNowCursor;
 		}
@@ -123,25 +145,15 @@ void CCameraControl::CameraControlCursor(f64 a_fX, f64 a_fY)
 			glm::vec2 vTempCursor = vNowCursor - this->m_vLastCursor;
 			glm::vec2 vTorwards = glm::normalize(vTempCursor);
 
-			pCamera->m_vPosition.x += vTorwards.x * this->m_fCameraRotationSpeed;
-			pCamera->m_vPosition.y += vTorwards.y * this->m_fCameraRotationSpeed;
+			glm::vec3 vVector1 = glm::vec3(pCamera->m_vTowards.x, 0.0f, pCamera->m_vTowards.z);
+			glm::vec3 vVector2 = glm::vec3(0.0f, 1.0f, 0.0f);
+			glm::vec3 vVertical = glm::cross(vVector1, vVector2);
 
-			//pCamera->m_vTowards.x -= vTorwards.x * this->m_fCameraRotationSpeed;
-			//pCamera->m_vTowards.y -= vTorwards.y * this->m_fCameraRotationSpeed;
-			//this->m_vLastCursor = vNowCursor;
-
-			//glm::mat4 matM = glm::mat4(1.0f);
-			//glm::mat4 rotateX = glm::rotate(glm::mat4(1.0f), glm::radians(vTorwards.x * this->m_fCameraRotationSpeed), glm::vec3(1.0f, 0.0, 0.0f));
-			//matM *= rotateX;
-
-			//glm::mat4 rotateY = glm::rotate(glm::mat4(1.0f), glm::radians(vTorwards.y * this->m_fCameraRotationSpeed), glm::vec3(0.0f, 1.0, 0.0f));
-			//matM *= rotateY;
-
+			pCamera->m_vPosition.x += vVertical.x * this->m_fCameraXMoveSpeed * -vTorwards.x;
+			pCamera->m_vPosition.y += this->m_fCameraYMoveSpeed * vTorwards.y;
+			pCamera->m_vPosition.z += vVertical.z * this->m_fCameraXMoveSpeed * -vTorwards.x;
+			this->m_vLastCursor = vNowCursor;
 		}
-	}
-	if (this->m_bMidPress == true)
-	{
-
 	}
 }
 
@@ -152,19 +164,13 @@ void CCameraControl::CameraControlScroll(f64 a_fX, f64 a_fY)
 	{
 		return;
 	}
-	glm::vec3 vTowards = glm::normalize(pCamera->m_vTowards - pCamera->m_vPosition);
-
 	if (a_fY > 0)
 	{
-		pCamera->m_vPosition += vTowards * this->m_fCameraMoveSpeed;
-		//pCamera->m_vPosition.z += this->m_fCameraMoveSpeed;
-		//pCamera->m_vTowards.z += this->m_fCameraMoveSpeed;
+		pCamera->m_vPosition += pCamera->m_vTowards * this->m_fCameraScrollSpeed;
 	}
 	if (a_fY < 0)
 	{
-		pCamera->m_vPosition += -vTowards * this->m_fCameraMoveSpeed;
-		//pCamera->m_vPosition.z -= this->m_fCameraMoveSpeed;
-		//pCamera->m_vTowards.z -= this->m_fCameraMoveSpeed;
+		pCamera->m_vPosition += -pCamera->m_vTowards * this->m_fCameraScrollSpeed;
 	}
 }
 
