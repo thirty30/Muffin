@@ -54,7 +54,7 @@ public:
 public:
 	CDirectionLight() : CLight(E_LIGHT_TYPE_DIRECTION) 
 	{
-		this->m_vDirection = glm::vec3(1.0f, -0.5f, 1.0f);
+		this->m_vDirection = glm::normalize(glm::vec3(1.0f, -0.5f, 1.0f));
 	}
 	~CDirectionLight() {}
 	virtual void BindShader(n32 a_nShaderProgramID);
@@ -96,7 +96,7 @@ public:
 public:
 	CSpotLight() : CLight(E_LIGHT_TYPE_SPOT)
 	{
-		this->m_vDirection = glm::vec3(0.0f, -1.0f, 0.0f);
+		this->m_vDirection = glm::normalize(glm::vec3(1.0f, -0.5f, 1.0f));
 		this->m_fConstant = 0.0f;
 		this->m_fLinear = 0.1f;
 		this->m_fQuadratic = 0.00001f;

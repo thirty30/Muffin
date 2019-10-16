@@ -57,6 +57,11 @@ void CObjectRenderer::RenderObjects()
 		GLint matModel_UL = glGetUniformLocation(nShaderProgramID, "matModel");
 		GLint matView_UL = glGetUniformLocation(nShaderProgramID, "matView");
 		GLint matProj_UL = glGetUniformLocation(nShaderProgramID, "matProj");
+
+		GLint matModelIT_UL = glGetUniformLocation(nShaderProgramID, "matModelInverseTranspose");
+		glm::mat4 matModelInverseTranspose = glm::inverse(glm::transpose(matM));
+		glUniformMatrix4fv(matModelIT_UL, 1, GL_FALSE, glm::value_ptr(matModelInverseTranspose));
+
 		glUniformMatrix4fv(matModel_UL, 1, GL_FALSE, glm::value_ptr(matM));
 		glUniformMatrix4fv(matView_UL, 1, GL_FALSE, glm::value_ptr(matV));
 		glUniformMatrix4fv(matProj_UL, 1, GL_FALSE, glm::value_ptr(matP));
