@@ -24,6 +24,13 @@ void CObjectRenderer::RenderObjects()
 		}
 
 		glm::mat4 matM = glm::mat4(1.0f);
+
+		glm::mat4 trans = glm::translate(glm::mat4(1.0f), pCurGameObj->m_vPosition);
+		matM *= trans;
+
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f), pCurGameObj->m_vScale);
+		matM *= scale;
+
 		glm::mat4 rotateX = glm::rotate(glm::mat4(1.0f), pCurGameObj->m_vRotation.x, glm::vec3(1.0f, 0.0, 0.0f));
 		matM *= rotateX;
 
@@ -32,12 +39,6 @@ void CObjectRenderer::RenderObjects()
 
 		glm::mat4 rotateZ = glm::rotate(glm::mat4(1.0f), pCurGameObj->m_vRotation.z, glm::vec3(0.0f, 0.0, 1.0f));
 		matM *= rotateZ;
-
-		glm::mat4 trans = glm::translate(glm::mat4(1.0f), pCurGameObj->m_vPosition);
-		matM *= trans;
-
-		glm::mat4 scale = glm::scale(glm::mat4(1.0f), pCurGameObj->m_vScale);
-		matM *= scale;
 
 		n32 nShaderProgramID = pMeshRenderer->m_nShaderProgramID;
 		glUseProgram(nShaderProgramID);

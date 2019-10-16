@@ -53,6 +53,11 @@ void MuffinClear()
 		delete g_pObjectRenderer;
 		g_pObjectRenderer = NULL;
 	}
+	if (g_pLightManager != NULL)
+	{
+		delete g_pLightManager;
+		g_pLightManager = NULL;
+	}
 	if (g_pMuffinWindow != NULL)
 	{
 		g_pMuffinWindow->Clear();

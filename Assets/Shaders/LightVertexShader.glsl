@@ -5,6 +5,7 @@ uniform mat4 MVP;
 uniform mat4 matModel;	//Model or World
 uniform mat4 matView;	//View or camera
 uniform mat4 matProj;	//Projection transform
+uniform mat4 matModelInverseTranspose;
 
 //in variables
 in vec4 vColor;
@@ -24,6 +25,6 @@ void main()
     gl_Position = matMVP * vPosition;
     in_fColour = vColor;
     in_fVertWorldLocation = matModel * vPosition;
-    in_fNormal = vNormal;
+    in_fNormal = matModelInverseTranspose* vNormal;
     in_fUVx2 = vUVx2;
 }

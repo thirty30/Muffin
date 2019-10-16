@@ -14,7 +14,7 @@ CGame::CGame()
 
 CGame::~CGame()
 {
-
+	this->ClearGame();
 }
 
 tbool CGame::InitGame()
