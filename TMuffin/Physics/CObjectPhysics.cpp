@@ -4,6 +4,7 @@ T_IMPLEMENT_SINGLETON(CObjectPhysics)
 CObjectPhysics::CObjectPhysics()
 {
 	this->m_vGravity = glm::vec3(0, -9.8f, 0);
+	this->m_fLastFrameTime = 0;
 }
 
 CObjectPhysics::~CObjectPhysics()
@@ -69,27 +70,30 @@ glm::vec3 CObjectPhysics::ClosestPtPointTriangle(glm::vec3 p, glm::vec3 a, glm::
 	return u * a + v * b + w * c;
 }
 
-tbool CObjectPhysics::TestSphereTriangle(CSphereCollider& a_rSphere, glm::vec3 a_vTriangleVectex1, glm::vec3 a_vTriangleVectex2, glm::vec3 ca_vTriangleVectex3, glm::vec3& a_vClosestPoint)
+tbool CObjectPhysics::TestSphereTriangle(CSphereCollider* a_rSphere, glm::vec3 a_vTriangleVectex1, glm::vec3 a_vTriangleVectex2, glm::vec3 ca_vTriangleVectex3, glm::vec3& a_vClosestPoint)
 {
 	// Find point P on triangle ABC closest to sphere center
-	a_vClosestPoint = this->ClosestPtPointTriangle(a_rSphere.m_vCenter, a_vTriangleVectex1, a_vTriangleVectex2, ca_vTriangleVectex3);
+	a_vClosestPoint = this->ClosestPtPointTriangle(a_rSphere->m_vCenter, a_vTriangleVectex1, a_vTriangleVectex2, ca_vTriangleVectex3);
 
 	// Sphere and triangle intersect if the (squared) distance from sphere
 	// center to point p is less than the (squared) sphere radius
-	glm::vec3 vDis = a_vClosestPoint - a_rSphere.m_vCenter;
-	return glm::dot(vDis, vDis) <= a_rSphere.m_fRadius * a_rSphere.m_fRadius;
+	glm::vec3 vDis = a_vClosestPoint - a_rSphere->m_vCenter;
+	return glm::dot(vDis, vDis) <= a_rSphere->m_fRadius * a_rSphere->m_fRadius;
 }
 
-void CObjectPhysics::PhysicsObjects(f32 a_fDeltaTime)
+void CObjectPhysics::PhysicsObjects(f64 a_fCurFrameTime)
 {
-	//1. calc new collider center
+	f32 fDeltaTime = (f32)(a_fCurFrameTime - this->m_fLastFrameTime);
+	//1. refresh new collider center
 	CGameObjectManager::GetSingleton().RefreshColliderPosition();
 
-	//2. calc rigidbody motion
-	this->CalcRigidBodyMotion(a_fDeltaTime);
-	
+	//2. calc rigidbody motion and refresh collider center
+	this->CalcRigidBodyMotion(fDeltaTime);
+	CGameObjectManager::GetSingleton().RefreshColliderPosition();
+
 	//3. calc collision
 	this->CalcCollision();
+	this->m_fLastFrameTime = a_fCurFrameTime;
 }
 
 void CObjectPhysics::CalcRigidBodyMotion(f32 a_fDeltaTime)
@@ -133,15 +137,13 @@ void CObjectPhysics::CalcCollision()
 		{
 			continue;;
 		}
-
 		CRigidBody* pSrcRB = pSrcGameObj->GetComponent<CRigidBody>(E_COMPONENT_RIGIDBODY);
-		//EColliderType eSrcType = pSrcGameObj->GetColliderType();
 
 		hash_map<n32, CGameObject*>::iterator iterTar = CGameObjectManager::GetSingleton().m_mapID2GameObj.begin();
 		for (; iterTar != CGameObjectManager::GetSingleton().m_mapID2GameObj.end(); iterTar++)
 		{
-			CGameObject* pTarGameObj = iterSrc->second;
-			if (pSrcGameObj->m_nMuffinEngineGUID = pTarGameObj->m_nMuffinEngineGUID)
+			CGameObject* pTarGameObj = iterTar->second;
+			if (pSrcGameObj->m_nMuffinEngineGUID == pTarGameObj->m_nMuffinEngineGUID)
 			{
 				continue;
 			}
@@ -150,44 +152,67 @@ void CObjectPhysics::CalcCollision()
 			{
 				continue;
 			}
-
-
-			CRigidBody* pTarRB = pTarGameObj->GetComponent<CRigidBody>(E_COMPONENT_RIGIDBODY);
-			//EColliderType eTarType = pTarGameObj->GetColliderType();
-			//this->CalcCollider(pSrcBC, pTarBC);
+			glm::vec3 vHitPoint(0.0f, 0.0f, 0.0f);
+			SCollisionInfo rCollisionInfo;
+			this->CalcColliderIsHit(pSrcBC, pTarBC, rCollisionInfo);
+			if (rCollisionInfo.m_bIsHit == false)
+			{
+				continue;
+			}
+			if (pSrcRB == NULL)
+			{
+				continue;
+			}
+			pSrcBC->m_vCenter += rCollisionInfo.m_vHitNormal * rCollisionInfo.m_fIntersectDis;
+			pSrcGameObj->m_vPosition = pSrcBC->m_vCenter;
+			pSrcRB->m_vVelocity = glm::reflect(pSrcRB->m_vVelocity, rCollisionInfo.m_vHitNormal);
+			pSrcRB->m_vVelocity *= glm::min(1.0f, pSrcBC->m_fElastic * pTarBC->m_fElastic);
+			if (pTarBC->m_eColliderType == E_COLLIDER_TYPE_SPHERE)
+			{
+				CRigidBody* pTarRB = pTarGameObj->GetComponent<CRigidBody>(E_COMPONENT_RIGIDBODY);
+				pTarBC->m_vCenter += (-rCollisionInfo.m_vHitNormal) * 0.01f;
+				pTarGameObj->m_vPosition = pTarBC->m_vCenter;
+				pTarRB->m_vVelocity = glm::reflect(pTarRB->m_vVelocity, -rCollisionInfo.m_vHitNormal);
+				pTarRB->m_vVelocity *= glm::min(1.0f, pSrcBC->m_fElastic * pTarBC->m_fElastic);
+			}
 		}
-
-		//CSphereCollider* pCollider = pSrcGameObj->GetComponent<CSphereCollider>(E_COMPONENT_SPHERE_COLLIDER);
-		//if (pCollider->m_vCenter.y - 1.0f <= 1.0f)
-		//{
-		//	pSrcRB->m_vVelocity = glm::reflect(pSrcRB->m_vVelocity, glm::vec3(0, 1, 0));
-		//}
-
 	}
 }
 
-void CObjectPhysics::CalcCollider(CGameObject* a_pObj1, CGameObject* a_pObj2)
+void CObjectPhysics::CalcColliderIsHit(CBaseCollider* a_pCollider1, CBaseCollider* a_pCollider2, SCollisionInfo& a_rCollisionInfo)
 {
-	CBaseCollider* a_pC1 = a_pObj1->GetBaseCollider();
-	switch (a_pC1->m_eColliderType)
+	switch (a_pCollider1->m_eColliderType)
 	{
 	case E_COLLIDER_TYPE_PLANE:
 	{
-
 	}
 	break;
 	case E_COLLIDER_TYPE_SPHERE:
 	{
+		if (a_pCollider2->m_eColliderType == E_COLLIDER_TYPE_PLANE)
+		{
+			this->doSphere2Plane((CSphereCollider*)a_pCollider1, (CPlaneCollider*)a_pCollider2, a_rCollisionInfo);
+		}
+		else if (a_pCollider2->m_eColliderType == E_COLLIDER_TYPE_SPHERE)
+		{
+			this->doSphere2Sphere((CSphereCollider*)a_pCollider1, (CSphereCollider*)a_pCollider2, a_rCollisionInfo);
+		}
+		else if (a_pCollider2->m_eColliderType == E_COLLIDER_TYPE_BOX)
+		{
+			this->doSphere2Box((CSphereCollider*)a_pCollider1, (CBoxCollider*)a_pCollider2, a_rCollisionInfo);
+		}
+		else if (a_pCollider2->m_eColliderType == E_COLLIDER_TYPE_MESH)
+		{
+			this->doSphere2Mesh((CSphereCollider*)a_pCollider1, (CMeshCollider*)a_pCollider2, a_rCollisionInfo);
+		}
 	}
 	break;
 	case E_COLLIDER_TYPE_BOX:
 	{
-
 	}
 	break;
 	case E_COLLIDER_TYPE_MESH:
 	{
-
 	}
 	break;
 	default:
@@ -195,47 +220,78 @@ void CObjectPhysics::CalcCollider(CGameObject* a_pObj1, CGameObject* a_pObj2)
 	}
 }
 
-void CObjectPhysics::doSphereTriangle(CGameObject* a_pObj1, CGameObject* a_pObj2)
+
+void CObjectPhysics::doSphere2Plane(CSphereCollider* a_pSrcCollider, CPlaneCollider* a_pTarCollider, SCollisionInfo& a_rCollisionInfo)
 {
-	/*
-	f32 fLastDis = FLT_MAX;
-	CMeshDrawInfo* pTargetDrawInfo = pTargetGameObj->m_pMeshRenderer.m_pMeshDrawInfo;
-	for (n32 i = 0; i < pTargetDrawInfo->m_nTriangelIndexCount; i += 3)
+	a_rCollisionInfo.m_vHitPoint = a_pSrcCollider->m_vCenter;
+	if (a_pTarCollider->m_eAxis == E_PLANE_COLLIDER_AXIS_X)
 	{
-		n32 nVertex1 = pTargetDrawInfo->m_pTriangelIndices[i + 0];
-		glm::vec3 vPoint1 = glm::vec3(pTargetDrawInfo->m_pVertices[nVertex1].X, pTargetDrawInfo->m_pVertices[nVertex1].Y, pTargetDrawInfo->m_pVertices[nVertex1].Z);
+		a_rCollisionInfo.m_vHitPoint.x = a_pTarCollider->m_fPos;
+	}
+	else if (a_pTarCollider->m_eAxis == E_PLANE_COLLIDER_AXIS_Y)
+	{
+		a_rCollisionInfo.m_vHitPoint.y = a_pTarCollider->m_fPos;
+	}
+	else if (a_pTarCollider->m_eAxis == E_PLANE_COLLIDER_AXIS_Z)
+	{
+		a_rCollisionInfo.m_vHitPoint.z = a_pTarCollider->m_fPos;
+	}
+	f32 fHitDis = glm::distance(a_pSrcCollider->m_vCenter, a_rCollisionInfo.m_vHitPoint);
+	if (fHitDis <= a_pSrcCollider->m_fRadius)
+	{
+		a_rCollisionInfo.m_bIsHit = true;
+		a_rCollisionInfo.m_fIntersectDis = a_pSrcCollider->m_fRadius - fHitDis;
+		a_rCollisionInfo.m_vHitNormal = glm::normalize(a_pSrcCollider->m_vCenter - a_rCollisionInfo.m_vHitPoint);
+	}
+}
 
-		n32 nVertex2 = pTargetDrawInfo->m_pTriangelIndices[i + 1];
-		glm::vec3 vPoint2 = glm::vec3(pTargetDrawInfo->m_pVertices[nVertex2].X, pTargetDrawInfo->m_pVertices[nVertex2].Y, pTargetDrawInfo->m_pVertices[nVertex2].Z);
+void CObjectPhysics::doSphere2Sphere(CSphereCollider* a_pSrcCollider, CSphereCollider* a_pTarCollider, SCollisionInfo& a_rCollisionInfo)
+{
+	f32 fHitDis = glm::distance(a_pSrcCollider->m_vCenter, a_pTarCollider->m_vCenter);
+	if (fHitDis < a_pSrcCollider->m_fRadius + a_pTarCollider->m_fRadius)
+	{
+		a_rCollisionInfo.m_bIsHit = true;
+		a_rCollisionInfo.m_vHitNormal = glm::normalize(a_pSrcCollider->m_vCenter - a_pTarCollider->m_vCenter);
+		glm::vec3 vBackDir = glm::normalize(a_pSrcCollider->m_vCenter - a_pTarCollider->m_vCenter);
+		glm::vec3 vBackPoint = a_pTarCollider->m_vCenter + vBackDir * (a_pSrcCollider->m_fRadius + a_pTarCollider->m_fRadius);
+		a_rCollisionInfo.m_fIntersectDis = glm::distance(a_pSrcCollider->m_vCenter, vBackPoint);
+		a_rCollisionInfo.m_vHitPoint = a_pTarCollider->m_vCenter + vBackDir * a_pTarCollider->m_fRadius;
+	}
+}
 
-		n32 nVertex3 = pTargetDrawInfo->m_pTriangelIndices[i + 2];
-		glm::vec3 vPoint3 = glm::vec3(pTargetDrawInfo->m_pVertices[nVertex3].X, pTargetDrawInfo->m_pVertices[nVertex3].Y, pTargetDrawInfo->m_pVertices[nVertex3].Z);
+void CObjectPhysics::doSphere2Box(CSphereCollider* a_pSrcCollider, CBoxCollider* a_pTarCollider, SCollisionInfo& a_rCollisionInfo)
+{
+	glm::vec3 vMin = a_pTarCollider->GetMinPoint();
+	glm::vec3 vMax = a_pTarCollider->GetMaxPoint();
+	for (int i = 0; i < 3; i++) {
+		float v = a_pSrcCollider->m_vCenter[i];
+		v = glm::max(v, vMin[i]);
+		v = glm::min(v, vMax[i]);
+		a_rCollisionInfo.m_vHitPoint[i] = v;
+	}
+	f32 fHitDis = glm::distance(a_pSrcCollider->m_vCenter, a_rCollisionInfo.m_vHitPoint);
+	if (fHitDis <= a_pSrcCollider->m_fRadius)
+	{
+		a_rCollisionInfo.m_bIsHit = true;
+		a_rCollisionInfo.m_fIntersectDis = a_pSrcCollider->m_fRadius - fHitDis;
+		a_rCollisionInfo.m_vHitNormal = glm::normalize(a_pSrcCollider->m_vCenter - a_rCollisionInfo.m_vHitPoint);
+	}
+}
 
-		glm::vec3 vPointClosest;// = this->ClosestPtPointTriangle(pCurGameObj->m_vPosition, vPoint1, vPoint2, vPoint3);
-
-		Sphere sp;
-		sp.c = pCurGameObj->m_vPosition;
-		sp.r = 1;
-		tbool bCollided = this->TestSphereTriangle(sp, vPoint1, vPoint2, vPoint3, vPointClosest);
+void CObjectPhysics::doSphere2Mesh(CSphereCollider* a_pSrcCollider, CMeshCollider* a_pTarCollider, SCollisionInfo& a_rCollisionInfo)
+{
+	f32 fLastDis = FLT_MAX;
+	for (n32 i = 0; i < a_pTarCollider->m_nTriangleCount; i += 3)
+	{
+		sMeshColliderTriangle* pTriangle = &a_pTarCollider->m_pTriangleoArray[i];
+		tbool bCollided = this->TestSphereTriangle(a_pSrcCollider, pTriangle->m_vPoint1, pTriangle->m_vPoint2, pTriangle->m_vPoint3, a_rCollisionInfo.m_vHitPoint);
 		if (bCollided == true)
 		{
-			//printf("%f, %f, %f\n", pCurGameObj->m_vPosition.x, pCurGameObj->m_vPosition.y, pCurGameObj->m_vPosition.z);
-			//f32 fDisTemp = 1.0f - glm::distance(pCurGameObj->m_vPositidon, vPointClosest);
-			//pPhy->m_bIsPhysics = false;
-			//glm::vec3 vInversepVelocity = -pPhy->m_vVelocity;
-			//pCurGameObj->m_vPosition += vInversepVelocity * fDisTemp;
-			//printf("======%f, %f, %f\n", pCurGameObj->m_vPosition.x, pCurGameObj->m_vPosition.y, pCurGameObj->m_vPosition.z);
-			continue;
-		}
-
-		//debug sphere
-		CGameObject* pDebugSphere = CGameObjectManager::GetSingleton().FindGameObjectByID(DEBUG_SPHERE_OBJECT_ID);
-		f32 fDis = glm::distance(pCurGameObj->m_vPosition, vPointClosest);
-		if (fDis < fLastDis)
-		{
-			fLastDis = fDis;
-			pDebugSphere->m_vPosition = vPointClosest;
+			a_rCollisionInfo.m_bIsHit = true;
+			a_rCollisionInfo.m_vHitNormal = pTriangle->m_vTriangleNormal;
+			f32 fHitDis = glm::distance(a_pSrcCollider->m_vCenter, a_rCollisionInfo.m_vHitPoint);
+			a_rCollisionInfo.m_fIntersectDis = a_pSrcCollider->m_fRadius - fHitDis;
 		}
 	}
-	*/
 }
+

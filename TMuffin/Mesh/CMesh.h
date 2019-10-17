@@ -15,10 +15,10 @@ struct SMeshVertex
 	}
 };
 
-struct SMeshTriangel
+struct SMeshTriangle
 {
 	u32 Vertex1, Vertex2, Vertex3;
-	SMeshTriangel()
+	SMeshTriangle()
 	{
 		this->Vertex1 = 0;
 		this->Vertex2 = 0;
@@ -32,8 +32,8 @@ public:
 	n32 m_nVertexCount;
 	SMeshVertex* m_pVertices;	//store the vertices
 
-	n32 m_nTriangelCount;
-	SMeshTriangel* m_pTriangels;	//store the triangels
+	n32 m_nTriangleCount;
+	SMeshTriangle* m_pTriangles;	//store the triangels
 
 public:
 	CMesh();

@@ -4,8 +4,8 @@ CMesh::CMesh()
 {
 	this->m_nVertexCount = 0;
 	this->m_pVertices = NULL;
-	this->m_nTriangelCount = 0;
-	this->m_pTriangels = NULL;
+	this->m_nTriangleCount = 0;
+	this->m_pTriangles = NULL;
 }
 
 CMesh::~CMesh()
@@ -14,8 +14,8 @@ CMesh::~CMesh()
 	{
 		delete []this->m_pVertices;
 	}
-	if (this->m_pTriangels != NULL)
+	if (this->m_pTriangles != NULL)
 	{
-		delete []this->m_pTriangels;
+		delete []this->m_pTriangles;
 	}
 }

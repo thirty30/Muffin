@@ -5,7 +5,7 @@ class CRigidBody : public CComponent
 public:
 	tbool m_bUseGravity;
 	f32 m_fMass;
-	tbool m_bIsPassive;
+	tbool m_bIsPassive; // If true it cannot move in physics frame
 
 	glm::vec3 m_vVelocity;
 	glm::vec3 m_vAccel;

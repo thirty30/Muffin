@@ -29,21 +29,21 @@ tbool CMeshRenderer::InitRenderer(const CMesh* a_pMesh, n32 a_nShaderProgramID)
 		this->m_pMeshDrawInfo->m_pVertices[i].nw = 1.0f;
 	}
 
-	this->m_pMeshDrawInfo->m_nTriangelCount = a_pMesh->m_nTriangelCount;
-	this->m_pMeshDrawInfo->m_nTriangelIndexCount = a_pMesh->m_nTriangelCount * 3;
-	this->m_pMeshDrawInfo->m_pTriangelIndices = new u32[this->m_pMeshDrawInfo->m_nTriangelIndexCount];
-	TMemzero(this->m_pMeshDrawInfo->m_pTriangelIndices, this->m_pMeshDrawInfo->m_nTriangelIndexCount);
-	for (n32 i = 0; i < this->m_pMeshDrawInfo->m_nTriangelCount; i++)
+	this->m_pMeshDrawInfo->m_nTriangleCount = a_pMesh->m_nTriangleCount;
+	this->m_pMeshDrawInfo->m_nTriangleIndexCount = a_pMesh->m_nTriangleCount * 3;
+	this->m_pMeshDrawInfo->m_pTriangleIndices = new u32[this->m_pMeshDrawInfo->m_nTriangleIndexCount];
+	TMemzero(this->m_pMeshDrawInfo->m_pTriangleIndices, this->m_pMeshDrawInfo->m_nTriangleIndexCount);
+	for (n32 i = 0; i < this->m_pMeshDrawInfo->m_nTriangleCount; i++)
 	{
-		const SMeshTriangel* pTriangel = &a_pMesh->m_pTriangels[i];
+		const SMeshTriangle* pTriangel = &a_pMesh->m_pTriangles[i];
 		if (pTriangel == NULL)
 		{
 			delete this->m_pMeshDrawInfo;
 			return false;
 		}
-		this->m_pMeshDrawInfo->m_pTriangelIndices[(i * 3) + 0] = pTriangel->Vertex1;
-		this->m_pMeshDrawInfo->m_pTriangelIndices[(i * 3) + 1] = pTriangel->Vertex2;
-		this->m_pMeshDrawInfo->m_pTriangelIndices[(i * 3) + 2] = pTriangel->Vertex3;
+		this->m_pMeshDrawInfo->m_pTriangleIndices[(i * 3) + 0] = pTriangel->Vertex1;
+		this->m_pMeshDrawInfo->m_pTriangleIndices[(i * 3) + 1] = pTriangel->Vertex2;
+		this->m_pMeshDrawInfo->m_pTriangleIndices[(i * 3) + 2] = pTriangel->Vertex3;
 	}
 
 	this->m_nShaderProgramID = a_nShaderProgramID;
@@ -56,9 +56,9 @@ tbool CMeshRenderer::InitRenderer(const CMesh* a_pMesh, n32 a_nShaderProgramID)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(SDrawVertex) * this->m_pMeshDrawInfo->m_nVertexCount, (GLvoid*)this->m_pMeshDrawInfo->m_pVertices, GL_STATIC_DRAW);
 
 	// Copy the index buffer into the video card
-	glGenBuffers(1, &(this->m_pMeshDrawInfo->m_nTriangelIndexGLBufferID));
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->m_pMeshDrawInfo->m_nTriangelIndexGLBufferID);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(u32) * this->m_pMeshDrawInfo->m_nTriangelIndexCount, (GLvoid*)this->m_pMeshDrawInfo->m_pTriangelIndices, GL_STATIC_DRAW);
+	glGenBuffers(1, &(this->m_pMeshDrawInfo->m_nTriangleIndexGLBufferID));
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->m_pMeshDrawInfo->m_nTriangleIndexGLBufferID);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(u32) * this->m_pMeshDrawInfo->m_nTriangleIndexCount, (GLvoid*)this->m_pMeshDrawInfo->m_pTriangleIndices, GL_STATIC_DRAW);
 
 	// Set the vertex attributes.
 	GLint nPositionLocation = glGetAttribLocation(a_nShaderProgramID, "vPosition");

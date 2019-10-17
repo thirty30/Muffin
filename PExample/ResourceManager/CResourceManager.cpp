@@ -29,7 +29,7 @@ tbool CResourceManager::Init()
 
 	this->LoadMesh(E_MODEL_ID_CUBE, "../Assets/Models/Cube.ply");
 	this->LoadMesh(E_MODEL_ID_SPHERE, "../Assets/Models/Sphere.ply");
-	this->LoadMesh(E_MODEL_ID_TERRAIN, "../Assets/Models/Terrain.ply");
+	//this->LoadMesh(E_MODEL_ID_TERRAIN, "../Assets/Models/Terrain.ply");
 
 	return true;
 }

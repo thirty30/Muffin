@@ -6,10 +6,10 @@ CCameraControl::CCameraControl()
 	this->m_bMidPress = false;
 	this->m_bReadyRotateCamera = false;
 	this->m_vLastCursor = glm::vec2(-1, -1);
-	this->m_fCameraYMoveSpeed = 2.5f;
-	this->m_fCameraXMoveSpeed = 5.0f;
+	this->m_fCameraYMoveSpeed = 0.2f;
+	this->m_fCameraXMoveSpeed = 0.4f;
 	this->m_fCameraRotationSpeed = 0.6f;
-	this->m_fCameraScrollSpeed = 10.0f;
+	this->m_fCameraScrollSpeed = 2.0f;
 }
 
 CCameraControl::~CCameraControl()

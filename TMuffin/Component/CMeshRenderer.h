@@ -39,10 +39,10 @@ public:
 	n32 m_nVertexCount;
 	SDrawVertex* m_pVertices;
 
-	u32 m_nTriangelIndexGLBufferID;
-	n32 m_nTriangelCount;
-	n32 m_nTriangelIndexCount;
-	u32* m_pTriangelIndices;
+	u32 m_nTriangleIndexGLBufferID;
+	n32 m_nTriangleCount;
+	n32 m_nTriangleIndexCount;
+	u32* m_pTriangleIndices;
 
 public:
 	CMeshDrawInfo()
@@ -53,10 +53,10 @@ public:
 		this->m_nVertexCount = 0;
 		this->m_pVertices = NULL;
 
-		this->m_nTriangelIndexGLBufferID = 0;
-		this->m_nTriangelCount = 0;
-		this->m_nTriangelIndexCount = 0;
-		this->m_pTriangelIndices = NULL;
+		this->m_nTriangleIndexGLBufferID = 0;
+		this->m_nTriangleCount = 0;
+		this->m_nTriangleIndexCount = 0;
+		this->m_pTriangleIndices = NULL;
 	}
 
 	~CMeshDrawInfo() 
@@ -65,9 +65,9 @@ public:
 		{
 			delete this->m_pVertices;
 		}
-		if (this->m_pTriangelIndices != NULL)
+		if (this->m_pTriangleIndices != NULL)
 		{
-			delete this->m_pTriangelIndices;
+			delete this->m_pTriangleIndices;
 		}
 	}
 };

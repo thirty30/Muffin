@@ -14,9 +14,9 @@ extern tbool MuffinInit(n32 a_nWinWidth, n32 a_nWinHigh, const tcchar* a_strWinN
 extern void MuffinClear();
 
 extern void MuffinMainLoop();
-extern void MuffinPhysicsLoop();
-extern void MuffinGameLogicLoop();
-extern void MuffinRenderingLoop();
+extern void MuffinPhysicsLoop(f64 a_fFrameTime);
+extern void MuffinGameLogicLoop(f64 a_fFrameTime);
+extern void MuffinRenderingLoop(f64 a_fFrameTime);
 
 extern void GLFWErrorCallback(n32 a_nErrorCode, const tcchar* a_strDesc);
 extern void KeyCallBack(GLFWwindow* a_pWindow, n32 a_nKey, n32 a_nScancode, n32 a_nAction, n32 a_nMods);

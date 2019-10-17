@@ -24,7 +24,7 @@ tbool CResourceLoader::LoadModelFromPly(const tcchar* a_strFileName, CMesh* a_pM
 		}
 		if (strContent == "face")
 		{
-			objFile >> a_pMesh->m_nTriangelCount;
+			objFile >> a_pMesh->m_nTriangleCount;
 			continue;
 		}
 		if (strContent == "end_header")
@@ -39,10 +39,10 @@ tbool CResourceLoader::LoadModelFromPly(const tcchar* a_strFileName, CMesh* a_pM
 			}
 
 			//read all triangels
-			a_pMesh->m_pTriangels = new SMeshTriangel[a_pMesh->m_nTriangelCount];
-			for (u32 i = 0; i < a_pMesh->m_nTriangelCount; i++)
+			a_pMesh->m_pTriangles = new SMeshTriangle[a_pMesh->m_nTriangleCount];
+			for (u32 i = 0; i < a_pMesh->m_nTriangleCount; i++)
 			{
-				SMeshTriangel& rTemp = a_pMesh->m_pTriangels[i];
+				SMeshTriangle& rTemp = a_pMesh->m_pTriangles[i];
 				int nDiscard = 0;
 				objFile >> nDiscard >> rTemp.Vertex1 >> rTemp.Vertex2 >> rTemp.Vertex3;
 			}

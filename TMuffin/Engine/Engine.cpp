@@ -74,33 +74,32 @@ void MuffinMainLoop()
 
 		glfwPollEvents();
 
-		MuffinGameLogicLoop();
+		MuffinGameLogicLoop(g_fNowFrameTime);
 
-		MuffinPhysicsLoop();
+		MuffinPhysicsLoop(g_fNowFrameTime);
 
-		MuffinRenderingLoop();
+		MuffinRenderingLoop(g_fNowFrameTime);
 	}
 }
 
-void MuffinPhysicsLoop()
+void MuffinPhysicsLoop(f64 a_fFrameTime)
 {
 	if (pExternalPhysicsCallBack != NULL)
 	{
 		pExternalPhysicsCallBack();
 	}
-	g_pObjectPhysics->PhysicsObjects(0.01f);
+	g_pObjectPhysics->PhysicsObjects(a_fFrameTime);
 }
 
-void MuffinGameLogicLoop()
+void MuffinGameLogicLoop(f64 a_fFrameTime)
 {
 	if (pExternalGameLogicCallBack != NULL)
 	{
 		pExternalGameLogicCallBack();
 	}
-
 }
 
-void MuffinRenderingLoop()
+void MuffinRenderingLoop(f64 a_fFrameTime)
 {
 	g_pMuffinWindow->DrawWindow();
 }

@@ -70,7 +70,7 @@ void CObjectRenderer::RenderObjects()
 
 		CMeshDrawInfo* pDrawInfo = pMeshRenderer->m_pMeshDrawInfo;
 		glBindVertexArray(pDrawInfo->m_nVAOID);
-		glDrawElements(GL_TRIANGLES, pDrawInfo->m_nTriangelIndexCount, GL_UNSIGNED_INT, NULL);
+		glDrawElements(GL_TRIANGLES, pDrawInfo->m_nTriangleIndexCount, GL_UNSIGNED_INT, NULL);
 		glBindVertexArray(0);
 	}
 }
