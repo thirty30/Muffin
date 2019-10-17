@@ -175,6 +175,8 @@ void CObjectPhysics::CalcCollision()
 				pTarRB->m_vVelocity = glm::reflect(pTarRB->m_vVelocity, -rCollisionInfo.m_vHitNormal);
 				pTarRB->m_vVelocity *= glm::min(1.0f, pSrcBC->m_fElastic * pTarBC->m_fElastic);
 			}
+			pSrcGameObj->OnCollision(pTarGameObj);
+			pTarGameObj->OnCollision(pSrcGameObj);
 		}
 	}
 }

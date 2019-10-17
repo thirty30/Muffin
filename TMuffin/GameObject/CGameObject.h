@@ -13,6 +13,8 @@ private:
 	CBaseCollider* GetBaseCollider() { return dynamic_cast<CBaseCollider*>(this->m_pComponentArray[2]); }
 	n32 GetComponentIdxByType(EComponentType a_eType) { return this->m_nComponentIdx[a_eType]; }
 
+	virtual void OnCollision(CGameObject* a_pGameObj) {}
+
 public:
 	friend class CGameObjectManager;
 	friend class CObjectPhysics;
