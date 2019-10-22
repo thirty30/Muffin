@@ -119,7 +119,7 @@ void CObjectPhysics::CalcRigidBodyMotion(f32 a_fDeltaTime)
 		}
 
 		// S = vt + (1/2)at2
-		glm::vec3 vDis = pSrcRB->m_vVelocity * a_fDeltaTime + 0.5f * vNewAccel * glm::pow(a_fDeltaTime, 2);
+		glm::vec3 vDis = pSrcRB->m_vVelocity * a_fDeltaTime + 0.5f * vNewAccel * a_fDeltaTime * a_fDeltaTime;
 		pSrcGameObj->m_vPosition += vDis;
 
 		pSrcRB->m_vVelocity += vNewAccel * a_fDeltaTime;

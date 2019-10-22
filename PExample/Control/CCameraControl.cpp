@@ -38,6 +38,12 @@ void CCameraControl::CameraControlKeyPress(n32 a_nKey, n32 a_nScancode, n32 a_nA
 		{
 			break;
 		}
+		CParticleEmitter* pPar = CGame::GetSingleton().GetCurrentScene()->pTempParticle;
+		if (pPar == NULL)
+		{
+			break;
+		}
+		pPar->m_vPosition.x += 0.5f;
 	}
 	break;
 	case GLFW_KEY_S:
@@ -56,6 +62,12 @@ void CCameraControl::CameraControlKeyPress(n32 a_nKey, n32 a_nScancode, n32 a_nA
 		{
 			break;
 		}
+		CParticleEmitter* pPar = CGame::GetSingleton().GetCurrentScene()->pTempParticle;
+		if (pPar == NULL)
+		{
+			break;
+		}
+		pPar->m_vPosition.x -= 0.5f;
 	}
 	break;
 	default:

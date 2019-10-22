@@ -23,6 +23,10 @@ public:
 
 	CCamera* GetCamera() { return this->m_pCamera; }
 	void AddGameObject();
+
+public:	
+	CParticleEmitter* pTempParticle;
+	f64 m_fLastTime;
 };
 
 

@@ -35,6 +35,8 @@
     <ClCompile Include="Light\CLight.cpp" />
     <ClCompile Include="Light\CLightManager.cpp" />
     <ClCompile Include="Mesh\CMesh.cpp" />
+    <ClCompile Include="Particle\CParticle.cpp" />
+    <ClCompile Include="Particle\CParticleEmitter.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -63,6 +65,8 @@
     <ClInclude Include="Light\CLight.h" />
     <ClInclude Include="Light\CLightManager.h" />
     <ClInclude Include="Mesh\CMesh.h" />
+    <ClInclude Include="Particle\CParticle.h" />
+    <ClInclude Include="Particle\CParticleEmitter.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Physics\CObjectPhysics.h" />
     <ClInclude Include="Renderer\CObjectRenderer.h" />

@@ -17,6 +17,10 @@ void CObjectRenderer::RenderObjects()
 	for (; iter != CGameObjectManager::GetSingleton().m_mapID2GameObj.end(); iter++)
 	{
 		CGameObject* pCurGameObj = iter->second;
+		if (pCurGameObj->IsEnable() == false)
+		{
+			continue;
+		}
 		CMeshRenderer* pMeshRenderer = pCurGameObj->GetComponent<CMeshRenderer>(E_COMPONENT_MESH_RENDER);
 		if (pMeshRenderer == NULL)
 		{

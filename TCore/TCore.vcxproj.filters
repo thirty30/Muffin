@@ -87,7 +87,7 @@
       <Filter>TCommonFunction</Filter>
     </ClInclude>
     <ClInclude Include="TCore.h" />
-    <ClInclude Include="TDataStructure\TLinkedList\CTLinkedList.h">
+    <ClInclude Include="TDataStructure\TLinkedList\TLinkedList.h">
       <Filter>TDataStructure\TLinkedList</Filter>
     </ClInclude>
   </ItemGroup>

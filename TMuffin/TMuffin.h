@@ -24,6 +24,10 @@
 #include "./Camera/CCameraManager.h"
 #include "./Renderer/CObjectRenderer.h"
 #include "./Physics/CObjectPhysics.h"
+
+#include "./Particle/CParticle.h"
+#include "./Particle/CParticleEmitter.h"
+
 #include "./Window/CWindow.h"
 #include "./ResourceLoader/CResourceLoader.h"
 #include "./Engine/ExportFunction.h"

@@ -3,6 +3,7 @@
 class T_DLL_EXPORT CGameObject
 {
 private:
+	tbool m_bEnable;
 	u64 m_nMuffinEngineGUID;
 	CComponent* m_pComponentArray[E_COMPONENT_MAX];
 	n32 m_nComponentIdx[E_COMPONENT_MAX];
@@ -53,6 +54,9 @@ public:
 		}
 		return dynamic_cast<T*>(this->m_pComponentArray[nIdx]);
 	}
+
+	T_INLINE tbool IsEnable() { return this->m_bEnable; }
+	T_INLINE void SetEnable(tbool a_bEnable) { this->m_bEnable = a_bEnable; }
 };
 
 

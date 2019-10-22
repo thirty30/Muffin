@@ -169,6 +169,13 @@ namespace TCore
 		{
 			Sleep(a_msec);
 		}
+
+		template <class T>
+		T TRandInRange(T a_Min, T a_Max)
+		{
+			f64 value = a_Min + static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / (static_cast<double>(a_Max - a_Min))));
+			return static_cast<T>(value);
+		}
 	}
 }
 

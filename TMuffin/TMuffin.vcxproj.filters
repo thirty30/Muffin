@@ -53,6 +53,12 @@
     <ClCompile Include="GameObject\CGameObjectManager.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="Particle\CParticle.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle\CParticleEmitter.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -115,6 +121,12 @@
     <ClInclude Include="GameObject\CGameObjectManager.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="Particle\CParticle.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle\CParticleEmitter.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Camera">
@@ -149,6 +161,9 @@
     </Filter>
     <Filter Include="GameObject">
       <UniqueIdentifier>{215db145-0094-43ed-baa5-1d06b9cdfbc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Particle">
+      <UniqueIdentifier>{e2840aea-0d48-456a-85ce-3954873df463}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -104,3 +104,21 @@ void CMeshRenderer::SetRenderMode(ERenderMode a_eMode)
 		this->m_nRenderMode = GL_FILL;
 	}
 }
+
+void CMeshRenderer::SetColor(glm::vec4 a_vRGBA)
+{
+	this->m_vRGB.r = a_vRGBA.r;
+	this->m_vRGB.g = a_vRGBA.g;
+	this->m_vRGB.b = a_vRGBA.b;
+
+	for (n32 i = 0; i < this->m_pMeshDrawInfo->m_nVertexCount; i++)
+	{
+		this->m_pMeshDrawInfo->m_pVertices[i].r = a_vRGBA.r;
+		this->m_pMeshDrawInfo->m_pVertices[i].g = a_vRGBA.g;
+		this->m_pMeshDrawInfo->m_pVertices[i].b = a_vRGBA.b;
+		this->m_pMeshDrawInfo->m_pVertices[i].a = a_vRGBA.a;
+	}
+
+	//glBindBuffer(GL_ARRAY_BUFFER, this->m_pMeshDrawInfo->m_nVertexGLBufferID);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(SDrawVertex) * this->m_pMeshDrawInfo->m_nVertexCount, (GLvoid*)this->m_pMeshDrawInfo->m_pVertices, GL_STATIC_DRAW);
+}
