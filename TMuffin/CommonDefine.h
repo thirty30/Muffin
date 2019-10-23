@@ -78,3 +78,8 @@ typedef void (*MuffinScrollCallBack)(f64 a_fX, f64 a_fY);
 typedef void (*MuffinPhysicsCallBack)();
 typedef void (*MuffinGameLogicCallBack)();
 
+#define GRAVITY_ACCELERATION -9.8f
+
+
+
+

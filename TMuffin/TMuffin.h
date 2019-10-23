@@ -24,6 +24,7 @@
 #include "./Camera/CCamera.h"
 #include "./Camera/CCameraManager.h"
 #include "./Renderer/CObjectRenderer.h"
+#include "./Physics/PhysicsHelper.h"
 #include "./Physics/CObjectPhysics.h"
 
 #include "./Particle/CParticle.h"

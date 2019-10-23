@@ -45,6 +45,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Physics\CObjectPhysics.cpp" />
+    <ClCompile Include="Physics\PhysicsHelper.cpp" />
     <ClCompile Include="Renderer\CObjectRenderer.cpp" />
     <ClCompile Include="ResourceLoader\CResourceLoader.cpp" />
     <ClCompile Include="ShaderHelper\CShaderHelper.cpp" />
@@ -73,6 +74,7 @@
     <ClInclude Include="Particle\CParticleEmitterManager.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Physics\CObjectPhysics.h" />
+    <ClInclude Include="Physics\PhysicsHelper.h" />
     <ClInclude Include="Renderer\CObjectRenderer.h" />
     <ClInclude Include="ResourceLoader\CResourceLoader.h" />
     <ClInclude Include="ShaderHelper\CShaderHelper.h" />

@@ -65,6 +65,9 @@
     <ClCompile Include="Particle\CParticleEmitterManager.cpp">
       <Filter>Particle</Filter>
     </ClCompile>
+    <ClCompile Include="Physics\PhysicsHelper.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -141,6 +144,9 @@
     </ClInclude>
     <ClInclude Include="Particle\CParticleEmitterManager.h">
       <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\PhysicsHelper.h">
+      <Filter>Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
