@@ -2,15 +2,15 @@
 
 class T_DLL_EXPORT CParticleEmitter
 {
-#define DEFAULT_EMITTER_PARTICLE_NUM 100
-
 private:
+	u64 m_nMuffinEngineGUID;
 	TLinkedList<CParticle> m_objFreeList;
 	TLinkedList<CParticle> m_objEmittedList;
-	f32 m_fLastEmitTime;
-	f32 m_fLastUpdateTime;
+	f64 m_fLastEmitTime;
 	
 public:
+	friend class CParticleEmitterManager;
+
 	tbool m_bEnable;
 	glm::vec3 m_vPosition;
 	glm::vec3 m_vMinScale;
@@ -38,7 +38,7 @@ public:
 	void InitializeEmitter();
 	void EmitParticle();
 	void AwakeParticle(CParticle* a_pParticle);
-	void Update(f32 a_fFrameTime);
+	void Update();
 };
 
 

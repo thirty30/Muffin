@@ -26,6 +26,7 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\ExportFunction.cpp" />
+    <ClCompile Include="Engine\Muffin.cpp" />
     <ClCompile Include="GameObject\CGameObject.cpp" />
     <ClCompile Include="GameObject\CGameObjectManager.cpp" />
     <ClCompile Include="glad.c">
@@ -37,6 +38,7 @@
     <ClCompile Include="Mesh\CMesh.cpp" />
     <ClCompile Include="Particle\CParticle.cpp" />
     <ClCompile Include="Particle\CParticleEmitter.cpp" />
+    <ClCompile Include="Particle\CParticleEmitterManager.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -60,6 +62,7 @@
     <ClInclude Include="Component\CRigidBody.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\ExportFunction.h" />
+    <ClInclude Include="Engine\Muffin.h" />
     <ClInclude Include="GameObject\CGameObject.h" />
     <ClInclude Include="GameObject\CGameObjectManager.h" />
     <ClInclude Include="Light\CLight.h" />
@@ -67,12 +70,14 @@
     <ClInclude Include="Mesh\CMesh.h" />
     <ClInclude Include="Particle\CParticle.h" />
     <ClInclude Include="Particle\CParticleEmitter.h" />
+    <ClInclude Include="Particle\CParticleEmitterManager.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Physics\CObjectPhysics.h" />
     <ClInclude Include="Renderer\CObjectRenderer.h" />
     <ClInclude Include="ResourceLoader\CResourceLoader.h" />
     <ClInclude Include="ShaderHelper\CShaderHelper.h" />
     <ClInclude Include="TMuffin.h" />
+    <ClInclude Include="Utility\CGUIDMaker.h" />
     <ClInclude Include="Window\CWindow.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

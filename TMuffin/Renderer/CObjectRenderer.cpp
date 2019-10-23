@@ -1,10 +1,8 @@
 #include "pch.h"
 
-T_IMPLEMENT_SINGLETON(CObjectRenderer)
-
-void CObjectRenderer::RenderObjects()
+void MuffinRenderObjects()
 {
-	CCamera* pCamera = g_pMuffinCameraManager->GetTopCamera();
+	CCamera* pCamera = MUFFIN.GetCameraMgr()->GetTopCamera();
 	if (pCamera == NULL)
 	{
 		//cout << "No Scene Camera!!" << endl;
@@ -13,8 +11,8 @@ void CObjectRenderer::RenderObjects()
 	glm::mat4 matV = pCamera->GetView();
 	glm::mat4 matP = pCamera->GetPerspective();
 
-	hash_map<n32, CGameObject*>::iterator iter = CGameObjectManager::GetSingleton().m_mapID2GameObj.begin();
-	for (; iter != CGameObjectManager::GetSingleton().m_mapID2GameObj.end(); iter++)
+	hash_map<u64, CGameObject*>::iterator iter = MUFFIN.GetGameObjectMgr()->m_mapID2GameObj.begin();
+	for (; iter != MUFFIN.GetGameObjectMgr()->m_mapID2GameObj.end(); iter++)
 	{
 		CGameObject* pCurGameObj = iter->second;
 		if (pCurGameObj->IsEnable() == false)
@@ -56,7 +54,7 @@ void CObjectRenderer::RenderObjects()
 		GLint nEyeLocation = glGetUniformLocation(nShaderProgramID, "un_vEyeLocation");
 		glUniform4f(nEyeLocation, pCamera->m_vPosition.x, pCamera->m_vPosition.y, pCamera->m_vPosition.z, 1.0f);
 
-		CLightManager::GetSingleton().RenderLights(nShaderProgramID);
+		MUFFIN.GetLightMgr()->RenderLights(nShaderProgramID);
 
 		GLint matModel_UL = glGetUniformLocation(nShaderProgramID, "matModel");
 		GLint matView_UL = glGetUniformLocation(nShaderProgramID, "matView");

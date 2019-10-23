@@ -24,22 +24,26 @@ TMUFFIN_REGISTER_CALLBACK(TMuffin_RegisterPhysicsCallBack, MuffinPhysicsCallBack
 TMUFFIN_REGISTER_CALLBACK(TMuffin_RegisterGameLogicCallBack, MuffinGameLogicCallBack, pExternalPhysicsCallBack)
 
 
-
-void TMuffin_AddGameObjects(CGameObject* a_pGameObject)
-{
-	g_pMuffinGameObjectManager->AddGameObject(a_pGameObject);
-}
 void TMuffin_DeleteGameObjects(CGameObject* a_pGameObject)
 {
-	g_pMuffinGameObjectManager->DeleteGameObject(a_pGameObject);
+	MUFFIN.GetGameObjectMgr()->DeleteGameObject(a_pGameObject);
 }
 void TMuffin_AddCamera(CCamera* a_pCamera)
 {
-	g_pMuffinCameraManager->AddCamera(a_pCamera);
+	MUFFIN.GetCameraMgr()->AddCamera(a_pCamera);
 }
 f64 TMuffin_GetNowFrameTime()
 {
-	return g_fNowFrameTime;
+	return MUFFIN.GetNowFrameTime();
+}
+f32 TMuffin_GetDeltaFrameTime()
+{
+	return MUFFIN.GetDeltaFrameTime();
+}
+
+T_DLL_EXPORT CParticleEmitter* TMuffin_CreateParticleEmitter()
+{
+	return MUFFIN.GetParticleEmitterMgr()->CreateEmitter();
 }
 
 void TMuffin_DrawPoint()

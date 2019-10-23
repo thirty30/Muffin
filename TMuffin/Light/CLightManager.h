@@ -1,6 +1,6 @@
 #pragma once
 
-class CLightManager : public CSingleton<CLightManager>
+class CLightManager
 {
 private:
 	hash_map<u64, CLight*> m_mapID2Light;

@@ -59,6 +59,12 @@
     <ClCompile Include="Particle\CParticleEmitter.cpp">
       <Filter>Particle</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Muffin.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle\CParticleEmitterManager.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -127,6 +133,15 @@
     <ClInclude Include="Particle\CParticleEmitter.h">
       <Filter>Particle</Filter>
     </ClInclude>
+    <ClInclude Include="Utility\CGUIDMaker.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Muffin.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle\CParticleEmitterManager.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Camera">
@@ -164,6 +179,9 @@
     </Filter>
     <Filter Include="Particle">
       <UniqueIdentifier>{e2840aea-0d48-456a-85ce-3954873df463}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{f1d33e26-be67-43a3-ab59-5d932023dc48}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

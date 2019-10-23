@@ -13,6 +13,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 
 #include "./CommonDefine.h"
+#include "./Utility/CGUIDMaker.h"
 #include "./ShaderHelper/CShaderHelper.h"
 #include "./Light/CLight.h"
 #include "./Light/CLightManager.h"
@@ -27,10 +28,12 @@
 
 #include "./Particle/CParticle.h"
 #include "./Particle/CParticleEmitter.h"
+#include "./Particle/CParticleEmitterManager.h"
 
 #include "./Window/CWindow.h"
 #include "./ResourceLoader/CResourceLoader.h"
 #include "./Engine/ExportFunction.h"
+#include "./Engine/Muffin.h"
 #include "./Engine/Engine.h"
 
 

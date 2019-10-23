@@ -26,7 +26,7 @@ CLight::CLight(ELightType a_eType)
 	this->m_fSpecularPower = 0;
 	TMemzero(&this->m_objName, sizeof(this->m_objName));
 
-	CLightManager::GetSingleton().AddLight(this);
+	MUFFIN.GetLightMgr()->AddLight(this);
 }
 
 void CLight::InitShader(n32 a_nShaderProgramID)

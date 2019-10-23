@@ -1,5 +1,4 @@
 #include "pch.h"
-T_IMPLEMENT_SINGLETON(CObjectPhysics)
 
 CObjectPhysics::CObjectPhysics()
 {
@@ -10,11 +9,6 @@ CObjectPhysics::CObjectPhysics()
 CObjectPhysics::~CObjectPhysics()
 {
 
-}
-
-tbool CObjectPhysics::Init()
-{
-	return true;
 }
 
 glm::vec3 CObjectPhysics::ClosestPtPointTriangle(glm::vec3 p, glm::vec3 a, glm::vec3 b, glm::vec3 c)
@@ -81,25 +75,24 @@ tbool CObjectPhysics::TestSphereTriangle(CSphereCollider* a_rSphere, glm::vec3 a
 	return glm::dot(vDis, vDis) <= a_rSphere->m_fRadius * a_rSphere->m_fRadius;
 }
 
-void CObjectPhysics::PhysicsObjects(f64 a_fCurFrameTime)
+void CObjectPhysics::PhysicsObjects()
 {
-	f32 fDeltaTime = (f32)(a_fCurFrameTime - this->m_fLastFrameTime);
 	//1. refresh new collider center
-	CGameObjectManager::GetSingleton().RefreshColliderPosition();
+	MUFFIN.GetGameObjectMgr()->RefreshColliderPosition();
 
 	//2. calc rigidbody motion and refresh collider center
-	this->CalcRigidBodyMotion(fDeltaTime);
-	CGameObjectManager::GetSingleton().RefreshColliderPosition();
+	this->CalcRigidBodyMotion();
+	MUFFIN.GetGameObjectMgr()->RefreshColliderPosition();
 
 	//3. calc collision
 	this->CalcCollision();
-	this->m_fLastFrameTime = a_fCurFrameTime;
 }
 
-void CObjectPhysics::CalcRigidBodyMotion(f32 a_fDeltaTime)
+void CObjectPhysics::CalcRigidBodyMotion()
 {
-	hash_map<n32, CGameObject*>::iterator iterSrc = CGameObjectManager::GetSingleton().m_mapID2GameObj.begin();
-	for (; iterSrc != CGameObjectManager::GetSingleton().m_mapID2GameObj.end(); iterSrc++)
+	f32 fDeltaTime = MUFFIN.GetDeltaFrameTime();
+	hash_map<u64, CGameObject*>::iterator iterSrc = MUFFIN.GetGameObjectMgr()->m_mapID2GameObj.begin();
+	for (; iterSrc != MUFFIN.GetGameObjectMgr()->m_mapID2GameObj.end(); iterSrc++)
 	{
 		CGameObject* pSrcGameObj = iterSrc->second;
 		CRigidBody* pSrcRB = pSrcGameObj->GetComponent<CRigidBody>(E_COMPONENT_RIGIDBODY);
@@ -119,17 +112,17 @@ void CObjectPhysics::CalcRigidBodyMotion(f32 a_fDeltaTime)
 		}
 
 		// S = vt + (1/2)at2
-		glm::vec3 vDis = pSrcRB->m_vVelocity * a_fDeltaTime + 0.5f * vNewAccel * a_fDeltaTime * a_fDeltaTime;
+		glm::vec3 vDis = pSrcRB->m_vVelocity * fDeltaTime + 0.5f * vNewAccel * fDeltaTime * fDeltaTime;
 		pSrcGameObj->m_vPosition += vDis;
 
-		pSrcRB->m_vVelocity += vNewAccel * a_fDeltaTime;
+		pSrcRB->m_vVelocity += vNewAccel * fDeltaTime;
 	}
 }
 
 void CObjectPhysics::CalcCollision()
 {
-	hash_map<n32, CGameObject*>::iterator iterSrc = CGameObjectManager::GetSingleton().m_mapID2GameObj.begin();
-	for (; iterSrc != CGameObjectManager::GetSingleton().m_mapID2GameObj.end(); iterSrc++)
+	hash_map<u64, CGameObject*>::iterator iterSrc = MUFFIN.GetGameObjectMgr()->m_mapID2GameObj.begin();
+	for (; iterSrc != MUFFIN.GetGameObjectMgr()->m_mapID2GameObj.end(); iterSrc++)
 	{
 		CGameObject* pSrcGameObj = iterSrc->second;
 		CBaseCollider* pSrcBC = pSrcGameObj->GetBaseCollider();
@@ -139,8 +132,8 @@ void CObjectPhysics::CalcCollision()
 		}
 		CRigidBody* pSrcRB = pSrcGameObj->GetComponent<CRigidBody>(E_COMPONENT_RIGIDBODY);
 
-		hash_map<n32, CGameObject*>::iterator iterTar = CGameObjectManager::GetSingleton().m_mapID2GameObj.begin();
-		for (; iterTar != CGameObjectManager::GetSingleton().m_mapID2GameObj.end(); iterTar++)
+		hash_map<u64, CGameObject*>::iterator iterTar = MUFFIN.GetGameObjectMgr()->m_mapID2GameObj.begin();
+		for (; iterTar != MUFFIN.GetGameObjectMgr()->m_mapID2GameObj.end(); iterTar++)
 		{
 			CGameObject* pTarGameObj = iterTar->second;
 			if (pSrcGameObj->m_nMuffinEngineGUID == pTarGameObj->m_nMuffinEngineGUID)

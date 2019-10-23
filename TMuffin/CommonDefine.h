@@ -61,7 +61,15 @@ enum ELightType
 	E_LIGHT_TYPE_SPOT,
 };
 
-#define DEBUG_SPHERE_OBJECT_ID 10000000
+enum EGUIDType
+{
+	E_GUID_TYPE_INIT = -1,
+
+	E_GUID_TYPE_GAME_OBJECT,	// game object
+	E_GUID_TYPE_PARTICLE_EMITTER,	// particle emitter
+
+	E_GUID_TYPE_MAX,
+};
 
 typedef void (*MuffinKeyCallBack)(n32 a_nKey, n32 a_nScancode, n32 a_nAction, n32 a_nMods);
 typedef void (*MuffinMouseCallBack)(n32 a_nKey, n32 a_nAction, n32 a_nMods);
@@ -69,5 +77,4 @@ typedef void (*MuffinCursorCallBack)(f64 a_fX, f64 a_fY);
 typedef void (*MuffinScrollCallBack)(f64 a_fX, f64 a_fY);
 typedef void (*MuffinPhysicsCallBack)();
 typedef void (*MuffinGameLogicCallBack)();
-
 

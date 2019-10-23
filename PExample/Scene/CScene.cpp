@@ -123,7 +123,7 @@ tbool CScene::LoadScene()
 	//pPlaneC->m_eAxis = E_PLANE_COLLIDER_AXIS_Y;
 	//pPlaneC->m_fPos = -1.0f;
 
-	this->pTempParticle = new CParticleEmitter();
+	this->pTempParticle = TMuffin_CreateParticleEmitter();
 	pTempParticle->m_vPosition = glm::vec3(0.0f, 0.0f, 0.0f);
 	pTempParticle->m_vMinScale = glm::vec3(1.0f, 1.0f, 1.0f);
 	pTempParticle->m_vMaxScale = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -161,12 +161,7 @@ void CScene::Clear()
 
 void CScene::Loop()
 {
-	f64 fCurTime = TMuffin_GetNowFrameTime();
-	if (this->pTempParticle != NULL)
-	{
-		this->pTempParticle->Update((f32)fCurTime);
-	}
-	this->m_fLastTime = fCurTime;
+
 }
 
 

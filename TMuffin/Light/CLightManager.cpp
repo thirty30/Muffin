@@ -1,8 +1,5 @@
 #include "pch.h"
 
-T_IMPLEMENT_SINGLETON(CLightManager)
-
-
 CLightManager::CLightManager()
 {
 	this->m_mapID2Light.clear();

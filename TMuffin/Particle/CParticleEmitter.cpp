@@ -2,9 +2,9 @@
 
 CParticleEmitter::CParticleEmitter()
 {
+	this->m_nMuffinEngineGUID = 0;
 	this->m_bEnable = true;
 	this->m_fLastEmitTime = 0;
-	this->m_fLastUpdateTime = 0;
 
 	this->m_vPosition = glm::vec3(0.0f, 0.0f, 0.0f);
 	this->m_vMinScale = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -101,11 +101,9 @@ void CParticleEmitter::AwakeParticle(CParticle* a_pParticle)
 	pRenderer->SetColor(vRGBA);
 }
 
-void CParticleEmitter::Update(f32 a_fFrameTime)
+void CParticleEmitter::Update()
 {
-	f32 fDeltaTime = a_fFrameTime - this->m_fLastUpdateTime;
-	this->m_fLastUpdateTime = a_fFrameTime;
-
+	f32 fDeltaTime = MUFFIN.GetDeltaFrameTime();
 	TLinkedNode<CParticle>* pNode = this->m_objEmittedList.GetHeadNode();
 	while (pNode != NULL)
 	{
@@ -126,11 +124,11 @@ void CParticleEmitter::Update(f32 a_fFrameTime)
 		pNode = pNode->m_pNext;
 	}
 
-	if (a_fFrameTime - this->m_fLastEmitTime < this->m_fEmitPeriod)
+	if (MUFFIN.GetNowFrameTime() - this->m_fLastEmitTime < this->m_fEmitPeriod)
 	{
 		return;
 	}
-	this->m_fLastEmitTime = a_fFrameTime;
+	this->m_fLastEmitTime = MUFFIN.GetNowFrameTime();
 	this->EmitParticle();
 }
 
