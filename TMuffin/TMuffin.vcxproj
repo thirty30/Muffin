@@ -21,8 +21,6 @@
   <ItemGroup>
     <ClCompile Include="Camera\CCamera.cpp" />
     <ClCompile Include="Camera\CCameraManager.cpp" />
-    <ClCompile Include="Component\CMeshRenderer.cpp" />
-    <ClCompile Include="Component\CRigidBody.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\ExportFunction.cpp" />
@@ -33,6 +31,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Graphics\CGraphicsObject.cpp" />
+    <ClCompile Include="Graphics\CGraphicsRenderer.cpp" />
     <ClCompile Include="Light\CLight.cpp" />
     <ClCompile Include="Light\CLightManager.cpp" />
     <ClCompile Include="Mesh\CMesh.cpp" />
@@ -44,11 +44,17 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Physics\CObjectPhysics.cpp" />
+    <ClCompile Include="Physics\CCollider.cpp" />
+    <ClCompile Include="Physics\CPhysicsReactor.cpp" />
+    <ClCompile Include="Physics\CPhysicsObject.cpp" />
+    <ClCompile Include="Physics\CRigidBody.cpp" />
     <ClCompile Include="Physics\PhysicsHelper.cpp" />
-    <ClCompile Include="Renderer\CObjectRenderer.cpp" />
     <ClCompile Include="ResourceLoader\CResourceLoader.cpp" />
     <ClCompile Include="ShaderHelper\CShaderHelper.cpp" />
+    <ClCompile Include="Texture\C24BitBMPpixel.cpp" />
+    <ClCompile Include="Texture\cBasicTextureManager.cpp" />
+    <ClCompile Include="Texture\CTextureFromBMP.cpp" />
+    <ClCompile Include="Texture\CTexutre.cpp" />
     <ClCompile Include="TMuffin.cpp" />
     <ClCompile Include="Window\CWindow.cpp" />
   </ItemGroup>
@@ -56,16 +62,13 @@
     <ClInclude Include="Camera\CCamera.h" />
     <ClInclude Include="Camera\CCameraManager.h" />
     <ClInclude Include="CommonDefine.h" />
-    <ClInclude Include="Component\CCollider.h" />
-    <ClInclude Include="Component\CComponent.h" />
-    <ClInclude Include="Component\CMeshRenderer.h" />
-    <ClInclude Include="Component\ComponentDef.h" />
-    <ClInclude Include="Component\CRigidBody.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\ExportFunction.h" />
     <ClInclude Include="Engine\Muffin.h" />
     <ClInclude Include="GameObject\CGameObject.h" />
     <ClInclude Include="GameObject\CGameObjectManager.h" />
+    <ClInclude Include="Graphics\CGraphicsObject.h" />
+    <ClInclude Include="Graphics\CGraphicsRenderer.h" />
     <ClInclude Include="Light\CLight.h" />
     <ClInclude Include="Light\CLightManager.h" />
     <ClInclude Include="Mesh\CMesh.h" />
@@ -73,11 +76,17 @@
     <ClInclude Include="Particle\CParticleEmitter.h" />
     <ClInclude Include="Particle\CParticleEmitterManager.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Physics\CObjectPhysics.h" />
+    <ClInclude Include="Physics\CCollider.h" />
+    <ClInclude Include="Physics\CPhysicsReactor.h" />
+    <ClInclude Include="Physics\CPhysicsObject.h" />
+    <ClInclude Include="Physics\CRigidBody.h" />
     <ClInclude Include="Physics\PhysicsHelper.h" />
-    <ClInclude Include="Renderer\CObjectRenderer.h" />
     <ClInclude Include="ResourceLoader\CResourceLoader.h" />
     <ClInclude Include="ShaderHelper\CShaderHelper.h" />
+    <ClInclude Include="Texture\C24BitBMPpixel.h" />
+    <ClInclude Include="Texture\cBasicTextureManager.h" />
+    <ClInclude Include="Texture\CTextureFromBMP.h" />
+    <ClInclude Include="Texture\CTexutre.h" />
     <ClInclude Include="TMuffin.h" />
     <ClInclude Include="Utility\CGUIDMaker.h" />
     <ClInclude Include="Window\CWindow.h" />

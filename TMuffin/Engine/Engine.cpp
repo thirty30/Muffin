@@ -34,7 +34,7 @@ void MuffinMainLoop()
 
 void MuffinPhysicsLoop()
 {
-	MUFFIN.GetObjectPhysics()->PhysicsObjects();
+	MUFFIN.GetPhysicsReactor()->PhysicsLoop();
 	if (pExternalPhysicsCallBack != NULL)
 	{
 		pExternalPhysicsCallBack();

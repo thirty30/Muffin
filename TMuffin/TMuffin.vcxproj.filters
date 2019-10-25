@@ -35,18 +35,6 @@
     <ClCompile Include="Light\CLightManager.cpp">
       <Filter>Light</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\CObjectRenderer.cpp">
-      <Filter>Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics\CObjectPhysics.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\CMeshRenderer.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\CRigidBody.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject\CGameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
@@ -67,6 +55,36 @@
     </ClCompile>
     <ClCompile Include="Physics\PhysicsHelper.cpp">
       <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture\CTexutre.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture\C24BitBMPpixel.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture\cBasicTextureManager.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture\CTextureFromBMP.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\CPhysicsObject.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\CCollider.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\CRigidBody.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\CPhysicsReactor.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\CGraphicsObject.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\CGraphicsRenderer.cpp">
+      <Filter>Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -103,27 +121,6 @@
     <ClInclude Include="Light\CLightManager.h">
       <Filter>Light</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\CObjectRenderer.h">
-      <Filter>Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics\CObjectPhysics.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\CComponent.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\ComponentDef.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\CCollider.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\CMeshRenderer.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\CRigidBody.h">
-      <Filter>Component</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject\CGameObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
@@ -148,6 +145,36 @@
     <ClInclude Include="Physics\PhysicsHelper.h">
       <Filter>Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Texture\CTexutre.h">
+      <Filter>Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture\C24BitBMPpixel.h">
+      <Filter>Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture\cBasicTextureManager.h">
+      <Filter>Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture\CTextureFromBMP.h">
+      <Filter>Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\CPhysicsObject.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\CCollider.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\CRigidBody.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\CPhysicsReactor.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\CGraphicsObject.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\CGraphicsRenderer.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Camera">
@@ -165,9 +192,6 @@
     <Filter Include="ResourceLoader">
       <UniqueIdentifier>{6afbc6ee-cc89-4009-ac7a-4c84215e7e5c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Renderer">
-      <UniqueIdentifier>{67e98573-1cac-458f-a18d-6502059f9ce3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Light">
       <UniqueIdentifier>{14370ee5-43ca-4129-b56c-1d53dfdbc5af}</UniqueIdentifier>
     </Filter>
@@ -177,9 +201,6 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{a4c53223-3d74-4a77-b352-a40fa8b53a28}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Component">
-      <UniqueIdentifier>{d0b52922-c8e4-4ff4-b086-481dfaf401cd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject">
       <UniqueIdentifier>{215db145-0094-43ed-baa5-1d06b9cdfbc3}</UniqueIdentifier>
     </Filter>
@@ -188,6 +209,12 @@
     </Filter>
     <Filter Include="Utility">
       <UniqueIdentifier>{f1d33e26-be67-43a3-ab59-5d932023dc48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Texture">
+      <UniqueIdentifier>{19f8dc0a-16ef-4ae9-ad55-e9d79f3d9bd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{a6b7681d-4821-469f-ba09-e31d5da35d0a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

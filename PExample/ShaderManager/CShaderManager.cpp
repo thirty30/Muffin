@@ -39,6 +39,22 @@ tbool CShaderManager::Init()
 
 	this->m_mapCustomID2Program[E_SHADER_ID_LIGHT] = pLightShaderProgram;
 	
+	//Texture Shaders////////////////////////////////////////////////////
+	CShader* pTextureVertexShader = new CShader(E_SHADER_TYPE_VERTEX, "../Assets/shaders/LightVertexShaderWithTexture.glsl");
+	bRes = pTextureVertexShader->InitShader();
+	if (bRes == false) { return false; }
+
+	CShader* pTextureFragmentShader = new CShader(E_SHADER_TYPE_FRAGMENT, "../Assets/shaders/LightFragmentShaderWithTexture.glsl");
+	bRes = pTextureFragmentShader->InitShader();
+	if (bRes == false) { return false; }
+
+	CShaderProgram* pTextureShaderProgram = new CShaderProgram();
+	bRes = CreateShaderProgram(pTextureVertexShader, pTextureFragmentShader, pTextureShaderProgram);
+	if (bRes == false) { return false; }
+
+	this->m_mapCustomID2Program[E_SHADER_ID_LIGHT_TEXTURE] = pTextureShaderProgram;
+
+
 	return true;
 }
 

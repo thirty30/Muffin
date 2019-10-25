@@ -8,6 +8,7 @@ enum EModelID
 	E_MODEL_ID_CUBE,
 	E_MODEL_ID_SPHERE,
 	E_MODEL_ID_TRIANGLE,
+	E_MODEL_ID_SPHERE_UV,
 };
 
 enum EShaderID
@@ -16,6 +17,7 @@ enum EShaderID
 
 	E_SHADER_ID_DEFAULT,
 	E_SHADER_ID_LIGHT,
+	E_SHADER_ID_LIGHT_TEXTURE,
 };
 
 enum EGameStatus

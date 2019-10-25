@@ -72,24 +72,21 @@ public:
 	}
 };
 
-class T_DLL_EXPORT CMeshRenderer : public CComponent
+class T_DLL_EXPORT CGraphicsObject
 {
+private:
+	u64 m_nMuffinGraphicsObectGUID;
+	CGameObject* m_pGameObject;
+	friend class CGraphicsRenderer;
+
 public:
 	n32 m_nShaderProgramID;
 	CMeshDrawInfo* m_pMeshDrawInfo;
 	n32 m_nRenderMode;
-	glm::vec3 m_vRGB;
 
 public:
-	CMeshRenderer() 
-	{
-		this->m_eComponentType = E_COMPONENT_MESH_RENDER;
-		this->m_nShaderProgramID = 0;
-		this->m_pMeshDrawInfo = NULL;
-		this->m_nRenderMode = GL_FILL;
-		this->m_vRGB = glm::vec3(1.0f, 1.0f, 1.0f);
-	}
-	~CMeshRenderer(){}
+	CGraphicsObject(CGameObject* a_pGameObject);
+	virtual ~CGraphicsObject();
 
 	tbool InitRenderer(const CMesh* a_pMesh, n32 a_nShaderProgramID);
 	void SetRenderMode(ERenderMode a_eMode);

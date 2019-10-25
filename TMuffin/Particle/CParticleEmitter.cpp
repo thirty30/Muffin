@@ -40,9 +40,8 @@ void CParticleEmitter::InitializeEmitter()
 	{
 		CParticle* pParticle = new CParticle();
 		pParticle->SetEnable(false);
-		CMeshRenderer* pTriangleRenderer = pParticle->AddComponent<CMeshRenderer>(E_COMPONENT_MESH_RENDER);
-		pTriangleRenderer->InitRenderer(this->m_pMesh, this->m_nShaderID);
-		pTriangleRenderer->SetRenderMode(E_RENDER_MODE_FILL);
+		pParticle->InitRenderer(this->m_pMesh, this->m_nShaderID);
+		pParticle->SetRenderMode(E_RENDER_MODE_FILL);
 
 		TLinkedNode<CParticle>* pNode = new TLinkedNode<CParticle>(pParticle);
 		this->m_objFreeList.PushBack(pNode);
@@ -58,9 +57,8 @@ void CParticleEmitter::EmitParticle()
 		if (pNode == NULL)
 		{
 			CParticle* pParticle = new CParticle();
-			CMeshRenderer* pTriangleRenderer = pParticle->AddComponent<CMeshRenderer>(E_COMPONENT_MESH_RENDER);
-			pTriangleRenderer->InitRenderer(this->m_pMesh, this->m_nShaderID);
-			pTriangleRenderer->SetRenderMode(E_RENDER_MODE_FILL);
+			pParticle->InitRenderer(this->m_pMesh, this->m_nShaderID);
+			pParticle->SetRenderMode(E_RENDER_MODE_FILL);
 
 			pNode = new TLinkedNode<CParticle>(pParticle);
 		}
@@ -97,8 +95,7 @@ void CParticleEmitter::AwakeParticle(CParticle* a_pParticle)
 	vRGBA.b = TRandInRange(this->m_vMinColor.b, this->m_vMaxColor.b);
 	vRGBA.a = TRandInRange(this->m_vMinColor.a, this->m_vMaxColor.a);
 
-	CMeshRenderer* pRenderer = a_pParticle->GetComponent<CMeshRenderer>(E_COMPONENT_MESH_RENDER);
-	pRenderer->SetColor(vRGBA);
+	a_pParticle->SetColor(vRGBA);
 }
 
 void CParticleEmitter::Update()

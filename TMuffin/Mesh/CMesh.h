@@ -4,6 +4,8 @@ struct SMeshVertex
 {
 	f32 x, y, z;
 	f32 nx, ny, nz;
+	f32 u0, v0;
+	f32 u1, v1;
 	SMeshVertex()
 	{
 		this->x = 0;
@@ -12,6 +14,10 @@ struct SMeshVertex
 		this->nx = 0;
 		this->ny = 0;
 		this->nz = 0;
+		this->u0 = 0;
+		this->v0 = 0;
+		this->u1 = 0;
+		this->v1 = 0;
 	}
 };
 

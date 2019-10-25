@@ -13,7 +13,7 @@ public:
 
 	tbool Init();
 
-	CMesh* LoadMesh(EModelID a_eModeID, const tcchar* a_strFileName);
+	CMesh* LoadMesh(EModelID a_eModeID, const tcchar* a_strFileName, tbool a_bWithUV = false);
 	CMesh* FindMesh(EModelID a_eModeID);
 	void DeleteMesh(EModelID a_eModeID);
 

@@ -31,11 +31,14 @@ tbool CResourceManager::Init()
 	this->LoadMesh(E_MODEL_ID_SPHERE, "../Assets/Models/Sphere.ply");
 	//this->LoadMesh(E_MODEL_ID_TERRAIN, "../Assets/Models/Terrain.ply");
 	this->LoadMesh(E_MODEL_ID_TRIANGLE, "../Assets/Models/Triangel_Particle2.ply");
+	this->LoadMesh(E_MODEL_ID_SPHERE_UV, "../Assets/Models/SphereUV.ply", true);
+
+	m_pResourceLoader->LoadTextureFromBMP("../Assets/Textures/Texture1.bmp", NULL);
 
 	return true;
 }
 
-CMesh* CResourceManager::LoadMesh(EModelID a_eModeID, const tcchar* a_strFileName)
+CMesh* CResourceManager::LoadMesh(EModelID a_eModeID, const tcchar* a_strFileName, tbool a_bWithUV)
 {
 	CMesh* pOldMesh = this->FindMesh(a_eModeID);
 	if (pOldMesh != NULL)
@@ -43,7 +46,14 @@ CMesh* CResourceManager::LoadMesh(EModelID a_eModeID, const tcchar* a_strFileNam
 		return pOldMesh;
 	}
 	CMesh* pMesh = new CMesh();
-	this->m_pResourceLoader->LoadModelFromPly(a_strFileName, pMesh);
+	if (a_bWithUV == false)
+	{
+		this->m_pResourceLoader->LoadModelFromPly(a_strFileName, pMesh);
+	}
+	else
+	{
+		this->m_pResourceLoader->LoadModelFromPlyUV(a_strFileName, pMesh);
+	}
 	this->m_mapID2Mesh[a_eModeID] = pMesh;
 	return pMesh;
 }

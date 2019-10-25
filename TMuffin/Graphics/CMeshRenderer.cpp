@@ -1,6 +1,7 @@
 #include "pch.h"
+#include "./CGraphicsObject.h"
 
-tbool CMeshRenderer::InitRenderer(const CMesh* a_pMesh, n32 a_nShaderProgramID)
+tbool CGraphicsObject::InitRenderer(const CMesh* a_pMesh, n32 a_nShaderProgramID)
 {
 	this->m_pMeshDrawInfo = new CMeshDrawInfo();
 	this->m_pMeshDrawInfo->m_nVertexCount = a_pMesh->m_nVertexCount;
@@ -27,6 +28,11 @@ tbool CMeshRenderer::InitRenderer(const CMesh* a_pMesh, n32 a_nShaderProgramID)
 		this->m_pMeshDrawInfo->m_pVertices[i].ny = pVertex->ny;
 		this->m_pMeshDrawInfo->m_pVertices[i].nz = pVertex->nz;
 		this->m_pMeshDrawInfo->m_pVertices[i].nw = 1.0f;
+
+		this->m_pMeshDrawInfo->m_pVertices[i].u0 = pVertex->u0;
+		this->m_pMeshDrawInfo->m_pVertices[i].v0 = pVertex->v0;
+		this->m_pMeshDrawInfo->m_pVertices[i].u1 = pVertex->u1;
+		this->m_pMeshDrawInfo->m_pVertices[i].v1 = pVertex->v1;
 	}
 
 	this->m_pMeshDrawInfo->m_nTriangleCount = a_pMesh->m_nTriangleCount;
@@ -89,7 +95,7 @@ tbool CMeshRenderer::InitRenderer(const CMesh* a_pMesh, n32 a_nShaderProgramID)
 	return true;
 }
 
-void CMeshRenderer::SetRenderMode(ERenderMode a_eMode)
+void CGraphicsObject::SetRenderMode(ERenderMode a_eMode)
 {
 	if (a_eMode == E_RENDER_MODE_POINT)
 	{
@@ -105,12 +111,8 @@ void CMeshRenderer::SetRenderMode(ERenderMode a_eMode)
 	}
 }
 
-void CMeshRenderer::SetColor(glm::vec4 a_vRGBA)
+void CGraphicsObject::SetColor(glm::vec4 a_vRGBA)
 {
-	this->m_vRGB.r = a_vRGBA.r;
-	this->m_vRGB.g = a_vRGBA.g;
-	this->m_vRGB.b = a_vRGBA.b;
-
 	for (n32 i = 0; i < this->m_pMeshDrawInfo->m_nVertexCount; i++)
 	{
 		this->m_pMeshDrawInfo->m_pVertices[i].r = a_vRGBA.r;
@@ -119,6 +121,6 @@ void CMeshRenderer::SetColor(glm::vec4 a_vRGBA)
 		this->m_pMeshDrawInfo->m_pVertices[i].a = a_vRGBA.a;
 	}
 
-	//glBindBuffer(GL_ARRAY_BUFFER, this->m_pMeshDrawInfo->m_nVertexGLBufferID);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(SDrawVertex) * this->m_pMeshDrawInfo->m_nVertexCount, (GLvoid*)this->m_pMeshDrawInfo->m_pVertices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, this->m_pMeshDrawInfo->m_nVertexGLBufferID);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(SDrawVertex) * this->m_pMeshDrawInfo->m_nVertexCount, (GLvoid*)this->m_pMeshDrawInfo->m_pVertices, GL_STATIC_DRAW);
 }

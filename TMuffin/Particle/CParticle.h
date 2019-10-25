@@ -1,6 +1,6 @@
 #pragma once
 
-class CParticle : public CGameObject
+class CParticle : public CGameObject, public CGraphicsObject
 {
 public:
 	glm::vec3 m_vAcceleration;

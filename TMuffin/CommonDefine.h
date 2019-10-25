@@ -1,19 +1,5 @@
 #pragma once
 
-enum EComponentType
-{
-	E_COMPONENT_INIT = 0,
-
-	E_COMPONENT_MESH_RENDER,
-	E_COMPONENT_RIGIDBODY,
-	E_COMPONENT_PLANE_COLLIDER,
-	E_COMPONENT_SPHERE_COLLIDER,
-	E_COMPONENT_BOX_COLLIDER,
-	E_COMPONENT_MESH_COLLIDER,
-
-	E_COMPONENT_MAX,
-};
-
 enum EColliderType
 {
 	E_COLLIDER_TYPE_INVALID = -1,
@@ -63,9 +49,11 @@ enum ELightType
 
 enum EGUIDType
 {
-	E_GUID_TYPE_INIT = -1,
+	E_GUID_TYPE_INIT = 0,
 
-	E_GUID_TYPE_GAME_OBJECT,	// game object
+	E_GUID_TYPE_GAME_OBJECT,		// game object
+	E_GUID_TYPE_PHYSICS_OBJECT,		// physics object
+	E_GUID_TYPE_GRAPHICS_OBJECT,	// graphics object
 	E_GUID_TYPE_PARTICLE_EMITTER,	// particle emitter
 
 	E_GUID_TYPE_MAX,
@@ -78,7 +66,7 @@ typedef void (*MuffinScrollCallBack)(f64 a_fX, f64 a_fY);
 typedef void (*MuffinPhysicsCallBack)();
 typedef void (*MuffinGameLogicCallBack)();
 
-#define GRAVITY_ACCELERATION -9.8f
+#define GRAVITY_ACCELERATION glm::vec3(0.0f, -9.8f, 0.0f);
 
 
 

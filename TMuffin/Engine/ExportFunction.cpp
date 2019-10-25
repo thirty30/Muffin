@@ -24,10 +24,6 @@ TMUFFIN_REGISTER_CALLBACK(TMuffin_RegisterPhysicsCallBack, MuffinPhysicsCallBack
 TMUFFIN_REGISTER_CALLBACK(TMuffin_RegisterGameLogicCallBack, MuffinGameLogicCallBack, pExternalPhysicsCallBack)
 
 
-void TMuffin_DeleteGameObjects(CGameObject* a_pGameObject)
-{
-	MUFFIN.GetGameObjectMgr()->DeleteGameObject(a_pGameObject);
-}
 void TMuffin_AddCamera(CCamera* a_pCamera)
 {
 	MUFFIN.GetCameraMgr()->AddCamera(a_pCamera);

@@ -10,15 +10,12 @@ CGameObjectManager::~CGameObjectManager()
 
 }
 
-tbool CGameObjectManager::AddGameObject(CGameObject* a_pGameObject)
+void CGameObjectManager::AddObject(CGameObject* a_pGameObject)
 {
-	u64 nGUID = MUFFIN.GetGUIDMaker()->GenerateGUID(E_GUID_TYPE_GAME_OBJECT);
-	a_pGameObject->m_nMuffinEngineGUID = nGUID;
-	this->m_mapID2GameObj[nGUID] = a_pGameObject;
-	return true;
+	this->m_mapID2GameObj[a_pGameObject->m_nMuffinGameObectGUID] = a_pGameObject;
 }
 
-CGameObject* CGameObjectManager::FindGameObjectByID(u64 a_nGUID)
+CGameObject* CGameObjectManager::FindObject(u64 a_nGUID)
 {
 	hash_map<u64, CGameObject*>::iterator iter = this->m_mapID2GameObj.find(a_nGUID);
 	if (iter == this->m_mapID2GameObj.end())
@@ -28,26 +25,14 @@ CGameObject* CGameObjectManager::FindGameObjectByID(u64 a_nGUID)
 	return iter->second;
 }
 
-void CGameObjectManager::DeleteGameObject(CGameObject* a_pGameObject)
+void CGameObjectManager::RemoveObject(CGameObject* a_pGameObject)
 {
-	u64 nGUID = a_pGameObject->m_nMuffinEngineGUID;
-	if (this->FindGameObjectByID(nGUID) == NULL)
+	u64 nGUID = a_pGameObject->m_nMuffinGameObectGUID;
+	if (this->FindObject(nGUID) == NULL)
 	{
 		return;
 	}
 	this->m_mapID2GameObj.erase(nGUID);
 }
 
-void CGameObjectManager::RefreshColliderPosition()
-{
-	hash_map<u64, CGameObject*>::iterator iter = this->m_mapID2GameObj.begin();
-	for (; iter != this->m_mapID2GameObj.end(); iter++)
-	{
-		CGameObject* pObj = iter->second;
-		if (pObj != NULL)
-		{
-			pObj->RefreshColliderPostion();
-		}
-	}
-}
 

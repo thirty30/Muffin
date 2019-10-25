@@ -9,9 +9,8 @@ public:
 	CGameObjectManager();
 	~CGameObjectManager();
 
-	tbool AddGameObject(CGameObject* a_pGameObject);
-	CGameObject* FindGameObjectByID(u64 a_nGUID);
-	void DeleteGameObject(CGameObject* a_pGameObject);
-	void RefreshColliderPosition();
+	void AddObject(CGameObject* a_pGameObject);
+	CGameObject* FindObject(u64 a_nGUID);
+	void RemoveObject(CGameObject* a_pGameObject);
 };
 

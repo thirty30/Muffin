@@ -2,7 +2,7 @@
 
 //////////////////////////////////////////////////////////////
 //CBaseCollider
-class CBaseCollider : public CComponent
+class T_DLL_EXPORT CBaseCollider
 {
 public:
 	EColliderType m_eColliderType;
@@ -32,7 +32,6 @@ public:
 
 	CPlaneCollider()
 	{
-		this->m_eComponentType = E_COMPONENT_PLANE_COLLIDER;
 		this->m_eColliderType = E_COLLIDER_TYPE_PLANE;
 		this->m_eAxis = E_PLANE_COLLIDER_AXIS_INIT;
 		this->m_fPos = 0;
@@ -50,7 +49,6 @@ public:
 	f32 m_fRadius;
 	CSphereCollider()
 	{
-		this->m_eComponentType = E_COMPONENT_SPHERE_COLLIDER;
 		this->m_eColliderType = E_COLLIDER_TYPE_SPHERE;
 		this->m_fRadius = 1.0f;
 	}
@@ -73,7 +71,6 @@ public:
 	glm::vec3 m_vSize;
 	CBoxCollider()
 	{
-		this->m_eComponentType = E_COMPONENT_BOX_COLLIDER;
 		this->m_eColliderType = E_COLLIDER_TYPE_BOX;
 		this->m_vSize = glm::vec3(1.0f, 1.0f, 1.0f);
 	}
@@ -114,7 +111,6 @@ public:
 public:
 	CMeshCollider()
 	{
-		this->m_eComponentType = E_COMPONENT_MESH_COLLIDER;
 		this->m_eColliderType = E_COLLIDER_TYPE_MESH;
 		this->m_pTriangleoArray = NULL;
 	}

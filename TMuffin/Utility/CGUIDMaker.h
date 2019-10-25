@@ -8,7 +8,7 @@ private:
 public:
 	CGUIDMaker()
 	{
-		TMemzero(this->m_nCounter, sizeof(n32) * E_GUID_TYPE_MAX);
+		TMemzero(this->m_nCounter, sizeof(u64) * E_GUID_TYPE_MAX);
 	}
 
 	T_INLINE u64 GenerateGUID(EGUIDType a_eType)

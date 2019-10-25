@@ -45,18 +45,21 @@ tbool CScene::LoadScene()
 	n32 nShaderProgramID = pShaderPro->m_nOpenGLID;
 	CShaderProgram* pShaderProDefault = CShaderManager::GetSingleton().FindShaderProgramByCustomID(E_SHADER_ID_DEFAULT);
 	n32 nShaderProgramDefaultID = pShaderProDefault->m_nOpenGLID;
+	CShaderProgram* pShaderUV = CShaderManager::GetSingleton().FindShaderProgramByCustomID(E_SHADER_ID_LIGHT_TEXTURE);
+	n32 nShaderProgramUVID = pShaderUV->m_nOpenGLID;
 
 	//Mesh
 	CMesh* pMeshCube = CGame::GetSingleton().GetResourceManager()->FindMesh(E_MODEL_ID_CUBE);
 	CMesh* pMeshSphere = CGame::GetSingleton().GetResourceManager()->FindMesh(E_MODEL_ID_SPHERE);
 	CMesh* pMeshTerrain = CGame::GetSingleton().GetResourceManager()->FindMesh(E_MODEL_ID_TERRAIN);
 	CMesh* pMeshTriangle = CGame::GetSingleton().GetResourceManager()->FindMesh(E_MODEL_ID_TRIANGLE);
+	CMesh* pMeshSphereUV = CGame::GetSingleton().GetResourceManager()->FindMesh(E_MODEL_ID_SPHERE_UV);
 
 	//scene items
-	//CDirectionLight* pDirectionLight = new CDirectionLight();
+	CDirectionLight* pDirectionLight = new CDirectionLight();
 
 	CPointLight* pPointLight1 = new CPointLight();
-	pPointLight1->m_vPosition = glm::vec3(-100.0f, 100.0f, 30.0f);
+	pPointLight1->m_vPosition = glm::vec3(100.0f, -100.0f, 30.0f);
 	pPointLight1->m_fLinear = 0.01f;
 	pPointLight1->m_fDistanceCutOff = 1000.0f;
 
@@ -65,63 +68,35 @@ tbool CScene::LoadScene()
 	//pPointLight2->m_fLinear = 0.01f;
 	//pPointLight2->m_fDistanceCutOff = 1000.0f;
 
-	//CGameObject* pObjTerrain = new CGameObject();
-	//CMeshRenderer* pMeshTerrainRenderer = pObjTerrain->AddComponent<CMeshRenderer>(E_COMPONENT_MESH_RENDER);
-	//pMeshTerrainRenderer->m_vRGB = glm::vec3(1.0f, 1.0f, 1.0f);
-	//pMeshTerrainRenderer->InitRenderer(pMeshTerrain, nShaderProgramID);
-	//pMeshTerrainRenderer->SetRenderMode(E_RENDER_MODE_FILL);
-	//pObjTerrain->AddComponent<CRigidBody>(E_COMPONENT_RIGIDBODY);
-	//CMeshCollider* pTerrainCollider = pObjTerrain->AddComponent<CMeshCollider>(E_COMPONENT_MESH_COLLIDER);
-	//pTerrainCollider->InitColliderMesh(pMeshTerrain);
-
-	//CGameObject* pObjCube = new CGameObject();
-	//CMeshRenderer* pMeshCubeRenderer = pObjCube->AddComponent<CMeshRenderer>(E_COMPONENT_MESH_RENDER);
-	//pMeshCubeRenderer->InitRenderer(pMeshCube, nShaderProgramDefaultID);
-	//pMeshCubeRenderer->SetRenderMode(E_RENDER_MODE_LINE);
-	//pObjCube->AddComponent<CRigidBody>(E_COMPONENT_RIGIDBODY);
-	//CMeshCollider* pCubeCollider = pObjCube->AddComponent<CMeshCollider>(E_COMPONENT_MESH_COLLIDER);
-	//pCubeCollider->InitColliderMesh(pMeshCube);
-
-	CGameObject* pObjCube = new CGameObject();
-	CMeshRenderer* pMeshCubeRenderer = pObjCube->AddComponent<CMeshRenderer>(E_COMPONENT_MESH_RENDER);
-	pMeshCubeRenderer->InitRenderer(pMeshCube, nShaderProgramDefaultID);
-	pMeshCubeRenderer->SetRenderMode(E_RENDER_MODE_FILL);
-	pObjCube->AddComponent<CRigidBody>(E_COMPONENT_RIGIDBODY);
-	CBoxCollider* pCubeCollider = pObjCube->AddComponent<CBoxCollider>(E_COMPONENT_BOX_COLLIDER);
-	pCubeCollider->m_vCenter = pObjCube->m_vPosition;
+	CActor* pActor1 = new CActor();
+	pActor1->InitRenderer(pMeshCube, nShaderProgramDefaultID);
+	pActor1->SetRenderMode(E_RENDER_MODE_FILL);
+	CBoxCollider* pCubeCollider = (CBoxCollider*)pActor1->CreateCollider(E_COLLIDER_TYPE_BOX);
 	pCubeCollider->m_fElastic = 0.4f;
-	
-	CGameObject* pObjSphere = new CGameObject();
-	pObjSphere->m_vPosition = glm::vec3(-10.0f, 10.0f, 0.0f);
-	CMeshRenderer* pMeshSphereRenderer = pObjSphere->AddComponent<CMeshRenderer>(E_COMPONENT_MESH_RENDER);
-	pMeshSphereRenderer->InitRenderer(pMeshSphere, nShaderProgramDefaultID);
-	pMeshSphereRenderer->SetRenderMode(E_RENDER_MODE_FILL);
-	CRigidBody* pSphereRB = pObjSphere->AddComponent<CRigidBody>(E_COMPONENT_RIGIDBODY);
+	pActor1->RefreshColliderPostion();
+
+	CActor* pActor2 = new CActor();
+	pActor2->m_vPosition = glm::vec3(-10.0f, 10.0f, 0.0f);
+	pActor2->InitRenderer(pMeshSphere, nShaderProgramDefaultID);
+	pActor2->SetRenderMode(E_RENDER_MODE_FILL);
+	CRigidBody* pSphereRB = pActor2->CreateRigidBody();
 	pSphereRB->m_bUseGravity = true;
 	pSphereRB->m_bIsPassive = false;
 	pSphereRB->m_vVelocity = glm::vec3(7.5f, -2.0f, 0.0f);
-	CSphereCollider* pSphereCollider = pObjSphere->AddComponent<CSphereCollider>(E_COMPONENT_SPHERE_COLLIDER);
-	pSphereCollider->m_vCenter = pObjSphere->m_vPosition;
-	pSphereCollider->m_fElastic = 1.0f;
+	CSphereCollider* pSphereCollider = (CSphereCollider*)pActor2->CreateCollider(E_COLLIDER_TYPE_SPHERE);
+	pActor2->RefreshColliderPostion();
 
-	CGameObject* pObjHit = new CGameObject();
-	pObjHit->m_vPosition = glm::vec3(10.0f, 10.0f, 0.0f);
-	CMeshRenderer* pMeshHitRenderer = pObjHit->AddComponent<CMeshRenderer>(E_COMPONENT_MESH_RENDER);
-	pMeshHitRenderer->InitRenderer(pMeshSphere, nShaderProgramDefaultID);
-	pMeshHitRenderer->SetRenderMode(E_RENDER_MODE_FILL);
-	CRigidBody* pHitRB = pObjHit->AddComponent<CRigidBody>(E_COMPONENT_RIGIDBODY);
+	CActor* pActor3 = new CActor();
+	pActor3->m_vPosition = glm::vec3(10.0f, 10.0f, 0.0f);
+	pActor3->InitRenderer(pMeshSphere, nShaderProgramDefaultID);
+	pActor3->SetRenderMode(E_RENDER_MODE_FILL);
+	CRigidBody* pHitRB = pActor3->CreateRigidBody();
 	pHitRB->m_bUseGravity = true;
 	pHitRB->m_bIsPassive = false;
 	pHitRB->m_vVelocity = glm::vec3(-27.5f, -3.0f, 0.0f);
-	CSphereCollider* pHitCollider = pObjHit->AddComponent<CSphereCollider>(E_COMPONENT_SPHERE_COLLIDER);
-	pHitCollider->m_vCenter = pObjHit->m_vPosition;
-	pHitCollider->m_fElastic = 1.0f;
+	CSphereCollider* pHitCollider = (CSphereCollider*)pActor3->CreateCollider(E_COLLIDER_TYPE_SPHERE);
+	pActor3->RefreshColliderPostion();
 
-	//CGameObject* pPlane = new CGameObject();
-	//pPlane->AddComponent<CRigidBody>(E_COMPONENT_RIGIDBODY);
-	//CPlaneCollider* pPlaneC = pPlane->AddComponent<CPlaneCollider>(E_COMPONENT_PLANE_COLLIDER);
-	//pPlaneC->m_eAxis = E_PLANE_COLLIDER_AXIS_Y;
-	//pPlaneC->m_fPos = -1.0f;
 
 	this->pTempParticle = TMuffin_CreateParticleEmitter();
 	pTempParticle->m_vPosition = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -143,6 +118,7 @@ tbool CScene::LoadScene()
 	pTempParticle->m_pMesh = pMeshTriangle;
 	pTempParticle->m_nShaderID = nShaderProgramDefaultID;
 	pTempParticle->InitializeEmitter();
+	
 
 	return true;
 }

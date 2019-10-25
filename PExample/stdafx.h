@@ -8,6 +8,7 @@
 #include "./ShaderManager/CShaderManager.h"
 #include "./Control/CControl.h"
 #include "./Control/CCameraControl.h"
+#include "./Actor/CActor.h"
 #include "./Scene/CScene.h"
 #include "./Scene/CSceneManager.h"
 

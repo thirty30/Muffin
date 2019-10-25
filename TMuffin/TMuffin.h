@@ -18,14 +18,22 @@
 #include "./Light/CLight.h"
 #include "./Light/CLightManager.h"
 #include "./Mesh/CMesh.h"
-#include "./Component/ComponentDef.h"
+
+#include "./Texture/cBasicTextureManager.h"
+#include "./Texture/CTexutre.h"
+
 #include "./GameObject/CGameObject.h"
 #include "./GameObject/CGameObjectManager.h"
 #include "./Camera/CCamera.h"
 #include "./Camera/CCameraManager.h"
-#include "./Renderer/CObjectRenderer.h"
+#include "./Graphics/CGraphicsObject.h"
+#include "./Graphics/CGraphicsRenderer.h"
+
+#include "./Physics/CRigidBody.h"
+#include "./Physics/CCollider.h"
+#include "./Physics/CPhysicsObject.h"
 #include "./Physics/PhysicsHelper.h"
-#include "./Physics/CObjectPhysics.h"
+#include "./Physics/CPhysicsReactor.h"
 
 #include "./Particle/CParticle.h"
 #include "./Particle/CParticleEmitter.h"

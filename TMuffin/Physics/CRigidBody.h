@@ -1,9 +1,10 @@
 #pragma once
 
-class CRigidBody : public CComponent
+class CRigidBody
 {
 public:
 	tbool m_bUseGravity;
+	glm::vec3 m_vGravity;
 	f32 m_fMass;
 	tbool m_bIsPassive; // If true it cannot move in physics frame
 
@@ -13,8 +14,8 @@ public:
 public:
 	CRigidBody()
 	{
-		this->m_eComponentType = E_COMPONENT_RIGIDBODY;
 		this->m_bUseGravity = true;
+		this->m_vGravity = GRAVITY_ACCELERATION;
 		this->m_fMass = 0;
 		this->m_bIsPassive = true;
 

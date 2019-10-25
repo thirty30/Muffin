@@ -23,7 +23,6 @@ T_DLL_EXPORT void TMuffin_RegisterGameLogicCallBack(MuffinGameLogicCallBack a_fu
 //------------Register call back function end------------//
 
 
-T_DLL_EXPORT void TMuffin_DeleteGameObjects(CGameObject* a_pGameObject);
 T_DLL_EXPORT void TMuffin_AddCamera(CCamera* a_pCamera);
 T_DLL_EXPORT f64 TMuffin_GetNowFrameTime();
 T_DLL_EXPORT f32 TMuffin_GetDeltaFrameTime();

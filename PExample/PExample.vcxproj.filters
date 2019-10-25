@@ -24,6 +24,9 @@
     <ClInclude Include="ResourceManager\CResourceManager.h">
       <Filter>ResourceManager</Filter>
     </ClInclude>
+    <ClInclude Include="Actor\CActor.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -49,6 +52,9 @@
     <ClCompile Include="ResourceManager\CResourceManager.cpp">
       <Filter>ResourceManager</Filter>
     </ClCompile>
+    <ClCompile Include="Actor\CActor.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ShaderManager">
@@ -65,6 +71,9 @@
     </Filter>
     <Filter Include="ResourceManager">
       <UniqueIdentifier>{489dae04-512a-468f-a455-96d97f9fa927}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor">
+      <UniqueIdentifier>{b9bc1205-f361-4c24-b2e9-bd2e90b00a84}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
