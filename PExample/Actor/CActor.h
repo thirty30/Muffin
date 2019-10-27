@@ -7,3 +7,13 @@ public:
 	~CActor();
 };
 
+class CCubeActor : public CGameObject, public CPhysicsObject, public CGraphicsObject
+{
+private:
+	CParticleEmitter* pTempParticle;
+public:
+	CCubeActor();
+	~CCubeActor();
+	virtual void OnCollision(SCollisionInfo& a_rCollision);
+};
+

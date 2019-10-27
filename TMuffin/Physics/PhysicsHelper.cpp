@@ -1,6 +1,6 @@
 #include "pch.h"
 
-void CalcColliderIsHit(CBaseCollider* a_pCollider1, CBaseCollider* a_pCollider2, SCollisionInfo& a_rCollisionInfo)
+void CalcColliderIsHit(CBaseCollider* a_pCollider1, CBaseCollider* a_pCollider2, SCollisionResult& a_rCollisionInfo)
 {
 	switch (a_pCollider1->m_eColliderType)
 	{
@@ -42,7 +42,7 @@ void CalcColliderIsHit(CBaseCollider* a_pCollider1, CBaseCollider* a_pCollider2,
 }
 
 
-void doSphere2Plane(CSphereCollider* a_pSrcCollider, CPlaneCollider* a_pTarCollider, SCollisionInfo& a_rCollisionInfo)
+void doSphere2Plane(CSphereCollider* a_pSrcCollider, CPlaneCollider* a_pTarCollider, SCollisionResult& a_rCollisionInfo)
 {
 	a_rCollisionInfo.m_vHitPoint = a_pSrcCollider->m_vCenter;
 	if (a_pTarCollider->m_eAxis == E_PLANE_COLLIDER_AXIS_X)
@@ -66,7 +66,7 @@ void doSphere2Plane(CSphereCollider* a_pSrcCollider, CPlaneCollider* a_pTarColli
 	}
 }
 
-void doSphere2Sphere(CSphereCollider* a_pSrcCollider, CSphereCollider* a_pTarCollider, SCollisionInfo& a_rCollisionInfo)
+void doSphere2Sphere(CSphereCollider* a_pSrcCollider, CSphereCollider* a_pTarCollider, SCollisionResult& a_rCollisionInfo)
 {
 	f32 fHitDis = glm::distance(a_pSrcCollider->m_vCenter, a_pTarCollider->m_vCenter);
 	if (fHitDis < a_pSrcCollider->m_fRadius + a_pTarCollider->m_fRadius)
@@ -80,7 +80,7 @@ void doSphere2Sphere(CSphereCollider* a_pSrcCollider, CSphereCollider* a_pTarCol
 	}
 }
 
-void doSphere2Box(CSphereCollider* a_pSrcCollider, CBoxCollider* a_pTarCollider, SCollisionInfo& a_rCollisionInfo)
+void doSphere2Box(CSphereCollider* a_pSrcCollider, CBoxCollider* a_pTarCollider, SCollisionResult& a_rCollisionInfo)
 {
 	glm::vec3 vMin = a_pTarCollider->GetMinPoint();
 	glm::vec3 vMax = a_pTarCollider->GetMaxPoint();
@@ -99,7 +99,7 @@ void doSphere2Box(CSphereCollider* a_pSrcCollider, CBoxCollider* a_pTarCollider,
 	}
 }
 
-void doSphere2Mesh(CSphereCollider* a_pSrcCollider, CMeshCollider* a_pTarCollider, SCollisionInfo& a_rCollisionInfo)
+void doSphere2Mesh(CSphereCollider* a_pSrcCollider, CMeshCollider* a_pTarCollider, SCollisionResult& a_rCollisionInfo)
 {
 	f32 fLastDis = FLT_MAX;
 	for (n32 i = 0; i < a_pTarCollider->m_nTriangleCount; i += 3)

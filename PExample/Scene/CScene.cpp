@@ -68,12 +68,14 @@ tbool CScene::LoadScene()
 	//pPointLight2->m_fLinear = 0.01f;
 	//pPointLight2->m_fDistanceCutOff = 1000.0f;
 
-	CActor* pActor1 = new CActor();
+	CCubeActor* pActor1 = new CCubeActor();
+	pActor1->m_vPosition = glm::vec3(0.0f, 6.0f, 0.0f);
 	pActor1->InitRenderer(pMeshCube, nShaderProgramDefaultID);
 	pActor1->SetRenderMode(E_RENDER_MODE_FILL);
+	CRigidBody* pCubeRB = pActor1->CreateRigidBody();
+	pCubeRB->m_bIsPassive = false;
 	CBoxCollider* pCubeCollider = (CBoxCollider*)pActor1->CreateCollider(E_COLLIDER_TYPE_BOX);
 	pCubeCollider->m_fElastic = 0.4f;
-	pActor1->RefreshColliderPostion();
 
 	CActor* pActor2 = new CActor();
 	pActor2->m_vPosition = glm::vec3(-10.0f, 10.0f, 0.0f);
@@ -84,7 +86,6 @@ tbool CScene::LoadScene()
 	pSphereRB->m_bIsPassive = false;
 	pSphereRB->m_vVelocity = glm::vec3(7.5f, -2.0f, 0.0f);
 	CSphereCollider* pSphereCollider = (CSphereCollider*)pActor2->CreateCollider(E_COLLIDER_TYPE_SPHERE);
-	pActor2->RefreshColliderPostion();
 
 	CActor* pActor3 = new CActor();
 	pActor3->m_vPosition = glm::vec3(10.0f, 10.0f, 0.0f);
@@ -95,31 +96,8 @@ tbool CScene::LoadScene()
 	pHitRB->m_bIsPassive = false;
 	pHitRB->m_vVelocity = glm::vec3(-27.5f, -3.0f, 0.0f);
 	CSphereCollider* pHitCollider = (CSphereCollider*)pActor3->CreateCollider(E_COLLIDER_TYPE_SPHERE);
-	pActor3->RefreshColliderPostion();
 
-
-	this->pTempParticle = TMuffin_CreateParticleEmitter();
-	pTempParticle->m_vPosition = glm::vec3(0.0f, 1.0f, 0.0f);
-	pTempParticle->m_vMinScale = glm::vec3(1.0f, 1.0f, 1.0f);
-	pTempParticle->m_vMaxScale = glm::vec3(1.0f, 1.0f, 1.0f);
-	pTempParticle->m_vMinAcceleration = glm::vec3(0.0f, 0.0f, 0.0f);
-	pTempParticle->m_vMaxAcceleration = glm::vec3(0.0f, 0.0f, 0.0f);
-	pTempParticle->m_vMinVelocity = glm::vec3(-3.0f, 10.0f, 0.0f);
-	pTempParticle->m_vMaxVelocity = glm::vec3(3.0f, 10.0f, 0.0f);
-	pTempParticle->m_vMinDeltaPosition = glm::vec3(0.0f, 0.0f, 0.0f);
-	pTempParticle->m_vMaxDeltaPosition = glm::vec3(0.0f, 0.0f, 0.0f);
-	pTempParticle->m_vMinColor = glm::vec4(0.9f, 0.39f, 0.13f, 1.0f);
-	pTempParticle->m_vMaxColor = glm::vec4(0.9f, 0.129f, 0.058f, 1.0f);
-	pTempParticle->m_fMinLifeTime = 1.0f;
-	pTempParticle->m_fMaxLifeTime = 2.0f;
-	pTempParticle->m_nMinEmitCount = 5;
-	pTempParticle->m_nMaxEmitCount = 8;
-	pTempParticle->m_fEmitPeriod = 0.05f;
-	pTempParticle->m_pMesh = pMeshTriangle;
-	pTempParticle->m_nShaderID = nShaderProgramDefaultID;
-	pTempParticle->InitializeEmitter();
 	
-
 	return true;
 }
 

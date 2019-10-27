@@ -1,11 +1,5 @@
 #pragma once
 
-struct SCollisionCallBackInfo
-{
-	CPhysicsObject* m_pSrc;
-	CPhysicsObject* m_pTar;
-};
-
 class CPhysicsReactor
 {
 private:

@@ -68,8 +68,16 @@ void CPhysicsReactor::PhysicsLoop()
 	for (n32 i = 0; i < nCount; i++)
 	{
 		SCollisionCallBackInfo* pInfo = this->m_vecCallBackArray[i];
-		pInfo->m_pSrc->OnCollision(NULL);
-		pInfo->m_pTar->OnCollision(NULL);
+		SCollisionInfo rParm1;
+		rParm1.m_pTarget = pInfo->m_pTar;
+		rParm1.m_vHitPoint = pInfo->m_vHitPoint;
+		pInfo->m_pSrc->OnCollision(rParm1);
+
+		SCollisionInfo rParm2;
+		rParm2.m_pTarget = pInfo->m_pSrc;
+		rParm2.m_vHitPoint = pInfo->m_vHitPoint;
+		pInfo->m_pTar->OnCollision(rParm2);
+
 		delete pInfo;
 	}
 	this->m_vecCallBackArray.clear();
@@ -102,7 +110,7 @@ void CPhysicsReactor::CalcCollision()
 	{
 		CPhysicsObject* pSrcPhysicsObj = iterSrc->second;
 		CBaseCollider* pSrcBC = pSrcPhysicsObj->m_pCollider;
-		if (pSrcBC == NULL || pSrcBC->m_bIsTrigger == true)
+		if (pSrcBC == NULL)
 		{
 			continue;;
 		}
@@ -121,17 +129,31 @@ void CPhysicsReactor::CalcCollision()
 			{
 				continue;
 			}
-			glm::vec3 vHitPoint(0.0f, 0.0f, 0.0f);
-			SCollisionInfo rCollisionInfo;
+			CRigidBody* pTarRB = pTarPhysicsObj->m_pRigidBody;
+
+			SCollisionResult rCollisionInfo;
 			CalcColliderIsHit(pSrcBC, pTarBC, rCollisionInfo);
 			if (rCollisionInfo.m_bIsHit == false)
 			{
 				continue;
 			}
-			if (pSrcRB == NULL)
+
+			SCollisionCallBackInfo* pCallBack = new SCollisionCallBackInfo();
+			pCallBack->m_pSrc = pSrcPhysicsObj;
+			pCallBack->m_pTar = pTarPhysicsObj;
+			pCallBack->m_vHitPoint = rCollisionInfo.m_vHitPoint;
+			this->m_vecCallBackArray.push_back(pCallBack);
+
+			if (pSrcBC->m_bIsTrigger == true || pTarBC->m_bIsTrigger == true)
 			{
 				continue;
 			}
+
+			if (pSrcRB == NULL || pTarRB == NULL)
+			{
+				continue;
+			}
+
 			pSrcBC->m_vCenter += rCollisionInfo.m_vHitNormal * rCollisionInfo.m_fIntersectDis;
 			pSrcPhysicsObj->m_pGameObject->m_vPosition = pSrcBC->m_vCenter;
 			pSrcRB->m_vVelocity = glm::reflect(pSrcRB->m_vVelocity, rCollisionInfo.m_vHitNormal);
@@ -140,17 +162,12 @@ void CPhysicsReactor::CalcCollision()
 			// temp code sanshi mark
 			if (pTarBC->m_eColliderType == E_COLLIDER_TYPE_SPHERE)
 			{
-				CRigidBody* pTarRB = pTarPhysicsObj->m_pRigidBody;
+				
 				pTarBC->m_vCenter += (-rCollisionInfo.m_vHitNormal) * 0.01f;
 				pTarPhysicsObj->m_pGameObject->m_vPosition = pTarBC->m_vCenter;
 				pTarRB->m_vVelocity = glm::reflect(pTarRB->m_vVelocity, -rCollisionInfo.m_vHitNormal);
 				pTarRB->m_vVelocity *= glm::min(1.0f, pSrcBC->m_fElastic * pTarBC->m_fElastic);
 			}
-
-			SCollisionCallBackInfo* pCallBack = new SCollisionCallBackInfo();
-			pCallBack->m_pSrc = pSrcPhysicsObj;
-			pCallBack->m_pTar = pTarPhysicsObj;
-			this->m_vecCallBackArray.push_back(pCallBack);
 		}
 	}
 }

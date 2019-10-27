@@ -100,6 +100,10 @@ void CParticleEmitter::AwakeParticle(CParticle* a_pParticle)
 
 void CParticleEmitter::Update()
 {
+	if (this->m_bEnable == false)
+	{
+		return;
+	}
 	f32 fDeltaTime = MUFFIN.GetDeltaFrameTime();
 	TLinkedNode<CParticle>* pNode = this->m_objEmittedList.GetHeadNode();
 	while (pNode != NULL)

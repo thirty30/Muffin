@@ -11,7 +11,7 @@ private:
 	friend class CPhysicsReactor;
 
 private:
-	virtual void OnCollision(CGameObject* a_pGameObj) {}
+	virtual void OnCollision(SCollisionInfo& a_rCollision) {}
 
 public:
 	CPhysicsObject(CGameObject* a_pGameObject);

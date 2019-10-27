@@ -31,8 +31,8 @@
 
 #include "./Physics/CRigidBody.h"
 #include "./Physics/CCollider.h"
-#include "./Physics/CPhysicsObject.h"
 #include "./Physics/PhysicsHelper.h"
+#include "./Physics/CPhysicsObject.h"
 #include "./Physics/CPhysicsReactor.h"
 
 #include "./Particle/CParticle.h"
