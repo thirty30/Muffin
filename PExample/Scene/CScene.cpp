@@ -97,7 +97,7 @@ tbool CScene::LoadScene()
 	pHitRB->m_vVelocity = glm::vec3(-27.5f, -3.0f, 0.0f);
 	CSphereCollider* pHitCollider = (CSphereCollider*)pActor3->CreateCollider(E_COLLIDER_TYPE_SPHERE);
 
-	
+
 	return true;
 }
 

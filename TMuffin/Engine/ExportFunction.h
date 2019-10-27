@@ -29,8 +29,3 @@ T_DLL_EXPORT f32 TMuffin_GetDeltaFrameTime();
 T_DLL_EXPORT CParticleEmitter* TMuffin_CreateParticleEmitter();
 
 
-T_DLL_EXPORT void TMuffin_DrawPoint();
-
-
-
-

@@ -41,12 +41,3 @@ T_DLL_EXPORT CParticleEmitter* TMuffin_CreateParticleEmitter()
 {
 	return MUFFIN.GetParticleEmitterMgr()->CreateEmitter();
 }
-
-void TMuffin_DrawPoint()
-{
-	glPointSize(5.0f);
-	glBegin(GL_POINTS);
-	glColor3f(1.0, 1.0, 1.0);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glEnd();
-}
