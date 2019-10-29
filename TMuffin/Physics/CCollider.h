@@ -125,17 +125,17 @@ public:
 		{
 			SMeshTriangle* pTriangle = &a_pMesh->m_pTriangles[i];
 			sMeshColliderTriangle* pInfo = &this->m_pTriangleoArray[i];
-			pInfo->m_vPoint1.x = a_pMesh->m_pVertices[pTriangle->Vertex1].x;
-			pInfo->m_vPoint1.y = a_pMesh->m_pVertices[pTriangle->Vertex1].y;
-			pInfo->m_vPoint1.z = a_pMesh->m_pVertices[pTriangle->Vertex1].z;
+			pInfo->m_vPoint1.x = a_pMesh->m_pVertices[pTriangle->Vertex1].x + this->m_vCenter.x;
+			pInfo->m_vPoint1.y = a_pMesh->m_pVertices[pTriangle->Vertex1].y + this->m_vCenter.y;
+			pInfo->m_vPoint1.z = a_pMesh->m_pVertices[pTriangle->Vertex1].z + this->m_vCenter.z;
 
-			pInfo->m_vPoint2.x = a_pMesh->m_pVertices[pTriangle->Vertex2].x;
-			pInfo->m_vPoint2.y = a_pMesh->m_pVertices[pTriangle->Vertex2].y;
-			pInfo->m_vPoint2.z = a_pMesh->m_pVertices[pTriangle->Vertex2].z;
+			pInfo->m_vPoint2.x = a_pMesh->m_pVertices[pTriangle->Vertex2].x + this->m_vCenter.x;
+			pInfo->m_vPoint2.y = a_pMesh->m_pVertices[pTriangle->Vertex2].y + this->m_vCenter.y;
+			pInfo->m_vPoint2.z = a_pMesh->m_pVertices[pTriangle->Vertex2].z + this->m_vCenter.z;
 
-			pInfo->m_vPoint3.x = a_pMesh->m_pVertices[pTriangle->Vertex3].x;
-			pInfo->m_vPoint3.y = a_pMesh->m_pVertices[pTriangle->Vertex3].y;
-			pInfo->m_vPoint3.z = a_pMesh->m_pVertices[pTriangle->Vertex3].z;
+			pInfo->m_vPoint3.x = a_pMesh->m_pVertices[pTriangle->Vertex3].x + this->m_vCenter.x;
+			pInfo->m_vPoint3.y = a_pMesh->m_pVertices[pTriangle->Vertex3].y + this->m_vCenter.y;
+			pInfo->m_vPoint3.z = a_pMesh->m_pVertices[pTriangle->Vertex3].z + this->m_vCenter.z;
 
 			glm::vec3 vNormal1 = glm::normalize(pInfo->m_vPoint2 - pInfo->m_vPoint1);
 			glm::vec3 vNormal2 = glm::normalize(pInfo->m_vPoint3 - pInfo->m_vPoint1);

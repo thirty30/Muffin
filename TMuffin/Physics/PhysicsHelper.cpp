@@ -112,6 +112,7 @@ void doSphere2Mesh(CSphereCollider* a_pSrcCollider, CMeshCollider* a_pTarCollide
 			a_rCollisionInfo.m_vHitNormal = pTriangle->m_vTriangleNormal;
 			f32 fHitDis = glm::distance(a_pSrcCollider->m_vCenter, a_rCollisionInfo.m_vHitPoint);
 			a_rCollisionInfo.m_fIntersectDis = a_pSrcCollider->m_fRadius - fHitDis;
+			return;
 		}
 	}
 }
