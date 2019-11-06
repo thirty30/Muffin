@@ -143,3 +143,17 @@ void CGraphicsObject::SetColor(glm::vec4 a_vRGBA)
 	glBindBuffer(GL_ARRAY_BUFFER, this->m_pMeshDrawInfo->m_nVertexGLBufferID);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(SDrawVertex) * this->m_pMeshDrawInfo->m_nVertexCount, (GLvoid*)this->m_pMeshDrawInfo->m_pVertices, GL_STATIC_DRAW);
 }
+
+void CGraphicsObject::SetDebugColor(n32 a_nIdx, glm::vec4 a_vRGBA)
+{
+	this->m_pMeshDrawInfo->m_pVertices[a_nIdx].r = a_vRGBA.r;
+	this->m_pMeshDrawInfo->m_pVertices[a_nIdx].g = a_vRGBA.g;
+	this->m_pMeshDrawInfo->m_pVertices[a_nIdx].b = a_vRGBA.b;
+	this->m_pMeshDrawInfo->m_pVertices[a_nIdx].a = a_vRGBA.a;
+}
+
+void CGraphicsObject::RefreshDebugColor()
+{
+	glBindBuffer(GL_ARRAY_BUFFER, this->m_pMeshDrawInfo->m_nVertexGLBufferID);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(SDrawVertex) * this->m_pMeshDrawInfo->m_nVertexCount, (GLvoid*)this->m_pMeshDrawInfo->m_pVertices, GL_STATIC_DRAW);
+}

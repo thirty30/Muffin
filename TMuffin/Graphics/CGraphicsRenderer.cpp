@@ -62,17 +62,20 @@ void CGraphicsRenderer::GraphicsLoop()
 		glm::mat4 trans = glm::translate(glm::mat4(1.0f), pGameObj->m_vPosition);
 		matM *= trans;
 
+		glm::mat4 rotation = glm::mat4(pGameObj->m_qRotation);
+		matM *= rotation;
+
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), pGameObj->m_vScale);
 		matM *= scale;
 
-		glm::mat4 rotateX = glm::rotate(glm::mat4(1.0f), glm::radians(pGameObj->m_vRotation.x), glm::vec3(1.0f, 0.0, 0.0f));
-		matM *= rotateX;
+		//glm::mat4 rotateX = glm::rotate(glm::mat4(1.0f), glm::radians(pGameObj->m_vRotation.x), glm::vec3(1.0f, 0.0, 0.0f));
+		//matM *= rotateX;
 
-		glm::mat4 rotateY = glm::rotate(glm::mat4(1.0f), glm::radians(pGameObj->m_vRotation.y), glm::vec3(0.0f, 1.0, 0.0f));
-		matM *= rotateY;
+		//glm::mat4 rotateY = glm::rotate(glm::mat4(1.0f), glm::radians(pGameObj->m_vRotation.y), glm::vec3(0.0f, 1.0, 0.0f));
+		//matM *= rotateY;
 
-		glm::mat4 rotateZ = glm::rotate(glm::mat4(1.0f), glm::radians(pGameObj->m_vRotation.z), glm::vec3(0.0f, 0.0, 1.0f));
-		matM *= rotateZ;
+		//glm::mat4 rotateZ = glm::rotate(glm::mat4(1.0f), glm::radians(pGameObj->m_vRotation.z), glm::vec3(0.0f, 0.0, 1.0f));
+		//matM *= rotateZ;
 
 		n32 nShaderProgramID = pGraphicsObj->m_nShaderProgramID;
 		glUseProgram(nShaderProgramID);

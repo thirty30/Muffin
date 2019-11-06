@@ -91,6 +91,9 @@ public:
 	tbool InitRenderer(const CMesh* a_pMesh, n32 a_nShaderProgramID);
 	void SetRenderMode(ERenderMode a_eMode);
 	void SetColor(glm::vec4 a_vRGBA);
+
+	void SetDebugColor(n32 a_nIdx, glm::vec4 a_vRGBA);
+	void RefreshDebugColor();
 };
 
 

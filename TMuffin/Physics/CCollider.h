@@ -10,13 +10,7 @@ public:
 	f32 m_fElastic;
 	tbool m_bIsTrigger;
 
-	CBaseCollider() 
-	{
-		this->m_eColliderType = E_COLLIDER_TYPE_INIT;
-		this->m_vCenter = glm::vec3(0, 0, 0);
-		this->m_fElastic = 1.0f;
-		this->m_bIsTrigger = false;
-	}
+	CBaseCollider();
 	virtual ~CBaseCollider() {}
 
 	virtual void SetScale(glm::vec3 a_vScale) T_PURE;
@@ -24,18 +18,13 @@ public:
 
 //////////////////////////////////////////////////////////////
 //CPlaneCollider
-class CPlaneCollider : public CBaseCollider
+class T_DLL_EXPORT CPlaneCollider : public CBaseCollider
 {
 public:
 	EPLaneColliderAxis m_eAxis;
 	f32 m_fPos;
 
-	CPlaneCollider()
-	{
-		this->m_eColliderType = E_COLLIDER_TYPE_PLANE;
-		this->m_eAxis = E_PLANE_COLLIDER_AXIS_INIT;
-		this->m_fPos = 0;
-	}
+	CPlaneCollider();
 	~CPlaneCollider() {}
 
 	virtual void SetScale(glm::vec3 a_vScale) {}
@@ -43,37 +32,23 @@ public:
 
 //////////////////////////////////////////////////////////////
 //CSphereCollider
-class CSphereCollider : public CBaseCollider
+class T_DLL_EXPORT CSphereCollider : public CBaseCollider
 {
 public:
 	f32 m_fRadius;
-	CSphereCollider()
-	{
-		this->m_eColliderType = E_COLLIDER_TYPE_SPHERE;
-		this->m_fRadius = 1.0f;
-	}
+	CSphereCollider();
 	~CSphereCollider() {}
 
-	virtual void SetScale(glm::vec3 a_vScale)
-	{
-		f32 fScale = 0;
-		fScale = glm::max(a_vScale.x, a_vScale.y);
-		fScale = glm::max(fScale, a_vScale.z);
-		this->m_fRadius *= fScale;
-	}
+	virtual void SetScale(glm::vec3 a_vScale);
 };
 
 //////////////////////////////////////////////////////////////
 //CBoxCollider
-class CBoxCollider : public CBaseCollider
+class T_DLL_EXPORT CBoxCollider : public CBaseCollider
 {
 public:
 	glm::vec3 m_vSize;
-	CBoxCollider()
-	{
-		this->m_eColliderType = E_COLLIDER_TYPE_BOX;
-		this->m_vSize = glm::vec3(1.0f, 1.0f, 1.0f);
-	}
+	CBoxCollider();
 	~CBoxCollider() {}
 
 	virtual void SetScale(glm::vec3 a_vScale)
@@ -81,12 +56,12 @@ public:
 		this->m_vSize = a_vScale;
 	}
 
-	glm::vec3 GetMinPoint()
+	T_INLINE glm::vec3 GetMinPoint()
 	{
 		return glm::vec3(this->m_vCenter.x - this->m_vSize.x, this->m_vCenter.y - this->m_vSize.y, this->m_vCenter.z - this->m_vSize.z);
 	}
 
-	glm::vec3 GetMaxPoint()
+	T_INLINE glm::vec3 GetMaxPoint()
 	{
 		return glm::vec3(this->m_vCenter.x + this->m_vSize.x, this->m_vCenter.y + this->m_vSize.y, this->m_vCenter.z + this->m_vSize.z);
 	}
@@ -100,47 +75,48 @@ struct sMeshColliderTriangle
 	glm::vec3 m_vPoint2;
 	glm::vec3 m_vPoint3;
 	glm::vec3 m_vTriangleNormal;
+
+	u32 m_nDebugIdx1;
+	u32 m_nDebugIdx2;
+	u32 m_nDebugIdx3;
 };
 
-class CMeshCollider : public CBaseCollider
+struct T_DLL_EXPORT sMeshColliderBox
 {
+	vector<n32> m_vecTriangleIdx;
+	glm::vec3 m_fMinPoint;
+	glm::vec3 m_fMaxPoint;
+};
+
+class T_DLL_EXPORT CMeshCollider : public CBaseCollider
+{
+#define SUB_STEP_NUM 10
 public:
 	sMeshColliderTriangle* m_pTriangleoArray;
 	n32 m_nTriangleCount;
+	hash_map<u64, sMeshColliderBox*> m_mapID2AABB;
 
+	glm::vec3 m_vMinPoint;
+	glm::vec3 m_vMaxPoint;
+
+	n32 m_nXStepNum;
+	n32 m_nYStepNum;
+	n32 m_nZStepNum;
+
+	f32 m_fXStep;
+	f32 m_fYStep;
+	f32 m_fZStep;
+
+private:
+	sMeshColliderBox* GetBoxByID(u64 a_nID);
+	
+	
 public:
-	CMeshCollider()
-	{
-		this->m_eColliderType = E_COLLIDER_TYPE_MESH;
-		this->m_pTriangleoArray = NULL;
-	}
-	~CMeshCollider() {}
+	CMeshCollider();
+	~CMeshCollider();
 
+	sMeshColliderBox* FindBoxByPosition(glm::vec3 a_vPosition);
 	virtual void SetScale(glm::vec3 a_vScale) {}
-	void InitColliderMesh(CMesh* a_pMesh)
-	{
-		this->m_nTriangleCount = a_pMesh->m_nTriangleCount;
-		this->m_pTriangleoArray = new sMeshColliderTriangle[this->m_nTriangleCount];
-		for (n32 i = 0; i < this->m_nTriangleCount; i++)
-		{
-			SMeshTriangle* pTriangle = &a_pMesh->m_pTriangles[i];
-			sMeshColliderTriangle* pInfo = &this->m_pTriangleoArray[i];
-			pInfo->m_vPoint1.x = a_pMesh->m_pVertices[pTriangle->Vertex1].x + this->m_vCenter.x;
-			pInfo->m_vPoint1.y = a_pMesh->m_pVertices[pTriangle->Vertex1].y + this->m_vCenter.y;
-			pInfo->m_vPoint1.z = a_pMesh->m_pVertices[pTriangle->Vertex1].z + this->m_vCenter.z;
-
-			pInfo->m_vPoint2.x = a_pMesh->m_pVertices[pTriangle->Vertex2].x + this->m_vCenter.x;
-			pInfo->m_vPoint2.y = a_pMesh->m_pVertices[pTriangle->Vertex2].y + this->m_vCenter.y;
-			pInfo->m_vPoint2.z = a_pMesh->m_pVertices[pTriangle->Vertex2].z + this->m_vCenter.z;
-
-			pInfo->m_vPoint3.x = a_pMesh->m_pVertices[pTriangle->Vertex3].x + this->m_vCenter.x;
-			pInfo->m_vPoint3.y = a_pMesh->m_pVertices[pTriangle->Vertex3].y + this->m_vCenter.y;
-			pInfo->m_vPoint3.z = a_pMesh->m_pVertices[pTriangle->Vertex3].z + this->m_vCenter.z;
-
-			glm::vec3 vNormal1 = glm::normalize(pInfo->m_vPoint2 - pInfo->m_vPoint1);
-			glm::vec3 vNormal2 = glm::normalize(pInfo->m_vPoint3 - pInfo->m_vPoint1);
-			pInfo->m_vTriangleNormal = glm::normalize(glm::cross(vNormal1, vNormal2));
-		}
-	}
+	void InitColliderMesh(CMesh* a_pMesh);
 };
 

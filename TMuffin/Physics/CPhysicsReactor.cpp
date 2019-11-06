@@ -43,6 +43,11 @@ void CPhysicsReactor::RefreshColliderPosition()
 	for (; iter != this->m_mapID2PhysicsObj.end(); iter++)
 	{
 		CPhysicsObject* pObj = iter->second;
+		CGameObject* pGameObj = pObj->m_pGameObject;
+		if (pGameObj->IsEnable() == false)
+		{
+			continue;
+		}
 		if (pObj != NULL)
 		{
 			pObj->RefreshColliderPostion();
@@ -90,6 +95,11 @@ void CPhysicsReactor::CalcRigidBodyMotion()
 	for (; iter != this->m_mapID2PhysicsObj.end(); iter++)
 	{
 		CPhysicsObject* pPhysicsObj = iter->second;
+		CGameObject* pGameObj = pPhysicsObj->m_pGameObject;
+		if (pGameObj->IsEnable() == false)
+		{
+			continue;
+		}
 		CRigidBody* pRigidBody = pPhysicsObj->m_pRigidBody;
 		if (pRigidBody == NULL || pRigidBody->m_bIsPassive == true)
 		{
@@ -109,6 +119,11 @@ void CPhysicsReactor::CalcCollision()
 	for (; iterSrc != this->m_mapID2PhysicsObj.end(); iterSrc++)
 	{
 		CPhysicsObject* pSrcPhysicsObj = iterSrc->second;
+		CGameObject* pSrcGameObj = pSrcPhysicsObj->m_pGameObject;
+		if (pSrcGameObj->IsEnable() == false)
+		{
+			continue;
+		}
 		CBaseCollider* pSrcBC = pSrcPhysicsObj->m_pCollider;
 		if (pSrcBC == NULL)
 		{
@@ -120,6 +135,11 @@ void CPhysicsReactor::CalcCollision()
 		for (; iterTar != this->m_mapID2PhysicsObj.end(); iterTar++)
 		{
 			CPhysicsObject* pTarPhysicsObj = iterTar->second;
+			CGameObject* pTarGameObj = pTarPhysicsObj->m_pGameObject;
+			if (pTarGameObj->IsEnable() == false)
+			{
+				continue;
+			}
 			if (pSrcPhysicsObj == pTarPhysicsObj)
 			{
 				continue;

@@ -101,10 +101,42 @@ void doSphere2Box(CSphereCollider* a_pSrcCollider, CBoxCollider* a_pTarCollider,
 
 void doSphere2Mesh(CSphereCollider* a_pSrcCollider, CMeshCollider* a_pTarCollider, SCollisionResult& a_rCollisionInfo)
 {
-	f32 fLastDis = FLT_MAX;
-	for (n32 i = 0; i < a_pTarCollider->m_nTriangleCount; i += 3)
+	glm::vec3 vMin = a_pTarCollider->m_vMinPoint;
+	glm::vec3 vMax = a_pTarCollider->m_vMaxPoint;
+	for (n32 i = 0; i < 3; i++) {
+		f32 v = a_pSrcCollider->m_vCenter[i];
+		v = glm::max(v, vMin[i]);
+		v = glm::min(v, vMax[i]);
+		a_rCollisionInfo.m_vHitPoint[i] = v;
+	}
+	f32 fHitDis = glm::distance(a_pSrcCollider->m_vCenter, a_rCollisionInfo.m_vHitPoint);
+	if (fHitDis > a_pSrcCollider->m_fRadius)
 	{
-		sMeshColliderTriangle* pTriangle = &a_pTarCollider->m_pTriangleoArray[i];
+		return;
+	}
+
+	glm::vec3 vPoint = a_rCollisionInfo.m_vHitPoint;
+	if (a_pSrcCollider->m_vCenter.x < a_pTarCollider->m_vMaxPoint.x && a_pSrcCollider->m_vCenter.x > a_pTarCollider->m_vMinPoint.x)
+	{
+		if (a_pSrcCollider->m_vCenter.y < a_pTarCollider->m_vMaxPoint.y && a_pSrcCollider->m_vCenter.y > a_pTarCollider->m_vMinPoint.y)
+		{
+			if (a_pSrcCollider->m_vCenter.z < a_pTarCollider->m_vMaxPoint.z && a_pSrcCollider->m_vCenter.z > a_pTarCollider->m_vMinPoint.z)
+			{
+				vPoint = a_pSrcCollider->m_vCenter;
+			}
+		}
+	}
+
+	sMeshColliderBox* pMeshBox = a_pTarCollider->FindBoxByPosition(vPoint);
+	if (pMeshBox == NULL)
+	{
+		return;
+	}
+	f32 fLastDis = FLT_MAX;
+	for (n32 i = 0; i < pMeshBox->m_vecTriangleIdx.size(); i += 3)
+	{
+		n32 nIdx = pMeshBox->m_vecTriangleIdx[i];
+		sMeshColliderTriangle* pTriangle = &a_pTarCollider->m_pTriangleoArray[nIdx];
 		tbool bCollided = TestSphereTriangle(a_pSrcCollider, pTriangle->m_vPoint1, pTriangle->m_vPoint2, pTriangle->m_vPoint3, a_rCollisionInfo.m_vHitPoint);
 		if (bCollided == true)
 		{
@@ -115,6 +147,21 @@ void doSphere2Mesh(CSphereCollider* a_pSrcCollider, CMeshCollider* a_pTarCollide
 			return;
 		}
 	}
+
+	//f32 fLastDis = FLT_MAX;
+	//for (n32 i = 0; i < a_pTarCollider->m_nTriangleCount; i += 3)
+	//{
+	//	sMeshColliderTriangle* pTriangle = &a_pTarCollider->m_pTriangleoArray[i];
+	//	tbool bCollided = TestSphereTriangle(a_pSrcCollider, pTriangle->m_vPoint1, pTriangle->m_vPoint2, pTriangle->m_vPoint3, a_rCollisionInfo.m_vHitPoint);
+	//	if (bCollided == true)
+	//	{
+	//		a_rCollisionInfo.m_bIsHit = true;
+	//		a_rCollisionInfo.m_vHitNormal = pTriangle->m_vTriangleNormal;
+	//		f32 fHitDis = glm::distance(a_pSrcCollider->m_vCenter, a_rCollisionInfo.m_vHitPoint);
+	//		a_rCollisionInfo.m_fIntersectDis = a_pSrcCollider->m_fRadius - fHitDis;
+	//		return;
+	//	}
+	//}
 }
 
 glm::vec3 ClosestPtPointTriangle(glm::vec3 p, glm::vec3 a, glm::vec3 b, glm::vec3 c)
