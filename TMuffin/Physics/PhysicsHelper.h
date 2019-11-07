@@ -30,11 +30,11 @@ struct SCollisionInfo
 	glm::vec3 m_vHitPoint;
 };
 
-extern void CalcColliderIsHit(CBaseCollider* a_pCollider1, CBaseCollider* a_pCollider2, SCollisionResult& a_rCollisionInfo);
-extern void doSphere2Plane(CSphereCollider* a_pSrcCollider, CPlaneCollider* a_pTarCollider, SCollisionResult& a_rCollisionInfo);
-extern void doSphere2Sphere(CSphereCollider* a_pSrcCollider, CSphereCollider* a_pTarCollider, SCollisionResult& a_rCollisionInfo);
-extern void doSphere2Box(CSphereCollider* a_pSrcCollider, CBoxCollider* a_pTarCollider, SCollisionResult& a_rCollisionInfo);
-extern void doSphere2Mesh(CSphereCollider* a_pSrcCollider, CMeshCollider* a_pTarCollider, SCollisionResult& a_rCollisionInfo);
+extern void CalcColliderIsHit(CColliderBase* a_pCollider1, CColliderBase* a_pCollider2, SCollisionResult& a_rCollisionInfo);
+extern void doSphere2Plane(CColliderSphere* a_pSrcCollider, CColliderPlane* a_pTarCollider, SCollisionResult& a_rCollisionInfo);
+extern void doSphere2Sphere(CColliderSphere* a_pSrcCollider, CColliderSphere* a_pTarCollider, SCollisionResult& a_rCollisionInfo);
+extern void doSphere2Box(CColliderSphere* a_pSrcCollider, CColliderBox* a_pTarCollider, SCollisionResult& a_rCollisionInfo);
+extern void doSphere2Mesh(CColliderSphere* a_pSrcCollider, CColliderMesh* a_pTarCollider, SCollisionResult& a_rCollisionInfo);
 extern glm::vec3 ClosestPtPointTriangle(glm::vec3 p, glm::vec3 a, glm::vec3 b, glm::vec3 c);
-extern tbool TestSphereTriangle(CSphereCollider* a_rSphere, glm::vec3 a_vTriangleVectex1, glm::vec3 a_vTriangleVectex2, glm::vec3 ca_vTriangleVectex3, glm::vec3& a_vClosestPoint);
+extern tbool TestSphereTriangle(CColliderSphere* a_rSphere, glm::vec3 a_vTriangleVectex1, glm::vec3 a_vTriangleVectex2, glm::vec3 ca_vTriangleVectex3, glm::vec3& a_vClosestPoint);
 

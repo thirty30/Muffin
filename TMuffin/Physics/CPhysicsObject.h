@@ -6,7 +6,7 @@ private:
 	u64 m_nMuffinPhysicsObectGUID;
 	CGameObject* m_pGameObject;
 	CRigidBody* m_pRigidBody;
-	CBaseCollider* m_pCollider;
+	CColliderBase* m_pCollider;
 
 	friend class CPhysicsReactor;
 
@@ -18,7 +18,7 @@ public:
 	virtual ~CPhysicsObject();
 
 	CRigidBody* CreateRigidBody();
-	CBaseCollider* CreateCollider(EColliderType a_eType);
+	CColliderBase* CreateCollider(EColliderType a_eType);
 
 	void RefreshColliderPostion();
 	

@@ -1,53 +1,8 @@
 #include "pch.h"
 
-CBaseCollider::CBaseCollider()
+CColliderMesh::CColliderMesh() : CColliderBase(E_COLLIDER_TYPE_MESH)
 {
-	this->m_eColliderType = E_COLLIDER_TYPE_INIT;
-	this->m_vCenter = glm::vec3(0, 0, 0);
-	this->m_fElastic = 1.0f;
-	this->m_bIsTrigger = false;
-}
-
-//////////////////////////////////////////////////////////////
-
-CPlaneCollider::CPlaneCollider()
-{
-	this->m_eColliderType = E_COLLIDER_TYPE_PLANE;
-	this->m_eAxis = E_PLANE_COLLIDER_AXIS_INIT;
-	this->m_fPos = 0;
-}
-
-//////////////////////////////////////////////////////////////
-
-CSphereCollider::CSphereCollider()
-{
-	this->m_eColliderType = E_COLLIDER_TYPE_SPHERE;
-	this->m_fRadius = 1.0f;
-}
-
-void CSphereCollider::SetScale(glm::vec3 a_vScale)
-{
-	f32 fScale = 0;
-	fScale = glm::max(a_vScale.x, a_vScale.y);
-	fScale = glm::max(fScale, a_vScale.z);
-	this->m_fRadius *= fScale;
-}
-
-//////////////////////////////////////////////////////////////
-
-
-CBoxCollider::CBoxCollider()
-{
-	this->m_eColliderType = E_COLLIDER_TYPE_BOX;
-	this->m_vSize = glm::vec3(1.0f, 1.0f, 1.0f);
-}
-
-//////////////////////////////////////////////////////////////
-
-
-CMeshCollider::CMeshCollider()
-{
-	this->m_eColliderType = E_COLLIDER_TYPE_MESH;
+	this->m_nTriangleCount = 0;
 	this->m_pTriangleoArray = NULL;
 	this->m_vMinPoint = glm::vec3(0.0f, 0.0f, 0.0f);
 	this->m_vMaxPoint = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -60,9 +15,9 @@ CMeshCollider::CMeshCollider()
 	this->m_mapID2AABB.clear();
 }
 
-CMeshCollider::~CMeshCollider()
+CColliderMesh::~CColliderMesh()
 {
-	hash_map<u64, sMeshColliderBox*>::const_iterator iter = this->m_mapID2AABB.begin();
+	hash_map<u64, SMeshColliderBox*>::const_iterator iter = this->m_mapID2AABB.begin();
 	for (; iter != this->m_mapID2AABB.end(); iter++)
 	{
 		if (iter->second != NULL)
@@ -72,14 +27,14 @@ CMeshCollider::~CMeshCollider()
 	}
 }
 
-sMeshColliderBox* CMeshCollider::GetBoxByID(u64 a_nID)
+SMeshColliderBox* CColliderMesh::GetBoxByID(u64 a_nID)
 {
-	hash_map<u64, sMeshColliderBox*>::const_iterator iter = this->m_mapID2AABB.find(a_nID);
+	hash_map<u64, SMeshColliderBox*>::const_iterator iter = this->m_mapID2AABB.find(a_nID);
 	if (iter != this->m_mapID2AABB.end())
 	{
 		return iter->second;
 	}
-	sMeshColliderBox* pBox = new sMeshColliderBox();
+	SMeshColliderBox* pBox = new SMeshColliderBox();
 	u64 nMinXNum = a_nID / 100000000;
 	u64 nMinYNum = (a_nID - nMinXNum * 100000000) / 10000;
 	u64 nMinZNum = a_nID - nMinXNum * 100000000 - nMinYNum * 10000;
@@ -89,14 +44,14 @@ sMeshColliderBox* CMeshCollider::GetBoxByID(u64 a_nID)
 	return pBox;
 }
 
-sMeshColliderBox* CMeshCollider::FindBoxByPosition(glm::vec3 a_vPosition)
+SMeshColliderBox* CColliderMesh::FindBoxByPosition(glm::vec3 a_vPosition)
 {
 	glm::vec3 vOffsetPoint = a_vPosition - this->m_vMinPoint;
 	u64 nXNum = (u64)(vOffsetPoint.x / this->m_fXStep); if (nXNum == this->m_nXStepNum) { nXNum -= 1; }
 	u64 nYNum = (u64)(vOffsetPoint.y / this->m_fYStep); if (nYNum == this->m_nYStepNum) { nYNum -= 1; }
 	u64 nZNum = (u64)(vOffsetPoint.z / this->m_fZStep); if (nZNum == this->m_nZStepNum) { nZNum -= 1; }
 	u64 nID = nXNum * 100000000 + nYNum * 10000 + nZNum;
-	hash_map<u64, sMeshColliderBox*>::const_iterator iter = this->m_mapID2AABB.find(nID);
+	hash_map<u64, SMeshColliderBox*>::const_iterator iter = this->m_mapID2AABB.find(nID);
 	if (iter != this->m_mapID2AABB.end())
 	{
 		return iter->second;
@@ -104,17 +59,17 @@ sMeshColliderBox* CMeshCollider::FindBoxByPosition(glm::vec3 a_vPosition)
 	return NULL;
 }
 
-void CMeshCollider::InitColliderMesh(CMesh* a_pMesh)
+void CColliderMesh::InitColliderMesh(CMesh* a_pMesh)
 {
 	f32 fMinX = FLT_MAX, fMinY = FLT_MAX, fMinZ = FLT_MAX;
 	f32 fMaxX = FLT_MIN, fMaxY = FLT_MIN, fMaxZ = FLT_MIN;
 
 	this->m_nTriangleCount = a_pMesh->m_nTriangleCount;
-	this->m_pTriangleoArray = new sMeshColliderTriangle[this->m_nTriangleCount];
+	this->m_pTriangleoArray = new SMeshColliderTriangle[this->m_nTriangleCount];
 	for (n32 i = 0; i < this->m_nTriangleCount; i++)
 	{
 		SMeshTriangle* pTriangle = &a_pMesh->m_pTriangles[i];
-		sMeshColliderTriangle* pInfo = &this->m_pTriangleoArray[i];
+		SMeshColliderTriangle* pInfo = &this->m_pTriangleoArray[i];
 		pInfo->m_vPoint1.x = a_pMesh->m_pVertices[pTriangle->Vertex1].x + this->m_vCenter.x;
 		pInfo->m_vPoint1.y = a_pMesh->m_pVertices[pTriangle->Vertex1].y + this->m_vCenter.y;
 		pInfo->m_vPoint1.z = a_pMesh->m_pVertices[pTriangle->Vertex1].z + this->m_vCenter.z;
@@ -126,14 +81,10 @@ void CMeshCollider::InitColliderMesh(CMesh* a_pMesh)
 		pInfo->m_vPoint3.x = a_pMesh->m_pVertices[pTriangle->Vertex3].x + this->m_vCenter.x;
 		pInfo->m_vPoint3.y = a_pMesh->m_pVertices[pTriangle->Vertex3].y + this->m_vCenter.y;
 		pInfo->m_vPoint3.z = a_pMesh->m_pVertices[pTriangle->Vertex3].z + this->m_vCenter.z;
-		 
+
 		glm::vec3 vNormal1 = glm::normalize(pInfo->m_vPoint2 - pInfo->m_vPoint1);
 		glm::vec3 vNormal2 = glm::normalize(pInfo->m_vPoint3 - pInfo->m_vPoint1);
 		pInfo->m_vTriangleNormal = glm::normalize(glm::cross(vNormal1, vNormal2));
-
-		pInfo->m_nDebugIdx1 = pTriangle->Vertex1;
-		pInfo->m_nDebugIdx2 = pTriangle->Vertex2;
-		pInfo->m_nDebugIdx3 = pTriangle->Vertex3;
 
 		// separate mesh to AABB
 		if (pInfo->m_vPoint1.x < fMinX) { fMinX = pInfo->m_vPoint1.x; }
@@ -186,13 +137,13 @@ void CMeshCollider::InitColliderMesh(CMesh* a_pMesh)
 	for (n32 i = 0; i < this->m_nTriangleCount; i++)
 	{
 		n32 nTriangleIdx = i;
-		sMeshColliderTriangle& rInfo = this->m_pTriangleoArray[nTriangleIdx];
+		SMeshColliderTriangle& rInfo = this->m_pTriangleoArray[nTriangleIdx];
 		glm::vec3 vOffsetPoint1 = rInfo.m_vPoint1 - this->m_vMinPoint;
 		u64 nXNum1 = (u64)(vOffsetPoint1.x / this->m_fXStep); if (nXNum1 == this->m_nXStepNum) { nXNum1 -= 1; }
 		u64 nYNum1 = (u64)(vOffsetPoint1.y / this->m_fYStep); if (nYNum1 == this->m_nYStepNum) { nYNum1 -= 1; }
 		u64 nZNum1 = (u64)(vOffsetPoint1.z / this->m_fZStep); if (nZNum1 == this->m_nZStepNum) { nZNum1 -= 1; }
 		u64 nID1 = nXNum1 * 100000000 + nYNum1 * 10000 + nZNum1;
-		sMeshColliderBox* pBox = this->GetBoxByID(nID1);
+		SMeshColliderBox* pBox = this->GetBoxByID(nID1);
 		pBox->m_vecTriangleIdx.push_back(nTriangleIdx);
 
 		glm::vec3 vOffsetPoint2 = rInfo.m_vPoint2 - this->m_vMinPoint;
@@ -299,4 +250,3 @@ void CMeshCollider::InitColliderMesh(CMesh* a_pMesh)
 		}
 	}
 }
-

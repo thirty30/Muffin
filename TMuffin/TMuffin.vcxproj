@@ -44,7 +44,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Physics\CCollider.cpp" />
+    <ClCompile Include="Physics\CColliderBase.cpp" />
+    <ClCompile Include="Physics\CColliderBox.cpp" />
+    <ClCompile Include="Physics\CColliderCapsule.cpp" />
+    <ClCompile Include="Physics\CColliderMesh.cpp" />
+    <ClCompile Include="Physics\CColliderPlane.cpp" />
+    <ClCompile Include="Physics\CColliderSphere.cpp" />
     <ClCompile Include="Physics\CPhysicsReactor.cpp" />
     <ClCompile Include="Physics\CPhysicsObject.cpp" />
     <ClCompile Include="Physics\CRigidBody.cpp" />
@@ -76,10 +81,16 @@
     <ClInclude Include="Particle\CParticleEmitter.h" />
     <ClInclude Include="Particle\CParticleEmitterManager.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Physics\CCollider.h" />
+    <ClInclude Include="Physics\CColliderBase.h" />
+    <ClInclude Include="Physics\CColliderBox.h" />
+    <ClInclude Include="Physics\CColliderCapsule.h" />
+    <ClInclude Include="Physics\CColliderMesh.h" />
+    <ClInclude Include="Physics\CColliderSphere.h" />
     <ClInclude Include="Physics\CPhysicsReactor.h" />
     <ClInclude Include="Physics\CPhysicsObject.h" />
+    <ClInclude Include="Physics\CColliderPlane.h" />
     <ClInclude Include="Physics\CRigidBody.h" />
+    <ClInclude Include="Physics\PhysicsDef.h" />
     <ClInclude Include="Physics\PhysicsHelper.h" />
     <ClInclude Include="ResourceLoader\CResourceLoader.h" />
     <ClInclude Include="ShaderHelper\CShaderHelper.h" />

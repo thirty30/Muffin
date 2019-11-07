@@ -1,8 +1,8 @@
 #include "pch.h"
 
-void CalcColliderIsHit(CBaseCollider* a_pCollider1, CBaseCollider* a_pCollider2, SCollisionResult& a_rCollisionInfo)
+void CalcColliderIsHit(CColliderBase* a_pCollider1, CColliderBase* a_pCollider2, SCollisionResult& a_rCollisionInfo)
 {
-	switch (a_pCollider1->m_eColliderType)
+	switch (a_pCollider1->GetColliderType())
 	{
 	case E_COLLIDER_TYPE_PLANE:
 	{
@@ -10,21 +10,21 @@ void CalcColliderIsHit(CBaseCollider* a_pCollider1, CBaseCollider* a_pCollider2,
 	break;
 	case E_COLLIDER_TYPE_SPHERE:
 	{
-		if (a_pCollider2->m_eColliderType == E_COLLIDER_TYPE_PLANE)
+		if (a_pCollider2->GetColliderType() == E_COLLIDER_TYPE_PLANE)
 		{
-			doSphere2Plane((CSphereCollider*)a_pCollider1, (CPlaneCollider*)a_pCollider2, a_rCollisionInfo);
+			doSphere2Plane((CColliderSphere*)a_pCollider1, (CColliderPlane*)a_pCollider2, a_rCollisionInfo);
 		}
-		else if (a_pCollider2->m_eColliderType == E_COLLIDER_TYPE_SPHERE)
+		else if (a_pCollider2->GetColliderType() == E_COLLIDER_TYPE_SPHERE)
 		{
-			doSphere2Sphere((CSphereCollider*)a_pCollider1, (CSphereCollider*)a_pCollider2, a_rCollisionInfo);
+			doSphere2Sphere((CColliderSphere*)a_pCollider1, (CColliderSphere*)a_pCollider2, a_rCollisionInfo);
 		}
-		else if (a_pCollider2->m_eColliderType == E_COLLIDER_TYPE_BOX)
+		else if (a_pCollider2->GetColliderType() == E_COLLIDER_TYPE_BOX)
 		{
-			doSphere2Box((CSphereCollider*)a_pCollider1, (CBoxCollider*)a_pCollider2, a_rCollisionInfo);
+			doSphere2Box((CColliderSphere*)a_pCollider1, (CColliderBox*)a_pCollider2, a_rCollisionInfo);
 		}
-		else if (a_pCollider2->m_eColliderType == E_COLLIDER_TYPE_MESH)
+		else if (a_pCollider2->GetColliderType() == E_COLLIDER_TYPE_MESH)
 		{
-			doSphere2Mesh((CSphereCollider*)a_pCollider1, (CMeshCollider*)a_pCollider2, a_rCollisionInfo);
+			doSphere2Mesh((CColliderSphere*)a_pCollider1, (CColliderMesh*)a_pCollider2, a_rCollisionInfo);
 		}
 	}
 	break;
@@ -42,92 +42,92 @@ void CalcColliderIsHit(CBaseCollider* a_pCollider1, CBaseCollider* a_pCollider2,
 }
 
 
-void doSphere2Plane(CSphereCollider* a_pSrcCollider, CPlaneCollider* a_pTarCollider, SCollisionResult& a_rCollisionInfo)
+void doSphere2Plane(CColliderSphere* a_pSrcCollider, CColliderPlane* a_pTarCollider, SCollisionResult& a_rCollisionInfo)
 {
-	a_rCollisionInfo.m_vHitPoint = a_pSrcCollider->m_vCenter;
-	if (a_pTarCollider->m_eAxis == E_PLANE_COLLIDER_AXIS_X)
+	a_rCollisionInfo.m_vHitPoint = a_pSrcCollider->GetCenter();
+	if (a_pTarCollider->GetAxis() == E_PLANE_COLLIDER_AXIS_X)
 	{
-		a_rCollisionInfo.m_vHitPoint.x = a_pTarCollider->m_fPos;
+		a_rCollisionInfo.m_vHitPoint.x = a_pTarCollider->GetCenter().x;
 	}
-	else if (a_pTarCollider->m_eAxis == E_PLANE_COLLIDER_AXIS_Y)
+	else if (a_pTarCollider->GetAxis() == E_PLANE_COLLIDER_AXIS_Y)
 	{
-		a_rCollisionInfo.m_vHitPoint.y = a_pTarCollider->m_fPos;
+		a_rCollisionInfo.m_vHitPoint.y = a_pTarCollider->GetCenter().y;
 	}
-	else if (a_pTarCollider->m_eAxis == E_PLANE_COLLIDER_AXIS_Z)
+	else if (a_pTarCollider->GetAxis() == E_PLANE_COLLIDER_AXIS_Z)
 	{
-		a_rCollisionInfo.m_vHitPoint.z = a_pTarCollider->m_fPos;
+		a_rCollisionInfo.m_vHitPoint.z = a_pTarCollider->GetCenter().z;
 	}
-	f32 fHitDis = glm::distance(a_pSrcCollider->m_vCenter, a_rCollisionInfo.m_vHitPoint);
-	if (fHitDis <= a_pSrcCollider->m_fRadius)
+	f32 fHitDis = glm::distance(a_pSrcCollider->GetCenter(), a_rCollisionInfo.m_vHitPoint);
+	if (fHitDis <= a_pSrcCollider->GetRadius())
 	{
 		a_rCollisionInfo.m_bIsHit = true;
-		a_rCollisionInfo.m_fIntersectDis = a_pSrcCollider->m_fRadius - fHitDis;
-		a_rCollisionInfo.m_vHitNormal = glm::normalize(a_pSrcCollider->m_vCenter - a_rCollisionInfo.m_vHitPoint);
+		a_rCollisionInfo.m_fIntersectDis = a_pSrcCollider->GetRadius() - fHitDis;
+		a_rCollisionInfo.m_vHitNormal = glm::normalize(a_pSrcCollider->GetCenter() - a_rCollisionInfo.m_vHitPoint);
 	}
 }
 
-void doSphere2Sphere(CSphereCollider* a_pSrcCollider, CSphereCollider* a_pTarCollider, SCollisionResult& a_rCollisionInfo)
+void doSphere2Sphere(CColliderSphere* a_pSrcCollider, CColliderSphere* a_pTarCollider, SCollisionResult& a_rCollisionInfo)
 {
-	f32 fHitDis = glm::distance(a_pSrcCollider->m_vCenter, a_pTarCollider->m_vCenter);
-	if (fHitDis < a_pSrcCollider->m_fRadius + a_pTarCollider->m_fRadius)
+	f32 fHitDis = glm::distance(a_pSrcCollider->GetCenter(), a_pTarCollider->GetCenter());
+	if (fHitDis < a_pSrcCollider->GetRadius() + a_pTarCollider->GetRadius())
 	{
 		a_rCollisionInfo.m_bIsHit = true;
-		a_rCollisionInfo.m_vHitNormal = glm::normalize(a_pSrcCollider->m_vCenter - a_pTarCollider->m_vCenter);
-		glm::vec3 vBackDir = glm::normalize(a_pSrcCollider->m_vCenter - a_pTarCollider->m_vCenter);
-		glm::vec3 vBackPoint = a_pTarCollider->m_vCenter + vBackDir * (a_pSrcCollider->m_fRadius + a_pTarCollider->m_fRadius);
-		a_rCollisionInfo.m_fIntersectDis = glm::distance(a_pSrcCollider->m_vCenter, vBackPoint);
-		a_rCollisionInfo.m_vHitPoint = a_pTarCollider->m_vCenter + vBackDir * a_pTarCollider->m_fRadius;
+		a_rCollisionInfo.m_vHitNormal = glm::normalize(a_pSrcCollider->GetCenter() - a_pTarCollider->GetCenter());
+		glm::vec3 vBackDir = glm::normalize(a_pSrcCollider->GetCenter() - a_pTarCollider->GetCenter());
+		glm::vec3 vBackPoint = a_pTarCollider->GetCenter() + vBackDir * (a_pSrcCollider->GetRadius() + a_pTarCollider->GetRadius());
+		a_rCollisionInfo.m_fIntersectDis = glm::distance(a_pSrcCollider->GetCenter(), vBackPoint);
+		a_rCollisionInfo.m_vHitPoint = a_pTarCollider->GetCenter() + vBackDir * a_pTarCollider->GetRadius();
 	}
 }
 
-void doSphere2Box(CSphereCollider* a_pSrcCollider, CBoxCollider* a_pTarCollider, SCollisionResult& a_rCollisionInfo)
+void doSphere2Box(CColliderSphere* a_pSrcCollider, CColliderBox* a_pTarCollider, SCollisionResult& a_rCollisionInfo)
 {
 	glm::vec3 vMin = a_pTarCollider->GetMinPoint();
 	glm::vec3 vMax = a_pTarCollider->GetMaxPoint();
 	for (n32 i = 0; i < 3; i++) {
-		f32 v = a_pSrcCollider->m_vCenter[i];
+		f32 v = a_pSrcCollider->GetCenter()[i];
 		v = glm::max(v, vMin[i]);
 		v = glm::min(v, vMax[i]);
 		a_rCollisionInfo.m_vHitPoint[i] = v;
 	}
-	f32 fHitDis = glm::distance(a_pSrcCollider->m_vCenter, a_rCollisionInfo.m_vHitPoint);
-	if (fHitDis <= a_pSrcCollider->m_fRadius)
+	f32 fHitDis = glm::distance(a_pSrcCollider->GetCenter(), a_rCollisionInfo.m_vHitPoint);
+	if (fHitDis <= a_pSrcCollider->GetRadius())
 	{
 		a_rCollisionInfo.m_bIsHit = true;
-		a_rCollisionInfo.m_fIntersectDis = a_pSrcCollider->m_fRadius - fHitDis;
-		a_rCollisionInfo.m_vHitNormal = glm::normalize(a_pSrcCollider->m_vCenter - a_rCollisionInfo.m_vHitPoint);
+		a_rCollisionInfo.m_fIntersectDis = a_pSrcCollider->GetRadius() - fHitDis;
+		a_rCollisionInfo.m_vHitNormal = glm::normalize(a_pSrcCollider->GetCenter() - a_rCollisionInfo.m_vHitPoint);
 	}
 }
 
-void doSphere2Mesh(CSphereCollider* a_pSrcCollider, CMeshCollider* a_pTarCollider, SCollisionResult& a_rCollisionInfo)
+void doSphere2Mesh(CColliderSphere* a_pSrcCollider, CColliderMesh* a_pTarCollider, SCollisionResult& a_rCollisionInfo)
 {
 	glm::vec3 vMin = a_pTarCollider->m_vMinPoint;
 	glm::vec3 vMax = a_pTarCollider->m_vMaxPoint;
 	for (n32 i = 0; i < 3; i++) {
-		f32 v = a_pSrcCollider->m_vCenter[i];
+		f32 v = a_pSrcCollider->GetCenter()[i];
 		v = glm::max(v, vMin[i]);
 		v = glm::min(v, vMax[i]);
 		a_rCollisionInfo.m_vHitPoint[i] = v;
 	}
-	f32 fHitDis = glm::distance(a_pSrcCollider->m_vCenter, a_rCollisionInfo.m_vHitPoint);
-	if (fHitDis > a_pSrcCollider->m_fRadius)
+	f32 fHitDis = glm::distance(a_pSrcCollider->GetCenter(), a_rCollisionInfo.m_vHitPoint);
+	if (fHitDis > a_pSrcCollider->GetRadius())
 	{
 		return;
 	}
 
 	glm::vec3 vPoint = a_rCollisionInfo.m_vHitPoint;
-	if (a_pSrcCollider->m_vCenter.x < a_pTarCollider->m_vMaxPoint.x && a_pSrcCollider->m_vCenter.x > a_pTarCollider->m_vMinPoint.x)
+	if (a_pSrcCollider->GetCenter().x < a_pTarCollider->m_vMaxPoint.x && a_pSrcCollider->GetCenter().x > a_pTarCollider->m_vMinPoint.x)
 	{
-		if (a_pSrcCollider->m_vCenter.y < a_pTarCollider->m_vMaxPoint.y && a_pSrcCollider->m_vCenter.y > a_pTarCollider->m_vMinPoint.y)
+		if (a_pSrcCollider->GetCenter().y < a_pTarCollider->m_vMaxPoint.y && a_pSrcCollider->GetCenter().y > a_pTarCollider->m_vMinPoint.y)
 		{
-			if (a_pSrcCollider->m_vCenter.z < a_pTarCollider->m_vMaxPoint.z && a_pSrcCollider->m_vCenter.z > a_pTarCollider->m_vMinPoint.z)
+			if (a_pSrcCollider->GetCenter().z < a_pTarCollider->m_vMaxPoint.z && a_pSrcCollider->GetCenter().z > a_pTarCollider->m_vMinPoint.z)
 			{
-				vPoint = a_pSrcCollider->m_vCenter;
+				vPoint = a_pSrcCollider->GetCenter();
 			}
 		}
 	}
 
-	sMeshColliderBox* pMeshBox = a_pTarCollider->FindBoxByPosition(vPoint);
+	SMeshColliderBox* pMeshBox = a_pTarCollider->FindBoxByPosition(vPoint);
 	if (pMeshBox == NULL)
 	{
 		return;
@@ -136,14 +136,14 @@ void doSphere2Mesh(CSphereCollider* a_pSrcCollider, CMeshCollider* a_pTarCollide
 	for (n32 i = 0; i < pMeshBox->m_vecTriangleIdx.size(); i += 3)
 	{
 		n32 nIdx = pMeshBox->m_vecTriangleIdx[i];
-		sMeshColliderTriangle* pTriangle = &a_pTarCollider->m_pTriangleoArray[nIdx];
+		SMeshColliderTriangle* pTriangle = &a_pTarCollider->m_pTriangleoArray[nIdx];
 		tbool bCollided = TestSphereTriangle(a_pSrcCollider, pTriangle->m_vPoint1, pTriangle->m_vPoint2, pTriangle->m_vPoint3, a_rCollisionInfo.m_vHitPoint);
 		if (bCollided == true)
 		{
 			a_rCollisionInfo.m_bIsHit = true;
 			a_rCollisionInfo.m_vHitNormal = pTriangle->m_vTriangleNormal;
-			f32 fHitDis = glm::distance(a_pSrcCollider->m_vCenter, a_rCollisionInfo.m_vHitPoint);
-			a_rCollisionInfo.m_fIntersectDis = a_pSrcCollider->m_fRadius - fHitDis;
+			f32 fHitDis = glm::distance(a_pSrcCollider->GetCenter(), a_rCollisionInfo.m_vHitPoint);
+			a_rCollisionInfo.m_fIntersectDis = a_pSrcCollider->GetRadius() - fHitDis;
 			return;
 		}
 	}
@@ -217,13 +217,13 @@ glm::vec3 ClosestPtPointTriangle(glm::vec3 p, glm::vec3 a, glm::vec3 b, glm::vec
 	return u * a + v * b + w * c;
 }
 
-tbool TestSphereTriangle(CSphereCollider* a_rSphere, glm::vec3 a_vTriangleVectex1, glm::vec3 a_vTriangleVectex2, glm::vec3 ca_vTriangleVectex3, glm::vec3& a_vClosestPoint)
+tbool TestSphereTriangle(CColliderSphere* a_rSphere, glm::vec3 a_vTriangleVectex1, glm::vec3 a_vTriangleVectex2, glm::vec3 ca_vTriangleVectex3, glm::vec3& a_vClosestPoint)
 {
 	// Find point P on triangle ABC closest to sphere center
-	a_vClosestPoint = ClosestPtPointTriangle(a_rSphere->m_vCenter, a_vTriangleVectex1, a_vTriangleVectex2, ca_vTriangleVectex3);
+	a_vClosestPoint = ClosestPtPointTriangle(a_rSphere->GetCenter(), a_vTriangleVectex1, a_vTriangleVectex2, ca_vTriangleVectex3);
 
 	// Sphere and triangle intersect if the (squared) distance from sphere
 	// center to point p is less than the (squared) sphere radius
-	glm::vec3 vDis = a_vClosestPoint - a_rSphere->m_vCenter;
-	return glm::dot(vDis, vDis) <= a_rSphere->m_fRadius * a_rSphere->m_fRadius;
+	glm::vec3 vDis = a_vClosestPoint - a_rSphere->GetCenter();
+	return glm::dot(vDis, vDis) <= a_rSphere->GetRadius() * a_rSphere->GetRadius();
 }
