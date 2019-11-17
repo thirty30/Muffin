@@ -8,6 +8,7 @@ private:
 	CCameraControl* m_pCameraControl;
 	u64 m_nGUIDIdx;
 	hash_map<u64, CGameObject*> m_mapID2GameObj;
+	CSkyBox* m_pSkyBox;
 
 private:
 	u64 GenGUID();

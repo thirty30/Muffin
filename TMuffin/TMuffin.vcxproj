@@ -35,6 +35,9 @@
     <ClCompile Include="Graphics\CGraphicsRenderer.cpp" />
     <ClCompile Include="Light\CLight.cpp" />
     <ClCompile Include="Light\CLightManager.cpp" />
+    <ClCompile Include="Material\CMaterialBase.cpp" />
+    <ClCompile Include="Material\CMaterialDefault.cpp" />
+    <ClCompile Include="Material\CMaterialStandard.cpp" />
     <ClCompile Include="Mesh\CMesh.cpp" />
     <ClCompile Include="Particle\CParticle.cpp" />
     <ClCompile Include="Particle\CParticleEmitter.cpp" />
@@ -56,10 +59,8 @@
     <ClCompile Include="Physics\PhysicsHelper.cpp" />
     <ClCompile Include="ResourceLoader\CResourceLoader.cpp" />
     <ClCompile Include="ShaderHelper\CShaderHelper.cpp" />
-    <ClCompile Include="Texture\C24BitBMPpixel.cpp" />
-    <ClCompile Include="Texture\cBasicTextureManager.cpp" />
-    <ClCompile Include="Texture\CTextureFromBMP.cpp" />
-    <ClCompile Include="Texture\CTexutre.cpp" />
+    <ClCompile Include="SkyBox\CSkyBox.cpp" />
+    <ClCompile Include="Texture\CTexture.cpp" />
     <ClCompile Include="TMuffin.cpp" />
     <ClCompile Include="Window\CWindow.cpp" />
   </ItemGroup>
@@ -76,6 +77,9 @@
     <ClInclude Include="Graphics\CGraphicsRenderer.h" />
     <ClInclude Include="Light\CLight.h" />
     <ClInclude Include="Light\CLightManager.h" />
+    <ClInclude Include="Material\CMaterialBase.h" />
+    <ClInclude Include="Material\CMaterialDefault.h" />
+    <ClInclude Include="Material\CMaterialStandard.h" />
     <ClInclude Include="Mesh\CMesh.h" />
     <ClInclude Include="Particle\CParticle.h" />
     <ClInclude Include="Particle\CParticleEmitter.h" />
@@ -90,14 +94,12 @@
     <ClInclude Include="Physics\CPhysicsObject.h" />
     <ClInclude Include="Physics\CColliderPlane.h" />
     <ClInclude Include="Physics\CRigidBody.h" />
-    <ClInclude Include="Physics\PhysicsDef.h" />
+    <ClInclude Include="Physics\PhysicsDefine.h" />
     <ClInclude Include="Physics\PhysicsHelper.h" />
     <ClInclude Include="ResourceLoader\CResourceLoader.h" />
     <ClInclude Include="ShaderHelper\CShaderHelper.h" />
-    <ClInclude Include="Texture\C24BitBMPpixel.h" />
-    <ClInclude Include="Texture\cBasicTextureManager.h" />
-    <ClInclude Include="Texture\CTextureFromBMP.h" />
-    <ClInclude Include="Texture\CTexutre.h" />
+    <ClInclude Include="SkyBox\CSkyBox.h" />
+    <ClInclude Include="Texture\CTexture.h" />
     <ClInclude Include="TMuffin.h" />
     <ClInclude Include="Utility\CGUIDMaker.h" />
     <ClInclude Include="Window\CWindow.h" />
@@ -186,7 +188,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;TCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;FreeImage.lib;TCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy /y $(SolutionDir)Dependence\dll\x64\*.dll $(SolutionDir)bin_debug_x64</Command>
@@ -246,7 +248,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;TCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;FreeImage.lib;TCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy /y $(SolutionDir)Dependence\dll\x64\*.dll $(SolutionDir)bin_release_x64</Command>

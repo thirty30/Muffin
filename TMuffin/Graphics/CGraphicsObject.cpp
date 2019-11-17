@@ -4,9 +4,9 @@ CGraphicsObject::CGraphicsObject(CGameObject* a_pGameObject)
 {
 	this->m_nMuffinGraphicsObectGUID = MUFFIN.GetGUIDMaker()->GenerateGUID(E_GUID_TYPE_GRAPHICS_OBJECT);
 	this->m_pGameObject = a_pGameObject;
-	this->m_nShaderProgramID = 0;
 	this->m_pMeshDrawInfo = NULL;
 	this->m_nRenderMode = GL_FILL;
+	this->m_pMaterial = NULL;
 
 	MUFFIN.GetGraphicsRenderer()->AddObject(this);
 }
@@ -20,8 +20,13 @@ CGraphicsObject::~CGraphicsObject()
 	}
 }
 
-tbool CGraphicsObject::InitRenderer(const CMesh* a_pMesh, n32 a_nShaderProgramID)
+tbool CGraphicsObject::InitRenderer(const CMesh* a_pMesh, CMaterialBase* a_pMaterial)
 {
+	if (a_pMesh == NULL || a_pMaterial == NULL)
+	{
+		return false;
+	}
+	this->m_pMaterial = a_pMaterial;
 	this->m_pMeshDrawInfo = new CMeshDrawInfo();
 	this->m_pMeshDrawInfo->m_nVertexCount = a_pMesh->m_nVertexCount;
 	this->m_pMeshDrawInfo->m_pVertices = new SDrawVertex[this->m_pMeshDrawInfo->m_nVertexCount];
@@ -71,7 +76,7 @@ tbool CGraphicsObject::InitRenderer(const CMesh* a_pMesh, n32 a_nShaderProgramID
 		this->m_pMeshDrawInfo->m_pTriangleIndices[(i * 3) + 2] = pTriangel->Vertex3;
 	}
 
-	this->m_nShaderProgramID = a_nShaderProgramID;
+	n32 nShaderProgramID = this->m_pMaterial->GetShaderProgramID();
 	glGenVertexArrays(1, &(this->m_pMeshDrawInfo->m_nVAOID));	// Ask OpenGL for a new buffer ID
 	glBindVertexArray(this->m_pMeshDrawInfo->m_nVAOID);	// "Bind" this buffer: "make this the 'current' VAO buffer
 
@@ -86,10 +91,10 @@ tbool CGraphicsObject::InitRenderer(const CMesh* a_pMesh, n32 a_nShaderProgramID
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(u32) * this->m_pMeshDrawInfo->m_nTriangleIndexCount, (GLvoid*)this->m_pMeshDrawInfo->m_pTriangleIndices, GL_STATIC_DRAW);
 
 	// Set the vertex attributes.
-	GLint nPositionLocation = glGetAttribLocation(a_nShaderProgramID, "vPosition");
-	GLint nColorLocation = glGetAttribLocation(a_nShaderProgramID, "vColor");
-	GLint nNormalLocation = glGetAttribLocation(a_nShaderProgramID, "vNormal");
-	GLint nUVLocation = glGetAttribLocation(a_nShaderProgramID, "vUVx2");
+	GLint nPositionLocation = glGetAttribLocation(nShaderProgramID, "vPosition");
+	GLint nColorLocation = glGetAttribLocation(nShaderProgramID, "vColor");
+	GLint nNormalLocation = glGetAttribLocation(nShaderProgramID, "vNormal");
+	GLint nUVLocation = glGetAttribLocation(nShaderProgramID, "vUVx2");
 
 	// Set the vertex attributes for this shader
 	glEnableVertexAttribArray(nPositionLocation);
@@ -130,30 +135,20 @@ void CGraphicsObject::SetRenderMode(ERenderMode a_eMode)
 	}
 }
 
-void CGraphicsObject::SetColor(glm::vec4 a_vRGBA)
+void CGraphicsObject::LightPass()
 {
-	for (n32 i = 0; i < this->m_pMeshDrawInfo->m_nVertexCount; i++)
+	if (this->m_pMaterial == NULL)
 	{
-		this->m_pMeshDrawInfo->m_pVertices[i].r = a_vRGBA.r;
-		this->m_pMeshDrawInfo->m_pVertices[i].g = a_vRGBA.g;
-		this->m_pMeshDrawInfo->m_pVertices[i].b = a_vRGBA.b;
-		this->m_pMeshDrawInfo->m_pVertices[i].a = a_vRGBA.a;
+		return;
 	}
-
-	glBindBuffer(GL_ARRAY_BUFFER, this->m_pMeshDrawInfo->m_nVertexGLBufferID);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(SDrawVertex) * this->m_pMeshDrawInfo->m_nVertexCount, (GLvoid*)this->m_pMeshDrawInfo->m_pVertices, GL_STATIC_DRAW);
+	MUFFIN.GetLightMgr()->RenderLights(this->m_pMaterial->GetShaderProgramID());
 }
 
-void CGraphicsObject::SetDebugColor(n32 a_nIdx, glm::vec4 a_vRGBA)
+void CGraphicsObject::MaterialPass()
 {
-	this->m_pMeshDrawInfo->m_pVertices[a_nIdx].r = a_vRGBA.r;
-	this->m_pMeshDrawInfo->m_pVertices[a_nIdx].g = a_vRGBA.g;
-	this->m_pMeshDrawInfo->m_pVertices[a_nIdx].b = a_vRGBA.b;
-	this->m_pMeshDrawInfo->m_pVertices[a_nIdx].a = a_vRGBA.a;
-}
-
-void CGraphicsObject::RefreshDebugColor()
-{
-	glBindBuffer(GL_ARRAY_BUFFER, this->m_pMeshDrawInfo->m_nVertexGLBufferID);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(SDrawVertex) * this->m_pMeshDrawInfo->m_nVertexCount, (GLvoid*)this->m_pMeshDrawInfo->m_pVertices, GL_STATIC_DRAW);
+	if (this->m_pMaterial == NULL)
+	{
+		return;
+	}
+	this->m_pMaterial->RenderMaterial();
 }

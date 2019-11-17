@@ -6,10 +6,10 @@ private:
 	n32 m_nScreenWidth;
 	n32 m_nScreenHigh;
 	tstring m_strWindowName;
-	CShaderManager* m_pShaderMgr;
 	CScene* m_pScene;
 	EGameStatus m_eGameStatus;
 	CResourceManager* m_pResManager;
+	CRofManager* m_pRofManager;
 
 public:
 	static void PhysicsCallBack() { CGame::GetSingleton().PhysicsLoop(); }
@@ -27,7 +27,8 @@ public:
 	inline n32 GetScreenWidth() { return this->m_nScreenWidth; }
 	inline n32 GetScreenHigh() { return this->m_nScreenHigh; }
 	CScene* GetCurrentScene() { return this->m_pScene; }
-	CResourceManager* GetResourceManager() { return this->m_pResManager; };
+	CResourceManager* GetResourceManager() { return this->m_pResManager; }
+	CRofManager* GetRofManager() { return this->m_pRofManager; }
 	void PhysicsLoop();
 	void GameLogicLoop();
 };

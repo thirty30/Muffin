@@ -1,7 +1,7 @@
 #version 420
 
 //in variables
-in vec4 in_fColour;	
+flat in vec4 in_fColour;	
 in vec4 in_fNormal;
 in vec4 in_fVertWorldLocation;
 in vec4 in_fUVx2;
@@ -37,7 +37,7 @@ uniform sLight un_LightArray[80];
 
 void main()  
 {
-	vec3 vVertexMaterialColour = un_vDiffuseColour.rgb;
+	vec3 vVertexMaterialColour = in_fColour.rgb;
 	vec3 vVertexNormal = normalize(in_fNormal.xyz);
 	vec3 vVertexWorldPos = in_fVertWorldLocation.xyz;
 	vec4 vFinalObjectColour = vec4( 0.0f, 0.0f, 0.0f, 1.0f );

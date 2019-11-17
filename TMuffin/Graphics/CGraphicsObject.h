@@ -80,20 +80,19 @@ private:
 	friend class CGraphicsRenderer;
 
 public:
-	n32 m_nShaderProgramID;
 	CMeshDrawInfo* m_pMeshDrawInfo;
+	CMaterialBase* m_pMaterial;
 	n32 m_nRenderMode;
 
 public:
 	CGraphicsObject(CGameObject* a_pGameObject);
 	virtual ~CGraphicsObject();
 
-	tbool InitRenderer(const CMesh* a_pMesh, n32 a_nShaderProgramID);
+	tbool InitRenderer(const CMesh* a_pMesh, CMaterialBase* a_pMaterial);
 	void SetRenderMode(ERenderMode a_eMode);
-	void SetColor(glm::vec4 a_vRGBA);
 
-	void SetDebugColor(n32 a_nIdx, glm::vec4 a_vRGBA);
-	void RefreshDebugColor();
+	virtual void LightPass();
+	virtual void MaterialPass();
 };
 
 

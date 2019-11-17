@@ -65,23 +65,7 @@ void CPhysicsReactor::PhysicsLoop()
 	this->CalcCollision();
 
 	//4. callback
-	n32 nCount = this->m_vecCallBackArray.size();
-	for (n32 i = 0; i < nCount; i++)
-	{
-		SCollisionCallBackInfo* pInfo = this->m_vecCallBackArray[i];
-		SCollisionInfo rParm1;
-		rParm1.m_pTarget = pInfo->m_pTar;
-		rParm1.m_vHitPoint = pInfo->m_vHitPoint;
-		pInfo->m_pSrc->OnCollision(rParm1);
-
-		SCollisionInfo rParm2;
-		rParm2.m_pTarget = pInfo->m_pSrc;
-		rParm2.m_vHitPoint = pInfo->m_vHitPoint;
-		pInfo->m_pTar->OnCollision(rParm2);
-
-		delete pInfo;
-	}
-	this->m_vecCallBackArray.clear();
+	this->CollisionCallBack();
 }
 
 void CPhysicsReactor::CalcRigidBodyMotion()
@@ -186,5 +170,26 @@ void CPhysicsReactor::CalcCollision()
 			}
 		}
 	}
+}
+
+void CPhysicsReactor::CollisionCallBack()
+{
+	n32 nCount = this->m_vecCallBackArray.size();
+	for (n32 i = 0; i < nCount; i++)
+	{
+		SCollisionCallBackInfo* pInfo = this->m_vecCallBackArray[i];
+		SCollisionInfo rParm1;
+		rParm1.m_pTarget = pInfo->m_pTar;
+		rParm1.m_vHitPoint = pInfo->m_vHitPoint;
+		pInfo->m_pSrc->OnCollision(rParm1);
+
+		SCollisionInfo rParm2;
+		rParm2.m_pTarget = pInfo->m_pSrc;
+		rParm2.m_vHitPoint = pInfo->m_vHitPoint;
+		pInfo->m_pTar->OnCollision(rParm2);
+
+		delete pInfo;
+	}
+	this->m_vecCallBackArray.clear();
 }
 

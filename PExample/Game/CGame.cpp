@@ -7,8 +7,8 @@ CGame::CGame()
 	this->m_nScreenHigh = 900;
 	this->m_strWindowName = "pExample";
 	this->m_pResManager = NULL;
-	this->m_pShaderMgr = NULL;
 	this->m_pScene = NULL;
+	this->m_pRofManager = NULL;
 	this->m_eGameStatus = E_GAME_STATUS_INIT;
 }
 
@@ -25,17 +25,14 @@ tbool CGame::InitGame()
 	TMuffin_RegisterScrollCallback(ControlScrollEvent);
 	TMuffin_RegisterPhysicsCallBack(CGame::PhysicsCallBack);
 	TMuffin_RegisterGameLogicCallBack(CGame::GameLogicCallBack);
-
+	
 	if (TMuffin_Initialize(this->m_nScreenWidth, this->m_nScreenHigh, this->m_strWindowName.c_str()) == false)
 	{
 		return 0;
 	}
 
 	this->m_pResManager = new CResourceManager();
-	this->m_pResManager->Init();
-
-	this->m_pShaderMgr = new CShaderManager();
-	if (this->m_pShaderMgr->Init() == false)
+	if (this->m_pResManager->Init() == false)
 	{
 		return false;
 	}
@@ -45,6 +42,13 @@ tbool CGame::InitGame()
 	{
 		return false;
 	}
+
+	this->m_pRofManager = new CRofManager();
+	if (this->m_pRofManager->Init("../Assets/Rof/Binary/") == false)
+	{
+		return false;
+	}
+
 	return true;
 }
 
@@ -55,12 +59,6 @@ void CGame::ClearGame()
 	{
 		delete this->m_pResManager;
 		this->m_pResManager = NULL;
-	}
-	if (this->m_pShaderMgr != NULL)
-	{
-		this->m_pShaderMgr->Clear();
-		delete this->m_pShaderMgr;
-		this->m_pShaderMgr = NULL;
 	}
 	if (this->m_pScene != NULL)
 	{

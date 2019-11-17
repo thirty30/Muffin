@@ -111,12 +111,6 @@ tbool CResourceLoader::LoadModelFromPlyUV(const tcchar* a_strFileName, CMesh* a_
 
 tbool CResourceLoader::LoadTextureFromBMP(const tcchar* a_strFileName, CTexture* a_pTexture)
 {
-	cBasicTextureManager* pTextureMgr = new cBasicTextureManager();
 
-	if (pTextureMgr->Create2DTextureFromBMPFile(a_strFileName, true) == false)
-	{
-		return false;
-	}
-	GLint ID = pTextureMgr->getTextureIDFromName(a_strFileName);
 	return  true;
 }

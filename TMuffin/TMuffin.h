@@ -4,11 +4,12 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
-#include <glm/vec3.hpp>						// glm::vec3
+#include <glm/vec3.hpp>						// glm::v-ec3
 #include <glm/vec4.hpp>						// glm::vec4
 #include <glm/mat4x4.hpp>					// glm::mat4
 #include <glm/gtc/matrix_transform.hpp>		// glm::translate, glm::rotate, glm::scale, glm::perspective
 #include <glm/gtc/type_ptr.hpp>				// glm::value_ptr
+#include <FreeImage/FreeImage.h>
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -19,18 +20,21 @@
 #include "./Light/CLightManager.h"
 #include "./Mesh/CMesh.h"
 
-#include "./Texture/cBasicTextureManager.h"
-#include "./Texture/CTexutre.h"
+#include "./Texture/CTexture.h"
+#include "./Material/CMaterialBase.h"
+#include "./Material/CMaterialDefault.h"
+#include "./Material/CMaterialStandard.h"
 
 #include "./GameObject/CGameObject.h"
 #include "./GameObject/CGameObjectManager.h"
 #include "./Camera/CCamera.h"
 #include "./Camera/CCameraManager.h"
 #include "./Graphics/CGraphicsObject.h"
+#include "./SkyBox/CSkyBox.h"
 #include "./Graphics/CGraphicsRenderer.h"
 
 #include "./Physics/CRigidBody.h"
-#include "./Physics/PhysicsDef.h"
+#include "./Physics/PhysicsDefine.h"
 #include "./Physics/CColliderBase.h"
 #include "./Physics/CColliderPlane.h"
 #include "./Physics/CColliderSphere.h"

@@ -22,7 +22,7 @@ CParticleEmitter::CParticleEmitter()
 	this->m_nMinEmitCount = 0;
 	this->m_nMaxEmitCount = 0;
 	this->m_fEmitPeriod = 0;
-	this->m_nShaderID = 0;
+	this->m_pMaterial = NULL;
 	this->m_pMesh = NULL;
 }
 
@@ -40,7 +40,7 @@ void CParticleEmitter::InitializeEmitter()
 	{
 		CParticle* pParticle = new CParticle();
 		pParticle->SetEnable(false);
-		pParticle->InitRenderer(this->m_pMesh, this->m_nShaderID);
+		pParticle->InitRenderer(this->m_pMesh, this->m_pMaterial);
 		pParticle->SetRenderMode(E_RENDER_MODE_FILL);
 
 		TLinkedNode<CParticle>* pNode = new TLinkedNode<CParticle>(pParticle);
@@ -57,7 +57,7 @@ void CParticleEmitter::EmitParticle()
 		if (pNode == NULL)
 		{
 			CParticle* pParticle = new CParticle();
-			pParticle->InitRenderer(this->m_pMesh, this->m_nShaderID);
+			pParticle->InitRenderer(this->m_pMesh, this->m_pMaterial);
 			pParticle->SetRenderMode(E_RENDER_MODE_FILL);
 
 			pNode = new TLinkedNode<CParticle>(pParticle);
@@ -94,8 +94,6 @@ void CParticleEmitter::AwakeParticle(CParticle* a_pParticle)
 	vRGBA.g = TRandInRange(this->m_vMinColor.g, this->m_vMaxColor.g);
 	vRGBA.b = TRandInRange(this->m_vMinColor.b, this->m_vMaxColor.b);
 	vRGBA.a = TRandInRange(this->m_vMinColor.a, this->m_vMaxColor.a);
-
-	a_pParticle->SetColor(vRGBA);
 }
 
 void CParticleEmitter::Update()

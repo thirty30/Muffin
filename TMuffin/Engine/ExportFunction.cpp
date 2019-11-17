@@ -41,3 +41,8 @@ T_DLL_EXPORT CParticleEmitter* TMuffin_CreateParticleEmitter()
 {
 	return MUFFIN.GetParticleEmitterMgr()->CreateEmitter();
 }
+
+T_DLL_EXPORT void TMuffin_SetSkyBox(CSkyBox* a_pSkyBox)
+{
+	MUFFIN.GetGraphicsRenderer()->SetSkyBox(a_pSkyBox);
+}

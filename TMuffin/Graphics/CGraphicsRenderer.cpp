@@ -4,6 +4,7 @@
 CGraphicsRenderer::CGraphicsRenderer()
 {
 	this->m_mapID2GraphicsObj.clear();
+	this->m_pSkyBox = NULL;
 }
 
 CGraphicsRenderer::~CGraphicsRenderer()
@@ -36,6 +37,11 @@ CGraphicsObject* CGraphicsRenderer::FindObject(u64 a_nGUID)
 	return iter->second;
 }
 
+void CGraphicsRenderer::SetSkyBox(CSkyBox* a_pSkyBox)
+{
+	this->m_pSkyBox = a_pSkyBox;
+}
+
 void CGraphicsRenderer::GraphicsLoop()
 {
 	CCamera* pCamera = MUFFIN.GetCameraMgr()->GetTopCamera();
@@ -46,6 +52,8 @@ void CGraphicsRenderer::GraphicsLoop()
 	}
 	glm::mat4 matV = pCamera->GetView();
 	glm::mat4 matP = pCamera->GetPerspective();
+
+	this->RenderSkyBox(matV, matP);
 
 	hash_map<u64, CGraphicsObject*>::iterator iter = this->m_mapID2GraphicsObj.begin();
 	for (; iter != this->m_mapID2GraphicsObj.end(); iter++)
@@ -77,7 +85,7 @@ void CGraphicsRenderer::GraphicsLoop()
 		//glm::mat4 rotateZ = glm::rotate(glm::mat4(1.0f), glm::radians(pGameObj->m_vRotation.z), glm::vec3(0.0f, 0.0, 1.0f));
 		//matM *= rotateZ;
 
-		n32 nShaderProgramID = pGraphicsObj->m_nShaderProgramID;
+		n32 nShaderProgramID = pGraphicsObj->m_pMaterial->GetShaderProgramID();
 		glUseProgram(nShaderProgramID);
 
 		GLint nDiffuseColour = glGetUniformLocation(nShaderProgramID, "un_vDiffuseColour");
@@ -89,16 +97,8 @@ void CGraphicsRenderer::GraphicsLoop()
 		GLint nEyeLocation = glGetUniformLocation(nShaderProgramID, "un_vEyeLocation");
 		glUniform4f(nEyeLocation, pCamera->m_vPosition.x, pCamera->m_vPosition.y, pCamera->m_vPosition.z, 1.0f);
 
-		MUFFIN.GetLightMgr()->RenderLights(nShaderProgramID);
-
-		///////////////////////////////////////////////
-		//GLuint textureID = 1;
-		//glActiveTexture(GL_TEXTURE0);
-		//glBindTexture(GL_TEXTURE_2D, textureID);
-
-		//GLint nSampler01 = glGetUniformLocation(nShaderProgramID, "textSamp01");
-		//glUniform1i(nSampler01, 0);
-		///////////////////////////////////////////////
+		pGraphicsObj->LightPass();
+		pGraphicsObj->MaterialPass();
 
 		GLint matModel_UL = glGetUniformLocation(nShaderProgramID, "matModel");
 		GLint matView_UL = glGetUniformLocation(nShaderProgramID, "matView");
@@ -119,4 +119,49 @@ void CGraphicsRenderer::GraphicsLoop()
 		glDrawElements(GL_TRIANGLES, pDrawInfo->m_nTriangleIndexCount, GL_UNSIGNED_INT, NULL);
 		glBindVertexArray(0);
 	}
+}
+
+void CGraphicsRenderer::RenderSkyBox(glm::mat4 a_matV, glm::mat4 a_matP)
+{
+	if (this->m_pSkyBox == NULL)
+	{
+		return;
+	}
+
+	glm::mat4 matV = a_matV;
+	glm::mat4 matP = a_matP;
+	glm::mat4 matM = glm::mat4(1.0f);
+
+	glm::mat4 trans = glm::translate(glm::mat4(1.0f), this->m_pSkyBox->m_vPosition);
+	matM *= trans;
+
+	glm::mat4 rotation = glm::mat4(this->m_pSkyBox->m_qRotation);
+	matM *= rotation;
+
+	glm::mat4 scale = glm::scale(glm::mat4(1.0f), this->m_pSkyBox->m_vScale);
+	matM *= scale;
+
+	n32 nShaderProgramID = this->m_pSkyBox->m_nShaderID;
+	glUseProgram(nShaderProgramID);
+
+	this->m_pSkyBox->Render();
+
+	GLint matModel_UL = glGetUniformLocation(nShaderProgramID, "matModel");
+	GLint matView_UL = glGetUniformLocation(nShaderProgramID, "matView");
+	GLint matProj_UL = glGetUniformLocation(nShaderProgramID, "matProj");
+
+	GLint matModelIT_UL = glGetUniformLocation(nShaderProgramID, "matModelInverseTranspose");
+	glm::mat4 matModelInverseTranspose = glm::inverse(glm::transpose(matM));
+	glUniformMatrix4fv(matModelIT_UL, 1, GL_FALSE, glm::value_ptr(matModelInverseTranspose));
+
+	glUniformMatrix4fv(matModel_UL, 1, GL_FALSE, glm::value_ptr(matM));
+	glUniformMatrix4fv(matView_UL, 1, GL_FALSE, glm::value_ptr(matV));
+	glUniformMatrix4fv(matProj_UL, 1, GL_FALSE, glm::value_ptr(matP));
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	CMeshDrawInfo* pDrawInfo = this->m_pSkyBox->m_pMeshDrawInfo;
+	glBindVertexArray(pDrawInfo->m_nVAOID);
+	glDrawElements(GL_TRIANGLES, pDrawInfo->m_nTriangleIndexCount, GL_UNSIGNED_INT, NULL);
+	glBindVertexArray(0);
 }

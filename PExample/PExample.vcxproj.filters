@@ -2,17 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="CommonDefine.h" />
-    <ClInclude Include="ShaderManager\CShaderManager.h">
-      <Filter>ShaderManager</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Game\CGame.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Scene\CScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\CSceneManager.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Control\CCameraControl.h">
@@ -27,20 +21,26 @@
     <ClInclude Include="Actor\CActor.h">
       <Filter>Actor</Filter>
     </ClInclude>
+    <ClInclude Include="Rof\CRofManager.h">
+      <Filter>Rof</Filter>
+    </ClInclude>
+    <ClInclude Include="Rof\RofTable.h">
+      <Filter>Rof</Filter>
+    </ClInclude>
+    <ClInclude Include="Rof\TRofTableDefine.h">
+      <Filter>Rof</Filter>
+    </ClInclude>
+    <ClInclude Include="Rof\TRofTableSerializeDefine.h">
+      <Filter>Rof</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ShaderManager\CShaderManager.cpp">
-      <Filter>ShaderManager</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Game\CGame.cpp">
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Scene\CScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\CSceneManager.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Control\CCameraControl.cpp">
@@ -57,9 +57,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="ShaderManager">
-      <UniqueIdentifier>{7936c3bd-ba3c-4292-9b85-1a2528239189}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{025e6de1-a428-4057-b4ce-a40b4fed8db3}</UniqueIdentifier>
     </Filter>
@@ -74,6 +71,9 @@
     </Filter>
     <Filter Include="Actor">
       <UniqueIdentifier>{b9bc1205-f361-4c24-b2e9-bd2e90b00a84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rof">
+      <UniqueIdentifier>{ffb72b38-d09a-4473-9ac1-52fbaf330a7f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

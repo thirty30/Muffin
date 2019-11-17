@@ -18,4 +18,5 @@ public:
 	void PhysicsLoop();
 	void CalcRigidBodyMotion();
 	void CalcCollision();
+	void CollisionCallBack();
 };

@@ -28,7 +28,7 @@ public:
 	n32 m_nMinEmitCount;
 	n32 m_nMaxEmitCount;
 	f32 m_fEmitPeriod;
-	n32 m_nShaderID;
+	CMaterialBase* m_pMaterial;
 	CMesh* m_pMesh;
 
 public:

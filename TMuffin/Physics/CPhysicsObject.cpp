@@ -23,6 +23,15 @@ CPhysicsObject::~CPhysicsObject()
 	}
 }
 
+void CPhysicsObject::RefreshColliderPostion()
+{
+	if (this->m_pCollider == NULL)
+	{
+		return;
+	}
+	this->m_pCollider->SetCenter(this->m_pGameObject->m_vPosition);
+}
+
 CRigidBody* CPhysicsObject::CreateRigidBody()
 {
 	if (this->m_pRigidBody != NULL)
@@ -72,12 +81,14 @@ CColliderBase* CPhysicsObject::CreateCollider(EColliderType a_eType)
 	return this->m_pCollider;
 }
 
-void CPhysicsObject::RefreshColliderPostion()
+CRigidBody* CPhysicsObject::GetRigidBody()
 {
-	if (this->m_pCollider == NULL)
-	{
-		return;
-	}
-	this->m_pCollider->SetCenter(this->m_pGameObject->m_vPosition);
+	return this->m_pRigidBody;
 }
+
+CColliderBase* CPhysicsObject::GetCollider(EColliderType a_eType)
+{
+	return this->m_pCollider;
+}
+
 

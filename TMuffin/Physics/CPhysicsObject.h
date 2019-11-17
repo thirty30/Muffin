@@ -12,6 +12,7 @@ private:
 
 private:
 	virtual void OnCollision(SCollisionInfo& a_rCollision) {}
+	void RefreshColliderPostion();
 
 public:
 	CPhysicsObject(CGameObject* a_pGameObject);
@@ -20,6 +21,8 @@ public:
 	CRigidBody* CreateRigidBody();
 	CColliderBase* CreateCollider(EColliderType a_eType);
 
-	void RefreshColliderPostion();
-	
+	CRigidBody* GetRigidBody();
+	CColliderBase* GetCollider(EColliderType a_eType);
 };
+
+

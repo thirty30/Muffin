@@ -6,6 +6,12 @@ CCameraControl::CCameraControl()
 	this->m_bMidPress = false;
 	this->m_bReadyRotateCamera = false;
 	this->m_vLastCursor = glm::vec2(-1, -1);
+	
+	//this->m_fCameraYMoveSpeed = 100.2f;
+	//this->m_fCameraXMoveSpeed = 150.4f;
+	//this->m_fCameraRotationSpeed = 0.6f;
+	//this->m_fCameraScrollSpeed = 350.0f;
+
 	this->m_fCameraYMoveSpeed = 0.2f;
 	this->m_fCameraXMoveSpeed = 0.4f;
 	this->m_fCameraRotationSpeed = 0.6f;
@@ -20,54 +26,37 @@ CCameraControl::~CCameraControl()
 void CCameraControl::CameraControlKeyPress(n32 a_nKey, n32 a_nScancode, n32 a_nAction, n32 a_nMods)
 {
 	f32 fSpeed = 1.1f;
+	f32 testspeed = 20.0f;
 	switch (a_nKey)
 	{
 	case GLFW_KEY_W:
 	{
-		CCamera* pCamera = CGame::GetSingleton().GetCurrentScene()->GetCamera();
-		if (pCamera == NULL)
-		{
-			break;
-		}
+
 	}
 	break;
 	case GLFW_KEY_A:
 	{
-		CCamera* pCamera = CGame::GetSingleton().GetCurrentScene()->GetCamera();
-		if (pCamera == NULL)
-		{
-			break;
-		}
-		CParticleEmitter* pPar = CGame::GetSingleton().GetCurrentScene()->pTempParticle;
-		if (pPar == NULL)
-		{
-			break;
-		}
-		pPar->m_vPosition.x += 0.5f;
+
 	}
 	break;
 	case GLFW_KEY_S:
 	{
-		CCamera* pCamera = CGame::GetSingleton().GetCurrentScene()->GetCamera();
-		if (pCamera == NULL)
-		{
-			break;
-		}
+
 	}
 	break;
 	case GLFW_KEY_D:
 	{
-		CCamera* pCamera = CGame::GetSingleton().GetCurrentScene()->GetCamera();
-		if (pCamera == NULL)
-		{
-			break;
-		}
-		CParticleEmitter* pPar = CGame::GetSingleton().GetCurrentScene()->pTempParticle;
-		if (pPar == NULL)
-		{
-			break;
-		}
-		pPar->m_vPosition.x -= 0.5f;
+
+	}
+	break;
+	case GLFW_KEY_Q:
+	{
+
+	}
+	break;
+	case GLFW_KEY_E:
+	{
+
 	}
 	break;
 	default:
