@@ -36,6 +36,14 @@ enum EGUIDType
 	E_GUID_TYPE_MAX,
 };
 
+enum EParticleMode
+{
+	E_PARTICLE_MODE_UNKNOWN = 0,
+
+	E_PARTICLE_MODE_NORMAL,
+	E_PARTICLE_MODE_BILLBOARD,
+};
+
 typedef void (*MuffinKeyCallBack)(n32 a_nKey, n32 a_nScancode, n32 a_nAction, n32 a_nMods);
 typedef void (*MuffinMouseCallBack)(n32 a_nKey, n32 a_nAction, n32 a_nMods);
 typedef void (*MuffinCursorCallBack)(f64 a_fX, f64 a_fY);

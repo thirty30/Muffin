@@ -156,6 +156,8 @@ void CCameraControl::CameraControlCursor(f64 a_fX, f64 a_fY)
 			this->m_vLastCursor = vNowCursor;
 		}
 	}
+
+	CGame::GetSingleton().GetCurrentScene()->pParticle->SetCameraPosition(pCamera->m_vPosition);
 }
 
 void CCameraControl::CameraControlScroll(f64 a_fX, f64 a_fY)
@@ -173,6 +175,7 @@ void CCameraControl::CameraControlScroll(f64 a_fX, f64 a_fY)
 	{
 		pCamera->m_vPosition += -pCamera->m_vTowards * this->m_fCameraScrollSpeed;
 	}
+	CGame::GetSingleton().GetCurrentScene()->pParticle->SetCameraPosition(pCamera->m_vPosition);
 }
 
 

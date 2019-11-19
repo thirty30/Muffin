@@ -33,7 +33,7 @@ tbool CResourceManager::Init()
 	// Load Meshes
 	this->LoadMesh(E_MODEL_ID_CUBE, "../Assets/Models/Cube.ply");
 	this->LoadMesh(E_MODEL_ID_SPHERE, "../Assets/Models/Sphere.ply");
-	this->LoadMesh(E_MODEL_ID_TRIANGLE, "../Assets/Models/Triangel_Particle2.ply");
+	this->LoadMesh(E_MODEL_ID_TRIANGLE, "../Assets/Models/Triangel_Particle2UV.ply", true);
 	this->LoadMesh(E_MODEL_ID_SPHERE_UV, "../Assets/Models/SphereUV.ply", true);
 	this->LoadMesh(E_MODEL_ID_CUBE_UV, "../Assets/Models/CubeUV.ply", true);
 	this->LoadMesh(E_MODEL_ID_SKYBOX, "../Assets/Models/BaseModels/SkyBox.ply", true);
@@ -44,16 +44,19 @@ tbool CResourceManager::Init()
 	this->LoaderShader(E_SHADER_ID_STANDARD, "../Assets/shaders/StandardVertexShader.glsl", "../Assets/shaders/StandardFragmentShader.glsl");
 	this->LoaderShader(E_SHADER_ID_SKYBOX, "../Assets/shaders/SkyBoxVertexShader.glsl", "../Assets/shaders/SkyBoxFragmentShader.glsl");
 	this->LoaderShader(E_SHADER_ID_BUNNY, "../Assets/shaders/BunnyVertexShader.glsl", "../Assets/shaders/BunnyFragmentShader.glsl");
+	this->LoaderShader(E_SHADER_ID_BILLBOARD, "../Assets/shaders/BillBoardVertexShader.glsl", "../Assets/shaders/BillBoardFragmentShader.glsl");
 
 	// Load Texture
 	this->LoadTexture(E_TEXTURE_ID_TEST, "../Assets/Textures/leaf.png");
 	this->LoadTexture(E_TEXTURE_ID_TEST2, "../Assets/Textures/leaf2.png");
 	this->LoadTexture(E_TEXTURE_ID_CIRCLE, "../Assets/Textures/circle.png");
+	this->LoadTexture(E_TEXTURE_ID_TEST3, "../Assets/Textures/ring.png");
 
 	// Load Materials
 	this->LoadMaterial(E_MATERIAL_ID_DEFAULT, E_SHADER_ID_DEFAULT);
 	this->LoadMaterial(E_MATERIAL_ID_STANDARD, E_SHADER_ID_STANDARD);
 	this->LoadMaterial(E_MATERIAL_ID_BUNNY, E_SHADER_ID_BUNNY);
+	this->LoadMaterial(E_MATERIAL_ID_BILLBOARD, E_SHADER_ID_BILLBOARD);
 
 	return true;
 }
@@ -181,18 +184,15 @@ CMaterialBase* CResourceManager::LoadMaterial(EMaterialID a_eMaterialID, EShader
 		return pMaterial;
 	}
 
-	switch (a_eMaterialID)
+	if (a_eMaterialID == E_MATERIAL_ID_DEFAULT)
 	{
-	case E_MATERIAL_ID_DEFAULT:
 		pMaterial = new CMaterialDefault();
-		break;
-	case E_MATERIAL_ID_STANDARD:
-	case E_MATERIAL_ID_BUNNY:
-		pMaterial = new CMaterialStandard();
-		break;
-	default:
-		break;
 	}
+	else
+	{
+		pMaterial = new CMaterialStandard();
+	}
+
 	if (pMaterial == NULL)
 	{
 		return NULL;

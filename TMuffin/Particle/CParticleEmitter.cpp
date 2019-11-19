@@ -5,6 +5,9 @@ CParticleEmitter::CParticleEmitter()
 	this->m_nMuffinEngineGUID = 0;
 	this->m_bEnable = true;
 	this->m_fLastEmitTime = 0;
+	this->m_eMode = E_PARTICLE_MODE_NORMAL;
+	this->m_vCameraPos = glm::vec3(0.0f, 0.0f, 0.0f);
+	this->m_nEmittedCount = 0;
 
 	this->m_vPosition = glm::vec3(0.0f, 0.0f, 0.0f);
 	this->m_vMinScale = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -22,6 +25,7 @@ CParticleEmitter::CParticleEmitter()
 	this->m_nMinEmitCount = 0;
 	this->m_nMaxEmitCount = 0;
 	this->m_fEmitPeriod = 0;
+	this->m_bIsPeriod = true;
 	this->m_pMaterial = NULL;
 	this->m_pMesh = NULL;
 }
@@ -111,6 +115,14 @@ void CParticleEmitter::Update()
 		pCurParticle->m_vPosition += vDis;
 		pCurParticle->m_vVelocity += pCurParticle->m_vAcceleration * fDeltaTime;
 		pCurParticle->m_fLifeTime -= fDeltaTime;
+
+		// Bill Board
+		if (this->m_eMode == E_PARTICLE_MODE_BILLBOARD)
+		{
+			f32 fAngle = glm::atan(pCurParticle->m_vPosition.x - this->m_vCameraPos.x, pCurParticle->m_vPosition.z - this->m_vCameraPos.z);
+			pCurParticle->SetRotation(glm::vec3(0.0f, fAngle, 0.0f));
+		}
+
 		if (pCurParticle->m_fLifeTime <= 0)
 		{
 			pCurParticle->SetEnable(false);
@@ -129,5 +141,15 @@ void CParticleEmitter::Update()
 	}
 	this->m_fLastEmitTime = MUFFIN.GetNowFrameTime();
 	this->EmitParticle();
+}
+
+void CParticleEmitter::SetParticleMode(EParticleMode a_eMode)
+{
+	this->m_eMode = a_eMode;
+}
+
+void CParticleEmitter::SetCameraPosition(glm::vec3 a_vPosition)
+{
+	this->m_vCameraPos = a_vPosition;
 }
 

@@ -8,7 +8,7 @@ CScene::CScene()
 	this->m_nGUIDIdx = 0;
 	this->m_pSkyBox = NULL;
 
-	this->pTempParticle = NULL;
+	this->pParticle = NULL;
 	this->m_fLastTime = 0;
 }
 
@@ -39,7 +39,7 @@ tbool CScene::LoadScene()
 	//this->m_pCamera->m_vPosition = glm::vec3(0, 5, -10);
 	//this->m_pCamera->m_vTowards = glm::normalize(glm::vec3(0.0f, -0.8f, 1.0f));
 
-	this->m_pCamera->m_vPosition = glm::vec3(0, 0, -200);
+	this->m_pCamera->m_vPosition = glm::vec3(0, 0, -20);
 	this->m_pCamera->m_vTowards = glm::normalize(glm::vec3(0.0f, 0.0f, 1.0f));
 	TMuffin_AddCamera(this->m_pCamera);
 
@@ -75,27 +75,33 @@ tbool CScene::LoadScene()
 	//pPointLight1->m_fLinear = 0.01f;
 	//pPointLight1->m_fDistanceCutOff = 1000.0f;
 
-	for (n32 i = 0; i < 10; i++)
-	{
-		CActor* pBunny = new CActor();
-		CMaterialStandard* pMaterial = (CMaterialStandard*)CGame::GetSingleton().GetResourceManager()->FindMaterial(E_MATERIAL_ID_BUNNY);
-		CTexture* pTexture = CGame::GetSingleton().GetResourceManager()->FindTexture(E_TEXTURE_ID_CIRCLE);
-		pMaterial->AddTexture(pTexture);
-		pTexture = CGame::GetSingleton().GetResourceManager()->FindTexture(E_TEXTURE_ID_TEST2);
-		pMaterial->AddTexture(pTexture);
-		pBunny->InitRenderer(pMeshBunnyUV, pMaterial);
-		pBunny->m_vPosition = glm::vec3(0.0f, 0.0f, i * 30.0f);
-	}
+	CMaterialStandard* pMaterial = (CMaterialStandard*)CResourceManager::GetSingleton().FindMaterial(E_MATERIAL_ID_BILLBOARD);
+	CTexture* pTexture = CResourceManager::GetSingleton().FindTexture(E_TEXTURE_ID_TEST3);
+	pMaterial->AddTexture(pTexture);
 
-	CActor* pActor = new CActor();
-	CMaterialStandard* pMaterial = (CMaterialStandard*)CGame::GetSingleton().GetResourceManager()->FindMaterial(E_MATERIAL_ID_STANDARD);
-	CTexture* pTexture = CGame::GetSingleton().GetResourceManager()->FindTexture(E_TEXTURE_ID_TEST);
-	pMaterial->AddTexture(pTexture);
-	pTexture = CGame::GetSingleton().GetResourceManager()->FindTexture(E_TEXTURE_ID_TEST2);
-	pMaterial->AddTexture(pTexture);
-	pActor->InitRenderer(pMeshSphereUV, pMaterial);
-	pActor->m_vPosition = glm::vec3(0.0f, 0.0f, 400.0f);
-	pActor->m_vScale = glm::vec3(150.0f, 150.0f, 150.0f);
+	pParticle = TMuffin_CreateParticleEmitter();
+	pParticle->m_vPosition = glm::vec3(0, 0, 0);
+	pParticle->m_vMinScale = glm::vec3(1.0f, 1.0f, 1.0f);
+	pParticle->m_vMaxScale = glm::vec3(1.0f, 1.0f, 1.0f);
+	pParticle->m_vMinAcceleration = glm::vec3(0.0f, 0.0f, 0.0f);
+	pParticle->m_vMaxAcceleration = glm::vec3(0.0f, 0.0f, 0.0f);
+	pParticle->m_vMinVelocity = glm::vec3(-2.0f, -2.0f, -2.0f);
+	pParticle->m_vMaxVelocity = glm::vec3(2.0f, 2.0f, 2.0f);
+	pParticle->m_vMinDeltaPosition = glm::vec3(0.0f, 0.0f, 0.0f);
+	pParticle->m_vMaxDeltaPosition = glm::vec3(0.0f, 0.0f, 0.0f);
+	pParticle->m_vMinColor = glm::vec4(0.9f, 0.39f, 0.13f, 1.0f);
+	pParticle->m_vMaxColor = glm::vec4(0.9f, 0.129f, 0.058f, 1.0f);
+	pParticle->m_fMinLifeTime = 5.0f;
+	pParticle->m_fMaxLifeTime = 5.0f;
+	pParticle->m_nMinEmitCount = 10;
+	pParticle->m_nMaxEmitCount = 20;
+	pParticle->m_fEmitPeriod = 0.5f;
+	pParticle->m_pMesh = pMeshTriangle;
+	pParticle->m_pMaterial = pMaterial;
+	pParticle->SetParticleMode(E_PARTICLE_MODE_BILLBOARD);
+	pParticle->SetCameraPosition(this->m_pCamera->m_vPosition);
+	pParticle->InitializeEmitter();
+	//pParticle->m_bEnable = false;
 
 	return true;
 }

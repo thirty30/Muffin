@@ -23,6 +23,7 @@ enum EShaderID
 	E_SHADER_ID_STANDARD,
 	E_SHADER_ID_SKYBOX,
 	E_SHADER_ID_BUNNY,
+	E_SHADER_ID_BILLBOARD,
 
 	E_SHADER_ID_MAX,
 };
@@ -34,6 +35,7 @@ enum EMaterialID
 	E_MATERIAL_ID_DEFAULT,
 	E_MATERIAL_ID_STANDARD,
 	E_MATERIAL_ID_BUNNY,
+	E_MATERIAL_ID_BILLBOARD,
 };
 
 enum ETextureID
@@ -44,6 +46,7 @@ enum ETextureID
 
 	E_TEXTURE_ID_TEST, //"../Assets/Textures/leaf.png"
 	E_TEXTURE_ID_TEST2, //"../Assets/Textures/leaf2.png"
+	E_TEXTURE_ID_TEST3, //"../Assets/Textures/ring.png"
 };
 
 enum EGameStatus

@@ -26,7 +26,7 @@ public:
 	void AddGameObject();
 
 public:	
-	CParticleEmitter* pTempParticle;
+	CParticleEmitter* pParticle;
 	f64 m_fLastTime;
 };
 

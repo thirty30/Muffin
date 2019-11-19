@@ -37,3 +37,4 @@ bin_release_x64/TMuffin.iobj
 bin_release_x64/TMuffin.ipdb
 bin_release_x64/TMuffin.lib
 bin_release_x64/TMuffin.pdb
+bin_debug_x64/FreeImage.dll

@@ -7,6 +7,9 @@ private:
 	TLinkedList<CParticle> m_objFreeList;
 	TLinkedList<CParticle> m_objEmittedList;
 	f64 m_fLastEmitTime;
+	EParticleMode m_eMode;
+	glm::vec3 m_vCameraPos;
+	u32 m_nEmittedCount;
 	
 public:
 	friend class CParticleEmitterManager;
@@ -28,6 +31,7 @@ public:
 	n32 m_nMinEmitCount;
 	n32 m_nMaxEmitCount;
 	f32 m_fEmitPeriod;
+	tbool m_bIsPeriod;
 	CMaterialBase* m_pMaterial;
 	CMesh* m_pMesh;
 
@@ -39,6 +43,9 @@ public:
 	void EmitParticle();
 	void AwakeParticle(CParticle* a_pParticle);
 	void Update();
+
+	void SetParticleMode(EParticleMode a_eMode);
+	void SetCameraPosition(glm::vec3 a_vPosition);
 };
 
 
