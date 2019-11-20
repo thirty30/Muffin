@@ -46,6 +46,8 @@ public:
 
 	void SetParticleMode(EParticleMode a_eMode);
 	void SetCameraPosition(glm::vec3 a_vPosition);
+
+	void Reset();
 };
 
 

@@ -44,12 +44,11 @@ void main()
 	{
 		vec3 color = texture( un_Samplers[0], in_fUVx2.st ).rgb;
 		float grey = (color.r + color.g + color.b) / 3.0f;
-		if (color.r < 0.1f)
+		if ((color.r + color.g + color.b) < 0.1f)
 		{	
-			
-			//discard;
+			discard;
 		}
-		out_pixelColour.a = grey;
+		//out_pixelColour.a = grey;
 		vVertexMaterialColour = color;
 	}
 	out_pixelColour.rgb = vVertexMaterialColour.rgb;

@@ -54,6 +54,10 @@ void CParticleEmitter::InitializeEmitter()
 
 void CParticleEmitter::EmitParticle()
 {
+	if (this->m_bIsPeriod == false && this->m_nEmittedCount > 0)
+	{
+		return;
+	}
 	n32 nParticleNum = TRandInRange(this->m_nMinEmitCount, this->m_nMaxEmitCount);
 	for (n32 i = 0; i < nParticleNum; i++)
 	{
@@ -69,6 +73,7 @@ void CParticleEmitter::EmitParticle()
 		this->AwakeParticle(pNode->m_pValue);
 		this->m_objEmittedList.PushBack(pNode);
 	}
+	this->m_nEmittedCount++;
 }
 
 void CParticleEmitter::AwakeParticle(CParticle* a_pParticle)
@@ -98,6 +103,8 @@ void CParticleEmitter::AwakeParticle(CParticle* a_pParticle)
 	vRGBA.g = TRandInRange(this->m_vMinColor.g, this->m_vMaxColor.g);
 	vRGBA.b = TRandInRange(this->m_vMinColor.b, this->m_vMaxColor.b);
 	vRGBA.a = TRandInRange(this->m_vMinColor.a, this->m_vMaxColor.a);
+
+	this->m_pMaterial->SetColor(vRGBA);
 }
 
 void CParticleEmitter::Update()
@@ -151,5 +158,11 @@ void CParticleEmitter::SetParticleMode(EParticleMode a_eMode)
 void CParticleEmitter::SetCameraPosition(glm::vec3 a_vPosition)
 {
 	this->m_vCameraPos = a_vPosition;
+}
+
+void CParticleEmitter::Reset()
+{
+	this->m_fLastEmitTime = 0;
+	this->m_nEmittedCount = 0;
 }
 
