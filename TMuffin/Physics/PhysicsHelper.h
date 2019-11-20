@@ -22,12 +22,16 @@ struct SCollisionCallBackInfo
 	CPhysicsObject* m_pSrc;
 	CPhysicsObject* m_pTar;
 	glm::vec3 m_vHitPoint;
+	glm::vec3 m_vHitNormal;
+	f32 m_fIntersectDis;
 };
 
 struct SCollisionInfo
 {
 	CPhysicsObject* m_pTarget;
+	glm::vec3 m_vHitNormal;
 	glm::vec3 m_vHitPoint;
+	f32 m_fIntersectDis;
 };
 
 extern void CalcColliderIsHit(CColliderBase* a_pCollider1, CColliderBase* a_pCollider2, SCollisionResult& a_rCollisionInfo);

@@ -9,6 +9,7 @@
 #include <glm/mat4x4.hpp>					// glm::mat4
 #include <glm/gtc/matrix_transform.hpp>		// glm::translate, glm::rotate, glm::scale, glm::perspective
 #include <glm/gtc/type_ptr.hpp>				// glm::value_ptr
+#include <glm/gtx/vector_angle.hpp>
 #include <FreeImage/FreeImage.h>
 
 ///////////////////////////////////////////////////////////////////////////////////////

@@ -6,6 +6,7 @@ public:
 	tbool m_bUseGravity;
 	glm::vec3 m_vGravity;
 	f32 m_fMass;
+	glm::vec3 m_vForce;
 	tbool m_bIsPassive; // If true it cannot move in physics frame
 
 	glm::vec3 m_vVelocity;
@@ -16,7 +17,8 @@ public:
 	{
 		this->m_bUseGravity = true;
 		this->m_vGravity = GRAVITY_ACCELERATION;
-		this->m_fMass = 0;
+		this->m_fMass = 1.0f;
+		this->m_vForce = glm::vec3(0, 0, 0);
 		this->m_bIsPassive = true;
 
 		this->m_vVelocity = glm::vec3(0 ,0, 0);

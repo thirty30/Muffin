@@ -21,20 +21,30 @@ void CGameObject::SetRotation(glm::vec3 a_vEulerAngle)
 {
 	glm::vec3 vAngle;
 	vAngle.x = glm::radians(a_vEulerAngle.x);
-	vAngle.z = glm::radians(a_vEulerAngle.y);
-	vAngle.y = glm::radians(a_vEulerAngle.z);
+	vAngle.y = glm::radians(a_vEulerAngle.y);
+	vAngle.z = glm::radians(a_vEulerAngle.z);
 
-	this->m_qRotation = glm::quat(a_vEulerAngle);
+	this->m_qRotation = glm::quat(vAngle);
+}
+
+void CGameObject::SetRotation(glm::quat a_quat)
+{
+	this->m_qRotation = a_quat;
 }
 
 void CGameObject::UpdateRotation(glm::vec3 a_vEulerAngle)
 {
 	glm::vec3 vAngle;
 	vAngle.x = glm::radians(a_vEulerAngle.x);
-	vAngle.z = glm::radians(a_vEulerAngle.y);
-	vAngle.y = glm::radians(a_vEulerAngle.z);
+	vAngle.y = glm::radians(a_vEulerAngle.y);
+	vAngle.z = glm::radians(a_vEulerAngle.z);
 
 	this->m_qRotation *= glm::quat(vAngle);
+}
+
+void CGameObject::UpdateRotation(glm::quat a_quat)
+{
+	this->m_qRotation *= a_quat;
 }
 
 glm::vec3 CGameObject::GetEulerAngle()

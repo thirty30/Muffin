@@ -85,6 +85,7 @@ void CPhysicsReactor::CalcRigidBodyMotion()
 		{
 			continue;
 		}
+		pRigidBody->m_vAccel = pRigidBody->m_vForce / pRigidBody->m_fMass;
 		glm::vec3 vNewAccel = pRigidBody->m_bUseGravity == true ? (pRigidBody->m_vGravity + pRigidBody->m_vAccel) : pRigidBody->m_vAccel;
 		// S = vt + (1/2)at2
 		glm::vec3 vDis = pRigidBody->m_vVelocity * fDeltaTime + 0.5f * vNewAccel * fDeltaTime * fDeltaTime;
@@ -142,6 +143,8 @@ void CPhysicsReactor::CalcCollision()
 			pCallBack->m_pSrc = pSrcPhysicsObj;
 			pCallBack->m_pTar = pTarPhysicsObj;
 			pCallBack->m_vHitPoint = rCollisionInfo.m_vHitPoint;
+			pCallBack->m_vHitNormal = rCollisionInfo.m_vHitNormal;
+			pCallBack->m_fIntersectDis = rCollisionInfo.m_fIntersectDis;
 			this->m_vecCallBackArray.push_back(pCallBack);
 
 			if (pSrcBC->IsTrigger() == true || pTarBC->IsTrigger() == true)
@@ -181,11 +184,15 @@ void CPhysicsReactor::CollisionCallBack()
 		SCollisionInfo rParm1;
 		rParm1.m_pTarget = pInfo->m_pTar;
 		rParm1.m_vHitPoint = pInfo->m_vHitPoint;
+		rParm1.m_vHitNormal = pInfo->m_vHitNormal;
+		rParm1.m_fIntersectDis = pInfo->m_fIntersectDis;
 		pInfo->m_pSrc->OnCollision(rParm1);
 
 		SCollisionInfo rParm2;
 		rParm2.m_pTarget = pInfo->m_pSrc;
 		rParm2.m_vHitPoint = pInfo->m_vHitPoint;
+		rParm2.m_vHitNormal = pInfo->m_vHitNormal;
+		rParm2.m_fIntersectDis = pInfo->m_fIntersectDis;
 		pInfo->m_pTar->OnCollision(rParm2);
 
 		delete pInfo;
