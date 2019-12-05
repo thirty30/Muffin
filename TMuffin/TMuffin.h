@@ -16,6 +16,7 @@
 
 #include "./CommonDefine.h"
 #include "./Utility/CGUIDMaker.h"
+#include "./Utility/Utility.h"
 #include "./ShaderHelper/CShaderHelper.h"
 #include "./Light/CLight.h"
 #include "./Light/CLightManager.h"
@@ -49,6 +50,13 @@
 #include "./Particle/CParticle.h"
 #include "./Particle/CParticleEmitter.h"
 #include "./Particle/CParticleEmitterManager.h"
+
+#include "./LineTween/CLineTween.h"
+#include "./LineTween/CLineTweenMove.h"
+#include "./LineTween/CLineTweenScale.h"
+#include "./LineTween/CLineTweenRotation.h"
+#include "./LineTween/CLineTweenCurve.h"
+#include "./LineTween/CLineTweenFollow.h"
 
 #include "./Window/CWindow.h"
 #include "./ResourceLoader/CResourceLoader.h"

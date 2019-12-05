@@ -12,5 +12,6 @@ public:
 	void AddObject(CGameObject* a_pGameObject);
 	CGameObject* FindObject(u64 a_nGUID);
 	void RemoveObject(CGameObject* a_pGameObject);
+	void Update();
 };
 

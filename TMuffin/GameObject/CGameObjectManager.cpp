@@ -35,4 +35,17 @@ void CGameObjectManager::RemoveObject(CGameObject* a_pGameObject)
 	this->m_mapID2GameObj.erase(nGUID);
 }
 
+void CGameObjectManager::Update()
+{
+	hash_map<u64, CGameObject*>::iterator iter = this->m_mapID2GameObj.begin();
+	for (; iter != this->m_mapID2GameObj.end(); iter++)
+	{
+		CGameObject* pObj = iter->second;
+		if (pObj == NULL)
+		{
+			continue;
+		}
+		pObj->Update();
+	}
+}
 

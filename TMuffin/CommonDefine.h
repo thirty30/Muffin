@@ -44,6 +44,18 @@ enum EParticleMode
 	E_PARTICLE_MODE_BILLBOARD,
 };
 
+enum ELineTweenType
+{
+	E_LINETWEEN_TYPE_INIT = 0,
+
+	E_LINETWEEN_TYPE_MOVE_TO,
+	E_LINETWEEN_TYPE_SCALE_TO,
+	E_LINETWEEN_TYPE_ROTATE_TO,
+	E_LINETWEEN_TYPE_CURVE,
+	E_LINETWEEN_TYPE_FOLLOW,
+
+};
+
 typedef void (*MuffinKeyCallBack)(n32 a_nKey, n32 a_nScancode, n32 a_nAction, n32 a_nMods);
 typedef void (*MuffinMouseCallBack)(n32 a_nKey, n32 a_nAction, n32 a_nMods);
 typedef void (*MuffinCursorCallBack)(f64 a_fX, f64 a_fY);

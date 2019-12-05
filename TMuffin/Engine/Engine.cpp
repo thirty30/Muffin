@@ -47,6 +47,7 @@ void MuffinGameLogicLoop()
 	{
 		pExternalGameLogicCallBack();
 	}
+	MUFFIN.GetGameObjectMgr()->Update();
 }
 
 void MuffinRenderingLoop()

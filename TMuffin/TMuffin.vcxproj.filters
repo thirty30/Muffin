@@ -104,6 +104,21 @@
     <ClCompile Include="SkyBox\CSkyBox.cpp">
       <Filter>SkyBox</Filter>
     </ClCompile>
+    <ClCompile Include="LineTween\CLineTweenMove.cpp">
+      <Filter>LineTween</Filter>
+    </ClCompile>
+    <ClCompile Include="LineTween\CLineTweenScale.cpp">
+      <Filter>LineTween</Filter>
+    </ClCompile>
+    <ClCompile Include="LineTween\CLineTweenRotation.cpp">
+      <Filter>LineTween</Filter>
+    </ClCompile>
+    <ClCompile Include="LineTween\CLineTweenCurve.cpp">
+      <Filter>LineTween</Filter>
+    </ClCompile>
+    <ClCompile Include="LineTween\CLineTweenFollow.cpp">
+      <Filter>LineTween</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -214,6 +229,27 @@
     <ClInclude Include="SkyBox\CSkyBox.h">
       <Filter>SkyBox</Filter>
     </ClInclude>
+    <ClInclude Include="LineTween\CLineTween.h">
+      <Filter>LineTween</Filter>
+    </ClInclude>
+    <ClInclude Include="LineTween\CLineTweenMove.h">
+      <Filter>LineTween</Filter>
+    </ClInclude>
+    <ClInclude Include="LineTween\CLineTweenScale.h">
+      <Filter>LineTween</Filter>
+    </ClInclude>
+    <ClInclude Include="LineTween\CLineTweenRotation.h">
+      <Filter>LineTween</Filter>
+    </ClInclude>
+    <ClInclude Include="LineTween\CLineTweenCurve.h">
+      <Filter>LineTween</Filter>
+    </ClInclude>
+    <ClInclude Include="LineTween\CLineTweenFollow.h">
+      <Filter>LineTween</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\Utility.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Camera">
@@ -260,6 +296,9 @@
     </Filter>
     <Filter Include="SkyBox">
       <UniqueIdentifier>{1cf4b1a8-5a7b-4fd6-808f-ac8485043edc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LineTween">
+      <UniqueIdentifier>{6588b745-d3d1-40bc-be1e-f23cc47372a3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

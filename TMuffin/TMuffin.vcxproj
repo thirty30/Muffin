@@ -35,6 +35,11 @@
     <ClCompile Include="Graphics\CGraphicsRenderer.cpp" />
     <ClCompile Include="Light\CLight.cpp" />
     <ClCompile Include="Light\CLightManager.cpp" />
+    <ClCompile Include="LineTween\CLineTweenCurve.cpp" />
+    <ClCompile Include="LineTween\CLineTweenFollow.cpp" />
+    <ClCompile Include="LineTween\CLineTweenMove.cpp" />
+    <ClCompile Include="LineTween\CLineTweenRotation.cpp" />
+    <ClCompile Include="LineTween\CLineTweenScale.cpp" />
     <ClCompile Include="Material\CMaterialBase.cpp" />
     <ClCompile Include="Material\CMaterialDefault.cpp" />
     <ClCompile Include="Material\CMaterialStandard.cpp" />
@@ -77,6 +82,12 @@
     <ClInclude Include="Graphics\CGraphicsRenderer.h" />
     <ClInclude Include="Light\CLight.h" />
     <ClInclude Include="Light\CLightManager.h" />
+    <ClInclude Include="LineTween\CLineTweenCurve.h" />
+    <ClInclude Include="LineTween\CLineTweenFollow.h" />
+    <ClInclude Include="LineTween\CLineTweenMove.h" />
+    <ClInclude Include="LineTween\CLineTween.h" />
+    <ClInclude Include="LineTween\CLineTweenRotation.h" />
+    <ClInclude Include="LineTween\CLineTweenScale.h" />
     <ClInclude Include="Material\CMaterialBase.h" />
     <ClInclude Include="Material\CMaterialDefault.h" />
     <ClInclude Include="Material\CMaterialStandard.h" />
@@ -102,6 +113,7 @@
     <ClInclude Include="Texture\CTexture.h" />
     <ClInclude Include="TMuffin.h" />
     <ClInclude Include="Utility\CGUIDMaker.h" />
+    <ClInclude Include="Utility\Utility.h" />
     <ClInclude Include="Window\CWindow.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

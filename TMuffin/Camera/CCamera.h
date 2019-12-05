@@ -27,6 +27,7 @@ public:
 	inline glm::mat4 GetView()
 	{
 		glm::vec3 vTowards = this->m_vPosition + this->m_vTowards;
+		//glm::quat qView = glm::quatLookAt(vTowards, this->m_vUpwards);
 		return glm::lookAt(this->m_vPosition, vTowards, this->m_vUpwards);
 	}
 };
