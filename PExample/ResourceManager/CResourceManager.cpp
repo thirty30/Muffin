@@ -38,6 +38,9 @@ tbool CResourceManager::Init()
 	this->LoadMesh(E_MODEL_ID_CUBE_UV, "../Assets/Models/CubeUV.ply", true);
 	this->LoadMesh(E_MODEL_ID_SKYBOX, "../Assets/Models/BaseModels/SkyBox.ply", true);
 	this->LoadMesh(E_MODEL_ID_BUNNY_UV, "../Assets/Models/BunnyUV.ply", true);
+	this->LoadMesh(E_MODEL_ID_SHIP, "../Assets/Models/SM_Ship_Stealth_03.ply", true);
+	//this->LoadMesh(E_MODEL_ID_SPACESTATION, "../Assets/Models/SpaceStation.ply");
+	this->LoadMesh(E_MODEL_ID_WATER, "../Assets/Models/water.ply");
 
 	// Load Shaders
 	this->LoaderShader(E_SHADER_ID_DEFAULT, "../Assets/shaders/DefaultVertexShader.glsl", "../Assets/shaders/DefaultFragmentShader.glsl");
@@ -45,18 +48,25 @@ tbool CResourceManager::Init()
 	this->LoaderShader(E_SHADER_ID_SKYBOX, "../Assets/shaders/SkyBoxVertexShader.glsl", "../Assets/shaders/SkyBoxFragmentShader.glsl");
 	this->LoaderShader(E_SHADER_ID_BUNNY, "../Assets/shaders/BunnyVertexShader.glsl", "../Assets/shaders/BunnyFragmentShader.glsl");
 	this->LoaderShader(E_SHADER_ID_BILLBOARD, "../Assets/shaders/BillBoardVertexShader.glsl", "../Assets/shaders/BillBoardFragmentShader.glsl");
+	this->LoaderShader(E_SHADER_ID_SHIP, "../Assets/shaders/ShipVertexShader.glsl", "../Assets/shaders/ShipFragmentShader.glsl");
+	this->LoaderShader(E_SHADER_ID_WATER, "../Assets/shaders/WaterVertexShader.glsl", "../Assets/shaders/WaterFragmentShader.glsl");
 
 	// Load Texture
 	this->LoadTexture(E_TEXTURE_ID_TEST, "../Assets/Textures/leaf.png");
 	this->LoadTexture(E_TEXTURE_ID_TEST2, "../Assets/Textures/leaf2.png");
 	this->LoadTexture(E_TEXTURE_ID_CIRCLE, "../Assets/Textures/circle.png");
 	this->LoadTexture(E_TEXTURE_ID_TEST3, "../Assets/Textures/ring.png");
+	this->LoadTexture(E_TEXTURE_ID_DIFFUSE, "../Assets/Textures/Diffuse.png");
+	this->LoadTexture(E_TEXTURE_ID_FIREWORK, "../Assets/Textures/fire.png");
+	this->LoadTexture(E_TEXTURE_ID_WATER, "../Assets/Textures/water.png");
 
 	// Load Materials
 	this->LoadMaterial(E_MATERIAL_ID_DEFAULT, E_SHADER_ID_DEFAULT);
 	this->LoadMaterial(E_MATERIAL_ID_STANDARD, E_SHADER_ID_STANDARD);
 	this->LoadMaterial(E_MATERIAL_ID_BUNNY, E_SHADER_ID_BUNNY);
 	this->LoadMaterial(E_MATERIAL_ID_BILLBOARD, E_SHADER_ID_BILLBOARD);
+	this->LoadMaterial(E_MATERIAL_ID_SHIP, E_SHADER_ID_SHIP);
+	this->LoadMaterial(E_MATERIAL_ID_WATER, E_SHADER_ID_WATER);
 
 	return true;
 }

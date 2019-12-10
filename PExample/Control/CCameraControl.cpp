@@ -7,15 +7,15 @@ CCameraControl::CCameraControl()
 	this->m_bReadyRotateCamera = false;
 	this->m_vLastCursor = glm::vec2(-1, -1);
 	
-	//this->m_fCameraYMoveSpeed = 100.2f;
-	//this->m_fCameraXMoveSpeed = 150.4f;
-	//this->m_fCameraRotationSpeed = 0.6f;
-	//this->m_fCameraScrollSpeed = 350.0f;
-
-	this->m_fCameraYMoveSpeed = 0.2f;
-	this->m_fCameraXMoveSpeed = 0.4f;
+	this->m_fCameraYMoveSpeed = 2.2f;
+	this->m_fCameraXMoveSpeed = 2.4f;
 	this->m_fCameraRotationSpeed = 0.6f;
-	this->m_fCameraScrollSpeed = 2.0f;
+	this->m_fCameraScrollSpeed = 8.0f;
+
+	//this->m_fCameraYMoveSpeed = 0.2f;
+	//this->m_fCameraXMoveSpeed = 0.4f;
+	//this->m_fCameraRotationSpeed = 0.6f;
+	//this->m_fCameraScrollSpeed = 2.0f;
 }
 
 CCameraControl::~CCameraControl()
@@ -29,32 +29,60 @@ void CCameraControl::CameraControlKeyPress(n32 a_nKey, n32 a_nScancode, n32 a_nA
 	f32 testspeed = 20.0f;
 	switch (a_nKey)
 	{
-	case GLFW_KEY_W:
+	case GLFW_KEY_1:
+	{
+		if (a_nAction == GLFW_PRESS)
+		{
+			lua_State* pL = CGame::GetSingleton().GetCurrentScene()->m_pLuaState;
+			lua_getglobal(pL, "DistributeEvent");
+			lua_pushnumber(pL, 1);
+			lua_pcall(pL, 1, 0, 0);
+		}
+
+	}
+	break;
+	case GLFW_KEY_2:
+	{
+		if (a_nAction == GLFW_PRESS)
+		{
+			lua_State* pL = CGame::GetSingleton().GetCurrentScene()->m_pLuaState;
+			lua_getglobal(pL, "DistributeEvent");
+			lua_pushnumber(pL, 2);
+			lua_pcall(pL, 1, 0, 0);
+		}
+
+	}
+	break;
+	case GLFW_KEY_3:
+	{
+		if (a_nAction == GLFW_PRESS)
+		{
+			lua_State* pL = CGame::GetSingleton().GetCurrentScene()->m_pLuaState;
+			lua_getglobal(pL, "DistributeEvent");
+			lua_pushnumber(pL, 3);
+			lua_pcall(pL, 1, 0, 0);
+		}
+
+	}
+	break;
+	case GLFW_KEY_4:
+	{
+		if (a_nAction == GLFW_PRESS)
+		{
+			lua_State* pL = CGame::GetSingleton().GetCurrentScene()->m_pLuaState;
+			lua_getglobal(pL, "DistributeEvent");
+			lua_pushnumber(pL, 4);
+			lua_pcall(pL, 1, 0, 0);
+		}
+
+	}
+	break;
+	case GLFW_KEY_5:
 	{
 
 	}
 	break;
-	case GLFW_KEY_A:
-	{
-
-	}
-	break;
-	case GLFW_KEY_S:
-	{
-
-	}
-	break;
-	case GLFW_KEY_D:
-	{
-
-	}
-	break;
-	case GLFW_KEY_Q:
-	{
-
-	}
-	break;
-	case GLFW_KEY_E:
+	case GLFW_KEY_6:
 	{
 
 	}
@@ -129,8 +157,10 @@ void CCameraControl::CameraControlCursor(f64 a_fX, f64 a_fY)
 			f32 fXAngle = glm::radians(this->m_fCameraRotationSpeed * vTorwards.y);
 			glm::mat4 matRotX = glm::rotate(glm::mat4(1.0f), fXAngle, glm::vec3(1.0f, 0.0f, 0.0f));
 			vFront = matRotX * vFront;
-
 			pCamera->m_vTowards = vFront;
+
+			//printf("Angle: %f, towardy: %f\n", fXAngle, vTorwards.y);
+
 			this->m_vLastCursor = vNowCursor;
 		}
 	}
@@ -157,7 +187,7 @@ void CCameraControl::CameraControlCursor(f64 a_fX, f64 a_fY)
 		}
 	}
 
-	CGame::GetSingleton().GetCurrentScene()->pParticle->SetCameraPosition(pCamera->m_vPosition);
+	//CGame::GetSingleton().GetCurrentScene()->pParticle->SetCameraPosition(pCamera->m_vPosition);
 }
 
 void CCameraControl::CameraControlScroll(f64 a_fX, f64 a_fY)
@@ -175,7 +205,7 @@ void CCameraControl::CameraControlScroll(f64 a_fX, f64 a_fY)
 	{
 		pCamera->m_vPosition += -pCamera->m_vTowards * this->m_fCameraScrollSpeed;
 	}
-	CGame::GetSingleton().GetCurrentScene()->pParticle->SetCameraPosition(pCamera->m_vPosition);
+	//CGame::GetSingleton().GetCurrentScene()->pParticle->SetCameraPosition(pCamera->m_vPosition);
 }
 
 

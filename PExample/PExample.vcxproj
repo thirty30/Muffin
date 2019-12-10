@@ -89,7 +89,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;TCore.lib;TMuffin.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;lua5.3.5.lib;TCore.lib;TMuffin.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -132,7 +132,7 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;TCore.lib;TMuffin.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;lua5.3.5.lib;TCore.lib;TMuffin.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -140,7 +140,9 @@
     <ClInclude Include="CommonDefine.h" />
     <ClInclude Include="Control\CCameraControl.h" />
     <ClInclude Include="Control\CControl.h" />
+    <ClInclude Include="Control\CShipControl.h" />
     <ClInclude Include="Game\CGame.h" />
+    <ClInclude Include="LuaExport.h" />
     <ClInclude Include="ResourceManager\CResourceManager.h" />
     <ClInclude Include="Rof\CRofManager.h" />
     <ClInclude Include="Rof\RofTable.h" />
@@ -153,7 +155,9 @@
     <ClCompile Include="Actor\CActor.cpp" />
     <ClCompile Include="Control\CCameraControl.cpp" />
     <ClCompile Include="Control\CControl.cpp" />
+    <ClCompile Include="Control\CShipControl.cpp" />
     <ClCompile Include="Game\CGame.cpp" />
+    <ClCompile Include="LuaExport.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ResourceManager\CResourceManager.cpp" />
     <ClCompile Include="Scene\CScene.cpp" />

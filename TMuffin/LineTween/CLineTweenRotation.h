@@ -6,6 +6,8 @@ private:
 	glm::quat m_qStartRotation;
 	glm::quat m_qEndRotation;
 
+	glm::quat m_qEaseRotation;
+
 	f32 m_fNowTime;
 	f32 m_fTargetTime;
 	glm::quat m_vVelocity;

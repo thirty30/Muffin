@@ -9,16 +9,9 @@ private:
 	n32 m_nBezierIndex;
 	vector<glm::vec3> m_vecBezier;
 	f32 m_fTotalCurveLength;
-	f32 m_fEaseLength;
-	f32 m_fNowLength;
-
-	f32 m_fVelocity;
-	f32 m_fMidVelocity;
-	f32 m_fAcc;
-
 	f32 m_fNowTime;
 	f32 m_fTargetTime;
-	f32 m_fEaseTime;
+	f32 m_fVelocity;
 
 public:
 	CLineTweenCurve(u64 a_nID, CGameObject* a_pParent);
@@ -26,7 +19,6 @@ public:
 
 	virtual void Update();
 	tbool Init(glm::vec3 a_vP1, glm::vec3 a_vP2, glm::vec3 a_vP3, f32 a_fTime);
-	tbool Init(glm::vec3 a_vP1, glm::vec3 a_vP2, glm::vec3 a_vP3, f32 a_fVelocity, f32 a_fEaseTime);
 };
 
 
