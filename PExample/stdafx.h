@@ -17,5 +17,4 @@
 //add include above the CGame.h
 #include "./Game/CGame.h"
 
-#include "./LuaExport.h"
 

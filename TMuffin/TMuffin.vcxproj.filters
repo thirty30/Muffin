@@ -119,6 +119,9 @@
     <ClCompile Include="LineTween\CLineTweenFollow.cpp">
       <Filter>LineTween</Filter>
     </ClCompile>
+    <ClCompile Include="Material\CMaterial.cpp">
+      <Filter>Material</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -249,6 +252,9 @@
     </ClInclude>
     <ClInclude Include="Utility\Utility.h">
       <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Material\CMaterial.h">
+      <Filter>Material</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

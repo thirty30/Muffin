@@ -11,8 +11,6 @@ private:
 	hash_map<u64, CActor*> m_mapID2Actor;
 	CSkyBox* m_pSkyBox;
 
-	vector<CActor*> m_vecLineTweenGroup;
-
 private:
 	n32 GenGUID();
 
@@ -29,11 +27,6 @@ public:
 	void Loop();
 
 	CCamera* GetCamera() { return this->m_pCamera; }
-	CActor* NewActor();
-	CActor* FindActor(n32 a_nActorID);
-
-	void AddToLineTweenGroup(n32 a_nActorID);
-	void LineTweenGroupFollow(n32 a_nTargetID, f32 a_fDis, f32 a_fVelocity);
 };
 
 

@@ -32,7 +32,7 @@ public:
 	n32 m_nMaxEmitCount;
 	f32 m_fEmitPeriod;
 	tbool m_bIsPeriod;
-	CMaterialBase* m_pMaterial;
+	CMaterial* m_pMaterial;
 	CMesh* m_pMesh;
 
 public:

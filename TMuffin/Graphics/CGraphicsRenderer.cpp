@@ -85,7 +85,7 @@ void CGraphicsRenderer::GraphicsLoop()
 		//glm::mat4 rotateZ = glm::rotate(glm::mat4(1.0f), glm::radians(pGameObj->m_vRotation.z), glm::vec3(0.0f, 0.0, 1.0f));
 		//matM *= rotateZ;
 
-		n32 nShaderProgramID = pGraphicsObj->m_pMaterial->GetShaderProgramID();
+		n32 nShaderProgramID = pGraphicsObj->m_pMaterial->GetShaderID();
 		glUseProgram(nShaderProgramID);
 
 		GLint nDiffuseColour = glGetUniformLocation(nShaderProgramID, "un_vDiffuseColour");
@@ -141,7 +141,7 @@ void CGraphicsRenderer::RenderSkyBox(glm::mat4 a_matV, glm::mat4 a_matP)
 	glm::mat4 scale = glm::scale(glm::mat4(1.0f), this->m_pSkyBox->m_vScale);
 	matM *= scale;
 
-	n32 nShaderProgramID = this->m_pSkyBox->m_nShaderID;
+	n32 nShaderProgramID = this->m_pSkyBox->GetShaderID();
 	glUseProgram(nShaderProgramID);
 
 	this->m_pSkyBox->Render();

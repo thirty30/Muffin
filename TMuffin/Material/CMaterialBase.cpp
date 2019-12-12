@@ -20,3 +20,5 @@ T_INLINE n32 CMaterialBase::GetShaderProgramID()
 {
 	return this->m_nShaderProgramID;
 }
+
+

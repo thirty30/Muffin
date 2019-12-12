@@ -1,0 +1,10 @@
+{
+	"MaterialName":"StandardMaterial",
+	"VertexShader":"../Assets/shaders/ShipVertexShader.glsl",
+	"FragmentShader":"../Assets/shaders/ShipFragmentShader.glsl",
+	"MaterialData":
+	[
+		{"Name":"DiffuseMap", "Tag":"Texture", "Value":"../Assets/Textures/Diffuse.png"}
+	]
+}
+

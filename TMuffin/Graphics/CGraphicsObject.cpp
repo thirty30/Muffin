@@ -20,7 +20,7 @@ CGraphicsObject::~CGraphicsObject()
 	}
 }
 
-tbool CGraphicsObject::InitRenderer(const CMesh* a_pMesh, CMaterialBase* a_pMaterial)
+tbool CGraphicsObject::InitRenderer(const CMesh* a_pMesh, CMaterial* a_pMaterial)
 {
 	if (a_pMesh == NULL || a_pMaterial == NULL)
 	{
@@ -76,7 +76,7 @@ tbool CGraphicsObject::InitRenderer(const CMesh* a_pMesh, CMaterialBase* a_pMate
 		this->m_pMeshDrawInfo->m_pTriangleIndices[(i * 3) + 2] = pTriangel->Vertex3;
 	}
 
-	n32 nShaderProgramID = this->m_pMaterial->GetShaderProgramID();
+	n32 nShaderProgramID = this->m_pMaterial->GetShaderID();
 	glGenVertexArrays(1, &(this->m_pMeshDrawInfo->m_nVAOID));	// Ask OpenGL for a new buffer ID
 	glBindVertexArray(this->m_pMeshDrawInfo->m_nVAOID);	// "Bind" this buffer: "make this the 'current' VAO buffer
 
@@ -141,7 +141,7 @@ void CGraphicsObject::LightPass()
 	{
 		return;
 	}
-	MUFFIN.GetLightMgr()->RenderLights(this->m_pMaterial->GetShaderProgramID());
+	MUFFIN.GetLightMgr()->RenderLights(this->m_pMaterial->GetShaderID());
 }
 
 void CGraphicsObject::MaterialPass()

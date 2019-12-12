@@ -103,8 +103,6 @@ void CParticleEmitter::AwakeParticle(CParticle* a_pParticle)
 	vRGBA.g = TRandInRange(this->m_vMinColor.g, this->m_vMaxColor.g);
 	vRGBA.b = TRandInRange(this->m_vMinColor.b, this->m_vMaxColor.b);
 	vRGBA.a = TRandInRange(this->m_vMinColor.a, this->m_vMaxColor.a);
-
-	this->m_pMaterial->SetColor(vRGBA);
 }
 
 void CParticleEmitter::Update()

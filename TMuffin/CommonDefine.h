@@ -53,7 +53,24 @@ enum ELineTweenType
 	E_LINETWEEN_TYPE_ROTATE_TO,
 	E_LINETWEEN_TYPE_CURVE,
 	E_LINETWEEN_TYPE_FOLLOW,
+};
 
+
+enum EMaterialParamVariableType
+{
+	E_MPVT_UNKNOWN = 0,
+
+	E_MPVT_TEXTURE,
+
+	E_MPVT_INT,
+	E_MPVT_INT_VEC2,
+	E_MPVT_INT_VEC3,
+	E_MPVT_INT_VEC4,
+
+	E_MPVT_FLOAT,
+	E_MPVT_FLOAT_VEC2,
+	E_MPVT_FLOAT_VEC3,
+	E_MPVT_FLOAT_VEC4,
 };
 
 typedef void (*MuffinKeyCallBack)(n32 a_nKey, n32 a_nScancode, n32 a_nAction, n32 a_nMods);

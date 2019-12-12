@@ -17,5 +17,3 @@ public:
 	virtual void SetTexture(n32 a_nIDX, CTexture* a_pTexture) {}
 	virtual T_INLINE void SetColor(glm::vec4 a_vRGBA) {}
 };
-
-

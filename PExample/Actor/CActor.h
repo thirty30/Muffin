@@ -11,12 +11,3 @@ public:
 	virtual void Update() {}
 };
 
-
-class CZone : public CGameObject, public CPhysicsObject
-{
-public:
-	CZone();
-	~CZone();
-
-	virtual void OnCollision(SCollisionInfo& a_rCollision);
-};

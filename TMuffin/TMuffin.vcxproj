@@ -40,6 +40,7 @@
     <ClCompile Include="LineTween\CLineTweenMove.cpp" />
     <ClCompile Include="LineTween\CLineTweenRotation.cpp" />
     <ClCompile Include="LineTween\CLineTweenScale.cpp" />
+    <ClCompile Include="Material\CMaterial.cpp" />
     <ClCompile Include="Material\CMaterialBase.cpp" />
     <ClCompile Include="Material\CMaterialDefault.cpp" />
     <ClCompile Include="Material\CMaterialStandard.cpp" />
@@ -88,6 +89,7 @@
     <ClInclude Include="LineTween\CLineTween.h" />
     <ClInclude Include="LineTween\CLineTweenRotation.h" />
     <ClInclude Include="LineTween\CLineTweenScale.h" />
+    <ClInclude Include="Material\CMaterial.h" />
     <ClInclude Include="Material\CMaterialBase.h" />
     <ClInclude Include="Material\CMaterialDefault.h" />
     <ClInclude Include="Material\CMaterialStandard.h" />

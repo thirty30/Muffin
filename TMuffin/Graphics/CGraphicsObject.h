@@ -81,14 +81,14 @@ private:
 
 public:
 	CMeshDrawInfo* m_pMeshDrawInfo;
-	CMaterialBase* m_pMaterial;
+	CMaterial* m_pMaterial;
 	n32 m_nRenderMode;
-
+	
 public:
 	CGraphicsObject(CGameObject* a_pGameObject);
 	virtual ~CGraphicsObject();
 
-	tbool InitRenderer(const CMesh* a_pMesh, CMaterialBase* a_pMaterial);
+	tbool InitRenderer(const CMesh* a_pMesh, CMaterial* a_pMaterial);
 	void SetRenderMode(ERenderMode a_eMode);
 
 	virtual void LightPass();

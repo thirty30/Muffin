@@ -108,9 +108,3 @@ tbool CResourceLoader::LoadModelFromPlyUV(const tcchar* a_strFileName, CMesh* a_
 	objFile.close();
 	return true;
 }
-
-tbool CResourceLoader::LoadTextureFromBMP(const tcchar* a_strFileName, CTexture* a_pTexture)
-{
-
-	return  true;
-}

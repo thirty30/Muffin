@@ -11,7 +11,7 @@
 #include <glm/gtc/type_ptr.hpp>				// glm::value_ptr
 #include <glm/gtx/vector_angle.hpp>
 #include <FreeImage/FreeImage.h>
-
+#include <rapidjson/document.h>
 ///////////////////////////////////////////////////////////////////////////////////////
 
 #include "./CommonDefine.h"
@@ -24,6 +24,7 @@
 
 #include "./Texture/CTexture.h"
 #include "./Material/CMaterialBase.h"
+#include "./Material/CMaterial.h"
 #include "./Material/CMaterialDefault.h"
 #include "./Material/CMaterialStandard.h"
 

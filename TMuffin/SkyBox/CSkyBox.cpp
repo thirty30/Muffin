@@ -2,7 +2,6 @@
 
 CSkyBox::CSkyBox()
 {
-	this->m_nShaderID = -1;
 	this->m_pMeshDrawInfo = NULL;
 	this->m_nTextureID = -1;
 	this->m_nULSampler = -1;
@@ -78,10 +77,11 @@ void CSkyBox::InitMesh(const CMesh* a_pMesh)
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(u32) * this->m_pMeshDrawInfo->m_nTriangleIndexCount, (GLvoid*)this->m_pMeshDrawInfo->m_pTriangleIndices, GL_STATIC_DRAW);
 
 	// Set the vertex attributes.
-	GLint nPositionLocation = glGetAttribLocation(this->m_nShaderID, "vPosition");
-	GLint nColorLocation = glGetAttribLocation(this->m_nShaderID, "vColor");
-	GLint nNormalLocation = glGetAttribLocation(this->m_nShaderID, "vNormal");
-	GLint nUVLocation = glGetAttribLocation(this->m_nShaderID, "vUVx2");
+	n32 nShaderID = this->m_Shader.GetShaderID();
+	GLint nPositionLocation = glGetAttribLocation(nShaderID, "vPosition");
+	GLint nColorLocation = glGetAttribLocation(nShaderID, "vColor");
+	GLint nNormalLocation = glGetAttribLocation(nShaderID, "vNormal");
+	GLint nUVLocation = glGetAttribLocation(nShaderID, "vUVx2");
 
 	// Set the vertex attributes for this shader
 	glEnableVertexAttribArray(nPositionLocation);
@@ -152,9 +152,10 @@ tbool CSkyBox::LoadImage(GLenum a_eValue, const tcchar* a_strFileName)
 	return true;
 }
 
-tbool CSkyBox::Init(const CMesh* a_pMesh, n32 a_nShaderID, const tcchar* a_strXTexture, const tcchar* a_strNegXTexture, const tcchar* a_strYTexture, const tcchar* a_strNegYTexture, const tcchar* a_strZTexture, const tcchar* a_strNegZTexture)
+tbool CSkyBox::Init(const CMesh* a_pMesh, const tcchar* a_strVertexShader, const tcchar* a_strFragmentShader, const tcchar* a_strXTexture, const tcchar* a_strNegXTexture, const tcchar* a_strYTexture, const tcchar* a_strNegYTexture, const tcchar* a_strZTexture, const tcchar* a_strNegZTexture)
 {
-	this->m_nShaderID = a_nShaderID;
+	this->m_Shader.Init(a_strVertexShader, a_strFragmentShader);
+
 	this->InitMesh(a_pMesh);
 
 	glGenTextures(1, &this->m_nTextureID);
@@ -174,7 +175,7 @@ tbool CSkyBox::Init(const CMesh* a_pMesh, n32 a_nShaderID, const tcchar* a_strXT
 	this->LoadImage(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, a_strZTexture);
 	this->LoadImage(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, a_strNegZTexture);
 
-	this->m_nULSampler = glGetUniformLocation(this->m_nShaderID, "un_Sampler");
+	this->m_nULSampler = glGetUniformLocation(this->m_Shader.GetShaderID(), "un_Sampler");
 	this->m_vScale = glm::vec3(10000.0f, 10000.0f, 10000.0f);
 
 	return true;
