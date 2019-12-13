@@ -10,10 +10,10 @@ T_INLINE vector<glm::vec3> GenerateBezierCurve(glm::vec3 a_vP1, glm::vec3 a_vP2,
 
 	vector<glm::vec3> arr;
 	arr.clear();
-
-	for (n32 i = 1; i <= 50; i++)
+	arr.push_back(a_vP1);
+	for (n32 i = 1; i <= 48; i++)
 	{
-		f32 fRate = i / 50.0f;
+		f32 fRate = i / 48.0f;
 		f32 fDis10 = fDis1 * fRate;
 		glm::vec3 vPos10 = vDir1 * fDis10 + a_vP1;
 
@@ -28,5 +28,6 @@ T_INLINE vector<glm::vec3> GenerateBezierCurve(glm::vec3 a_vP1, glm::vec3 a_vP2,
 		glm::vec3 vPos30 = vDir3 * fDis30 + vPos10;
 		arr.push_back(vPos30);
 	}
+	arr.push_back(a_vP3);
 	return arr;
 }
