@@ -55,9 +55,15 @@ tbool CScene::LoadScene()
 	CMesh* pMeshShip = CResourceManager::GetSingleton().FindMesh(E_MODEL_ID_SHIP);
 	CActor* pShip = new CActor();
 	CMaterial* pMaterial = new CMaterial();
-	pMaterial->Init("../Assets/Materials/StandardMaterial.json");
+	pMaterial->Init("../Assets/Materials/ShipMaterial.json");
 	pShip->InitRenderer(pMeshShip, pMaterial);
 
+	CActor* pShip2 = new CActor();
+	pMaterial = new CMaterial();
+	pMaterial->Init("../Assets/Materials/ShipMaterial2.json");
+	pShip2->InitRenderer(pMeshShip, pMaterial);
+	pShip2->m_vPosition = glm::vec3(20.0f, 0.0f, 0.0f);
+	pMaterial->SetParam<f32>(2, 1.0f, 1.0f, 0.0f, 0.0f);
 	return true;
 }
 

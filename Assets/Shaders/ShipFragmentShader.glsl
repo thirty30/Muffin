@@ -36,10 +36,12 @@ uniform int un_nLightNum;
 uniform sLight un_LightArray[80];
 uniform int un_samplerCount;
 uniform sampler2D DiffuseMap;
+uniform vec3 DiffuseColor;
 
 void main()  
 {
 	vec3 vVertexMaterialColour = texture( DiffuseMap, in_fUVx2.st ).rgb;
+	vVertexMaterialColour.rgb += DiffuseColor.rgb * 0.8f;
 	vec3 vVertexNormal = normalize(in_fNormal.xyz);
 	vec3 vVertexWorldPos = in_fVertWorldLocation.xyz;
 	vec4 vFinalObjectColour = vec4( 0.0f, 0.0f, 0.0f, 1.0f );
