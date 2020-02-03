@@ -1,4 +1,10 @@
-#include "pch.h"
+#include "PhysicsHelper.h"
+#include "CColliderBase.h"
+#include "CColliderBox.h"
+#include "CColliderCapsule.h"
+#include "CColliderMesh.h"
+#include "CColliderPlane.h"
+#include "CColliderSphere.h"
 
 void CalcColliderIsHit(CColliderBase* a_pCollider1, CColliderBase* a_pCollider2, SCollisionResult& a_rCollisionInfo)
 {

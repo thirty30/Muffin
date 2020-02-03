@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "CColliderPlane.h"
 
 CColliderPlane::CColliderPlane() : CColliderBase(E_COLLIDER_TYPE_PLANE)
 {

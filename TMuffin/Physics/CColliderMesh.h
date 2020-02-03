@@ -1,4 +1,8 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+#include "CColliderBase.h"
+
+class CMesh;
 
 struct SMeshColliderTriangle
 {
@@ -21,7 +25,7 @@ class T_DLL_EXPORT CColliderMesh : public CColliderBase
 public:
 	n32 m_nTriangleCount;
 	SMeshColliderTriangle* m_pTriangleoArray;
-	
+
 	hash_map<u64, SMeshColliderBox*> m_mapID2AABB;
 
 	glm::vec3 m_vMinPoint;

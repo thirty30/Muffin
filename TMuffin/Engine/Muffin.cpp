@@ -1,4 +1,12 @@
-#include "pch.h"
+#include "Muffin.h"
+#include "Utility/CGUIDMaker.h"
+#include "Window/CWindow.h"
+#include "GameObject/CGameObjectManager.h"
+#include "Graphics/CGraphicsRenderer.h"
+#include "Camera/CCameraManager.h"
+#include "Light/CLightManager.h"
+#include "Physics/CPhysicsReactor.h"
+#include "Particle/CParticleEmitterManager.h"
 
 CMuffin::CMuffin()
 {

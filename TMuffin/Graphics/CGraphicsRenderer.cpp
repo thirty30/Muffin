@@ -1,5 +1,12 @@
-#include "pch.h"
-#include "./CGraphicsRenderer.h"
+#include "CGraphicsRenderer.h"
+#include "CGraphicsObject.h"
+#include "SkyBox/CSkyBox.h"
+#include "Mesh/CMesh.h"
+#include "Engine/Engine.h"
+#include "Camera/CCameraManager.h"
+#include "Material/CMaterial.h"
+#include "Camera/CCamera.h"
+
 
 CGraphicsRenderer::CGraphicsRenderer()
 {

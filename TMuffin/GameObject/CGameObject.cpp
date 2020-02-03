@@ -1,5 +1,14 @@
-#include "pch.h"
-#include "./CGameObject.h"
+#include "CGameObject.h"
+#include "Engine/Engine.h"
+#include "LineTween/CLineTween.h"
+#include "Utility/CGUIDMaker.h"
+#include "GameObject/CGameObjectManager.h"
+#include "LineTween/CLineTween.h"
+#include "LineTween/CLineTweenCurve.h"
+#include "LineTween/CLineTweenFollow.h"
+#include "LineTween/CLineTweenMove.h"
+#include "LineTween/CLineTweenRotation.h"
+#include "LineTween/CLineTweenScale.h"
 
 CGameObject::CGameObject()
 {

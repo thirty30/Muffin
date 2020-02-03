@@ -1,4 +1,5 @@
 #pragma once
+#include "TMuffinSysInclude.h"
 
 class T_DLL_EXPORT CTexture
 {

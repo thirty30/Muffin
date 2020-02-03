@@ -1,4 +1,8 @@
-#include "pch.h"
+#include "CParticleEmitterManager.h"
+#include "Engine/Engine.h"
+#include "CParticleEmitter.h"
+#include "CommonDefine.h"
+#include "Utility/CGUIDMaker.h"
 
 CParticleEmitterManager::CParticleEmitterManager()
 {

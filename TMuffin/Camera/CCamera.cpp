@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "./CCamera.h"
 
 CCamera::CCamera(u64 a_nGUID, f32 a_fViewRadians, f32 a_fScreenRatio, f32 a_fViewDisBegin, f32 a_fViewDisEnd)
 {

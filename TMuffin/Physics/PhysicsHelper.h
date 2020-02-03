@@ -1,4 +1,5 @@
 #pragma once
+#include "TMuffinSysInclude.h"
 
 struct SCollisionResult
 {
@@ -33,6 +34,12 @@ struct SCollisionInfo
 	glm::vec3 m_vHitPoint;
 	f32 m_fIntersectDis;
 };
+
+class CColliderBase;
+class CColliderSphere;
+class CColliderPlane;
+class CColliderBox;
+class CColliderMesh;
 
 extern void CalcColliderIsHit(CColliderBase* a_pCollider1, CColliderBase* a_pCollider2, SCollisionResult& a_rCollisionInfo);
 extern void doSphere2Plane(CColliderSphere* a_pSrcCollider, CColliderPlane* a_pTarCollider, SCollisionResult& a_rCollisionInfo);

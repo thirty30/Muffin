@@ -1,4 +1,7 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+#include "GameObject/CGameObject.h"
+#include "Graphics/CGraphicsObject.h"
 
 class CParticle : public CGameObject, public CGraphicsObject
 {
@@ -11,6 +14,7 @@ public:
 	CParticle();
 	~CParticle();
 };
+
 
 
 

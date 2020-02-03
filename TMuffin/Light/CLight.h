@@ -1,4 +1,6 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+#include "CommonDefine.h"
 
 #define GLSL_STRUCT_NAME_LEN 64
 struct sGLSLLightStructName
@@ -52,7 +54,7 @@ public:
 	glm::vec3 m_vDirection;
 
 public:
-	CDirectionLight() : CLight(E_LIGHT_TYPE_DIRECTION) 
+	CDirectionLight() : CLight(E_LIGHT_TYPE_DIRECTION)
 	{
 		this->m_vDirection = glm::normalize(glm::vec3(1.0f, -0.5f, 1.0f));
 	}
@@ -108,5 +110,4 @@ public:
 	~CSpotLight() {}
 	virtual void BindShader(n32 a_nShaderProgramID);
 };
-
 

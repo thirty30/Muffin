@@ -1,4 +1,6 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+#include "CommonDefine.h"
 
 class T_DLL_EXPORT CShader
 {

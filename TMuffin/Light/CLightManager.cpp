@@ -1,4 +1,5 @@
-#include "pch.h"
+#include "CLightManager.h"
+#include "CLight.h"
 
 CLightManager::CLightManager()
 {

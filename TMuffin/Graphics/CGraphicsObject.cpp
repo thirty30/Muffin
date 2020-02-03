@@ -1,4 +1,10 @@
-#include "pch.h"
+#include "CGraphicsObject.h"
+#include "Material/CMaterial.h"
+#include "Mesh/CMesh.h"
+#include "Engine/Engine.h"
+#include "Utility/CGUIDMaker.h"
+#include "Light/CLightManager.h"
+#include "Graphics/CGraphicsRenderer.h"
 
 CGraphicsObject::CGraphicsObject(CGameObject* a_pGameObject)
 {

@@ -34,7 +34,7 @@ tbool CScene::LoadScene()
 	n32 nScreenHigh = CGame::GetSingleton().GetScreenHigh();
 	f32 fScreenRatio = 1.0f * nScreenWidth / nScreenHigh;
 	this->m_pCamera = new CCamera(this->GenGUID(), 0.6f, fScreenRatio, 1.0f, 100000.0f);
-	this->m_pCamera->m_vPosition = glm::vec3(0, 300, -300);
+	this->m_pCamera->m_vPosition = glm::vec3(0, 800, -800);
 	this->m_pCamera->m_vTowards = glm::normalize(glm::vec3(0.0f, -0.5f, 0.5f));
 	TMuffin_AddCamera(this->m_pCamera);
 	
@@ -54,16 +54,11 @@ tbool CScene::LoadScene()
 
 	CMesh* pMeshShip = CResourceManager::GetSingleton().FindMesh(E_MODEL_ID_SHIP);
 	CActor* pShip = new CActor();
+	//pShip->m_vScale = glm::vec3(0.01f, 0.01f, 0.01f);
 	CMaterial* pMaterial = new CMaterial();
 	pMaterial->Init("../Assets/Materials/ShipMaterial.json");
 	pShip->InitRenderer(pMeshShip, pMaterial);
 
-	CActor* pShip2 = new CActor();
-	pMaterial = new CMaterial();
-	pMaterial->Init("../Assets/Materials/ShipMaterial2.json");
-	pShip2->InitRenderer(pMeshShip, pMaterial);
-	pShip2->m_vPosition = glm::vec3(20.0f, 0.0f, 0.0f);
-	pMaterial->SetParam<f32>(2, 1.0f, 1.0f, 0.0f, 0.0f);
 	return true;
 }
 

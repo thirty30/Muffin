@@ -1,4 +1,5 @@
-#include "pch.h"
+#include "CMaterialStandard.h"
+#include "Texture/CTexture.h"
 
 CMaterialStandard::CMaterialStandard()
 {

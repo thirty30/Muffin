@@ -1,5 +1,11 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+#include "PhysicsDefine.h"
+#include "PhysicsHelper.h"
 
+class CGameObject;
+class CRigidBody;
+class CColliderBase;
 class T_DLL_EXPORT CPhysicsObject
 {
 private:
@@ -24,5 +30,4 @@ public:
 	CRigidBody* GetRigidBody();
 	CColliderBase* GetCollider(EColliderType a_eType);
 };
-
 

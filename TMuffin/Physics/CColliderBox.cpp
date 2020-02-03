@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "CColliderBox.h"
 
 CColliderBox::CColliderBox() : CColliderBase(E_COLLIDER_TYPE_BOX)
 {

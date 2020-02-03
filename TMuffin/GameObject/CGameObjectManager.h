@@ -1,5 +1,7 @@
 #pragma once
+#include "TMuffinSysInclude.h"
 
+class CGameObject;
 class CGameObjectManager
 {
 public:
@@ -14,4 +16,3 @@ public:
 	void RemoveObject(CGameObject* a_pGameObject);
 	void Update();
 };
-

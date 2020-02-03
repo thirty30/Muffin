@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="pch.cpp" />
     <ClCompile Include="Camera\CCamera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
@@ -16,7 +15,6 @@
     <ClCompile Include="ShaderHelper\CShaderHelper.cpp">
       <Filter>ShaderHelper</Filter>
     </ClCompile>
-    <ClCompile Include="TMuffin.cpp" />
     <ClCompile Include="ResourceLoader\CResourceLoader.cpp">
       <Filter>ResourceLoader</Filter>
     </ClCompile>
@@ -122,9 +120,9 @@
     <ClCompile Include="Material\CMaterial.cpp">
       <Filter>Material</Filter>
     </ClCompile>
+    <ClCompile Include="Transform\CTransform.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h" />
     <ClInclude Include="Camera\CCamera.h">
       <Filter>Camera</Filter>
     </ClInclude>
@@ -256,6 +254,10 @@
     <ClInclude Include="Material\CMaterial.h">
       <Filter>Material</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\CScene.h" />
+    <ClInclude Include="Component\IComponent.h" />
+    <ClInclude Include="Transform\CTransform.h" />
+    <ClInclude Include="TMuffinSysInclude.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Camera">

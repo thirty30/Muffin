@@ -1,4 +1,6 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+#include "CommonDefine.h"
 
 struct SDrawVertex
 {
@@ -59,7 +61,7 @@ public:
 		this->m_pTriangleIndices = NULL;
 	}
 
-	~CMeshDrawInfo() 
+	~CMeshDrawInfo()
 	{
 		if (this->m_pVertices != NULL)
 		{
@@ -72,6 +74,10 @@ public:
 	}
 };
 
+class CMeshDrawInfo;
+class CMaterial;
+class CGameObject;
+class CMesh;
 class T_DLL_EXPORT CGraphicsObject
 {
 private:
@@ -83,7 +89,7 @@ public:
 	CMeshDrawInfo* m_pMeshDrawInfo;
 	CMaterial* m_pMaterial;
 	n32 m_nRenderMode;
-	
+
 public:
 	CGraphicsObject(CGameObject* a_pGameObject);
 	virtual ~CGraphicsObject();
@@ -94,7 +100,6 @@ public:
 	virtual void LightPass();
 	virtual void MaterialPass();
 };
-
 
 
 

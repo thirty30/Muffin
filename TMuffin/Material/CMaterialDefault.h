@@ -1,4 +1,6 @@
 #pragma once 
+#include "TMuffinSysInclude.h"
+#include "CMaterialBase.h"
 
 class T_DLL_EXPORT CMaterialDefault : public CMaterialBase
 {

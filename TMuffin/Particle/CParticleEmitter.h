@@ -1,5 +1,10 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+#include "CommonDefine.h"
+#include "CParticle.h"
 
+class CMaterial;
+class CMesh;
 class T_DLL_EXPORT CParticleEmitter
 {
 private:
@@ -10,7 +15,7 @@ private:
 	EParticleMode m_eMode;
 	glm::vec3 m_vCameraPos;
 	u32 m_nEmittedCount;
-	
+
 public:
 	friend class CParticleEmitterManager;
 
@@ -49,6 +54,5 @@ public:
 
 	void Reset();
 };
-
 
 

@@ -1,5 +1,7 @@
 #pragma once
+#include "TMuffinSysInclude.h"
 
+class CParticleEmitter;
 class CParticleEmitterManager
 {
 public:
@@ -14,5 +16,4 @@ public:
 	void DeleteEmitter(CParticleEmitter* a_pGameObject);
 	void Update();
 };
-
 

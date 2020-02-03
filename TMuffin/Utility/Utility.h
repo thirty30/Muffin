@@ -1,4 +1,5 @@
 #pragma once
+#include "TMuffinSysInclude.h"
 
 T_INLINE vector<glm::vec3> GenerateBezierCurve(glm::vec3 a_vP1, glm::vec3 a_vP2, glm::vec3 a_vP3)
 {

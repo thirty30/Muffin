@@ -1,4 +1,5 @@
 #pragma once
+#include "TMuffinSysInclude.h"
 
 struct SMeshVertex
 {
@@ -45,3 +46,4 @@ public:
 	CMesh();
 	~CMesh();
 };
+

@@ -1,5 +1,16 @@
-#include "pch.h"
-#include "./CPhysicsObject.h"
+#include "CPhysicsObject.h"
+#include "CRigidBody.h"
+#include "GameObject/CGameObject.h"
+#include "Engine/Engine.h"
+#include "Utility/CGUIDMaker.h"
+#include "Physics/CColliderBase.h"
+#include "CPhysicsReactor.h"
+#include "CColliderBase.h"
+#include "CColliderBox.h"
+#include "CColliderCapsule.h"
+#include "CColliderMesh.h"
+#include "CColliderPlane.h"
+#include "CColliderSphere.h"
 
 CPhysicsObject::CPhysicsObject(CGameObject* a_pGameObject)
 {

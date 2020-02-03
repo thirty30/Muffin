@@ -1,4 +1,6 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+#include "CommonDefine.h"
 
 class CGUIDMaker
 {
@@ -21,7 +23,4 @@ public:
 		return ((u64)a_eType << 48) + this->m_nCounter[a_eType];
 	}
 };
-
-
-
 

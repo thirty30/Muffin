@@ -1,4 +1,5 @@
-#include "pch.h"
+#include "CColliderMesh.h"
+#include "Mesh/CMesh.h"
 
 CColliderMesh::CColliderMesh() : CColliderBase(E_COLLIDER_TYPE_MESH)
 {

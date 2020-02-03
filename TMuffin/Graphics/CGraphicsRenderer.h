@@ -1,5 +1,8 @@
 #pragma once
+#include "TMuffinSysInclude.h"
 
+class CSkyBox;
+class CGraphicsObject;
 class CGraphicsRenderer
 {
 private:

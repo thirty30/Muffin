@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "CColliderBase.h"
 
 CColliderBase::CColliderBase(EColliderType a_eColliderType)
 {

@@ -1,11 +1,14 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+#include "CLineTween.h"
+
 
 class T_DLL_EXPORT CLineTweenScale : public CLineTween
 {
 private:
 	glm::vec3 m_vStartScale;
 	glm::vec3 m_vEndScale;
-	
+
 	f32 m_fNowTime;
 	f32 m_fTargetTime;
 	glm::vec3 m_vVelocity;

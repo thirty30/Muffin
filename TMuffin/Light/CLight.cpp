@@ -1,4 +1,6 @@
-#include "pch.h"
+#include "CLight.h"
+#include "Engine/Engine.h"
+#include "Light/CLightManager.h"
 
 void CLight::InitGLSLName(n32 a_nIdx)
 {

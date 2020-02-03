@@ -1,5 +1,7 @@
 #pragma once
+#include "TMuffinSysInclude.h"
 
+class CTexture;
 class T_DLL_EXPORT CMaterialBase
 {
 private:

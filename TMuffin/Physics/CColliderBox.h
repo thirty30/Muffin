@@ -1,4 +1,6 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+#include "CColliderBase.h"
 
 class T_DLL_EXPORT CColliderBox : public CColliderBase
 {

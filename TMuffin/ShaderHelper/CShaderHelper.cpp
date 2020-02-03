@@ -1,4 +1,5 @@
-#include "pch.h"
+#include "CShaderHelper.h"
+
 CShader::CShader()
 {
 	this->m_nShaderID = 0;

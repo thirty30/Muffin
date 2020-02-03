@@ -1,4 +1,6 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+#include "Muffin.h"
 
 ///////////////////-------------global variables stat-------------///////////////////
 
@@ -19,5 +21,4 @@ extern void KeyCallBack(GLFWwindow* a_pWindow, n32 a_nKey, n32 a_nScancode, n32 
 extern void MouseCallBack(GLFWwindow* a_pWindow, n32 a_nKey, n32 a_nAction, n32 a_nMods);
 extern void CursorCallBack(GLFWwindow* a_pWindow, f64 a_fX, f64 a_fY);
 extern void ScrollCallBack(GLFWwindow* a_pWindow, f64 a_fX, f64 a_fY);
-
 

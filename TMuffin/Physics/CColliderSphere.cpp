@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "CColliderSphere.h"
 
 CColliderSphere::CColliderSphere() : CColliderBase(E_COLLIDER_TYPE_SPHERE)
 {

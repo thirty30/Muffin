@@ -1,4 +1,15 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+
+class CGUIDMaker;
+class CGUIDMaker;
+class CWindow;
+class CGameObjectManager;
+class CGraphicsRenderer;
+class CCameraManager;
+class CLightManager;
+class CPhysicsReactor;
+class CParticleEmitterManager;
 
 class CMuffin
 {
@@ -6,7 +17,7 @@ private:
 	tbool m_bRun;
 	f64 m_fNowFrameTime;
 	f32 m_fDeltaFrameTime;
-	
+
 	CGUIDMaker* m_pGUIDMaker;
 	CWindow* m_pWindow;
 	CGameObjectManager* m_pGameObjectManager;
@@ -34,10 +45,10 @@ public:
 	T_INLINE CLightManager* GetLightMgr() { return this->m_pLightManager; }
 	T_INLINE CPhysicsReactor* GetPhysicsReactor() { return this->m_pPhysicsReactor; }
 	T_INLINE CParticleEmitterManager* GetParticleEmitterMgr() { return this->m_pParticleEmitterManager; }
-	
+
 
 public:
-	
+
 	void Tick();
 
 };

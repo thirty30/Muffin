@@ -48,11 +48,6 @@
     <ClCompile Include="Particle\CParticle.cpp" />
     <ClCompile Include="Particle\CParticleEmitter.cpp" />
     <ClCompile Include="Particle\CParticleEmitterManager.cpp" />
-    <ClCompile Include="pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="Physics\CColliderBase.cpp" />
     <ClCompile Include="Physics\CColliderBox.cpp" />
     <ClCompile Include="Physics\CColliderCapsule.cpp" />
@@ -67,13 +62,14 @@
     <ClCompile Include="ShaderHelper\CShaderHelper.cpp" />
     <ClCompile Include="SkyBox\CSkyBox.cpp" />
     <ClCompile Include="Texture\CTexture.cpp" />
-    <ClCompile Include="TMuffin.cpp" />
+    <ClCompile Include="Transform\CTransform.cpp" />
     <ClCompile Include="Window\CWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\CCamera.h" />
     <ClInclude Include="Camera\CCameraManager.h" />
     <ClInclude Include="CommonDefine.h" />
+    <ClInclude Include="Component\IComponent.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\ExportFunction.h" />
     <ClInclude Include="Engine\Muffin.h" />
@@ -97,7 +93,6 @@
     <ClInclude Include="Particle\CParticle.h" />
     <ClInclude Include="Particle\CParticleEmitter.h" />
     <ClInclude Include="Particle\CParticleEmitterManager.h" />
-    <ClInclude Include="pch.h" />
     <ClInclude Include="Physics\CColliderBase.h" />
     <ClInclude Include="Physics\CColliderBox.h" />
     <ClInclude Include="Physics\CColliderCapsule.h" />
@@ -110,10 +105,13 @@
     <ClInclude Include="Physics\PhysicsDefine.h" />
     <ClInclude Include="Physics\PhysicsHelper.h" />
     <ClInclude Include="ResourceLoader\CResourceLoader.h" />
+    <ClInclude Include="Scene\CScene.h" />
     <ClInclude Include="ShaderHelper\CShaderHelper.h" />
     <ClInclude Include="SkyBox\CSkyBox.h" />
     <ClInclude Include="Texture\CTexture.h" />
     <ClInclude Include="TMuffin.h" />
+    <ClInclude Include="Transform\CTransform.h" />
+    <ClInclude Include="TMuffinSysInclude.h" />
     <ClInclude Include="Utility\CGUIDMaker.h" />
     <ClInclude Include="Utility\Utility.h" />
     <ClInclude Include="Window\CWindow.h" />
@@ -190,7 +188,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
@@ -202,10 +200,10 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;FreeImage.lib;TCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;FreeImage.lib;assimp-vc142-mt.lib;TCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y $(SolutionDir)Dependence\dll\x64\*.dll $(SolutionDir)bin_debug_x64</Command>
+      <Command>copy /y "$(SolutionDir)Dependence\dll\x64\*.dll" "$(SolutionDir)bin_debug_x64"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -246,7 +244,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -262,7 +260,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;FreeImage.lib;TCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;FreeImage.lib;assimp-vc142-mt.lib;TCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy /y $(SolutionDir)Dependence\dll\x64\*.dll $(SolutionDir)bin_release_x64</Command>

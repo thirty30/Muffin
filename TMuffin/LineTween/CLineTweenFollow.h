@@ -1,4 +1,6 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+#include "CLineTween.h"
 
 class T_DLL_EXPORT CLineTweenFollow : public CLineTween
 {
@@ -17,4 +19,3 @@ public:
 	virtual void Update();
 	tbool Init(CGameObject* a_pTarget, f32 a_fDistance, f32 a_fVelocity);
 };
-

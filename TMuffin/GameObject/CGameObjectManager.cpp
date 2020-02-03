@@ -1,4 +1,5 @@
-#include "pch.h"
+#include "CGameObjectManager.h"
+#include "CGameObject.h"
 
 CGameObjectManager::CGameObjectManager()
 {

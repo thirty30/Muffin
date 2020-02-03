@@ -1,5 +1,10 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+#include "GameObject/CGameObject.h"
+#include "ShaderHelper/CShaderHelper.h"
 
+class CMeshDrawInfo;
+class CMesh;
 class T_DLL_EXPORT CSkyBox : public CGameObject
 {
 private:
@@ -19,7 +24,7 @@ public:
 	CSkyBox();
 	~CSkyBox();
 
-	tbool Init(const CMesh* a_pMesh, 
+	tbool Init(const CMesh* a_pMesh,
 		const tcchar* a_strVertexShader, const tcchar* a_strFragmentShader,
 		const tcchar* a_strXTexture, const tcchar* a_strNegXTexture,
 		const tcchar* a_strYTexture, const tcchar* a_strNegYTexture,

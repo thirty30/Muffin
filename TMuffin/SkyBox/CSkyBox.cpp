@@ -1,4 +1,6 @@
-#include "pch.h"
+#include "CSkyBox.h"
+#include "Mesh/CMesh.h"
+#include "Graphics/CGraphicsObject.h"
 
 CSkyBox::CSkyBox()
 {

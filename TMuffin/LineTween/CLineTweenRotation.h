@@ -1,4 +1,6 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+#include "CLineTween.h"
 
 class T_DLL_EXPORT CLineTweenRotation : public CLineTween
 {

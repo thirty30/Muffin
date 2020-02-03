@@ -28,14 +28,13 @@ tbool CResourceManager::Init()
 	this->m_pResourceLoader = new CResourceLoader();
 
 	// Load Meshes
-	this->LoadMesh(E_MODEL_ID_SKYBOX, "../Assets/Models/BaseModels/SkyBox.ply", true);
-	this->LoadMesh(E_MODEL_ID_SHIP, "../Assets/Models/SM_Ship_Stealth_03.ply", true);
-
+	this->LoadMesh(E_MODEL_ID_SKYBOX, "../Assets/Models/BaseModels/SkyBox.ply");
+	this->LoadMesh(E_MODEL_ID_SHIP, "../Assets/Models/SM_Ship_Massive_Transport_01.ply");
 
 	return true;
 }
 
-CMesh* CResourceManager::LoadMesh(EModelID a_eModeID, const tcchar* a_strFileName, tbool a_bWithUV)
+CMesh* CResourceManager::LoadMesh(EModelID a_eModeID, const tcchar* a_strFileName)
 {
 	CMesh* pOldMesh = this->FindMesh(a_eModeID);
 	if (pOldMesh != NULL)
@@ -43,14 +42,7 @@ CMesh* CResourceManager::LoadMesh(EModelID a_eModeID, const tcchar* a_strFileNam
 		return pOldMesh;
 	}
 	CMesh* pMesh = new CMesh();
-	if (a_bWithUV == false)
-	{
-		this->m_pResourceLoader->LoadModelFromPly(a_strFileName, pMesh);
-	}
-	else
-	{
-		this->m_pResourceLoader->LoadModelFromPlyUV(a_strFileName, pMesh);
-	}
+	this->m_pResourceLoader->LoadMesh(a_strFileName, pMesh);
 	this->m_mapID2Mesh[a_eModeID] = pMesh;
 	return pMesh;
 }

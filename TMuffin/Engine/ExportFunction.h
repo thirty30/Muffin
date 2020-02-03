@@ -1,4 +1,6 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+#include "Particle/CParticleEmitter.h"
 
 T_DLL_EXPORT tbool TMuffin_Initialize(n32 a_nWinWidth, n32 a_nWinHigh, const tcchar* a_strWinName);
 T_DLL_EXPORT void TMuffin_Loop();
@@ -22,7 +24,8 @@ T_DLL_EXPORT void TMuffin_RegisterGameLogicCallBack(MuffinGameLogicCallBack a_fu
 
 //------------Register call back function end------------//
 
-
+class CCamera;
+class CSkyBox;
 T_DLL_EXPORT void TMuffin_AddCamera(CCamera* a_pCamera);
 T_DLL_EXPORT f64 TMuffin_GetNowFrameTime();
 T_DLL_EXPORT f32 TMuffin_GetDeltaFrameTime();

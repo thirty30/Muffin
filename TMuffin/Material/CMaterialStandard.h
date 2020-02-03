@@ -1,5 +1,8 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+#include "CMaterialBase.h"
 
+class CTexture;
 class T_DLL_EXPORT CMaterialStandard : public CMaterialBase
 {
 #define TEXTURE_MAX_COUNT 16
@@ -30,4 +33,3 @@ public:
 	T_INLINE void SetSpecularRGBA(glm::vec4 a_vRGBA);
 
 };
-

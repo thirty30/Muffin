@@ -1,4 +1,5 @@
 #pragma once
+#include "TMuffinSysInclude.h"
 
 class CWindow : public CSingleton<CWindow>
 {
@@ -24,4 +25,3 @@ public:
 	GLFWwindow* GetGLFWWindow() { return this->m_pWindow; }
 	tbool WindowShouldClose();
 };
-

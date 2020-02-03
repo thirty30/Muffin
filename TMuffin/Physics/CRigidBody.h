@@ -1,4 +1,6 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+#include "CommonDefine.h"
 
 class CRigidBody
 {
@@ -21,7 +23,7 @@ public:
 		this->m_vForce = glm::vec3(0, 0, 0);
 		this->m_bIsPassive = true;
 
-		this->m_vVelocity = glm::vec3(0 ,0, 0);
+		this->m_vVelocity = glm::vec3(0, 0, 0);
 		this->m_vAccel = glm::vec3(0, 0, 0);
 	}
 	~CRigidBody() {}

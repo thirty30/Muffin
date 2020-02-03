@@ -1,4 +1,5 @@
-#include "pch.h"
+#include "CMaterialDefault.h"
+#include "CMaterialBase.h"
 
 CMaterialDefault::CMaterialDefault()
 {

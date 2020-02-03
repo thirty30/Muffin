@@ -1,4 +1,7 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+#include "CommonDefine.h"
+#include "PhysicsDefine.h"
 
 class T_DLL_EXPORT CColliderBase
 {

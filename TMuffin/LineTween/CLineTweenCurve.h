@@ -1,4 +1,6 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+#include "CLineTween.h"
 
 class T_DLL_EXPORT CLineTweenCurve : public CLineTween
 {
@@ -20,5 +22,4 @@ public:
 	virtual void Update();
 	tbool Init(glm::vec3 a_vP1, glm::vec3 a_vP2, glm::vec3 a_vP3, f32 a_fTime);
 };
-
 

@@ -1,5 +1,9 @@
 #pragma once
+#include "TMuffinSysInclude.h"
+#include "CommonDefine.h"
+#include "ShaderHelper/CShaderHelper.h"
 
+class CTexture;
 class T_DLL_EXPORT CMaterialParam
 {
 public:
@@ -87,3 +91,4 @@ void CMaterial::SetParam(n32 a_nID, T a_v1, T a_v2, T a_v3, T a_v4)
 		break;
 	}
 }
+

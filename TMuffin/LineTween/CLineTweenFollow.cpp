@@ -1,4 +1,6 @@
-#include "pch.h"
+#include "CLineTweenFollow.h"
+#include "Engine/ExportFunction.h"
+#include "GameObject/CGameObject.h"
 
 CLineTweenFollow::CLineTweenFollow(u64 a_nID, CGameObject* a_pParent) : CLineTween(a_nID, a_pParent, E_LINETWEEN_TYPE_FOLLOW)
 {

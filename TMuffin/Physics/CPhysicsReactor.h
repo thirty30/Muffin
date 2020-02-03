@@ -1,5 +1,8 @@
 #pragma once
+#include "TMuffinSysInclude.h"
 
+class CPhysicsObject;
+class SCollisionCallBackInfo;
 class CPhysicsReactor
 {
 private:

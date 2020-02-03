@@ -1,11 +1,13 @@
 #pragma once
+#include "TMuffinSysInclude.h"
 
+class CCamera;
 class CCameraManager
 {
 private:
 	CCamera* m_pSceneCamera;
 public:
-	CCameraManager() 
+	CCameraManager()
 	{
 		this->m_pSceneCamera = NULL;
 	};
@@ -14,7 +16,6 @@ public:
 	inline void AddCamera(CCamera* a_pCamera) { m_pSceneCamera = a_pCamera; }
 	inline CCamera* GetTopCamera() { return m_pSceneCamera; }
 };
-
 
 
 

@@ -1,5 +1,7 @@
 #pragma once
+#include "TMuffinSysInclude.h"
 
+class CLight;
 class CLightManager
 {
 private:
@@ -19,6 +21,5 @@ public:
 
 	void RenderLights(n32 a_nShaderProgramID);
 };
-
 
 

@@ -1,4 +1,5 @@
-#include "pch.h"
+#include "CParticleEmitter.h"
+#include "Engine/Engine.h"
 
 CParticleEmitter::CParticleEmitter()
 {

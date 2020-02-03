@@ -2,7 +2,7 @@
 
 class CResourceManager : public CSingleton<CResourceManager>
 {
-private:
+public:
 	CResourceLoader* m_pResourceLoader;
 	hash_map<EModelID, CMesh*> m_mapID2Mesh;
 
@@ -12,7 +12,7 @@ public:
 
 	tbool Init();
 
-	CMesh* LoadMesh(EModelID a_eModeID, const tcchar* a_strFileName, tbool a_bWithUV = false);
+	CMesh* LoadMesh(EModelID a_eModeID, const tcchar* a_strFileName);
 	CMesh* FindMesh(EModelID a_eModeID);
 	void DeleteMesh(EModelID a_eModeID);
 };

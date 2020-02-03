@@ -1,4 +1,6 @@
-#include "pch.h"
+#include "CWindow.h"
+#include "Engine/Engine.h"
+#include "Graphics/CGraphicsRenderer.h"
 
 T_IMPLEMENT_SINGLETON(CWindow)
 
@@ -57,5 +59,4 @@ tbool CWindow::WindowShouldClose()
 {
 	return glfwWindowShouldClose(this->m_pWindow);
 }
-
 

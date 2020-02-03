@@ -1,4 +1,5 @@
 #pragma once
+#include "TMuffinSysInclude.h"
 
 class T_DLL_EXPORT CCamera
 {
@@ -31,4 +32,7 @@ public:
 		return glm::lookAt(this->m_vPosition, vTowards, this->m_vUpwards);
 	}
 };
+
+
+
 

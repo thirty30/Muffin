@@ -1,4 +1,10 @@
-#include "pch.h"
+#include "ExportFunction.h"
+#include "Engine.h"
+#include "Camera/CCamera.h"
+#include "Camera/CCameraManager.h"
+#include "Particle/CParticleEmitterManager.h"
+#include "SkyBox/CSkyBox.h"
+#include "Graphics/CGraphicsRenderer.h"
 
 tbool TMuffin_Initialize(n32 a_nWinWidth, n32 a_nWinHigh, const tcchar* a_strWinName)
 {

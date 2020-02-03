@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "CMaterialBase.h"
 
 
 CMaterialBase::CMaterialBase()

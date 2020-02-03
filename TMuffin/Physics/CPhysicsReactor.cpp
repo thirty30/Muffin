@@ -1,4 +1,11 @@
-#include "pch.h"
+#include "CPhysicsReactor.h"
+#include "GameObject/CGameObject.h"
+#include "PhysicsHelper.h"
+#include "CRigidBody.h"
+#include "CPhysicsObject.h"
+#include "CColliderBase.h"
+#include "PhysicsHelper.h"
+#include "Engine/Engine.h"
 
 CPhysicsReactor::CPhysicsReactor()
 {

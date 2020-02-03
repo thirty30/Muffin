@@ -1,4 +1,10 @@
-#include "pch.h"
+#include "Engine.h"
+#include "Window/CWindow.h"
+#include "Physics/CPhysicsReactor.h"
+#include "Particle/CParticleEmitterManager.h"
+#include "Particle/CParticleEmitter.h"
+#include "GameObject/CGameObjectManager.h"
+#include "ExportFunction.h"
 
 CMuffin MUFFIN;
 
