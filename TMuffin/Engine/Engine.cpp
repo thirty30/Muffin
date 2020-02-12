@@ -40,7 +40,7 @@ void MuffinMainLoop()
 
 void MuffinPhysicsLoop()
 {
-	MUFFIN.GetPhysicsReactor()->PhysicsLoop();
+	//MUFFIN.GetPhysicsReactor()->PhysicsLoop();
 	if (pExternalPhysicsCallBack != NULL)
 	{
 		pExternalPhysicsCallBack();
@@ -49,16 +49,17 @@ void MuffinPhysicsLoop()
 
 void MuffinGameLogicLoop()
 {
+	MUFFIN.GetGameObjectMgr()->Init();
+	MUFFIN.GetGameObjectMgr()->Update();
 	if (pExternalGameLogicCallBack != NULL)
 	{
 		pExternalGameLogicCallBack();
 	}
-	MUFFIN.GetGameObjectMgr()->Update();
 }
 
 void MuffinRenderingLoop()
 {
-	MUFFIN.GetParticleEmitterMgr()->Update();
+	//MUFFIN.GetParticleEmitterMgr()->Update();
 	MUFFIN.GetWindow()->DrawWindow();
 }
 

@@ -22,14 +22,13 @@ void CLineTweenFollow::Update()
 	f32 fDeltaTime = TMuffin_GetDeltaFrameTime();
 	this->m_fNowTime += fDeltaTime;
 
-	f32 fDis = glm::distance(this->m_pTargetObject->m_vPosition, this->m_pParentObject->m_vPosition);
+	f32 fDis = glm::distance(this->m_pTargetObject->GetTransform().m_vPosition, this->m_pParentObject->GetTransform().m_vPosition);
 	if (fDis <= this->m_fDistance)
 	{
-		this->m_pParentObject->LineTweenDone(this->m_nLineTweenID);
 		return;
 	}
-	glm::vec3 vDirection = glm::normalize(this->m_pTargetObject->m_vPosition - this->m_pParentObject->m_vPosition);
-	this->m_pParentObject->m_vPosition += this->m_fVelocity * vDirection * fDeltaTime;
+	glm::vec3 vDirection = glm::normalize(this->m_pTargetObject->GetTransform().m_vPosition - this->m_pParentObject->GetTransform().m_vPosition);
+	this->m_pParentObject->GetTransform().m_vPosition += this->m_fVelocity * vDirection * fDeltaTime;
 }
 
 tbool CLineTweenFollow::Init(CGameObject* a_pTarget, f32 a_fDistance, f32 a_fVelocity)

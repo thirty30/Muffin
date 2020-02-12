@@ -136,29 +136,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Actor\CActor.h" />
     <ClInclude Include="CommonDefine.h" />
     <ClInclude Include="Control\CCameraControl.h" />
     <ClInclude Include="Control\CControl.h" />
-    <ClInclude Include="Control\CShipControl.h" />
     <ClInclude Include="Game\CGame.h" />
     <ClInclude Include="ResourceManager\CResourceManager.h" />
     <ClInclude Include="Rof\CRofManager.h" />
     <ClInclude Include="Rof\RofTable.h" />
     <ClInclude Include="Rof\TRofTableDefine.h" />
     <ClInclude Include="Rof\TRofTableSerializeDefine.h" />
-    <ClInclude Include="Scene\CScene.h" />
+    <ClInclude Include="Scene\Scene1\CScene1.h" />
+    <ClInclude Include="Scene\CSceneBase.h" />
+    <ClInclude Include="Scene\CSceneManager.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Actor\CActor.cpp" />
     <ClCompile Include="Control\CCameraControl.cpp" />
     <ClCompile Include="Control\CControl.cpp" />
-    <ClCompile Include="Control\CShipControl.cpp" />
     <ClCompile Include="Game\CGame.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ResourceManager\CResourceManager.cpp" />
-    <ClCompile Include="Scene\CScene.cpp" />
+    <ClCompile Include="Scene\Scene1\CScene1.cpp" />
+    <ClCompile Include="Scene\CSceneManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>

@@ -1,36 +1,28 @@
 #pragma once
 #include "TMuffinSysInclude.h"
+#include "Component/CComponentBase.h"
 
-class T_DLL_EXPORT CCamera
+class CGameObject;
+class T_DLL_EXPORT CCamera : public CComponentBase
 {
 public:
-	glm::vec3 m_vPosition;
-	glm::vec3 m_vRotation;
-	glm::vec3 m_vScale;
-
 	f32 m_fFieldOfViewRadians;
 	f32 m_fScreenRatio;
 	f32 m_fViewDisBegin;
 	f32 m_fViewDisEnd;
 	glm::vec3 m_vTowards;
 	glm::vec3 m_vUpwards;
-
 	n32 m_nDepth;
+
+protected:
+	virtual void Init() override;
+
 public:
-	CCamera(u64 a_nGUID, f32 a_fViewRadians, f32 a_fScreenRatio, f32 a_fViewDisBegin, f32 a_fViewDisEnd);
+	CCamera();
 	~CCamera();
 
-	inline glm::mat4 GetPerspective()
-	{
-		return glm::perspective(this->m_fFieldOfViewRadians, this->m_fScreenRatio, this->m_fViewDisBegin, this->m_fViewDisEnd);
-	}
-
-	inline glm::mat4 GetView()
-	{
-		glm::vec3 vTowards = this->m_vPosition + this->m_vTowards;
-		//glm::quat qView = glm::quatLookAt(vTowards, this->m_vUpwards);
-		return glm::lookAt(this->m_vPosition, vTowards, this->m_vUpwards);
-	}
+	T_INLINE glm::mat4 GetPerspective();
+	T_INLINE glm::mat4 GetView();
 };
 
 

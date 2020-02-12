@@ -2,7 +2,7 @@
 #include "Utility/CGUIDMaker.h"
 #include "Window/CWindow.h"
 #include "GameObject/CGameObjectManager.h"
-#include "Graphics/CGraphicsRenderer.h"
+#include "Graphics/CGraphicsWorld.h"
 #include "Camera/CCameraManager.h"
 #include "Light/CLightManager.h"
 #include "Physics/CPhysicsReactor.h"
@@ -14,10 +14,10 @@ CMuffin::CMuffin()
 	this->m_fNowFrameTime = 0;
 	this->m_fDeltaFrameTime = 0;
 
-	this->m_pGUIDMaker = new CGUIDMaker();
+	this->m_pGUIDMaker = new CGUIDMaker(E_GUID_MAX);
 	this->m_pWindow = new CWindow();
 	this->m_pGameObjectManager = new CGameObjectManager();
-	this->m_pGraphicsRenderer = new CGraphicsRenderer();
+	this->m_pGraphicsWorld = new CGraphicsWorld();
 	this->m_pCameraManager = new CCameraManager();
 	this->m_pLightManager = new CLightManager();
 	this->m_pPhysicsReactor = new CPhysicsReactor();
@@ -30,7 +30,7 @@ CMuffin::~CMuffin()
 	delete this->m_pGUIDMaker;
 	delete this->m_pWindow;
 	delete this->m_pGameObjectManager;
-	delete this->m_pGraphicsRenderer;
+	delete this->m_pGraphicsWorld;
 	delete this->m_pCameraManager;
 	delete this->m_pLightManager;
 	delete this->m_pPhysicsReactor;
@@ -39,7 +39,7 @@ CMuffin::~CMuffin()
 	this->m_pGUIDMaker = NULL;
 	this->m_pWindow = NULL;
 	this->m_pGameObjectManager = NULL;
-	this->m_pGraphicsRenderer = NULL;
+	this->m_pGraphicsWorld = NULL;
 	this->m_pCameraManager = NULL;
 	this->m_pLightManager = NULL;
 	this->m_pPhysicsReactor = NULL;

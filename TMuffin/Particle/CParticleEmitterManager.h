@@ -11,9 +11,9 @@ public:
 	CParticleEmitterManager();
 	~CParticleEmitterManager();
 
-	CParticleEmitter* CreateEmitter();
-	CParticleEmitter* FindEmitterByID(u64 a_nGUID);
-	void DeleteEmitter(CParticleEmitter* a_pGameObject);
+	void AddEmitter(CParticleEmitter* a_pComponent);
+	void RemoveEmitter(CParticleEmitter* a_pComponent);
+	CParticleEmitter* FindEmitter(u64 a_nGUID);
 	void Update();
 };
 

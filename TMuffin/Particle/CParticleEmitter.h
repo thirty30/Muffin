@@ -2,19 +2,22 @@
 #include "TMuffinSysInclude.h"
 #include "CommonDefine.h"
 #include "CParticle.h"
+#include "Graphics/CGraphicsComponent.h"
 
 class CMaterial;
 class CMesh;
-class T_DLL_EXPORT CParticleEmitter
+class T_DLL_EXPORT CParticleEmitter : public CComponentBase
 {
 private:
-	u64 m_nMuffinEngineGUID;
-	TLinkedList<CParticle> m_objFreeList;
-	TLinkedList<CParticle> m_objEmittedList;
+	TLinkedList<CParticle*> m_objFreeList;
+	TLinkedList<CParticle*> m_objEmittedList;
 	f64 m_fLastEmitTime;
 	EParticleMode m_eMode;
 	glm::vec3 m_vCameraPos;
 	u32 m_nEmittedCount;
+
+protected:
+	virtual void Init() override;
 
 public:
 	friend class CParticleEmitterManager;

@@ -8,11 +8,11 @@ namespace TCore
 		class T_DLL_EXPORT TLinkedNode
 		{
 		public:
-			T* m_pValue;
+			T m_pValue;
 			TLinkedNode<T>* m_pPrevious;
 			TLinkedNode<T>* m_pNext;
 
-			TLinkedNode(T* a_pValue)
+			TLinkedNode(T a_pValue)
 			{
 				this->m_pValue = a_pValue;
 				this->m_pPrevious = NULL;

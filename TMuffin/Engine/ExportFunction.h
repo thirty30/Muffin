@@ -24,12 +24,9 @@ T_DLL_EXPORT void TMuffin_RegisterGameLogicCallBack(MuffinGameLogicCallBack a_fu
 
 //------------Register call back function end------------//
 
-class CCamera;
 class CSkyBox;
-T_DLL_EXPORT void TMuffin_AddCamera(CCamera* a_pCamera);
 T_DLL_EXPORT f64 TMuffin_GetNowFrameTime();
 T_DLL_EXPORT f32 TMuffin_GetDeltaFrameTime();
-T_DLL_EXPORT CParticleEmitter* TMuffin_CreateParticleEmitter();
 T_DLL_EXPORT void TMuffin_SetSkyBox(CSkyBox* a_pSkyBox);
 
 

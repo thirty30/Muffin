@@ -1,6 +1,6 @@
 #include "CWindow.h"
 #include "Engine/Engine.h"
-#include "Graphics/CGraphicsRenderer.h"
+#include "Graphics/CGraphicsWorld.h"
 
 T_IMPLEMENT_SINGLETON(CWindow)
 
@@ -43,7 +43,7 @@ void CWindow::DrawWindow()
 	glViewport(0, 0, nWidth, nHeight);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		//clear both the colour(what we see) buffer and  the depth(z) buffer
 
-	MUFFIN.GetGraphicsRenderer()->GraphicsLoop();
+	MUFFIN.GetGraphicsWorld()->GraphicsLoop();
 
 	glfwSwapBuffers(this->m_pWindow);
 }

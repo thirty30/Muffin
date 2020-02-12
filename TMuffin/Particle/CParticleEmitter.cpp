@@ -1,9 +1,13 @@
 #include "CParticleEmitter.h"
 #include "Engine/Engine.h"
 
+void CParticleEmitter::Init()
+{
+
+}
+
 CParticleEmitter::CParticleEmitter()
 {
-	this->m_nMuffinEngineGUID = 0;
 	this->m_bEnable = true;
 	this->m_fLastEmitTime = 0;
 	this->m_eMode = E_PARTICLE_MODE_NORMAL;
@@ -45,10 +49,11 @@ void CParticleEmitter::InitializeEmitter()
 	{
 		CParticle* pParticle = new CParticle();
 		pParticle->SetEnable(false);
-		pParticle->InitRenderer(this->m_pMesh, this->m_pMaterial);
-		pParticle->SetRenderMode(E_RENDER_MODE_FILL);
+		CGraphicsComponent* pGraphics = static_cast<CGraphicsComponent*>(pParticle->AddComponent<CGraphicsComponent>());
+		pGraphics->InitRenderer(this->m_pMesh, this->m_pMaterial);
+		pGraphics->SetRenderMode(E_RENDER_MODE_FILL);
 
-		TLinkedNode<CParticle>* pNode = new TLinkedNode<CParticle>(pParticle);
+		TLinkedNode<CParticle*>* pNode = new TLinkedNode<CParticle*>(pParticle);
 		this->m_objFreeList.PushBack(pNode);
 	}
 }
@@ -62,14 +67,15 @@ void CParticleEmitter::EmitParticle()
 	n32 nParticleNum = TRandInRange(this->m_nMinEmitCount, this->m_nMaxEmitCount);
 	for (n32 i = 0; i < nParticleNum; i++)
 	{
-		TLinkedNode<CParticle>* pNode = this->m_objFreeList.PopBack();
+		TLinkedNode<CParticle*>* pNode = this->m_objFreeList.PopBack();
 		if (pNode == NULL)
 		{
 			CParticle* pParticle = new CParticle();
-			pParticle->InitRenderer(this->m_pMesh, this->m_pMaterial);
-			pParticle->SetRenderMode(E_RENDER_MODE_FILL);
+			CGraphicsComponent* pGraphics = static_cast<CGraphicsComponent*>(pParticle->AddComponent<CGraphicsComponent>());
+			pGraphics->InitRenderer(this->m_pMesh, this->m_pMaterial);
+			pGraphics->SetRenderMode(E_RENDER_MODE_FILL);
 
-			pNode = new TLinkedNode<CParticle>(pParticle);
+			pNode = new TLinkedNode<CParticle*>(pParticle);
 		}
 		this->AwakeParticle(pNode->m_pValue);
 		this->m_objEmittedList.PushBack(pNode);
@@ -91,13 +97,14 @@ void CParticleEmitter::AwakeParticle(CParticle* a_pParticle)
 	a_pParticle->m_vAcceleration.y = TRandInRange(this->m_vMinAcceleration.y, this->m_vMaxAcceleration.y);
 	a_pParticle->m_vAcceleration.z = TRandInRange(this->m_vMinAcceleration.z, this->m_vMaxAcceleration.z);
 
-	a_pParticle->m_vPosition.x = this->m_vPosition.x + TRandInRange(this->m_vMinDeltaPosition.x, this->m_vMaxDeltaPosition.x);
-	a_pParticle->m_vPosition.y = this->m_vPosition.y + TRandInRange(this->m_vMinDeltaPosition.y, this->m_vMaxDeltaPosition.y);
-	a_pParticle->m_vPosition.z = this->m_vPosition.z + TRandInRange(this->m_vMinDeltaPosition.z, this->m_vMaxDeltaPosition.z);
-
-	a_pParticle->m_vScale.x = TRandInRange(this->m_vMinScale.x, this->m_vMaxScale.x);
-	a_pParticle->m_vScale.y = TRandInRange(this->m_vMinScale.y, this->m_vMaxScale.y);
-	a_pParticle->m_vScale.z = TRandInRange(this->m_vMinScale.z, this->m_vMaxScale.z);
+	CTransform& rTrans = a_pParticle->GetTransform();
+	rTrans.m_vPosition.x = this->m_vPosition.x + TRandInRange(this->m_vMinDeltaPosition.x, this->m_vMaxDeltaPosition.x);
+	rTrans.m_vPosition.y = this->m_vPosition.y + TRandInRange(this->m_vMinDeltaPosition.y, this->m_vMaxDeltaPosition.y);
+	rTrans.m_vPosition.z = this->m_vPosition.z + TRandInRange(this->m_vMinDeltaPosition.z, this->m_vMaxDeltaPosition.z);
+	
+	rTrans.m_vScale.x = TRandInRange(this->m_vMinScale.x, this->m_vMaxScale.x);
+	rTrans.m_vScale.y = TRandInRange(this->m_vMinScale.y, this->m_vMaxScale.y);
+	rTrans.m_vScale.z = TRandInRange(this->m_vMinScale.z, this->m_vMaxScale.z);
 
 	glm::vec4 vRGBA;
 	vRGBA.r = TRandInRange(this->m_vMinColor.r, this->m_vMaxColor.r);
@@ -113,26 +120,27 @@ void CParticleEmitter::Update()
 		return;
 	}
 	f32 fDeltaTime = MUFFIN.GetDeltaFrameTime();
-	TLinkedNode<CParticle>* pNode = this->m_objEmittedList.GetHeadNode();
+	TLinkedNode<CParticle*>* pNode = this->m_objEmittedList.GetHeadNode();
 	while (pNode != NULL)
 	{
 		CParticle* pCurParticle = pNode->m_pValue;
+		CTransform& rTrans = pCurParticle->GetTransform();
 		glm::vec3 vDis = pCurParticle->m_vVelocity * fDeltaTime + 0.5f * pCurParticle->m_vAcceleration * fDeltaTime * fDeltaTime;
-		pCurParticle->m_vPosition += vDis;
+		rTrans.m_vPosition += vDis;
 		pCurParticle->m_vVelocity += pCurParticle->m_vAcceleration * fDeltaTime;
 		pCurParticle->m_fLifeTime -= fDeltaTime;
 
 		// Bill Board
 		if (this->m_eMode == E_PARTICLE_MODE_BILLBOARD)
 		{
-			f32 fAngle = glm::atan(pCurParticle->m_vPosition.x - this->m_vCameraPos.x, pCurParticle->m_vPosition.z - this->m_vCameraPos.z);
-			pCurParticle->SetRotation(glm::vec3(0.0f, fAngle, 0.0f));
+			f32 fAngle = glm::atan(rTrans.m_vPosition.x - this->m_vCameraPos.x, rTrans.m_vPosition.z - this->m_vCameraPos.z);
+			rTrans.SetRotation(glm::vec3(0.0f, fAngle, 0.0f));
 		}
 
 		if (pCurParticle->m_fLifeTime <= 0)
 		{
 			pCurParticle->SetEnable(false);
-			TLinkedNode<CParticle>* pRemoveNode = pNode;
+			TLinkedNode<CParticle*>* pRemoveNode = pNode;
 			pNode = pNode->m_pNext;
 			this->m_objEmittedList.RemoveNode(pRemoveNode);
 			this->m_objFreeList.PushBack(pRemoveNode);

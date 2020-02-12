@@ -36,9 +36,9 @@ public:
 	glm::vec4 m_vSpecularColor;
 	f32 m_fSpecularPower;
 
-public:
 	friend class CLightManager;
 
+public: 
 	CLight(ELightType a_eType);
 	virtual ~CLight() {}
 	virtual void BindShader(n32 a_nShaderProgramID) T_PURE;

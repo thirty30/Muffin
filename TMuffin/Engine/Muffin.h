@@ -5,7 +5,7 @@ class CGUIDMaker;
 class CGUIDMaker;
 class CWindow;
 class CGameObjectManager;
-class CGraphicsRenderer;
+class CGraphicsWorld;
 class CCameraManager;
 class CLightManager;
 class CPhysicsReactor;
@@ -21,7 +21,7 @@ private:
 	CGUIDMaker* m_pGUIDMaker;
 	CWindow* m_pWindow;
 	CGameObjectManager* m_pGameObjectManager;
-	CGraphicsRenderer* m_pGraphicsRenderer;
+	CGraphicsWorld* m_pGraphicsWorld;
 	CCameraManager* m_pCameraManager;
 	CLightManager* m_pLightManager;
 	CPhysicsReactor* m_pPhysicsReactor;
@@ -40,7 +40,7 @@ public:
 	T_INLINE CGUIDMaker* GetGUIDMaker() { return this->m_pGUIDMaker; }
 	T_INLINE CWindow* GetWindow() { return this->m_pWindow; }
 	T_INLINE CGameObjectManager* GetGameObjectMgr() { return this->m_pGameObjectManager; }
-	T_INLINE CGraphicsRenderer* GetGraphicsRenderer() { return this->m_pGraphicsRenderer; }
+	T_INLINE CGraphicsWorld* GetGraphicsWorld() { return this->m_pGraphicsWorld; }
 	T_INLINE CCameraManager* GetCameraMgr() { return this->m_pCameraManager; }
 	T_INLINE CLightManager* GetLightMgr() { return this->m_pLightManager; }
 	T_INLINE CPhysicsReactor* GetPhysicsReactor() { return this->m_pPhysicsReactor; }

@@ -24,35 +24,34 @@ void CLineTweenMove::Update()
 	if (this->m_bIsEnable == false)
 	{
 		this->m_bIsEnable = true;
-		this->m_pParentObject->m_vPosition = this->m_vStartPosition;
+		this->m_pParentObject->GetTransform().m_vPosition = this->m_vStartPosition;
 	}
 
 	f32 fDeltaTime = TMuffin_GetDeltaFrameTime();
 	this->m_fNowTime += fDeltaTime;
 
-	f32 fNowDis = glm::distance(this->m_pParentObject->m_vPosition, this->m_vStartPosition);
+	f32 fNowDis = glm::distance(this->m_pParentObject->GetTransform().m_vPosition, this->m_vStartPosition);
 	
 	if (fNowDis < this->m_fEaseDis)
 	{
 		glm::vec3 vDis = this->m_vVelocity * fDeltaTime + 0.5f * this->m_vAcc * fDeltaTime * fDeltaTime;
 		this->m_vVelocity += this->m_vAcc * fDeltaTime;
-		this->m_pParentObject->m_vPosition += vDis;
+		this->m_pParentObject->GetTransform().m_vPosition += vDis;
 	}
 	else if (fNowDis < this->m_fTotalDis - this->m_fEaseDis)
 	{
-		this->m_pParentObject->m_vPosition += this->m_vMidVeloctiy * fDeltaTime;
+		this->m_pParentObject->GetTransform().m_vPosition += this->m_vMidVeloctiy * fDeltaTime;
 	}
 	else
 	{
 		glm::vec3 vDis = this->m_vVelocity * fDeltaTime + 0.5f * (-this->m_vAcc) * fDeltaTime * fDeltaTime;
 		this->m_vVelocity += (-this->m_vAcc) * fDeltaTime;
-		this->m_pParentObject->m_vPosition += vDis;
+		this->m_pParentObject->GetTransform().m_vPosition += vDis;
 	}
 	
 	if (fNowDis >= this->m_fTotalDis)
 	{
 		this->m_bIsDone = true;
-		this->m_pParentObject->LineTweenDone(this->m_nLineTweenID);
 	}
 }
 

@@ -1,5 +1,5 @@
 #include "CMaterial.h"
-#include "Texture/CTexture.h"
+#include "Graphics/Texture/CTexture.h"
 
 CMaterial::CMaterial()
 {

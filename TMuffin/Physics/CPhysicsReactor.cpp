@@ -97,7 +97,7 @@ void CPhysicsReactor::CalcRigidBodyMotion()
 		// S = vt + (1/2)at2
 		glm::vec3 vDis = pRigidBody->m_vVelocity * fDeltaTime + 0.5f * vNewAccel * fDeltaTime * fDeltaTime;
 		pRigidBody->m_vVelocity += vNewAccel * fDeltaTime;
-		pPhysicsObj->m_pGameObject->m_vPosition += vDis;
+		pPhysicsObj->m_pGameObject->GetTransform().m_vPosition += vDis;
 	}
 }
 
@@ -165,7 +165,7 @@ void CPhysicsReactor::CalcCollision()
 			}
 
 			pSrcBC->SetCenter(pSrcBC->GetCenter() + rCollisionInfo.m_vHitNormal * rCollisionInfo.m_fIntersectDis);
-			pSrcPhysicsObj->m_pGameObject->m_vPosition = pSrcBC->GetCenter();
+			pSrcPhysicsObj->m_pGameObject->GetTransform().m_vPosition = pSrcBC->GetCenter();
 			pSrcRB->m_vVelocity = glm::reflect(pSrcRB->m_vVelocity, rCollisionInfo.m_vHitNormal);
 			pSrcRB->m_vVelocity *= glm::min(1.0f, pSrcBC->GetElastic() * pTarBC->GetElastic());
 			
@@ -174,7 +174,7 @@ void CPhysicsReactor::CalcCollision()
 			{
 				
 				pTarBC->SetCenter(pTarBC->GetCenter() + (-rCollisionInfo.m_vHitNormal) * 0.01f);
-				pTarPhysicsObj->m_pGameObject->m_vPosition = pTarBC->GetCenter();
+				pTarPhysicsObj->m_pGameObject->GetTransform().m_vPosition = pTarBC->GetCenter();
 				pTarRB->m_vVelocity = glm::reflect(pTarRB->m_vVelocity, -rCollisionInfo.m_vHitNormal);
 				pTarRB->m_vVelocity *= glm::min(1.0f, pSrcBC->GetElastic() * pTarBC->GetElastic());
 			}

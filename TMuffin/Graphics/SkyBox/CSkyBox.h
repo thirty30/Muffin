@@ -3,17 +3,18 @@
 #include "GameObject/CGameObject.h"
 #include "ShaderHelper/CShaderHelper.h"
 
-class CMeshDrawInfo;
+class SDrawMesh;
 class CMesh;
-class T_DLL_EXPORT CSkyBox : public CGameObject
+class T_DLL_EXPORT CSkyBox
 {
 private:
 	CShaderProgram m_Shader;
-	CMeshDrawInfo* m_pMeshDrawInfo;
+	SDrawMesh* m_pDrawMesh;
 	GLuint m_nTextureID;
 	GLuint m_nULSampler;
+	glm::vec3 m_vScale;
 
-	friend class CGraphicsRenderer;
+	friend class CGraphicsWorld;
 
 private:
 	void InitMesh(const CMesh* a_pMesh);

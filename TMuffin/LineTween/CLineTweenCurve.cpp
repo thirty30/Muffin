@@ -25,16 +25,16 @@ void CLineTweenCurve::Update()
 	if (this->m_bIsEnable == false)
 	{
 		this->m_bIsEnable = true;
-		this->m_pParentObject->m_vPosition = this->m_vCurvePoint1;
+		this->m_pParentObject->GetTransform().m_vPosition = this->m_vCurvePoint1;
 	}
 
 	f32 fDeltaTime = TMuffin_GetDeltaFrameTime();
 	this->m_fNowTime += fDeltaTime;
 
 	glm::vec3 vTempTarget = this->m_vecBezier[this->m_nBezierIndex];
-	glm::vec3 vDirction = glm::normalize(vTempTarget - this->m_pParentObject->m_vPosition);
+	glm::vec3 vDirction = glm::normalize(vTempTarget - this->m_pParentObject->GetTransform().m_vPosition);
 
-	this->m_pParentObject->m_vPosition += this->m_fVelocity * vDirction * fDeltaTime;
+	this->m_pParentObject->GetTransform().m_vPosition += this->m_fVelocity * vDirction * fDeltaTime;
 
 	f32 fTime = (this->m_fTargetTime / (this->m_vecBezier.size() - 1) * this->m_nBezierIndex);
 	if (this->m_fNowTime >= fTime)
@@ -45,7 +45,6 @@ void CLineTweenCurve::Update()
 	if (this->m_nBezierIndex >= this->m_vecBezier.size())
 	{
 		this->m_bIsDone = true;
-		this->m_pParentObject->LineTweenDone(this->m_nLineTweenID);
 	}
 }
 

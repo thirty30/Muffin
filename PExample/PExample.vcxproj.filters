@@ -6,20 +6,11 @@
     <ClInclude Include="Game\CGame.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\CScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Control\CCameraControl.h">
-      <Filter>Control</Filter>
-    </ClInclude>
     <ClInclude Include="Control\CControl.h">
       <Filter>Control</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager\CResourceManager.h">
       <Filter>ResourceManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Actor\CActor.h">
-      <Filter>Actor</Filter>
     </ClInclude>
     <ClInclude Include="Rof\CRofManager.h">
       <Filter>Rof</Filter>
@@ -33,7 +24,12 @@
     <ClInclude Include="Rof\TRofTableSerializeDefine.h">
       <Filter>Rof</Filter>
     </ClInclude>
-    <ClInclude Include="Control\CShipControl.h">
+    <ClInclude Include="Scene\CSceneManager.h" />
+    <ClInclude Include="Scene\CSceneBase.h" />
+    <ClInclude Include="Scene\Scene1\CScene1.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\CCameraControl.h">
       <Filter>Control</Filter>
     </ClInclude>
   </ItemGroup>
@@ -43,22 +39,17 @@
     <ClCompile Include="Game\CGame.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\CScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Control\CCameraControl.cpp">
-      <Filter>Control</Filter>
-    </ClCompile>
     <ClCompile Include="Control\CControl.cpp">
       <Filter>Control</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager\CResourceManager.cpp">
       <Filter>ResourceManager</Filter>
     </ClCompile>
-    <ClCompile Include="Actor\CActor.cpp">
-      <Filter>Actor</Filter>
+    <ClCompile Include="Scene\CSceneManager.cpp" />
+    <ClCompile Include="Scene\Scene1\CScene1.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Control\CShipControl.cpp">
+    <ClCompile Include="Control\CCameraControl.cpp">
       <Filter>Control</Filter>
     </ClCompile>
   </ItemGroup>

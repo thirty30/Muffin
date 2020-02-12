@@ -1,9 +1,9 @@
 #pragma once
 #include "TMuffinSysInclude.h"
 #include "GameObject/CGameObject.h"
-#include "Graphics/CGraphicsObject.h"
+#include "Graphics/CGraphicsComponent.h"
 
-class CParticle : public CGameObject, public CGraphicsObject
+class CParticle : public CGameObject
 {
 public:
 	glm::vec3 m_vAcceleration;

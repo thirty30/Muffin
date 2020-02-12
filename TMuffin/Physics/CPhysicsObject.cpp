@@ -14,7 +14,6 @@
 
 CPhysicsObject::CPhysicsObject(CGameObject* a_pGameObject)
 {
-	this->m_nMuffinPhysicsObectGUID = MUFFIN.GetGUIDMaker()->GenerateGUID(E_GUID_TYPE_PHYSICS_OBJECT);
 	this->m_pGameObject = a_pGameObject;
 	this->m_pRigidBody = NULL;
 	this->m_pCollider = NULL;
@@ -40,7 +39,7 @@ void CPhysicsObject::RefreshColliderPostion()
 	{
 		return;
 	}
-	this->m_pCollider->SetCenter(this->m_pGameObject->m_vPosition);
+	this->m_pCollider->SetCenter(this->m_pGameObject->GetTransform().m_vPosition);
 }
 
 CRigidBody* CPhysicsObject::CreateRigidBody()

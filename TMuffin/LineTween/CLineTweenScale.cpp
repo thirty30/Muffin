@@ -22,18 +22,17 @@ void CLineTweenScale::Update()
 	if (this->m_bIsEnable == false)
 	{
 		this->m_bIsEnable = true;
-		this->m_pParentObject->m_vScale = this->m_vStartScale;
+		this->m_pParentObject->GetTransform().m_vScale = this->m_vStartScale;
 	}
 
 	f32 fDeltaTime = TMuffin_GetDeltaFrameTime();
 	this->m_fNowTime += fDeltaTime;
 
-	this->m_pParentObject->m_vScale += this->m_vVelocity * fDeltaTime;
+	this->m_pParentObject->GetTransform().m_vScale += this->m_vVelocity * fDeltaTime;
 
 	if (this->m_fNowTime >= this->m_fTargetTime)
 	{
 		this->m_bIsDone = true;
-		this->m_pParentObject->LineTweenDone(this->m_nLineTweenID);
 	}
 }
 

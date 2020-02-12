@@ -22,7 +22,7 @@ void CLineTweenRotation::Update()
 	if (this->m_bIsEnable == false)
 	{
 		this->m_bIsEnable = true;
-		this->m_pParentObject->SetRotation(m_qStartRotation);
+		this->m_pParentObject->GetTransform().SetRotation(m_qStartRotation);
 	}
 
 	f32 fDeltaTime = TMuffin_GetDeltaFrameTime();
@@ -30,12 +30,11 @@ void CLineTweenRotation::Update()
 
 	f32 fAmountOfRotationCompleted = this->m_fNowTime / this->m_fTargetTime;
 	glm::quat qCurrentRotation = glm::slerp(this->m_qStartRotation, this->m_qEndRotation, fAmountOfRotationCompleted);
-	this->m_pParentObject->SetRotation(qCurrentRotation);
+	this->m_pParentObject->GetTransform().SetRotation(qCurrentRotation);
 
 	if (this->m_fNowTime >= this->m_fTargetTime)
 	{
 		this->m_bIsDone = true;
-		this->m_pParentObject->LineTweenDone(this->m_nLineTweenID);
 	}
 }
 

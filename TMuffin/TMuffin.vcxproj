@@ -31,8 +31,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Graphics\CGraphicsObject.cpp" />
-    <ClCompile Include="Graphics\CGraphicsRenderer.cpp" />
+    <ClCompile Include="Graphics\CGraphicsComponent.cpp" />
+    <ClCompile Include="Graphics\CGraphicsWorld.cpp" />
     <ClCompile Include="Light\CLight.cpp" />
     <ClCompile Include="Light\CLightManager.cpp" />
     <ClCompile Include="LineTween\CLineTweenCurve.cpp" />
@@ -40,11 +40,11 @@
     <ClCompile Include="LineTween\CLineTweenMove.cpp" />
     <ClCompile Include="LineTween\CLineTweenRotation.cpp" />
     <ClCompile Include="LineTween\CLineTweenScale.cpp" />
-    <ClCompile Include="Material\CMaterial.cpp" />
-    <ClCompile Include="Material\CMaterialBase.cpp" />
-    <ClCompile Include="Material\CMaterialDefault.cpp" />
-    <ClCompile Include="Material\CMaterialStandard.cpp" />
-    <ClCompile Include="Mesh\CMesh.cpp" />
+    <ClCompile Include="Graphics\Material\CMaterial.cpp" />
+    <ClCompile Include="Graphics\Material\CMaterialBase.cpp" />
+    <ClCompile Include="Graphics\Material\CMaterialDefault.cpp" />
+    <ClCompile Include="Graphics\Material\CMaterialStandard.cpp" />
+    <ClCompile Include="Graphics\Mesh\CMesh.cpp" />
     <ClCompile Include="Particle\CParticle.cpp" />
     <ClCompile Include="Particle\CParticleEmitter.cpp" />
     <ClCompile Include="Particle\CParticleEmitterManager.cpp" />
@@ -60,8 +60,8 @@
     <ClCompile Include="Physics\PhysicsHelper.cpp" />
     <ClCompile Include="ResourceLoader\CResourceLoader.cpp" />
     <ClCompile Include="ShaderHelper\CShaderHelper.cpp" />
-    <ClCompile Include="SkyBox\CSkyBox.cpp" />
-    <ClCompile Include="Texture\CTexture.cpp" />
+    <ClCompile Include="Graphics\SkyBox\CSkyBox.cpp" />
+    <ClCompile Include="Graphics\Texture\CTexture.cpp" />
     <ClCompile Include="Transform\CTransform.cpp" />
     <ClCompile Include="Window\CWindow.cpp" />
   </ItemGroup>
@@ -69,14 +69,15 @@
     <ClInclude Include="Camera\CCamera.h" />
     <ClInclude Include="Camera\CCameraManager.h" />
     <ClInclude Include="CommonDefine.h" />
-    <ClInclude Include="Component\IComponent.h" />
+    <ClInclude Include="Component\CComponentBase.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\ExportFunction.h" />
     <ClInclude Include="Engine\Muffin.h" />
     <ClInclude Include="GameObject\CGameObject.h" />
     <ClInclude Include="GameObject\CGameObjectManager.h" />
-    <ClInclude Include="Graphics\CGraphicsObject.h" />
-    <ClInclude Include="Graphics\CGraphicsRenderer.h" />
+    <ClInclude Include="Graphics\CGraphicsComponent.h" />
+    <ClInclude Include="Graphics\CGraphicsWorld.h" />
+    <ClInclude Include="Graphics\GraphicsDefine.h" />
     <ClInclude Include="Light\CLight.h" />
     <ClInclude Include="Light\CLightManager.h" />
     <ClInclude Include="LineTween\CLineTweenCurve.h" />
@@ -85,11 +86,11 @@
     <ClInclude Include="LineTween\CLineTween.h" />
     <ClInclude Include="LineTween\CLineTweenRotation.h" />
     <ClInclude Include="LineTween\CLineTweenScale.h" />
-    <ClInclude Include="Material\CMaterial.h" />
-    <ClInclude Include="Material\CMaterialBase.h" />
-    <ClInclude Include="Material\CMaterialDefault.h" />
-    <ClInclude Include="Material\CMaterialStandard.h" />
-    <ClInclude Include="Mesh\CMesh.h" />
+    <ClInclude Include="Graphics\Material\CMaterial.h" />
+    <ClInclude Include="Graphics\Material\CMaterialBase.h" />
+    <ClInclude Include="Graphics\Material\CMaterialDefault.h" />
+    <ClInclude Include="Graphics\Material\CMaterialStandard.h" />
+    <ClInclude Include="Graphics\Mesh\CMesh.h" />
     <ClInclude Include="Particle\CParticle.h" />
     <ClInclude Include="Particle\CParticleEmitter.h" />
     <ClInclude Include="Particle\CParticleEmitterManager.h" />
@@ -107,8 +108,8 @@
     <ClInclude Include="ResourceLoader\CResourceLoader.h" />
     <ClInclude Include="Scene\CScene.h" />
     <ClInclude Include="ShaderHelper\CShaderHelper.h" />
-    <ClInclude Include="SkyBox\CSkyBox.h" />
-    <ClInclude Include="Texture\CTexture.h" />
+    <ClInclude Include="Graphics\SkyBox\CSkyBox.h" />
+    <ClInclude Include="Graphics\Texture\CTexture.h" />
     <ClInclude Include="TMuffin.h" />
     <ClInclude Include="Transform\CTransform.h" />
     <ClInclude Include="TMuffinSysInclude.h" />

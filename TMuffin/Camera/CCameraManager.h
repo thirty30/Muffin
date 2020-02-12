@@ -2,19 +2,17 @@
 #include "TMuffinSysInclude.h"
 
 class CCamera;
-class CCameraManager
+class T_DLL_EXPORT CCameraManager
 {
 private:
 	CCamera* m_pSceneCamera;
 public:
-	CCameraManager()
-	{
-		this->m_pSceneCamera = NULL;
-	};
-	~CCameraManager() {};
+	CCameraManager();;
+	~CCameraManager();;
 
-	inline void AddCamera(CCamera* a_pCamera) { m_pSceneCamera = a_pCamera; }
-	inline CCamera* GetTopCamera() { return m_pSceneCamera; }
+	T_INLINE void AddCamera(CCamera* a_pCamera);
+	T_INLINE void RemoveCamera(CCamera* a_pCamera);
+	T_INLINE CCamera* GetTopCamera();
 };
 
 

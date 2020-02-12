@@ -1,32 +1,35 @@
-#include "CGraphicsRenderer.h"
-#include "CGraphicsObject.h"
+#include "CGraphicsWorld.h"
+#include "CGraphicsComponent.h"
 #include "SkyBox/CSkyBox.h"
 #include "Mesh/CMesh.h"
 #include "Engine/Engine.h"
 #include "Camera/CCameraManager.h"
 #include "Material/CMaterial.h"
 #include "Camera/CCamera.h"
+#include "Utility/CGUIDMaker.h"
+#include "Light/CLightManager.h"
 
 
-CGraphicsRenderer::CGraphicsRenderer()
+CGraphicsWorld::CGraphicsWorld()
 {
 	this->m_mapID2GraphicsObj.clear();
 	this->m_pSkyBox = NULL;
 }
 
-CGraphicsRenderer::~CGraphicsRenderer()
+CGraphicsWorld::~CGraphicsWorld()
 {
 	this->m_mapID2GraphicsObj.clear();
 }
 
-void CGraphicsRenderer::AddObject(CGraphicsObject* a_pObject)
+void CGraphicsWorld::AddGraphicsObject(CGraphicsComponent* a_pComponent)
 {
-	this->m_mapID2GraphicsObj[a_pObject->m_nMuffinGraphicsObectGUID] = a_pObject;
+	u64 nGUID = a_pComponent->GetGameObject()->GetGameObjectID();
+	this->m_mapID2GraphicsObj[nGUID] = a_pComponent;
 }
 
-void CGraphicsRenderer::RemoveObject(CGraphicsObject* a_pObject)
+void CGraphicsWorld::RemoveGraphicsObject(CGraphicsComponent* a_pComponent)
 {
-	u64 nGUID = a_pObject->m_nMuffinGraphicsObectGUID;
+	u64 nGUID = a_pComponent->GetGameObject()->GetGameObjectID();
 	if (this->FindObject(nGUID) == NULL)
 	{
 		return;
@@ -34,9 +37,9 @@ void CGraphicsRenderer::RemoveObject(CGraphicsObject* a_pObject)
 	this->m_mapID2GraphicsObj.erase(nGUID);
 }
 
-CGraphicsObject* CGraphicsRenderer::FindObject(u64 a_nGUID)
+CGraphicsComponent* CGraphicsWorld::FindObject(u64 a_nGUID)
 {
-	hash_map<u64, CGraphicsObject*>::const_iterator iter = this->m_mapID2GraphicsObj.find(a_nGUID);
+	hash_map<u64, CGraphicsComponent*>::const_iterator iter = this->m_mapID2GraphicsObj.find(a_nGUID);
 	if (iter == this->m_mapID2GraphicsObj.end())
 	{
 		return NULL;
@@ -44,12 +47,12 @@ CGraphicsObject* CGraphicsRenderer::FindObject(u64 a_nGUID)
 	return iter->second;
 }
 
-void CGraphicsRenderer::SetSkyBox(CSkyBox* a_pSkyBox)
+void CGraphicsWorld::SetSkyBox(CSkyBox* a_pSkyBox)
 {
 	this->m_pSkyBox = a_pSkyBox;
 }
 
-void CGraphicsRenderer::GraphicsLoop()
+void CGraphicsWorld::GraphicsLoop()
 {
 	CCamera* pCamera = MUFFIN.GetCameraMgr()->GetTopCamera();
 	if (pCamera == NULL)
@@ -62,37 +65,28 @@ void CGraphicsRenderer::GraphicsLoop()
 
 	this->RenderSkyBox(matV, matP);
 
-	hash_map<u64, CGraphicsObject*>::iterator iter = this->m_mapID2GraphicsObj.begin();
+	hash_map<u64, CGraphicsComponent*>::iterator iter = this->m_mapID2GraphicsObj.begin();
 	for (; iter != this->m_mapID2GraphicsObj.end(); iter++)
 	{
-		CGraphicsObject* pGraphicsObj = iter->second;
-		CGameObject* pGameObj = pGraphicsObj->m_pGameObject;
+		CGraphicsComponent* pGraphicsComponent = iter->second;
+		CGameObject* pGameObj = pGraphicsComponent->GetGameObject();
 		if (pGameObj->IsEnable() == false)
 		{
 			continue;
 		}
 
 		glm::mat4 matM = glm::mat4(1.0f);
+		CTransform& rTrans = pGameObj->GetTransform();
 
-		glm::mat4 trans = glm::translate(glm::mat4(1.0f), pGameObj->m_vPosition);
+		glm::mat4 trans = glm::translate(glm::mat4(1.0f), rTrans.m_vPosition);
+		glm::mat4 rotation = glm::mat4(rTrans.m_qRotation);
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f), rTrans.m_vScale);
+
 		matM *= trans;
-
-		glm::mat4 rotation = glm::mat4(pGameObj->m_qRotation);
 		matM *= rotation;
-
-		glm::mat4 scale = glm::scale(glm::mat4(1.0f), pGameObj->m_vScale);
 		matM *= scale;
 
-		//glm::mat4 rotateX = glm::rotate(glm::mat4(1.0f), glm::radians(pGameObj->m_vRotation.x), glm::vec3(1.0f, 0.0, 0.0f));
-		//matM *= rotateX;
-
-		//glm::mat4 rotateY = glm::rotate(glm::mat4(1.0f), glm::radians(pGameObj->m_vRotation.y), glm::vec3(0.0f, 1.0, 0.0f));
-		//matM *= rotateY;
-
-		//glm::mat4 rotateZ = glm::rotate(glm::mat4(1.0f), glm::radians(pGameObj->m_vRotation.z), glm::vec3(0.0f, 0.0, 1.0f));
-		//matM *= rotateZ;
-
-		n32 nShaderProgramID = pGraphicsObj->m_pMaterial->GetShaderID();
+		n32 nShaderProgramID = pGraphicsComponent->m_pMaterial->GetShaderID();
 		glUseProgram(nShaderProgramID);
 
 		GLint nDiffuseColour = glGetUniformLocation(nShaderProgramID, "un_vDiffuseColour");
@@ -102,10 +96,11 @@ void CGraphicsRenderer::GraphicsLoop()
 		glUniform4f(nSpecularColour, 1.0f, 1.0f, 1.0f, 100.0f);
 
 		GLint nEyeLocation = glGetUniformLocation(nShaderProgramID, "un_vEyeLocation");
-		glUniform4f(nEyeLocation, pCamera->m_vPosition.x, pCamera->m_vPosition.y, pCamera->m_vPosition.z, 1.0f);
+		CTransform& rCameraTrans = pCamera->GetGameObject()->GetTransform();
+		glUniform4f(nEyeLocation, rCameraTrans.m_vPosition.x, rCameraTrans.m_vPosition.y, rCameraTrans.m_vPosition.z, 1.0f);
 
-		pGraphicsObj->LightPass();
-		pGraphicsObj->MaterialPass();
+		MUFFIN.GetLightMgr()->RenderLights(nShaderProgramID);
+		pGraphicsComponent->GetMaterial()->RenderMaterial();
 
 		GLint matModel_UL = glGetUniformLocation(nShaderProgramID, "matModel");
 		GLint matView_UL = glGetUniformLocation(nShaderProgramID, "matView");
@@ -119,16 +114,16 @@ void CGraphicsRenderer::GraphicsLoop()
 		glUniformMatrix4fv(matView_UL, 1, GL_FALSE, glm::value_ptr(matV));
 		glUniformMatrix4fv(matProj_UL, 1, GL_FALSE, glm::value_ptr(matP));
 
-		glPolygonMode(GL_FRONT_AND_BACK, pGraphicsObj->m_nRenderMode);
+		glPolygonMode(GL_FRONT_AND_BACK, pGraphicsComponent->m_nRenderMode);
 
-		CMeshDrawInfo* pDrawInfo = pGraphicsObj->m_pMeshDrawInfo;
+		SDrawMesh* pDrawInfo = pGraphicsComponent->m_pDrawMesh;
 		glBindVertexArray(pDrawInfo->m_nVAOID);
 		glDrawElements(GL_TRIANGLES, pDrawInfo->m_nTriangleIndexCount, GL_UNSIGNED_INT, NULL);
 		glBindVertexArray(0);
 	}
 }
 
-void CGraphicsRenderer::RenderSkyBox(glm::mat4 a_matV, glm::mat4 a_matP)
+void CGraphicsWorld::RenderSkyBox(glm::mat4 a_matV, glm::mat4 a_matP)
 {
 	if (this->m_pSkyBox == NULL)
 	{
@@ -138,12 +133,6 @@ void CGraphicsRenderer::RenderSkyBox(glm::mat4 a_matV, glm::mat4 a_matP)
 	glm::mat4 matV = a_matV;
 	glm::mat4 matP = a_matP;
 	glm::mat4 matM = glm::mat4(1.0f);
-
-	glm::mat4 trans = glm::translate(glm::mat4(1.0f), this->m_pSkyBox->m_vPosition);
-	matM *= trans;
-
-	glm::mat4 rotation = glm::mat4(this->m_pSkyBox->m_qRotation);
-	matM *= rotation;
 
 	glm::mat4 scale = glm::scale(glm::mat4(1.0f), this->m_pSkyBox->m_vScale);
 	matM *= scale;
@@ -167,7 +156,7 @@ void CGraphicsRenderer::RenderSkyBox(glm::mat4 a_matV, glm::mat4 a_matP)
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-	CMeshDrawInfo* pDrawInfo = this->m_pSkyBox->m_pMeshDrawInfo;
+	SDrawMesh* pDrawInfo = this->m_pSkyBox->m_pDrawMesh;
 	glBindVertexArray(pDrawInfo->m_nVAOID);
 	glDrawElements(GL_TRIANGLES, pDrawInfo->m_nTriangleIndexCount, GL_UNSIGNED_INT, NULL);
 	glBindVertexArray(0);

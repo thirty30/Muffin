@@ -1,5 +1,5 @@
 #include "CResourceLoader.h"
-#include "Mesh/CMesh.h"
+#include "Graphics/Mesh/CMesh.h"
 
 tbool CResourceLoader::LoadModelFromPly(const tcchar* a_strFileName, CMesh* a_pMesh)
 {
@@ -147,6 +147,14 @@ tbool CResourceLoader::LoadMesh(const tcchar* a_strFileName, CMesh* a_pMesh)
 		a_pMesh->m_pVertices[i].x = pMesh->mVertices[i].x;
 		a_pMesh->m_pVertices[i].y = pMesh->mVertices[i].y;
 		a_pMesh->m_pVertices[i].z = pMesh->mVertices[i].z;
+
+		if (pMesh->HasVertexColors(0) == true)
+		{
+			a_pMesh->m_pVertices[i].r = pMesh->mColors[i]->r;
+			a_pMesh->m_pVertices[i].g = pMesh->mColors[i]->g;
+			a_pMesh->m_pVertices[i].b = pMesh->mColors[i]->b;
+			a_pMesh->m_pVertices[i].a = pMesh->mColors[i]->a;
+		}
 		
 		if (pMesh->HasNormals() == true)
 		{

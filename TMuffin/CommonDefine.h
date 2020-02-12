@@ -26,14 +26,11 @@ enum ELightType
 
 enum EGUIDType
 {
-	E_GUID_TYPE_INIT = 0,
+	E_GUID_INIT = -1,
 
-	E_GUID_TYPE_GAME_OBJECT,		// game object
-	E_GUID_TYPE_PHYSICS_OBJECT,		// physics object
-	E_GUID_TYPE_GRAPHICS_OBJECT,	// graphics object
-	E_GUID_TYPE_PARTICLE_EMITTER,	// particle emitter
+	E_GUID_GAMEOBJECT,			// game object
 
-	E_GUID_TYPE_MAX,
+	E_GUID_MAX,
 };
 
 enum EParticleMode

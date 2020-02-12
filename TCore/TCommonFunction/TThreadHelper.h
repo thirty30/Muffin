@@ -4,23 +4,23 @@ namespace TCore
 {
 	namespace TThreadHelper
 	{
-		//线程基类
 		class TThreadInterface
 		{
 		public:
 			virtual void Run() T_PURE;
 		};
 
-		//线程类
 		class TThreadWorker
 		{
 		private:
 			TThreadInterface * m_pRunner;
-			HANDLE m_tID;
+			HANDLE m_pHandle;
+
 		public:
 			TThreadWorker(TThreadInterface* a_pRunner)
 			{
-				m_pRunner = a_pRunner;
+				this->m_pRunner = a_pRunner;
+				this->m_pHandle = NULL;
 			}
 			static DWORD WINAPI TThreadWorkerCallBack(LPVOID a_pRunner)
 			{
@@ -30,17 +30,16 @@ namespace TCore
 
 			tbool CreateThread()
 			{
-				HANDLE m_tID = ::CreateThread(NULL, 0, TThreadWorker::TThreadWorkerCallBack, m_pRunner, 0, NULL);
+				this->m_pHandle = ::CreateThread(NULL, 0, TThreadWorker::TThreadWorkerCallBack, m_pRunner, 0, NULL);
 				return true;
 			}
 
 			void Stop()
 			{
-				TerminateThread(m_tID, 0);
+				TerminateThread(m_pHandle, 0);
 			}
 		};
 
-		//互斥锁
 		class TThreadMutexLock
 		{
 		private:

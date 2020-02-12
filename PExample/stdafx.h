@@ -9,9 +9,11 @@
 #include "./ResourceManager/CResourceManager.h"
 #include "./Control/CControl.h"
 #include "./Control/CCameraControl.h"
-#include "./Control/CShipControl.h"
-#include "./Actor/CActor.h"
-#include "./Scene/CScene.h"
+#include "./Scene/CSceneBase.h"
+#include "./Scene/Scene1/CScene1.h"
+#include "./Scene/CSceneManager.h"
+
+
 
 ////////////////////////////////////
 //add include above the CGame.h

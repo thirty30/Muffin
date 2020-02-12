@@ -141,7 +141,7 @@ public:
 
 	void Clear()
 	{
-
+		// TODO: release Holder memory
 	}
 
 };

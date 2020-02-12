@@ -19,16 +19,25 @@ CParticleEmitterManager::~CParticleEmitterManager()
 	this->m_mapID2Emitter.clear();
 }
 
-CParticleEmitter* CParticleEmitterManager::CreateEmitter()
+void CParticleEmitterManager::AddEmitter(CParticleEmitter* a_pComponent)
 {
-	u64 nGUID = MUFFIN.GetGUIDMaker()->GenerateGUID(E_GUID_TYPE_PARTICLE_EMITTER);
-	CParticleEmitter* pEmitter = new CParticleEmitter();
-	pEmitter->m_nMuffinEngineGUID = nGUID;
-	this->m_mapID2Emitter[nGUID] = pEmitter;
-	return pEmitter;
+	u64 nGUID = a_pComponent->GetGameObject()->GetGameObjectID();
+	this->m_mapID2Emitter[nGUID] = a_pComponent;
 }
 
-CParticleEmitter* CParticleEmitterManager::FindEmitterByID(u64 a_nGUID)
+void CParticleEmitterManager::RemoveEmitter(CParticleEmitter* a_pComponent)
+{
+	u64 nGUID = a_pComponent->GetGameObject()->GetGameObjectID();
+	CParticleEmitter* pEmitter = this->FindEmitter(nGUID);
+	if (pEmitter == NULL)
+	{
+		return;
+	}
+	delete pEmitter;
+	this->m_mapID2Emitter.erase(nGUID);
+}
+
+CParticleEmitter* CParticleEmitterManager::FindEmitter(u64 a_nGUID)
 {
 	hash_map<u64, CParticleEmitter*>::const_iterator iter = this->m_mapID2Emitter.find(a_nGUID);
 	if (iter == this->m_mapID2Emitter.end())
@@ -36,18 +45,6 @@ CParticleEmitter* CParticleEmitterManager::FindEmitterByID(u64 a_nGUID)
 		return NULL;
 	}
 	return iter->second;
-}
-
-void CParticleEmitterManager::DeleteEmitter(CParticleEmitter* a_pEmitter)
-{
-	u64 nGUID = a_pEmitter->m_nMuffinEngineGUID;
-	CParticleEmitter* pEmitter = this->FindEmitterByID(nGUID);
-	if (pEmitter == NULL)
-	{
-		return;
-	}
-	delete pEmitter;
-	this->m_mapID2Emitter.erase(nGUID);
 }
 
 void CParticleEmitterManager::Update()

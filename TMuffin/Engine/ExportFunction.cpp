@@ -3,8 +3,8 @@
 #include "Camera/CCamera.h"
 #include "Camera/CCameraManager.h"
 #include "Particle/CParticleEmitterManager.h"
-#include "SkyBox/CSkyBox.h"
-#include "Graphics/CGraphicsRenderer.h"
+#include "Graphics/SkyBox/CSkyBox.h"
+#include "Graphics/CGraphicsWorld.h"
 
 tbool TMuffin_Initialize(n32 a_nWinWidth, n32 a_nWinHigh, const tcchar* a_strWinName)
 {
@@ -29,11 +29,6 @@ TMUFFIN_REGISTER_CALLBACK(TMuffin_RegisterScrollCallback, MuffinScrollCallBack, 
 TMUFFIN_REGISTER_CALLBACK(TMuffin_RegisterPhysicsCallBack, MuffinPhysicsCallBack, pExternalGameLogicCallBack)
 TMUFFIN_REGISTER_CALLBACK(TMuffin_RegisterGameLogicCallBack, MuffinGameLogicCallBack, pExternalPhysicsCallBack)
 
-
-void TMuffin_AddCamera(CCamera* a_pCamera)
-{
-	MUFFIN.GetCameraMgr()->AddCamera(a_pCamera);
-}
 f64 TMuffin_GetNowFrameTime()
 {
 	return MUFFIN.GetNowFrameTime();
@@ -43,12 +38,7 @@ f32 TMuffin_GetDeltaFrameTime()
 	return MUFFIN.GetDeltaFrameTime();
 }
 
-T_DLL_EXPORT CParticleEmitter* TMuffin_CreateParticleEmitter()
-{
-	return MUFFIN.GetParticleEmitterMgr()->CreateEmitter();
-}
-
 T_DLL_EXPORT void TMuffin_SetSkyBox(CSkyBox* a_pSkyBox)
 {
-	MUFFIN.GetGraphicsRenderer()->SetSkyBox(a_pSkyBox);
+	MUFFIN.GetGraphicsWorld()->SetSkyBox(a_pSkyBox);
 }

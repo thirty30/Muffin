@@ -5,9 +5,6 @@
     <ClCompile Include="Camera\CCamera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Mesh\CMesh.cpp">
-      <Filter>Mesh</Filter>
-    </ClCompile>
     <ClCompile Include="glad.c" />
     <ClCompile Include="Window\CWindow.cpp">
       <Filter>Window</Filter>
@@ -60,12 +57,6 @@
     <ClCompile Include="Physics\CPhysicsReactor.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\CGraphicsObject.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\CGraphicsRenderer.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Physics\CRigidBody.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
@@ -87,21 +78,6 @@
     <ClCompile Include="Physics\CColliderSphere.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Material\CMaterialBase.cpp">
-      <Filter>Material</Filter>
-    </ClCompile>
-    <ClCompile Include="Material\CMaterialDefault.cpp">
-      <Filter>Material</Filter>
-    </ClCompile>
-    <ClCompile Include="Material\CMaterialStandard.cpp">
-      <Filter>Material</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture\CTexture.cpp">
-      <Filter>Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="SkyBox\CSkyBox.cpp">
-      <Filter>SkyBox</Filter>
-    </ClCompile>
     <ClCompile Include="LineTween\CLineTweenMove.cpp">
       <Filter>LineTween</Filter>
     </ClCompile>
@@ -117,17 +93,38 @@
     <ClCompile Include="LineTween\CLineTweenFollow.cpp">
       <Filter>LineTween</Filter>
     </ClCompile>
-    <ClCompile Include="Material\CMaterial.cpp">
+    <ClCompile Include="Transform\CTransform.cpp" />
+    <ClCompile Include="Graphics\CGraphicsComponent.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Mesh\CMesh.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\CGraphicsWorld.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Material\CMaterial.cpp">
       <Filter>Material</Filter>
     </ClCompile>
-    <ClCompile Include="Transform\CTransform.cpp" />
+    <ClCompile Include="Graphics\Material\CMaterialBase.cpp">
+      <Filter>Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Material\CMaterialDefault.cpp">
+      <Filter>Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Material\CMaterialStandard.cpp">
+      <Filter>Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Texture\CTexture.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\SkyBox\CSkyBox.cpp">
+      <Filter>SkyBox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\CCamera.h">
       <Filter>Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh\CMesh.h">
-      <Filter>Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Window\CWindow.h">
       <Filter>Window</Filter>
@@ -185,12 +182,6 @@
     <ClInclude Include="Physics\CPhysicsReactor.h">
       <Filter>Physics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\CGraphicsObject.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\CGraphicsRenderer.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Physics\CRigidBody.h">
       <Filter>Physics</Filter>
     </ClInclude>
@@ -215,21 +206,6 @@
     <ClInclude Include="Physics\PhysicsDefine.h">
       <Filter>Physics</Filter>
     </ClInclude>
-    <ClInclude Include="Material\CMaterialBase.h">
-      <Filter>Material</Filter>
-    </ClInclude>
-    <ClInclude Include="Material\CMaterialStandard.h">
-      <Filter>Material</Filter>
-    </ClInclude>
-    <ClInclude Include="Material\CMaterialDefault.h">
-      <Filter>Material</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture\CTexture.h">
-      <Filter>Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="SkyBox\CSkyBox.h">
-      <Filter>SkyBox</Filter>
-    </ClInclude>
     <ClInclude Include="LineTween\CLineTween.h">
       <Filter>LineTween</Filter>
     </ClInclude>
@@ -251,13 +227,38 @@
     <ClInclude Include="Utility\Utility.h">
       <Filter>Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Material\CMaterial.h">
-      <Filter>Material</Filter>
-    </ClInclude>
     <ClInclude Include="Scene\CScene.h" />
-    <ClInclude Include="Component\IComponent.h" />
     <ClInclude Include="Transform\CTransform.h" />
     <ClInclude Include="TMuffinSysInclude.h" />
+    <ClInclude Include="Component\CComponentBase.h" />
+    <ClInclude Include="Graphics\GraphicsDefine.h" />
+    <ClInclude Include="Graphics\CGraphicsComponent.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Mesh\CMesh.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\CGraphicsWorld.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Material\CMaterial.h">
+      <Filter>Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Material\CMaterialBase.h">
+      <Filter>Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Material\CMaterialDefault.h">
+      <Filter>Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Material\CMaterialStandard.h">
+      <Filter>Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Texture\CTexture.h">
+      <Filter>Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\SkyBox\CSkyBox.h">
+      <Filter>SkyBox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Camera">
