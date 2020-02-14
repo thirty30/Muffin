@@ -227,7 +227,6 @@
     <ClInclude Include="Utility\Utility.h">
       <Filter>Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\CScene.h" />
     <ClInclude Include="Transform\CTransform.h" />
     <ClInclude Include="TMuffinSysInclude.h" />
     <ClInclude Include="Component\CComponentBase.h" />

@@ -32,6 +32,8 @@
     <ClInclude Include="Control\CCameraControl.h">
       <Filter>Control</Filter>
     </ClInclude>
+    <ClInclude Include="Components\CMotion.h" />
+    <ClInclude Include="CommonFunction.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -52,6 +54,9 @@
     <ClCompile Include="Control\CCameraControl.cpp">
       <Filter>Control</Filter>
     </ClCompile>
+    <ClCompile Include="Components\CMotion.cpp" />
+    <ClCompile Include="Scene\CSceneBase.cpp" />
+    <ClCompile Include="CommonFunction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">

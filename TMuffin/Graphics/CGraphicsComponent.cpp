@@ -5,6 +5,7 @@
 #include "Engine/Engine.h"
 #include "Utility/CGUIDMaker.h"
 #include "Light/CLightManager.h"
+#include "ResourceLoader/CResourceLoader.h"
 
 CGraphicsComponent::CGraphicsComponent()
 {
@@ -30,7 +31,13 @@ CGraphicsComponent::~CGraphicsComponent()
 
 void CGraphicsComponent::Init()
 {
+	CMesh* pMesh = new CMesh();
+	CResourceLoader::LoadMesh(this->MeshFile.c_str(), pMesh);
+	CMaterial* pMat = new CMaterial();
+	pMat->Init(this->MaterialFile);
+	this->InitRenderer(pMesh, pMat);
 	MUFFIN.GetGraphicsWorld()->AddGraphicsObject(this);
+	delete pMesh;
 }
 
 tbool CGraphicsComponent::InitRenderer(const CMesh* a_pMesh, CMaterial* a_pMaterial)

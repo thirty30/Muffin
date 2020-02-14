@@ -1,0 +1,18 @@
+{
+	"SceneName":"Scene1",
+	"GameObject":{
+		"ID":1,
+		"Name":"GameObject",
+		"Transform": { "Position":[0.0, 0.0, 0.0], "Rotation":[0.0, 0.0, 0.0], "Scale":[1.0, 1.0, 1.0] },
+		"Components":{
+			"CGraphicsComponent":{
+				"MeshFile":"../Assets/Models/SM_Ship_Massive_Transport_01.fbx",
+				"MaterialFile":"../Assets/Materials/ShipMaterial.json"
+			},
+			"CMotion":{
+				"m_vVelocity":[0.0, -15.0, 15.0]
+			}
+		}
+	}
+}
+

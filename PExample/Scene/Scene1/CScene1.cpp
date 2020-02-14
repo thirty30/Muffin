@@ -58,12 +58,15 @@ tbool CScene1::LoadScene()
 
 
 	//Scene Items
-	CGameObject* pBox = new CGameObject();
-	CGraphicsComponent* pGraphics = static_cast<CGraphicsComponent*>(pBox->AddComponent<CGraphicsComponent>());
+	CGameObject* pShip = new CGameObject();
+	CGraphicsComponent* pGraphics = static_cast<CGraphicsComponent*>(pShip->AddComponent<CGraphicsComponent>());
 	CMesh* pMesh = CGame::GetSingleton().GetResourceManager()->FindMesh(E_MODEL_ID_SHIP);
 	CMaterial* pMat = new CMaterial();
 	pMat->Init("../Assets/Materials/ShipMaterial.json");
 	pGraphics->InitRenderer(pMesh, pMat);
+	pShip->AddComponent<CMotion>();
+
+	this->LoadSceneFile("../Assets/Scene/Scene1.json");
 
 	return true;
 }

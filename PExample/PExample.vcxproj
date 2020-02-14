@@ -137,6 +137,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CommonDefine.h" />
+    <ClInclude Include="CommonFunction.h" />
+    <ClInclude Include="Components\CMotion.h" />
     <ClInclude Include="Control\CCameraControl.h" />
     <ClInclude Include="Control\CControl.h" />
     <ClInclude Include="Game\CGame.h" />
@@ -151,11 +153,14 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CommonFunction.cpp" />
+    <ClCompile Include="Components\CMotion.cpp" />
     <ClCompile Include="Control\CCameraControl.cpp" />
     <ClCompile Include="Control\CControl.cpp" />
     <ClCompile Include="Game\CGame.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ResourceManager\CResourceManager.cpp" />
+    <ClCompile Include="Scene\CSceneBase.cpp" />
     <ClCompile Include="Scene\Scene1\CScene1.cpp" />
     <ClCompile Include="Scene\CSceneManager.cpp" />
     <ClCompile Include="stdafx.cpp">

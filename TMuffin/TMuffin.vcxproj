@@ -106,7 +106,6 @@
     <ClInclude Include="Physics\PhysicsDefine.h" />
     <ClInclude Include="Physics\PhysicsHelper.h" />
     <ClInclude Include="ResourceLoader\CResourceLoader.h" />
-    <ClInclude Include="Scene\CScene.h" />
     <ClInclude Include="ShaderHelper\CShaderHelper.h" />
     <ClInclude Include="Graphics\SkyBox\CSkyBox.h" />
     <ClInclude Include="Graphics\Texture\CTexture.h" />

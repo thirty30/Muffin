@@ -1,7 +1,7 @@
 #pragma once
 #include "TMuffinSysInclude.h"
 
-class CTransform
+class T_DLL_EXPORT CTransform
 {
 public:
 	glm::vec3 m_vPosition;

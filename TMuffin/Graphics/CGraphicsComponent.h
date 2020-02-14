@@ -17,7 +17,15 @@ private:
 
 protected:
 	virtual void Init() override;
-	
+
+public:
+	tstring MeshFile;
+	tstring MaterialFile;
+	T_SCS
+		T_SCP(MeshFile, tstring)
+		T_SCP(MaterialFile, tstring)
+	T_SCE
+
 public:
 	CGraphicsComponent();
 	~CGraphicsComponent();

@@ -42,7 +42,7 @@ CMesh* CResourceManager::LoadMesh(EModelID a_eModeID, const tcchar* a_strFileNam
 		return pOldMesh;
 	}
 	CMesh* pMesh = new CMesh();
-	this->m_pResourceLoader->LoadMesh(a_strFileName, pMesh);
+	CResourceLoader::LoadMesh(a_strFileName, pMesh);
 	this->m_mapID2Mesh[a_eModeID] = pMesh;
 	return pMesh;
 }

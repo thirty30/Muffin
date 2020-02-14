@@ -4,6 +4,7 @@ class CSceneBase
 {
 private:
 	n32 m_nSceneID;
+	tstring m_strSceneName;
 
 protected:
 	CGUIDMaker m_GUIDMaker;
@@ -14,6 +15,7 @@ public:
 		m_nSceneID(a_nSceneID),
 		m_GUIDMaker(1)
 	{
+		this->m_strSceneName = "";
 		this->m_mapID2GameObj.clear();
 	}
 	virtual ~CSceneBase() 
@@ -33,10 +35,8 @@ public:
 	virtual void Loop() T_PURE;
 
 public:
-	u64 CreateGUID() { return this->m_GUIDMaker.GenerateGUID(0); }
-	void AddGameObjet(CGameObject* a_pGameObject)
-	{
-		u64 nGUID = a_pGameObject->GetGameObjectID();
-		this->m_mapID2GameObj[nGUID] = a_pGameObject;
-	}
+	T_INLINE u64 CreateGUID();
+	T_INLINE void AddGameObjet(CGameObject* a_pGameObject);
+	tbool LoadSceneFile(const tcchar* a_strFileName);
+	tbool LoadSceneGameObject(const rapidjson::Value::ConstObject& a_rNode);
 };
