@@ -43,7 +43,8 @@ tbool CScene1::LoadScene()
 	}
 
 	//SkyBox
-	CMesh* pMeshSkyBox = CResourceManager::GetSingleton().FindMesh(E_MODEL_ID_SKYBOX);
+	CMesh* pMeshSkyBox = new CMesh();
+	CResourceLoader::LoadMesh("../Assets/Models/BaseModels/SkyBox.ply", pMeshSkyBox);
 	this->m_pSkyBox = new CSkyBox();
 	this->m_pSkyBox->Init(pMeshSkyBox, 
 		"../Assets/Shaders/SkyBoxVertexShader.glsl", "../Assets/Shaders/SkyBoxFragmentShader.glsl",
@@ -58,13 +59,15 @@ tbool CScene1::LoadScene()
 
 
 	//Scene Items
-	CGameObject* pShip = new CGameObject();
-	CGraphicsComponent* pGraphics = static_cast<CGraphicsComponent*>(pShip->AddComponent<CGraphicsComponent>());
-	CMesh* pMesh = CGame::GetSingleton().GetResourceManager()->FindMesh(E_MODEL_ID_SHIP);
-	CMaterial* pMat = new CMaterial();
-	pMat->Init("../Assets/Materials/ShipMaterial.json");
-	pGraphics->InitRenderer(pMesh, pMat);
-	pShip->AddComponent<CMotion>();
+	//CGameObject* pShip = new CGameObject();
+	//CGraphicsComponent* pGraphics = static_cast<CGraphicsComponent*>(pShip->AddComponent<CGraphicsComponent>());
+	//CMesh* pMesh = new CMesh();
+	//CResourceLoader::LoadMesh("../Assets/Models/SM_Ship_Massive_Transport_01.ply", pMesh);
+	//CMaterial* pMat = new CMaterial();
+	//pMat->Init("../Assets/Materials/ShipMaterial.json");
+	//pGraphics->InitRenderer(pMesh, pMat);
+	//CMotion* pMotion = static_cast<CMotion*>(pShip->AddComponent<CMotion>());
+	//pMotion->m_vVelocity = glm::vec3(0, -10.0f, 10.0f);
 
 	this->LoadSceneFile("../Assets/Scene/Scene1.json");
 

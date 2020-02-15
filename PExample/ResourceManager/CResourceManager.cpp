@@ -3,18 +3,11 @@ T_IMPLEMENT_SINGLETON(CResourceManager)
 
 CResourceManager::CResourceManager()
 {
-	this->m_pResourceLoader = NULL;
 	this->m_mapID2Mesh.clear();
 }
 
 CResourceManager::~CResourceManager()
 {
-	if (this->m_pResourceLoader != NULL)
-	{
-		delete this->m_pResourceLoader;
-		this->m_pResourceLoader = NULL;
-	}
-
 	hash_map<EModelID, CMesh*>::iterator iter = this->m_mapID2Mesh.begin();
 	for (; iter != this->m_mapID2Mesh.end(); iter++)
 	{
@@ -25,11 +18,9 @@ CResourceManager::~CResourceManager()
 
 tbool CResourceManager::Init()
 {
-	this->m_pResourceLoader = new CResourceLoader();
-
 	// Load Meshes
-	this->LoadMesh(E_MODEL_ID_SKYBOX, "../Assets/Models/BaseModels/SkyBox.ply");
-	this->LoadMesh(E_MODEL_ID_SHIP, "../Assets/Models/SM_Ship_Massive_Transport_01.ply");
+	//this->LoadMesh(E_MODEL_ID_SKYBOX, "../Assets/Models/BaseModels/SkyBox.ply");
+	//this->LoadMesh(E_MODEL_ID_SHIP, "../Assets/Models/SM_Ship_Massive_Transport_01.ply");
 
 	return true;
 }

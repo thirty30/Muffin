@@ -3,7 +3,6 @@
 class CResourceManager : public CSingleton<CResourceManager>
 {
 public:
-	CResourceLoader* m_pResourceLoader;
 	hash_map<EModelID, CMesh*> m_mapID2Mesh;
 
 public:

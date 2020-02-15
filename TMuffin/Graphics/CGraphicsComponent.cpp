@@ -31,13 +31,16 @@ CGraphicsComponent::~CGraphicsComponent()
 
 void CGraphicsComponent::Init()
 {
-	CMesh* pMesh = new CMesh();
-	CResourceLoader::LoadMesh(this->MeshFile.c_str(), pMesh);
-	CMaterial* pMat = new CMaterial();
-	pMat->Init(this->MaterialFile);
-	this->InitRenderer(pMesh, pMat);
+	if (this->m_pDrawMesh == NULL && this->m_pMaterial == NULL)
+	{
+		CMesh* pMesh = new CMesh();
+		CResourceLoader::LoadMesh(this->MeshFile.c_str(), pMesh);
+		CMaterial* pMat = new CMaterial();
+		pMat->Init(this->MaterialFile);
+		this->InitRenderer(pMesh, pMat);
+		delete pMesh;
+	}
 	MUFFIN.GetGraphicsWorld()->AddGraphicsObject(this);
-	delete pMesh;
 }
 
 tbool CGraphicsComponent::InitRenderer(const CMesh* a_pMesh, CMaterial* a_pMaterial)

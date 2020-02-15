@@ -14,7 +14,6 @@ void CMotion::Update()
 {
 	CTransform& rTrans = this->GetGameObject()->GetTransform();
 	f32 fDT = TMuffin_GetDeltaFrameTime();
-
-	rTrans.m_vPosition += glm::vec3(0, -20.0f, 20.0f) * fDT;
+	rTrans.m_vPosition += this->m_vVelocity * fDT;
 }
 

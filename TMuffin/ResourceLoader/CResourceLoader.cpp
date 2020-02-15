@@ -112,6 +112,10 @@ tbool CResourceLoader::LoadModelFromPlyUV(const tcchar* a_strFileName, CMesh* a_
 
 tbool CResourceLoader::LoadMesh(const tcchar* a_strFileName, CMesh* a_pMesh)
 {
+	if (a_pMesh == NULL)
+	{
+		return false;
+	}
 	// Create an instance of the Importer class
 	Assimp::Importer importer;
 	// And have it read the given file with some example postprocessing
