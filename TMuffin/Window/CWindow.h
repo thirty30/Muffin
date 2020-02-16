@@ -24,4 +24,6 @@ public:
 	void Clear();
 	GLFWwindow* GetGLFWWindow() { return this->m_pWindow; }
 	tbool WindowShouldClose();
+	T_INLINE n32 GetWindowWidth() { return this->m_nWindowWidth; }
+	T_INLINE n32 GetWindowHeight() { return this->m_nWindowHigh; }
 };

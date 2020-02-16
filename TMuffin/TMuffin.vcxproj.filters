@@ -121,6 +121,7 @@
     <ClCompile Include="Graphics\SkyBox\CSkyBox.cpp">
       <Filter>SkyBox</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\FBO\CFBOComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\CCamera.h">
@@ -258,6 +259,7 @@
     <ClInclude Include="Graphics\SkyBox\CSkyBox.h">
       <Filter>SkyBox</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\FBO\CFBOComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Camera">

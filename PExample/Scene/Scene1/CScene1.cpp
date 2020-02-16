@@ -60,15 +60,14 @@ tbool CScene1::LoadScene()
 
 	//Scene Items
 	//CGameObject* pShip = new CGameObject();
+	//pShip->GetTransform().m_vScale = glm::vec3(100, 1, 100);
 	//CGraphicsComponent* pGraphics = static_cast<CGraphicsComponent*>(pShip->AddComponent<CGraphicsComponent>());
 	//CMesh* pMesh = new CMesh();
-	//CResourceLoader::LoadMesh("../Assets/Models/SM_Ship_Massive_Transport_01.ply", pMesh);
+	//CResourceLoader::LoadMesh("../Assets/Models/BaseModels/Plane.ply", pMesh);
 	//CMaterial* pMat = new CMaterial();
-	//pMat->Init("../Assets/Materials/ShipMaterial.json");
+	//pMat->Init("../Assets/Materials/PlaneMaterial.json");
 	//pGraphics->InitRenderer(pMesh, pMat);
-	//CMotion* pMotion = static_cast<CMotion*>(pShip->AddComponent<CMotion>());
-	//pMotion->m_vVelocity = glm::vec3(0, -10.0f, 10.0f);
-
+	//delete pMesh;
 	this->LoadSceneFile("../Assets/Scene/Scene1.json");
 
 	return true;
