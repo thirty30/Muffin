@@ -4,5 +4,6 @@ extern CComponentBase* CreateComponent(CGameObject* a_pObj, tstring a_strClassNa
 {
 	T_REGISTER_COM(CGraphicsComponent)
 	T_REGISTER_COM(CMotion)
+	T_REGISTER_COM(CFBOComponent)
 }
 

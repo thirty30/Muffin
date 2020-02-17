@@ -5,10 +5,10 @@ class CCamera;
 class T_DLL_EXPORT CCameraManager
 {
 private:
-	CCamera* m_pSceneCamera;
+	vector<CCamera*> m_pSceneCamera;
 public:
-	CCameraManager();;
-	~CCameraManager();;
+	CCameraManager();
+	~CCameraManager();
 
 	T_INLINE void AddCamera(CCamera* a_pCamera);
 	T_INLINE void RemoveCamera(CCamera* a_pCamera);

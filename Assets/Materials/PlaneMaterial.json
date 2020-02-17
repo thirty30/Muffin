@@ -4,7 +4,7 @@
 	"FragmentShader":"../Assets/shaders/ShipFragmentShader.glsl",
 	"MaterialData":
 	[
-		{"ID":1, "Name":"DiffuseMap", "Tag":"Texture", "Value":"../Assets/Textures/Diffuse.png"},
+		{"ID":1, "Name":"DiffuseMap", "Tag":"Texture", "Value":"../Assets/Textures/leaf.png"},
 		{"ID":2, "Name":"DiffuseColor", "Tag":"FloatVec3", "Value":[1.0, 1.0, 1.0]}
 	]
 }

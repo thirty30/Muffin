@@ -38,8 +38,8 @@ tbool CScene1::LoadScene()
 		pController->SetCamera(pCamera);
 		pController->m_fCameraYMoveSpeed = 0.2f;
 		pController->m_fCameraXMoveSpeed = 0.4f;
-		pController->m_fCameraRotationSpeed = 0.6f;
-		pController->m_fCameraScrollSpeed = 2.0f;
+		pController->m_fCameraRotationSpeed = 1.0f;
+		pController->m_fCameraScrollSpeed = 6.0f;
 	}
 
 	//SkyBox

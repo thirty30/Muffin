@@ -20,6 +20,7 @@
 #include "./Camera/CCamera.h"
 #include "./Camera/CCameraManager.h"
 #include "./Graphics/CGraphicsComponent.h"
+#include "./Graphics/FBO/CFBOComponent.h"
 #include "./Graphics/SkyBox/CSkyBox.h"
 
 #include "./Physics/CRigidBody.h"

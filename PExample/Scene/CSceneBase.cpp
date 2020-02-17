@@ -113,6 +113,7 @@ tbool CSceneBase::LoadSceneGameObject(const rapidjson::Value::ConstObject& a_rNo
 				else if (iterProperty->value.IsFloat() == true)
 				{
 					f32 a = iterProperty->value.GetFloat();
+					tstring b = iterProperty->name.GetString();
 					pCom->SetProperty(iterProperty->name.GetString(), a);
 				}
 				else if (iterProperty->value.IsArray() == true)

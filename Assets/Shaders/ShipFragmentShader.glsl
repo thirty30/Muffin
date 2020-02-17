@@ -41,7 +41,7 @@ uniform vec3 DiffuseColor;
 void main()  
 {
 	vec3 vVertexMaterialColour = texture( DiffuseMap, in_fUVx2.st ).rgb;
-	vVertexMaterialColour.rgb += DiffuseColor.rgb;
+	//vVertexMaterialColour.rgb += DiffuseColor.rgb;
 	vec3 vVertexNormal = normalize(in_fNormal.xyz);
 	vec3 vVertexWorldPos = in_fVertWorldLocation.xyz;
 	vec4 vFinalObjectColour = vec4( 0.0f, 0.0f, 0.0f, 1.0f );

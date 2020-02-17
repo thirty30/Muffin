@@ -198,7 +198,7 @@ void CGraphicsWorld::RenderFBO()
 			continue;
 		}
 		pFBO->BindBuffer();
-		this->RenderObject(pFBO->m_pCamera);
+		this->RenderObject(pFBO->GetCamera());
 		pFBO->ReleaseBuffer();
 	}
 }

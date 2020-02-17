@@ -76,6 +76,10 @@ tbool CMaterial::Init(tstring a_strFileName)
 				return false;
 			}
 		}
+		else if (strTag == "FBOTexture")
+		{
+			pParam->m_eType = E_MPVT_FBO_TEXTURE;
+		}
 		else if (strTag == "Int")
 		{
 			if (rValue.IsInt() == false) { return false; }

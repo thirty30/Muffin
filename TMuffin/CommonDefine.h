@@ -58,6 +58,7 @@ enum EMaterialParamVariableType
 	E_MPVT_UNKNOWN = 0,
 
 	E_MPVT_TEXTURE,
+	E_MPVT_FBO_TEXTURE,
 
 	E_MPVT_INT,
 	E_MPVT_INT_VEC2,
