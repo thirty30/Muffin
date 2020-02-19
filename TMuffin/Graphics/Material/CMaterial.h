@@ -25,6 +25,7 @@ public:
 	~CMaterialParam() {}
 };
 
+class CGameObject;
 class T_DLL_EXPORT CMaterial
 {
 private:
@@ -38,7 +39,7 @@ public:
 
 	tbool Init(tstring a_strFileName);
 	CMaterialParam* FindMaterialParam(n32 a_nID);
-	virtual T_INLINE void RenderMaterial();
+	virtual T_INLINE void RenderMaterial(CGameObject* a_pGameObject);
 	T_INLINE n32 GetShaderID() { return this->m_pShaderProgram.GetShaderID(); }
 
 	template<typename T>

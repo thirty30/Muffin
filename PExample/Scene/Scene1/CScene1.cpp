@@ -31,8 +31,8 @@ tbool CScene1::LoadScene()
 		pCamera->m_fScreenRatio = fScreenRatio;
 		pCamera->m_fViewDisBegin = 1.0f;
 		pCamera->m_fViewDisEnd = 100000.0f;
-		pCamera->m_vTowards = glm::normalize(glm::vec3(0.0f, -0.5f, 0.5f));
-		this->pCameraObject->GetTransform().m_vPosition = glm::vec3(0, 100, -100);
+		pCamera->m_vTowards = glm::normalize(glm::vec3(0.0f, 0.0f, 1.0f));
+		this->pCameraObject->GetTransform().m_vPosition = glm::vec3(0, 0, -100);
 
 		CCameraControl* pController = static_cast<CCameraControl*>(CGame::GetSingleton().GetControlManager()->CreateController<CCameraControl>());
 		pController->SetCamera(pCamera);

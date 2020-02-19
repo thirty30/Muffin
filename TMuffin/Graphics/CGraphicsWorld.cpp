@@ -164,7 +164,7 @@ void CGraphicsWorld::RenderObject(CCamera* a_pCamera)
 		glUniform4f(nEyeLocation, rCameraTrans.m_vPosition.x, rCameraTrans.m_vPosition.y, rCameraTrans.m_vPosition.z, 1.0f);
 
 		MUFFIN.GetLightMgr()->RenderLights(nShaderProgramID);
-		pGraphicsComponent->GetMaterial()->RenderMaterial();
+		pGraphicsComponent->GetMaterial()->RenderMaterial(pGameObj);
 
 		GLint matModel_UL = glGetUniformLocation(nShaderProgramID, "matModel");
 		GLint matView_UL = glGetUniformLocation(nShaderProgramID, "matView");
@@ -197,9 +197,20 @@ void CGraphicsWorld::RenderFBO()
 		{
 			continue;
 		}
-		pFBO->BindBuffer();
+
+		glBindFramebuffer(GL_FRAMEBUFFER, pFBO->m_nFBOID);
+		glViewport(0, 0, pFBO->m_nWidthSize, pFBO->m_nHeightSize);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		GLfloat	fZero = 0.0f;
+		glClearBufferfv(GL_COLOR, 0, &fZero);
+		GLfloat fOne = 1.0f;
+		glClearBufferfv(GL_DEPTH, 0, &fOne);
+		glStencilMask(0xFF);
+		glClearBufferfi(GL_DEPTH_STENCIL, 0, 1.0f, 0);	// Clear value for stencil
+
 		this->RenderObject(pFBO->GetCamera());
-		pFBO->ReleaseBuffer();
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 }
 

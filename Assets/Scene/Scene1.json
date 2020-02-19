@@ -3,21 +3,21 @@
 	"GameObject":{
 		"ID":1,
 		"Name":"Ship1",
-		"Transform": { "Position":[0.0, 0.0, -500.0], "Rotation":[0.0, 0.0, 0.0], "Scale":[0.1, 0.1, 0.1] },
+		"Transform": { "Position":[0.0, 0.0, -50.0], "Rotation":[0.0, 0.0, 0.0], "Scale":[0.1, 0.1, 0.1] },
 		"Components":{
 			"CGraphicsComponent":{
 				"MeshFile":"../Assets/Models/SM_Ship_Massive_Transport_01.fbx",
 				"MaterialFile":"../Assets/Materials/ShipMaterial.json"
 			},
 			"CMotion":{
-				"#m_vVelocity":[0.0, -10.0, 10.0]
+				"m_vVelocity":[1.0, 0.0, 0.0]
 			}
 		}
 	},
 	"GameObject":{
 		"ID":1,
 		"Name":"Ship2",
-		"Transform": { "Position":[20.0, 0.0, -500.0], "Rotation":[0.0, 0.0, 0.0], "Scale":[0.1, 0.1, 0.1] },
+		"Transform": { "Position":[20.0, 0.0, -50.0], "Rotation":[0.0, 0.0, 0.0], "Scale":[0.1, 0.1, 0.1] },
 		"Components":{
 			"CGraphicsComponent":{
 				"MeshFile":"../Assets/Models/SM_Ship_Massive_Transport_01.fbx",
@@ -28,7 +28,7 @@
 	"GameObject":{
 		"ID":1,
 		"Name":"Ship3",
-		"Transform": { "Position":[-20.0, 0.0, -500.0], "Rotation":[0.0, 0.0, 0.0], "Scale":[0.1, 0.1, 0.1] },
+		"Transform": { "Position":[-20.0, 0.0, -50.0], "Rotation":[0.0, 0.0, 0.0], "Scale":[0.1, 0.1, 0.1] },
 		"Components":{
 			"CGraphicsComponent":{
 				"MeshFile":"../Assets/Models/SM_Ship_Massive_Transport_01.fbx",
@@ -39,7 +39,7 @@
 	"GameObject":{
 		"ID":1,
 		"Name":"Monitor",
-		"Transform": { "Position":[0.0, 0.0, 0.0], "Rotation":[0.0, 0.0, 0.0], "Scale":[50.0, 1.0, 50.0] },
+		"Transform": { "Position":[0.0, 0.0, 0.0], "Rotation":[-90.0, 0.0, 0.0], "Scale":[50.0, 1.0, 50.0] },
 		"Components":{
 			"CGraphicsComponent":{
 				"MeshFile":"../Assets/Models/BaseModels/Plane.ply",
@@ -52,8 +52,29 @@
 				"m_fScreenRatio":1.77778,
 				"m_fViewDisBegin":1.0,
 				"m_fViewDisEnd":10000.0,
-				"m_vCameraPosition":[0.0, 100.0, -600],
+				"m_vCameraPosition":[0.0, 100.0, -100.0],
 				"m_vTowards":[0.0, -0.5, 0.5]
+			}
+		}
+	},
+	"GameObject":{
+		"ID":1,
+		"Name":"Monitor",
+		"Transform": { "Position":[100.0, 0.0, 0.0], "Rotation":[-90.0, 0.0, 0.0], "Scale":[50.0, 1.0, 50.0] },
+		"Components":{
+			"CGraphicsComponent":{
+				"MeshFile":"../Assets/Models/BaseModels/Plane.ply",
+				"MaterialFile":"../Assets/Materials/MonitorMaterial.json"
+			},
+			"CFBOComponent":{
+				"m_nWidthSize":1024,
+				"m_nHeightSize":1024,
+				"m_fFieldOfViewRadians":0.6,
+				"m_fScreenRatio":1.77778,
+				"m_fViewDisBegin":1.0,
+				"m_fViewDisEnd":10000.0,
+				"m_vCameraPosition":[0.0, 0.0, -100.0],
+				"m_vTowards":[0.0, 0.0, 1.0]
 			}
 		}
 	}

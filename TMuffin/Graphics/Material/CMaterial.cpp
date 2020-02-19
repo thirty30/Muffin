@@ -1,5 +1,7 @@
 #include "CMaterial.h"
 #include "Graphics/Texture/CTexture.h"
+#include "GameObject/CGameObject.h"
+#include "Graphics/FBO/CFBOComponent.h"
 
 CMaterial::CMaterial()
 {
@@ -173,7 +175,7 @@ CMaterialParam* CMaterial::FindMaterialParam(n32 a_nID)
 	return NULL;
 }
 
-T_INLINE void CMaterial::RenderMaterial()
+T_INLINE void CMaterial::RenderMaterial(CGameObject* a_pGameObject)
 {
 	n32 nTextureIdx = 0;
 	hash_map<n32, CMaterialParam*>::const_iterator iter = this->m_mapKey2Param.begin();
@@ -191,6 +193,15 @@ T_INLINE void CMaterial::RenderMaterial()
 			glBindTexture(GL_TEXTURE_2D, pParam->m_pTexture->GetTextureID());
 			glUniform1i(pParam->m_nULID, nTextureIdx);
 			nTextureIdx++;
+			break;
+		case E_MPVT_FBO_TEXTURE:
+		{
+			CFBOComponent* pFBOCom = static_cast<CFBOComponent*>(a_pGameObject->GetComponent<CFBOComponent>());
+			glActiveTexture(GL_TEXTURE0 + nTextureIdx);
+			glBindTexture(GL_TEXTURE_2D, pFBOCom->GetColorTextureID());
+			glUniform1i(pParam->m_nULID, nTextureIdx);
+			nTextureIdx++;
+		}
 			break;
 		case E_MPVT_INT:
 			glUniform1i(pParam->m_nULID, pParam->m_nData[0]);

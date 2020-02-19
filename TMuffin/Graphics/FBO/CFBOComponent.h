@@ -41,8 +41,12 @@ public:
 	~CFBOComponent();
 
 	virtual void Init() override;
-	virtual void Clear() override;
-	void BindBuffer();
-	void ReleaseBuffer();
+
 	T_INLINE CCamera* GetCamera();
+
+	void BindBuffer();
+	void ClearBuffer();
+	void ReleaseBuffer();
+	GLuint GetColorTextureID() { return this->m_nColorTextureID; }
+	GLuint GetDepthTextureID() { return this->m_nDepthTextureID; }
 };
