@@ -1,5 +1,6 @@
 #pragma once
 #include "TMuffinSysInclude.h"
+#define BONE_NUM 4
 
 enum EShaderType
 {

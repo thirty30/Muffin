@@ -10,6 +10,8 @@
 #include "Utility/CGUIDMaker.h"
 #include "Light/CLightManager.h"
 #include "Window/CWindow.h"
+#include "Animation/CAnimation.h"
+#include "Animation/CAnimator.h"
 
 CGraphicsWorld::CGraphicsWorld()
 {
@@ -152,6 +154,27 @@ void CGraphicsWorld::RenderObject(CCamera* a_pCamera)
 
 		n32 nShaderProgramID = pGraphicsComponent->m_pMaterial->GetShaderID();
 		glUseProgram(nShaderProgramID);
+
+		CAnimator* pAnimator = static_cast<CAnimator*>(pGameObj->GetComponent<CAnimator>());
+		if (pAnimator != NULL)
+		{
+			GLint nIsSkinnedMesh = glGetUniformLocation(nShaderProgramID, "isSkinnedMesh");
+			glUniform1f(nIsSkinnedMesh, (f32)GL_TRUE);
+
+			vector<glm::mat4> vecFinalTransformation;
+			vector<glm::mat4> vecOffsets;
+			vector<glm::mat4> vecObjectBoneTransformation;
+			CAnimation* pAnimation = pAnimator->GetCurrentAnimation();
+			pAnimation->GetBoneTransform(pAnimation->m_fNowTime, vecFinalTransformation);
+			pAnimation->m_fNowTime += 0.001f;
+			GLint nMatBonesArray = glGetUniformLocation(nShaderProgramID, "matBonesArray");
+			glUniformMatrix4fv(nMatBonesArray, vecFinalTransformation.size(), GL_FALSE, glm::value_ptr(vecFinalTransformation[0]));
+		}
+		else
+		{
+			GLint nIsSkinnedMesh = glGetUniformLocation(nShaderProgramID, "isSkinnedMesh");
+			glUniform1f(nIsSkinnedMesh, (f32)GL_FALSE);
+		}
 
 		GLint nDiffuseColour = glGetUniformLocation(nShaderProgramID, "un_vDiffuseColour");
 		glUniform4f(nDiffuseColour, 1.0f, 1.0f, 1.0f, 1.0f);

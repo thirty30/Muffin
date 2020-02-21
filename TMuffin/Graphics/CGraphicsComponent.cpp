@@ -82,6 +82,16 @@ tbool CGraphicsComponent::InitRenderer(const CMesh* a_pMesh, CMaterial* a_pMater
 		this->m_pDrawMesh->m_pVertices[i].v0 = pVertex->v0;
 		this->m_pDrawMesh->m_pVertices[i].u1 = pVertex->u1;
 		this->m_pDrawMesh->m_pVertices[i].v1 = pVertex->v1;
+
+		this->m_pDrawMesh->m_pVertices[i].boneID[0] = pVertex->boneID[0];
+		this->m_pDrawMesh->m_pVertices[i].boneID[1] = pVertex->boneID[1];
+		this->m_pDrawMesh->m_pVertices[i].boneID[2] = pVertex->boneID[2];
+		this->m_pDrawMesh->m_pVertices[i].boneID[3] = pVertex->boneID[3];
+
+		this->m_pDrawMesh->m_pVertices[i].boneWeight[0] = pVertex->boneWeight[0];
+		this->m_pDrawMesh->m_pVertices[i].boneWeight[1] = pVertex->boneWeight[1];
+		this->m_pDrawMesh->m_pVertices[i].boneWeight[2] = pVertex->boneWeight[2];
+		this->m_pDrawMesh->m_pVertices[i].boneWeight[3] = pVertex->boneWeight[3];
 	}
 
 	this->m_pDrawMesh->m_nTriangleCount = a_pMesh->m_nTriangleCount;
@@ -122,6 +132,11 @@ tbool CGraphicsComponent::InitRenderer(const CMesh* a_pMesh, CMaterial* a_pMater
 	GLint nNormalLocation = glGetAttribLocation(nShaderProgramID, "vNormal");
 	GLint nUVLocation = glGetAttribLocation(nShaderProgramID, "vUVx2");
 
+	GLint nTangent = glGetAttribLocation(nShaderProgramID, "vTangent");
+	GLint nBiNormal = glGetAttribLocation(nShaderProgramID, "vBiNormal");
+	GLint nBoneID = glGetAttribLocation(nShaderProgramID, "vBoneID");
+	GLint nBoneWeight = glGetAttribLocation(nShaderProgramID, "vBoneWeight");
+
 	// Set the vertex attributes for this shader
 	glEnableVertexAttribArray(nPositionLocation);
 	glVertexAttribPointer(nPositionLocation, 4, GL_FLOAT, GL_FALSE, sizeof(SDrawVertex), (void*)(offsetof(SDrawVertex, x)));
@@ -135,12 +150,31 @@ tbool CGraphicsComponent::InitRenderer(const CMesh* a_pMesh, CMaterial* a_pMater
 	glEnableVertexAttribArray(nUVLocation);
 	glVertexAttribPointer(nUVLocation, 4, GL_FLOAT, GL_FALSE, sizeof(SDrawVertex), (void*)(offsetof(SDrawVertex, u0)));
 
+
+	glEnableVertexAttribArray(nTangent);
+	glVertexAttribPointer(nTangent, 4, GL_FLOAT, GL_FALSE, sizeof(SDrawVertex), (void*)(offsetof(SDrawVertex, tx)));
+
+	glEnableVertexAttribArray(nBiNormal);
+	glVertexAttribPointer(nBiNormal, 4, GL_FLOAT, GL_FALSE, sizeof(SDrawVertex), (void*)(offsetof(SDrawVertex, bx)));
+
+	glEnableVertexAttribArray(nBoneID);
+	glVertexAttribPointer(nBoneID, 4, GL_FLOAT, GL_FALSE, sizeof(SDrawVertex), (void*)(offsetof(SDrawVertex, boneID[0])));
+
+	glEnableVertexAttribArray(nBoneWeight);
+	glVertexAttribPointer(nBoneWeight, 4, GL_FLOAT, GL_FALSE, sizeof(SDrawVertex), (void*)(offsetof(SDrawVertex, boneWeight[0])));
+
 	// Now that all the parts are set up, set the VAO to zero
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	glDisableVertexAttribArray(nPositionLocation);
+	glDisableVertexAttribArray(nPositionLocation); 
 	glDisableVertexAttribArray(nColorLocation);
+	glDisableVertexAttribArray(nNormalLocation);
+	glDisableVertexAttribArray(nUVLocation);
+	glDisableVertexAttribArray(nTangent);
+	glDisableVertexAttribArray(nBiNormal);
+	glDisableVertexAttribArray(nBoneID);
+	glDisableVertexAttribArray(nBoneWeight);
 
 	return true;
 }

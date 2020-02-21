@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation\CAnimation.cpp" />
+    <ClCompile Include="Animation\CAnimator.cpp" />
     <ClCompile Include="Camera\CCamera.cpp" />
     <ClCompile Include="Camera\CCameraManager.cpp" />
     <ClCompile Include="dllmain.cpp" />
@@ -67,6 +69,8 @@
     <ClCompile Include="Window\CWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation\CAnimation.h" />
+    <ClInclude Include="Animation\CAnimator.h" />
     <ClInclude Include="Camera\CCamera.h" />
     <ClInclude Include="Camera\CCameraManager.h" />
     <ClInclude Include="CommonDefine.h" />

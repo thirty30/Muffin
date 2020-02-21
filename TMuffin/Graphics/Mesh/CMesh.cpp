@@ -6,6 +6,7 @@ CMesh::CMesh()
 	this->m_pVertices = NULL;
 	this->m_nTriangleCount = 0;
 	this->m_pTriangles = NULL;
+	this->m_mapName2Bone.clear();
 }
 
 CMesh::~CMesh()
@@ -18,4 +19,10 @@ CMesh::~CMesh()
 	{
 		delete []this->m_pTriangles;
 	}
+
+	for (auto iter : this->m_mapName2Bone)
+	{
+		delete iter.second;
+	}
+	this->m_mapName2Bone.clear();
 }

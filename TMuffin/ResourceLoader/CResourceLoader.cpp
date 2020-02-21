@@ -1,5 +1,6 @@
 #include "CResourceLoader.h"
 #include "Graphics/Mesh/CMesh.h"
+#include "Utility/Utility.h"
 
 tbool CResourceLoader::LoadModelFromPly(const tcchar* a_strFileName, CMesh* a_pMesh)
 {
@@ -126,7 +127,10 @@ tbool CResourceLoader::LoadMesh(const tcchar* a_strFileName, CMesh* a_pMesh)
 		aiProcess_Triangulate |
 		aiProcess_JoinIdenticalVertices |
 		aiProcess_SortByPType |
-		aiProcess_GlobalScale);
+		aiProcess_GlobalScale |
+		aiProcess_GenNormals |
+		aiProcess_OptimizeMeshes |
+		aiProcess_OptimizeGraph);
 	// If the import failed, report it
 	if (pScene == NULL)
 	{
@@ -138,9 +142,48 @@ tbool CResourceLoader::LoadMesh(const tcchar* a_strFileName, CMesh* a_pMesh)
 	{
 		return false;
 	}
+
+	a_pMesh->m_matInverseTransformation = AIMatrixToGLMMatrix(pScene->mRootNode->mTransformation);
+	a_pMesh->m_matInverseTransformation = glm::inverse(a_pMesh->m_matInverseTransformation);
+
 	//f64 factor = 0.0f;
 	//pScene->mMetaData->Get("UnitScaleFactor", factor);
 	aiMesh* pMesh = pScene->mMeshes[0];
+
+	SBoneInfo* pBoneArray = NULL;
+	if (pMesh->HasBones() == true)
+	{
+		pBoneArray = new SBoneInfo[pMesh->mNumVertices];
+		for (n32 i = 0; i < pMesh->mNumBones; i++)
+		{
+			tstring strBoneName(pMesh->mBones[i]->mName.C_Str());
+
+			//auto iter = a_pMesh->m_mapName2Bone.find(strBoneName);
+			//if (iter != a_pMesh->m_mapName2Bone.end())
+			//{
+			//	cout << " ####################" << endl;
+			//}
+
+			SBoneDetail* pDetail = new SBoneDetail();
+			pDetail->boneName = strBoneName;
+			pDetail->boneID = i;
+			pDetail->BoneOffset = AIMatrixToGLMMatrix(pMesh->mBones[i]->mOffsetMatrix);
+			a_pMesh->m_mapName2Bone[strBoneName] = pDetail;
+
+
+
+			//cout << "Bone: " << pMesh->mBones[i]->mName.C_Str() << endl;
+			n32 nNumWeights = pMesh->mBones[i]->mNumWeights;
+			for (n32 j = 0; j < nNumWeights; j++)
+			{
+				aiVertexWeight* pAIWeight = pMesh->mBones[i]->mWeights;
+				n32 nVertexID = pAIWeight[j].mVertexId;
+				f32 fVertexWeight = pAIWeight[j].mWeight;
+
+				pBoneArray[nVertexID].AddBone(i, fVertexWeight);
+			}
+		}
+	}
 	 
 	a_pMesh->m_nVertexCount = pMesh->mNumVertices;
 	a_pMesh->m_nTriangleCount = pMesh->mNumFaces;
@@ -154,10 +197,10 @@ tbool CResourceLoader::LoadMesh(const tcchar* a_strFileName, CMesh* a_pMesh)
 
 		if (pMesh->HasVertexColors(0) == true)
 		{
-			a_pMesh->m_pVertices[i].r = pMesh->mColors[i]->r;
-			a_pMesh->m_pVertices[i].g = pMesh->mColors[i]->g;
-			a_pMesh->m_pVertices[i].b = pMesh->mColors[i]->b;
-			a_pMesh->m_pVertices[i].a = pMesh->mColors[i]->a;
+			a_pMesh->m_pVertices[i].r = pMesh->mColors[0][i].r;
+			a_pMesh->m_pVertices[i].g = pMesh->mColors[0][i].g;
+			a_pMesh->m_pVertices[i].b = pMesh->mColors[0][i].b;
+			a_pMesh->m_pVertices[i].a = pMesh->mColors[0][i].a;
 		}
 		
 		if (pMesh->HasNormals() == true)
@@ -174,7 +217,37 @@ tbool CResourceLoader::LoadMesh(const tcchar* a_strFileName, CMesh* a_pMesh)
 			a_pMesh->m_pVertices[i].u1 = 1.0f;
 			a_pMesh->m_pVertices[i].v1 = 1.0f;
 		}
+
+		if (pMesh->HasTangentsAndBitangents() == true)
+		{
+			a_pMesh->m_pVertices[i].tx = pMesh->mTangents[i].x;
+			a_pMesh->m_pVertices[i].ty = pMesh->mTangents[i].y;
+			a_pMesh->m_pVertices[i].tz = pMesh->mTangents[i].z;
+
+			a_pMesh->m_pVertices[i].bx = pMesh->mBitangents[i].x;
+			a_pMesh->m_pVertices[i].by = pMesh->mBitangents[i].y;
+			a_pMesh->m_pVertices[i].bz = pMesh->mBitangents[i].z;
+		}
+
+		if (pBoneArray != NULL)
+		{
+			a_pMesh->m_pVertices[i].boneID[0] = pBoneArray[i].boneID[0];
+			a_pMesh->m_pVertices[i].boneID[1] = pBoneArray[i].boneID[1];
+			a_pMesh->m_pVertices[i].boneID[2] = pBoneArray[i].boneID[2];
+			a_pMesh->m_pVertices[i].boneID[3] = pBoneArray[i].boneID[3];
+
+			a_pMesh->m_pVertices[i].boneWeight[0] = pBoneArray[i].boneWeight[0];
+			a_pMesh->m_pVertices[i].boneWeight[1] = pBoneArray[i].boneWeight[1];
+			a_pMesh->m_pVertices[i].boneWeight[2] = pBoneArray[i].boneWeight[2];
+			a_pMesh->m_pVertices[i].boneWeight[3] = pBoneArray[i].boneWeight[3];
+		}
 	}
+
+	if (pBoneArray != NULL)
+	{
+		delete[] pBoneArray;
+	}
+	
 
 	a_pMesh->m_pTriangles = new SMeshTriangle[a_pMesh->m_nTriangleCount];
 	for (n32 i = 0; i < a_pMesh->m_nTriangleCount; i++)

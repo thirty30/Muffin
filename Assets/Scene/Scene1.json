@@ -46,10 +46,10 @@
 				"MaterialFile":"../Assets/Materials/MonitorMaterial.json"
 			},
 			"CFBOComponent":{
-				"m_nWidthSize":1024,
-				"m_nHeightSize":1024,
+				"m_nWidthSize":512,
+				"m_nHeightSize":512,
 				"m_fFieldOfViewRadians":0.6,
-				"m_fScreenRatio":1.77778,
+				"m_fScreenRatio":1.0,
 				"m_fViewDisBegin":1.0,
 				"m_fViewDisEnd":10000.0,
 				"m_vCameraPosition":[0.0, 100.0, -100.0],
@@ -67,10 +67,10 @@
 				"MaterialFile":"../Assets/Materials/MonitorMaterial.json"
 			},
 			"CFBOComponent":{
-				"m_nWidthSize":1024,
-				"m_nHeightSize":1024,
+				"m_nWidthSize":512,
+				"m_nHeightSize":512,
 				"m_fFieldOfViewRadians":0.6,
-				"m_fScreenRatio":1.77778,
+				"m_fScreenRatio":1.0,
 				"m_fViewDisBegin":1.0,
 				"m_fViewDisEnd":10000.0,
 				"m_vCameraPosition":[0.0, 0.0, -100.0],

@@ -5,6 +5,7 @@
 #include "Particle/CParticleEmitter.h"
 #include "GameObject/CGameObjectManager.h"
 #include "ExportFunction.h"
+#include "Animation/CAnimation.h"
 
 CMuffin MUFFIN;
 

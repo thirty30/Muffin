@@ -122,6 +122,8 @@
       <Filter>SkyBox</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\FBO\CFBOComponent.cpp" />
+    <ClCompile Include="Animation\CAnimation.cpp" />
+    <ClCompile Include="Animation\CAnimator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\CCamera.h">
@@ -260,6 +262,8 @@
       <Filter>SkyBox</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\FBO\CFBOComponent.h" />
+    <ClInclude Include="Animation\CAnimation.h" />
+    <ClInclude Include="Animation\CAnimator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Camera">

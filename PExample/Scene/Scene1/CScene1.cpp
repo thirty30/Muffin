@@ -31,15 +31,15 @@ tbool CScene1::LoadScene()
 		pCamera->m_fScreenRatio = fScreenRatio;
 		pCamera->m_fViewDisBegin = 1.0f;
 		pCamera->m_fViewDisEnd = 100000.0f;
-		pCamera->m_vTowards = glm::normalize(glm::vec3(0.0f, 0.0f, 1.0f));
-		this->pCameraObject->GetTransform().m_vPosition = glm::vec3(0, 0, -100);
+		pCamera->m_vTowards = glm::normalize(glm::vec3(0.0f, -0.5f, 0.5f));
+		this->pCameraObject->GetTransform().m_vPosition = glm::vec3(0, 10, -10);
 
 		CCameraControl* pController = static_cast<CCameraControl*>(CGame::GetSingleton().GetControlManager()->CreateController<CCameraControl>());
 		pController->SetCamera(pCamera);
 		pController->m_fCameraYMoveSpeed = 0.2f;
 		pController->m_fCameraXMoveSpeed = 0.4f;
 		pController->m_fCameraRotationSpeed = 1.0f;
-		pController->m_fCameraScrollSpeed = 6.0f;
+		pController->m_fCameraScrollSpeed = 2.0f;
 	}
 
 	//SkyBox
@@ -59,16 +59,22 @@ tbool CScene1::LoadScene()
 
 
 	//Scene Items
-	//CGameObject* pShip = new CGameObject();
-	//pShip->GetTransform().m_vScale = glm::vec3(100, 1, 100);
-	//CGraphicsComponent* pGraphics = static_cast<CGraphicsComponent*>(pShip->AddComponent<CGraphicsComponent>());
-	//CMesh* pMesh = new CMesh();
-	//CResourceLoader::LoadMesh("../Assets/Models/BaseModels/Plane.ply", pMesh);
-	//CMaterial* pMat = new CMaterial();
-	//pMat->Init("../Assets/Materials/PlaneMaterial.json");
-	//pGraphics->InitRenderer(pMesh, pMat);
-	//delete pMesh;
-	this->LoadSceneFile("../Assets/Scene/Scene1.json");
+	CGameObject* pRobot = new CGameObject();
+	//pRobot->GetTransform().m_vScale = glm::vec3(1, 1, 1);
+	//pRobot->GetTransform().SetRotation(glm::vec3(-90, 0, 0));
+	CGraphicsComponent* pGraphics = static_cast<CGraphicsComponent*>(pRobot->AddComponent<CGraphicsComponent>());
+	CMesh* pMesh = new CMesh();
+	CResourceLoader::LoadMesh("../Assets/Models/Robot.fbx", pMesh);
+	CMaterial* pMat = new CMaterial();
+	pMat->Init("../Assets/Materials/RobotMaterial.json");
+	pGraphics->InitRenderer(pMesh, pMat);
+	CAnimator* pAnimator = static_cast<CAnimator*>(pRobot->AddComponent<CAnimator>());
+	pAnimator->CreateAnimation("run", "../Assets/Animation/Robot/Run.fbx", pMesh);
+	pAnimator->CreateAnimation("attack", "../Assets/Animation/Robot/Attack.fbx", pMesh);
+	pAnimator->SetCurrentAnimation("run");
+	delete pMesh;
+
+	//this->LoadSceneFile("../Assets/Scene/Scene1.json");
 
 	return true;
 }
