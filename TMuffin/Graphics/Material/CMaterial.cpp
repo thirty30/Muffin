@@ -82,6 +82,10 @@ tbool CMaterial::Init(tstring a_strFileName)
 		{
 			pParam->m_eType = E_MPVT_FBO_TEXTURE;
 		}
+		else if (strTag == "SkyBoxCubeMap")
+		{
+			pParam->m_eType = E_MPVT_FBO_SKYBOXCUBEMAP;
+		}
 		else if (strTag == "Int")
 		{
 			if (rValue.IsInt() == false) { return false; }
@@ -175,7 +179,7 @@ CMaterialParam* CMaterial::FindMaterialParam(n32 a_nID)
 	return NULL;
 }
 
-T_INLINE void CMaterial::RenderMaterial(CGameObject* a_pGameObject)
+T_INLINE void CMaterial::RenderMaterial(CGameObject* a_pGameObject, GLuint a_nSkyBoxID)
 {
 	n32 nTextureIdx = 0;
 	hash_map<n32, CMaterialParam*>::const_iterator iter = this->m_mapKey2Param.begin();
@@ -202,7 +206,15 @@ T_INLINE void CMaterial::RenderMaterial(CGameObject* a_pGameObject)
 			glUniform1i(pParam->m_nULID, nTextureIdx);
 			nTextureIdx++;
 		}
-			break;
+		break;
+		case E_MPVT_FBO_SKYBOXCUBEMAP:
+		{
+			glActiveTexture(GL_TEXTURE0 + nTextureIdx);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, a_nSkyBoxID);
+			glUniform1i(pParam->m_nULID, nTextureIdx);
+			nTextureIdx++;
+		}
+		break;
 		case E_MPVT_INT:
 			glUniform1i(pParam->m_nULID, pParam->m_nData[0]);
 			break;

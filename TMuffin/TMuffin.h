@@ -22,9 +22,11 @@
 #include "./Graphics/CGraphicsComponent.h"
 #include "./Graphics/FBO/CFBOComponent.h"
 #include "./Graphics/SkyBox/CSkyBox.h"
+#include "./Graphics/Stencil/CStencilComponent.h"
 
 #include "./Animation/CAnimation.h"
 #include "./Animation/CAnimator.h"
+
 
 #include "./Physics/CRigidBody.h"
 #include "./Physics/PhysicsDefine.h"

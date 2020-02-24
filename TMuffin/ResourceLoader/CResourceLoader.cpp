@@ -117,11 +117,13 @@ tbool CResourceLoader::LoadMesh(const tcchar* a_strFileName, CMesh* a_pMesh)
 	{
 		return false;
 	}
+
 	// Create an instance of the Importer class
 	Assimp::Importer importer;
 	// And have it read the given file with some example postprocessing
 	// Usually - if speed is not the most important aspect for you - you'll
 	// probably to request more postprocessing than we do in this example.
+	
 	const aiScene* pScene = importer.ReadFile(a_strFileName,
 		aiProcess_CalcTangentSpace |
 		aiProcess_Triangulate |
@@ -131,6 +133,8 @@ tbool CResourceLoader::LoadMesh(const tcchar* a_strFileName, CMesh* a_pMesh)
 		aiProcess_GenNormals |
 		aiProcess_OptimizeMeshes |
 		aiProcess_OptimizeGraph);
+
+
 	// If the import failed, report it
 	if (pScene == NULL)
 	{
@@ -158,21 +162,12 @@ tbool CResourceLoader::LoadMesh(const tcchar* a_strFileName, CMesh* a_pMesh)
 		{
 			tstring strBoneName(pMesh->mBones[i]->mName.C_Str());
 
-			//auto iter = a_pMesh->m_mapName2Bone.find(strBoneName);
-			//if (iter != a_pMesh->m_mapName2Bone.end())
-			//{
-			//	cout << " ####################" << endl;
-			//}
-
 			SBoneDetail* pDetail = new SBoneDetail();
 			pDetail->boneName = strBoneName;
 			pDetail->boneID = i;
 			pDetail->BoneOffset = AIMatrixToGLMMatrix(pMesh->mBones[i]->mOffsetMatrix);
 			a_pMesh->m_mapName2Bone[strBoneName] = pDetail;
 
-
-
-			//cout << "Bone: " << pMesh->mBones[i]->mName.C_Str() << endl;
 			n32 nNumWeights = pMesh->mBones[i]->mNumWeights;
 			for (n32 j = 0; j < nNumWeights; j++)
 			{
@@ -243,10 +238,10 @@ tbool CResourceLoader::LoadMesh(const tcchar* a_strFileName, CMesh* a_pMesh)
 		}
 	}
 
-	if (pBoneArray != NULL)
-	{
-		delete[] pBoneArray;
-	}
+	//if (pBoneArray != NULL)
+	//{
+	//	delete[] pBoneArray;
+	//}
 	
 
 	a_pMesh->m_pTriangles = new SMeshTriangle[a_pMesh->m_nTriangleCount];

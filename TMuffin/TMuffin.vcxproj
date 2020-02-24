@@ -84,6 +84,7 @@
     <ClInclude Include="Graphics\CGraphicsWorld.h" />
     <ClInclude Include="Graphics\FBO\CFBOComponent.h" />
     <ClInclude Include="Graphics\GraphicsDefine.h" />
+    <ClInclude Include="Graphics\Stencil\CStencilComponent.h" />
     <ClInclude Include="Light\CLight.h" />
     <ClInclude Include="Light\CLightManager.h" />
     <ClInclude Include="LineTween\CLineTweenCurve.h" />

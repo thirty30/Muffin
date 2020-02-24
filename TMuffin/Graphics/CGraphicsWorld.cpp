@@ -12,6 +12,7 @@
 #include "Window/CWindow.h"
 #include "Animation/CAnimation.h"
 #include "Animation/CAnimator.h"
+#include "Stencil/CStencilComponent.h"
 
 CGraphicsWorld::CGraphicsWorld()
 {
@@ -140,6 +141,38 @@ void CGraphicsWorld::RenderObject(CCamera* a_pCamera)
 		{
 			continue;
 		}
+		
+		CStencilComponent* pStencil = static_cast<CStencilComponent*>(pGameObj->GetComponent<CStencilComponent>());
+		if (pStencil != NULL)
+		{
+			glEnable(GL_STENCIL_TEST);
+
+			if (pStencil->m_bIsStencil == true)
+			{
+				glClearStencil(pStencil->m_nDefaultValue);
+				glClear(GL_STENCIL_BUFFER_BIT);
+
+				glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+				glStencilFunc(GL_ALWAYS, pStencil->m_nTargetValue, 0xFF);
+				if (pStencil->m_bEnableColor == false)
+				{
+					glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+				}
+				if (pStencil->m_bEnableDepth == false)
+				{
+					glDepthMask(GL_FALSE);
+				}
+			}
+			else
+			{
+				glDepthMask(GL_TRUE);
+				glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+				//glClear(GL_DEPTH_BUFFER_BIT);
+
+				glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+				glStencilFunc(pStencil->m_nCondition, pStencil->m_nTargetValue, 0xFF);
+			}
+		}
 
 		glm::mat4 matM = glm::mat4(1.0f);
 		CTransform& rTrans = pGameObj->GetTransform();
@@ -155,26 +188,7 @@ void CGraphicsWorld::RenderObject(CCamera* a_pCamera)
 		n32 nShaderProgramID = pGraphicsComponent->m_pMaterial->GetShaderID();
 		glUseProgram(nShaderProgramID);
 
-		CAnimator* pAnimator = static_cast<CAnimator*>(pGameObj->GetComponent<CAnimator>());
-		if (pAnimator != NULL)
-		{
-			GLint nIsSkinnedMesh = glGetUniformLocation(nShaderProgramID, "isSkinnedMesh");
-			glUniform1f(nIsSkinnedMesh, (f32)GL_TRUE);
-
-			vector<glm::mat4> vecFinalTransformation;
-			vector<glm::mat4> vecOffsets;
-			vector<glm::mat4> vecObjectBoneTransformation;
-			CAnimation* pAnimation = pAnimator->GetCurrentAnimation();
-			pAnimation->GetBoneTransform(pAnimation->m_fNowTime, vecFinalTransformation);
-			pAnimation->m_fNowTime += 0.001f;
-			GLint nMatBonesArray = glGetUniformLocation(nShaderProgramID, "matBonesArray");
-			glUniformMatrix4fv(nMatBonesArray, vecFinalTransformation.size(), GL_FALSE, glm::value_ptr(vecFinalTransformation[0]));
-		}
-		else
-		{
-			GLint nIsSkinnedMesh = glGetUniformLocation(nShaderProgramID, "isSkinnedMesh");
-			glUniform1f(nIsSkinnedMesh, (f32)GL_FALSE);
-		}
+		/////////////////////////////////////////////////////////////////
 
 		GLint nDiffuseColour = glGetUniformLocation(nShaderProgramID, "un_vDiffuseColour");
 		glUniform4f(nDiffuseColour, 1.0f, 1.0f, 1.0f, 1.0f);
@@ -187,7 +201,7 @@ void CGraphicsWorld::RenderObject(CCamera* a_pCamera)
 		glUniform4f(nEyeLocation, rCameraTrans.m_vPosition.x, rCameraTrans.m_vPosition.y, rCameraTrans.m_vPosition.z, 1.0f);
 
 		MUFFIN.GetLightMgr()->RenderLights(nShaderProgramID);
-		pGraphicsComponent->GetMaterial()->RenderMaterial(pGameObj);
+		pGraphicsComponent->GetMaterial()->RenderMaterial(pGameObj, this->m_pSkyBox->m_nTextureID);
 
 		GLint matModel_UL = glGetUniformLocation(nShaderProgramID, "matModel");
 		GLint matView_UL = glGetUniformLocation(nShaderProgramID, "matView");
@@ -203,11 +217,36 @@ void CGraphicsWorld::RenderObject(CCamera* a_pCamera)
 
 		glPolygonMode(GL_FRONT_AND_BACK, pGraphicsComponent->m_nRenderMode);
 
+		CAnimator* pAnimator = static_cast<CAnimator*>(pGameObj->GetComponent<CAnimator>());
+		GLint nIsSkinnedMesh = glGetUniformLocation(nShaderProgramID, "isSkinnedMesh");
+		if (pAnimator != NULL)
+		{
+			glUniform1f(nIsSkinnedMesh, GL_TRUE);
+			vector<glm::mat4> vecFinalTransformation;
+			vector<glm::mat4> vecOffsets;
+			vector<glm::mat4> vecObjectBoneTransformation;
+
+			CAnimation* pAnimation = pAnimator->GetCurrentAnimation();
+			pAnimation->GetBoneTransform(vecFinalTransformation);
+			GLint nMatBonesArray = glGetUniformLocation(nShaderProgramID, "matBonesArray");
+			glUniformMatrix4fv(nMatBonesArray, vecFinalTransformation.size(), GL_FALSE, glm::value_ptr(vecFinalTransformation[0]));
+		}
+		else
+		{
+			glUniform1f(nIsSkinnedMesh, GL_FALSE);
+		}
+
 		SDrawMesh* pDrawInfo = pGraphicsComponent->m_pDrawMesh;
 		glBindVertexArray(pDrawInfo->m_nVAOID);
 		glDrawElements(GL_TRIANGLES, pDrawInfo->m_nTriangleIndexCount, GL_UNSIGNED_INT, NULL);
 		glBindVertexArray(0);
+
+		if (pStencil != NULL)
+		{
+			glDisable(GL_STENCIL_TEST);
+		}
 	}
+	
 }
 
 void CGraphicsWorld::RenderFBO()

@@ -39,6 +39,11 @@ void CCameraControl::MouseEvent(n32 a_nKey, n32 a_nAction, n32 a_nMods)
 {
 	switch (a_nKey)
 	{
+	case GLFW_MOUSE_BUTTON_1:
+	{
+		//SelectObject(800, 450);
+	}
+	break;
 	case GLFW_MOUSE_BUTTON_2:
 	{
 		if (a_nAction == GLFW_PRESS)

@@ -4,22 +4,22 @@
 
 struct SBoneInfo
 {
-	f32 boneID[BONE_NUM];
+	n32 boneID[BONE_NUM];
 	f32 boneWeight[BONE_NUM];
 
 	SBoneInfo()
 	{
-		TMemzero(this->boneID, sizeof(f32) * BONE_NUM);
+		TMemzero(this->boneID, sizeof(n32) * BONE_NUM);
 		TMemzero(this->boneWeight, sizeof(f32) * BONE_NUM);
 	}
 
-	void AddBone(u32 a_nBoneID, f32 a_fWeight) 
+	void AddBone(n32 a_nBoneID, f32 a_fWeight) 
 	{
 		for (n32 i = 0; i < BONE_NUM; i++)
 		{
 			if (boneWeight[i] == 0.0f)
 			{
-				this->boneID[i] = (f32)a_nBoneID;
+				this->boneID[i] = a_nBoneID;
 				this->boneWeight[i] = a_fWeight;
 				break;
 			}
@@ -45,7 +45,7 @@ struct SMeshVertex
 
 	f32 tx, ty, tz;
 	f32 bx, by, bz;
-	f32 boneID[BONE_NUM];
+	n32 boneID[BONE_NUM];
 	f32 boneWeight[BONE_NUM];
 
 	SMeshVertex()
@@ -56,7 +56,7 @@ struct SMeshVertex
 		this->u0 = 0; this->v0 = 0; this->u1 = 0; this->v1 = 0;
 		this->tx = 0, this->ty = 0, this->tz = 0;
 		this->bx = 0, this->by = 0, this->bz = 0;
-		TMemzero(this->boneID, sizeof(f32) * BONE_NUM);
+		TMemzero(this->boneID, sizeof(n32) * BONE_NUM);
 		TMemzero(this->boneWeight, sizeof(f32) * BONE_NUM);
 	}
 };
@@ -83,6 +83,7 @@ public:
 
 	hash_map<tstring, SBoneDetail*> m_mapName2Bone;
 	glm::mat4 m_matInverseTransformation;
+
 public:
 	CMesh();
 	~CMesh();

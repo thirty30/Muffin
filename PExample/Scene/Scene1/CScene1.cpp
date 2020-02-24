@@ -31,15 +31,15 @@ tbool CScene1::LoadScene()
 		pCamera->m_fScreenRatio = fScreenRatio;
 		pCamera->m_fViewDisBegin = 1.0f;
 		pCamera->m_fViewDisEnd = 100000.0f;
-		pCamera->m_vTowards = glm::normalize(glm::vec3(0.0f, -0.5f, 0.5f));
-		this->pCameraObject->GetTransform().m_vPosition = glm::vec3(0, 10, -10);
+		pCamera->m_vTowards = glm::normalize(glm::vec3(0.0f, -0.3f, 0.7f));
+		this->pCameraObject->GetTransform().m_vPosition = glm::vec3(0, 5, -10);
 
 		CCameraControl* pController = static_cast<CCameraControl*>(CGame::GetSingleton().GetControlManager()->CreateController<CCameraControl>());
 		pController->SetCamera(pCamera);
 		pController->m_fCameraYMoveSpeed = 0.2f;
 		pController->m_fCameraXMoveSpeed = 0.4f;
 		pController->m_fCameraRotationSpeed = 1.0f;
-		pController->m_fCameraScrollSpeed = 2.0f;
+		pController->m_fCameraScrollSpeed = 0.3f;
 	}
 
 	//SkyBox
@@ -64,14 +64,17 @@ tbool CScene1::LoadScene()
 	//pRobot->GetTransform().SetRotation(glm::vec3(-90, 0, 0));
 	CGraphicsComponent* pGraphics = static_cast<CGraphicsComponent*>(pRobot->AddComponent<CGraphicsComponent>());
 	CMesh* pMesh = new CMesh();
-	CResourceLoader::LoadMesh("../Assets/Models/Robot.fbx", pMesh);
+	CResourceLoader::LoadMesh("../Assets/Models/Role1.fbx", pMesh);
 	CMaterial* pMat = new CMaterial();
-	pMat->Init("../Assets/Materials/RobotMaterial.json");
+	pMat->Init("../Assets/Materials/Role1MapMaterial.json");
 	pGraphics->InitRenderer(pMesh, pMat);
 	CAnimator* pAnimator = static_cast<CAnimator*>(pRobot->AddComponent<CAnimator>());
-	pAnimator->CreateAnimation("run", "../Assets/Animation/Robot/Run.fbx", pMesh);
-	pAnimator->CreateAnimation("attack", "../Assets/Animation/Robot/Attack.fbx", pMesh);
-	pAnimator->SetCurrentAnimation("run");
+	pAnimator->CreateAnimation("jumping", "../Assets/Animation/Role1/Jumping.fbx", pMesh);
+	pAnimator->CreateAnimation("walking", "../Assets/Animation/Role1/WalkingInPlace.fbx", pMesh);
+	pAnimator->SetCurrentAnimation("walking");
+	CMotion* pMotion = static_cast<CMotion*>(pRobot->AddComponent<CMotion>());
+	pMotion->m_vVelocity = glm::vec3(0, 0, 1.0);
+
 	delete pMesh;
 
 	//this->LoadSceneFile("../Assets/Scene/Scene1.json");

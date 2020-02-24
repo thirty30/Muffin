@@ -264,6 +264,7 @@
     <ClInclude Include="Graphics\FBO\CFBOComponent.h" />
     <ClInclude Include="Animation\CAnimation.h" />
     <ClInclude Include="Animation\CAnimator.h" />
+    <ClInclude Include="Graphics\Stencil\CStencilComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Camera">

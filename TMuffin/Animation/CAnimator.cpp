@@ -1,11 +1,20 @@
 #include "CAnimator.h"
 #include "CAnimation.h"
 
+void CAnimator::CallBackEndAnimation()
+{
+	if (this->m_pCallBack != NULL)
+	{
+		this->m_pCallBack(this->m_pCurrentAnimation->m_strName, this->m_pCallBackCustom);
+	}
+}
+
 CAnimator::CAnimator()
 {
 	this->m_strFileName.clear();
 	this->m_mapName2Animation.clear();
 	this->m_pCurrentAnimation = NULL;
+	this->m_pCallBack = NULL;
 }
 
 CAnimator::~CAnimator()
@@ -20,12 +29,15 @@ CAnimator::~CAnimator()
 	this->m_pCurrentAnimation = NULL;
 }
 
-void CAnimator::CreateAnimation(tstring a_strKey, const tcchar* a_pFileName, CMesh* a_pMesh)
+CAnimation* CAnimator::CreateAnimation(tstring a_strKey, const tcchar* a_pFileName, CMesh* a_pMesh)
 {
 	tstring strFileName(a_pFileName);
 	CAnimation* pAnimation = new CAnimation();
 	pAnimation->Init(a_pFileName, a_pMesh);
+	pAnimation->m_strName = a_strKey;
+	pAnimation->SetAnimator(this);
 	this->m_mapName2Animation[a_strKey] = pAnimation;
+	return pAnimation;
 }
 
 CAnimation* CAnimator::GetAnimation(tstring a_strKey)
@@ -45,6 +57,22 @@ void CAnimator::SetCurrentAnimation(tstring a_strKey)
 	{
 		return;
 	}
+	if (this->m_pCurrentAnimation == pAnimation && this->m_pCurrentAnimation->IsPlaying() == true)
+	{
+		return;
+	}
 	this->m_pCurrentAnimation = pAnimation;
+	this->m_pCurrentAnimation->Reset();
+}
+
+void CAnimator::SetCallBack(MuffinAnimationCallBack a_pCallBack, void* a_pCustom)
+{
+	this->m_pCallBack = a_pCallBack;
+	this->m_pCallBackCustom = a_pCustom;
+}
+
+tbool CAnimator::IsPlaying()
+{
+	return this->m_pCurrentAnimation->IsPlaying();
 }
 

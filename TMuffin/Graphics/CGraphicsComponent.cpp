@@ -83,6 +83,14 @@ tbool CGraphicsComponent::InitRenderer(const CMesh* a_pMesh, CMaterial* a_pMater
 		this->m_pDrawMesh->m_pVertices[i].u1 = pVertex->u1;
 		this->m_pDrawMesh->m_pVertices[i].v1 = pVertex->v1;
 
+		this->m_pDrawMesh->m_pVertices[i].tx = pVertex->tx;
+		this->m_pDrawMesh->m_pVertices[i].ty = pVertex->ty;
+		this->m_pDrawMesh->m_pVertices[i].tz = pVertex->tz;
+
+		this->m_pDrawMesh->m_pVertices[i].bx = pVertex->bx;
+		this->m_pDrawMesh->m_pVertices[i].by = pVertex->by;
+		this->m_pDrawMesh->m_pVertices[i].bz = pVertex->bz;
+
 		this->m_pDrawMesh->m_pVertices[i].boneID[0] = pVertex->boneID[0];
 		this->m_pDrawMesh->m_pVertices[i].boneID[1] = pVertex->boneID[1];
 		this->m_pDrawMesh->m_pVertices[i].boneID[2] = pVertex->boneID[2];
@@ -158,7 +166,7 @@ tbool CGraphicsComponent::InitRenderer(const CMesh* a_pMesh, CMaterial* a_pMater
 	glVertexAttribPointer(nBiNormal, 4, GL_FLOAT, GL_FALSE, sizeof(SDrawVertex), (void*)(offsetof(SDrawVertex, bx)));
 
 	glEnableVertexAttribArray(nBoneID);
-	glVertexAttribPointer(nBoneID, 4, GL_FLOAT, GL_FALSE, sizeof(SDrawVertex), (void*)(offsetof(SDrawVertex, boneID[0])));
+	glVertexAttribPointer(nBoneID, 4, GL_INT, GL_FALSE, sizeof(SDrawVertex), (void*)(offsetof(SDrawVertex, boneID[0])));
 
 	glEnableVertexAttribArray(nBoneWeight);
 	glVertexAttribPointer(nBoneWeight, 4, GL_FLOAT, GL_FALSE, sizeof(SDrawVertex), (void*)(offsetof(SDrawVertex, boneWeight[0])));

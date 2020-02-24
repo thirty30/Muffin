@@ -8,7 +8,7 @@ struct SDrawVertex
 	f32 u0, v0, u1, v1;
 	f32 tx, ty, tz, tw;
 	f32 bx, by, bz, bw;
-	f32 boneID[4];
+	n32 boneID[4];
 	f32 boneWeight[4];
 	SDrawVertex()
 	{
@@ -18,7 +18,7 @@ struct SDrawVertex
 		this->u0 = 1; this->v0 = 1; this->u1 = 1; this->v1 = 1;
 		this->tx = 0, this->ty = 0, this->tz = 0, this->tw = 1;
 		this->bx = 0, this->by = 0, this->bz = 0, this->bw = 1;
-		TMemzero(this->boneID, sizeof(f32) * 4);
+		TMemzero(this->boneID, sizeof(n32) * 4);
 		TMemzero(this->boneWeight, sizeof(f32) * 4);
 	}
 };
