@@ -37,3 +37,11 @@ glm::vec3 CTransform::GetEulerAngle()
 {
 	return glm::eulerAngles(this->m_qRotation);
 }
+
+void CTransform::LookAt(glm::vec3 a_vTarget)
+{
+	glm::vec3 v1 = glm::vec3(0, 0, 1);
+	glm::vec3 v2 = glm::normalize(a_vTarget);
+	glm::quat qAngle = glm::rotation(v1, v2);
+	this->SetRotation(qAngle);
+}

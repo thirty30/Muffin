@@ -35,7 +35,11 @@ void CGameObject::Update()
 	TLinkedNode<CComponentBase*>* pNode = this->m_pComponents.GetHeadNode();
 	while (pNode != NULL)
 	{
-		pNode->m_pValue->Update();
+		tbool bIsEnable = pNode->m_pValue->m_bIsEnable;
+		if (bIsEnable == true)
+		{
+			pNode->m_pValue->Update();
+		}
 		pNode = pNode->m_pNext;
 	}
 }

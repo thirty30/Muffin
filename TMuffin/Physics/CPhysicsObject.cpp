@@ -12,16 +12,13 @@
 #include "CColliderPlane.h"
 #include "CColliderSphere.h"
 
-CPhysicsObject::CPhysicsObject(CGameObject* a_pGameObject)
+CPhysicsComponent::CPhysicsComponent()
 {
-	this->m_pGameObject = a_pGameObject;
 	this->m_pRigidBody = NULL;
 	this->m_pCollider = NULL;
-
-	MUFFIN.GetPhysicsReactor()->AddObject(this);
 }
 
-CPhysicsObject::~CPhysicsObject()
+CPhysicsComponent::~CPhysicsComponent()
 {
 	if (this->m_pRigidBody != NULL)
 	{
@@ -33,16 +30,21 @@ CPhysicsObject::~CPhysicsObject()
 	}
 }
 
-void CPhysicsObject::RefreshColliderPostion()
+void CPhysicsComponent::RefreshColliderPostion()
 {
 	if (this->m_pCollider == NULL)
 	{
 		return;
 	}
-	this->m_pCollider->SetCenter(this->m_pGameObject->GetTransform().m_vPosition);
+	this->m_pCollider->SetCenter(this->GetGameObject()->GetTransform().m_vPosition);
 }
 
-CRigidBody* CPhysicsObject::CreateRigidBody()
+void CPhysicsComponent::Init()
+{
+	MUFFIN.GetPhysicsReactor()->AddObject(this);
+}
+
+CRigidBody* CPhysicsComponent::CreateRigidBody()
 {
 	if (this->m_pRigidBody != NULL)
 	{
@@ -52,7 +54,7 @@ CRigidBody* CPhysicsObject::CreateRigidBody()
 	return this->m_pRigidBody;
 }
 
-CColliderBase* CPhysicsObject::CreateCollider(EColliderType a_eType)
+CColliderBase* CPhysicsComponent::CreateCollider(EColliderType a_eType)
 {
 	if (this->m_pCollider != NULL)
 	{
@@ -91,12 +93,12 @@ CColliderBase* CPhysicsObject::CreateCollider(EColliderType a_eType)
 	return this->m_pCollider;
 }
 
-CRigidBody* CPhysicsObject::GetRigidBody()
+CRigidBody* CPhysicsComponent::GetRigidBody()
 {
 	return this->m_pRigidBody;
 }
 
-CColliderBase* CPhysicsObject::GetCollider(EColliderType a_eType)
+CColliderBase* CPhysicsComponent::GetCollider(EColliderType a_eType)
 {
 	return this->m_pCollider;
 }

@@ -19,4 +19,6 @@ public:
 	void UpdateRotation(glm::quat a_qQuaternion);
 
 	glm::vec3 GetEulerAngle();
+
+	void LookAt(glm::vec3 a_vTarget);
 };

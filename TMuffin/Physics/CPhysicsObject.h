@@ -2,15 +2,14 @@
 #include "TMuffinSysInclude.h"
 #include "PhysicsDefine.h"
 #include "PhysicsHelper.h"
+#include "Component/CComponentBase.h"
 
 class CGameObject;
 class CRigidBody;
 class CColliderBase;
-class T_DLL_EXPORT CPhysicsObject
+class T_DLL_EXPORT CPhysicsComponent : public CComponentBase
 {
 private:
-	u64 m_nMuffinPhysicsObectGUID;
-	CGameObject* m_pGameObject;
 	CRigidBody* m_pRigidBody;
 	CColliderBase* m_pCollider;
 
@@ -20,9 +19,12 @@ private:
 	virtual void OnCollision(SCollisionInfo& a_rCollision) {}
 	void RefreshColliderPostion();
 
+protected:
+	virtual void Init() override;
+
 public:
-	CPhysicsObject(CGameObject* a_pGameObject);
-	virtual ~CPhysicsObject();
+	CPhysicsComponent();
+	virtual ~CPhysicsComponent();
 
 	CRigidBody* CreateRigidBody();
 	CColliderBase* CreateCollider(EColliderType a_eType);

@@ -201,7 +201,15 @@ void CGraphicsWorld::RenderObject(CCamera* a_pCamera)
 		glUniform4f(nEyeLocation, rCameraTrans.m_vPosition.x, rCameraTrans.m_vPosition.y, rCameraTrans.m_vPosition.z, 1.0f);
 
 		MUFFIN.GetLightMgr()->RenderLights(nShaderProgramID);
-		pGraphicsComponent->GetMaterial()->RenderMaterial(pGameObj, this->m_pSkyBox->m_nTextureID);
+		if (this->m_pSkyBox != NULL)
+		{
+			pGraphicsComponent->GetMaterial()->RenderMaterial(pGameObj, this->m_pSkyBox->m_nTextureID);
+		}
+		else
+		{
+			pGraphicsComponent->GetMaterial()->RenderMaterial(pGameObj, -1);
+		}
+		
 
 		GLint matModel_UL = glGetUniformLocation(nShaderProgramID, "matModel");
 		GLint matView_UL = glGetUniformLocation(nShaderProgramID, "matView");

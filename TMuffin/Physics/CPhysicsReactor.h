@@ -1,21 +1,21 @@
 #pragma once
 #include "TMuffinSysInclude.h"
 
-class CPhysicsObject;
 class SCollisionCallBackInfo;
+class CPhysicsComponent;
 class CPhysicsReactor
 {
 private:
-	hash_map<u64, CPhysicsObject*> m_mapID2PhysicsObj;
+	hash_map<u64, CPhysicsComponent*> m_mapID2PhysicsObj;
 	vector<SCollisionCallBackInfo*> m_vecCallBackArray;
 
 public:
 	CPhysicsReactor();
 	~CPhysicsReactor();
 
-	void AddObject(CPhysicsObject* a_pObject);
-	void RemoveObject(CPhysicsObject* a_pObject);
-	CPhysicsObject* FindObject(u64 a_nGUID);
+	void AddObject(CPhysicsComponent* a_pObject);
+	void RemoveObject(CPhysicsComponent* a_pObject);
+	CPhysicsComponent* FindObject(u64 a_nGUID);
 
 	void RefreshColliderPosition();
 	void PhysicsLoop();

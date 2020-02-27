@@ -19,14 +19,15 @@ CPhysicsReactor::~CPhysicsReactor()
 	this->m_vecCallBackArray.clear();
 }
 
-void CPhysicsReactor::AddObject(CPhysicsObject* a_pObject)
+void CPhysicsReactor::AddObject(CPhysicsComponent* a_pObject)
 {
-	this->m_mapID2PhysicsObj[a_pObject->m_nMuffinPhysicsObectGUID] = a_pObject;
+	u64 nGUID = a_pObject->GetGameObject()->GetGameObjectID();
+	this->m_mapID2PhysicsObj[nGUID] = a_pObject;
 }
 
-void CPhysicsReactor::RemoveObject(CPhysicsObject* a_pObject)
+void CPhysicsReactor::RemoveObject(CPhysicsComponent* a_pObject)
 {
-	u64 nGUID = a_pObject->m_nMuffinPhysicsObectGUID;
+	u64 nGUID = a_pObject->GetGameObject()->GetGameObjectID();
 	if (this->FindObject(nGUID) == NULL)
 	{
 		return;
@@ -34,9 +35,9 @@ void CPhysicsReactor::RemoveObject(CPhysicsObject* a_pObject)
 	this->m_mapID2PhysicsObj.erase(nGUID);
 }
 
-CPhysicsObject* CPhysicsReactor::FindObject(u64 a_nGUID)
+CPhysicsComponent* CPhysicsReactor::FindObject(u64 a_nGUID)
 {
-	hash_map<u64, CPhysicsObject*>::const_iterator iter = this->m_mapID2PhysicsObj.find(a_nGUID);
+	hash_map<u64, CPhysicsComponent*>::const_iterator iter = this->m_mapID2PhysicsObj.find(a_nGUID);
 	if (iter == this->m_mapID2PhysicsObj.end())
 	{
 		return NULL;
@@ -46,11 +47,11 @@ CPhysicsObject* CPhysicsReactor::FindObject(u64 a_nGUID)
 
 void CPhysicsReactor::RefreshColliderPosition()
 {
-	hash_map<u64, CPhysicsObject*>::const_iterator iter = this->m_mapID2PhysicsObj.begin();
+	hash_map<u64, CPhysicsComponent*>::const_iterator iter = this->m_mapID2PhysicsObj.begin();
 	for (; iter != this->m_mapID2PhysicsObj.end(); iter++)
 	{
-		CPhysicsObject* pObj = iter->second;
-		CGameObject* pGameObj = pObj->m_pGameObject;
+		CPhysicsComponent* pObj = iter->second;
+		CGameObject* pGameObj = pObj->GetGameObject();
 		if (pGameObj->IsEnable() == true && pObj != NULL)
 		{
 			pObj->RefreshColliderPostion();
@@ -78,11 +79,11 @@ void CPhysicsReactor::PhysicsLoop()
 void CPhysicsReactor::CalcRigidBodyMotion()
 {
 	f32 fDeltaTime = MUFFIN.GetDeltaFrameTime();
-	hash_map<u64, CPhysicsObject*>::iterator iter = this->m_mapID2PhysicsObj.begin();
+	hash_map<u64, CPhysicsComponent*>::iterator iter = this->m_mapID2PhysicsObj.begin();
 	for (; iter != this->m_mapID2PhysicsObj.end(); iter++)
 	{
-		CPhysicsObject* pPhysicsObj = iter->second;
-		CGameObject* pGameObj = pPhysicsObj->m_pGameObject;
+		CPhysicsComponent* pPhysicsObj = iter->second;
+		CGameObject* pGameObj = pPhysicsObj->GetGameObject();
 		if (pGameObj->IsEnable() == false)
 		{
 			continue;
@@ -97,17 +98,17 @@ void CPhysicsReactor::CalcRigidBodyMotion()
 		// S = vt + (1/2)at2
 		glm::vec3 vDis = pRigidBody->m_vVelocity * fDeltaTime + 0.5f * vNewAccel * fDeltaTime * fDeltaTime;
 		pRigidBody->m_vVelocity += vNewAccel * fDeltaTime;
-		pPhysicsObj->m_pGameObject->GetTransform().m_vPosition += vDis;
+		pPhysicsObj->GetGameObject()->GetTransform().m_vPosition += vDis;
 	}
 }
 
 void CPhysicsReactor::CalcCollision()
 {
-	hash_map<u64, CPhysicsObject*>::iterator iterSrc = this->m_mapID2PhysicsObj.begin();
+	hash_map<u64, CPhysicsComponent*>::iterator iterSrc = this->m_mapID2PhysicsObj.begin();
 	for (; iterSrc != this->m_mapID2PhysicsObj.end(); iterSrc++)
 	{
-		CPhysicsObject* pSrcPhysicsObj = iterSrc->second;
-		CGameObject* pSrcGameObj = pSrcPhysicsObj->m_pGameObject;
+		CPhysicsComponent* pSrcPhysicsObj = iterSrc->second;
+		CGameObject* pSrcGameObj = pSrcPhysicsObj->GetGameObject();
 		if (pSrcGameObj->IsEnable() == false)
 		{
 			continue;
@@ -119,11 +120,11 @@ void CPhysicsReactor::CalcCollision()
 		}
 		CRigidBody* pSrcRB = pSrcPhysicsObj->m_pRigidBody;
 
-		hash_map<u64, CPhysicsObject*>::iterator iterTar = this->m_mapID2PhysicsObj.begin();
+		hash_map<u64, CPhysicsComponent*>::iterator iterTar = this->m_mapID2PhysicsObj.begin();
 		for (; iterTar != this->m_mapID2PhysicsObj.end(); iterTar++)
 		{
-			CPhysicsObject* pTarPhysicsObj = iterTar->second;
-			CGameObject* pTarGameObj = pTarPhysicsObj->m_pGameObject;
+			CPhysicsComponent* pTarPhysicsObj = iterTar->second;
+			CGameObject* pTarGameObj = pTarPhysicsObj->GetGameObject();
 			if (pTarGameObj->IsEnable() == false)
 			{
 				continue;
@@ -165,7 +166,7 @@ void CPhysicsReactor::CalcCollision()
 			}
 
 			pSrcBC->SetCenter(pSrcBC->GetCenter() + rCollisionInfo.m_vHitNormal * rCollisionInfo.m_fIntersectDis);
-			pSrcPhysicsObj->m_pGameObject->GetTransform().m_vPosition = pSrcBC->GetCenter();
+			pSrcPhysicsObj->GetGameObject()->GetTransform().m_vPosition = pSrcBC->GetCenter();
 			pSrcRB->m_vVelocity = glm::reflect(pSrcRB->m_vVelocity, rCollisionInfo.m_vHitNormal);
 			pSrcRB->m_vVelocity *= glm::min(1.0f, pSrcBC->GetElastic() * pTarBC->GetElastic());
 			
@@ -174,7 +175,7 @@ void CPhysicsReactor::CalcCollision()
 			{
 				
 				pTarBC->SetCenter(pTarBC->GetCenter() + (-rCollisionInfo.m_vHitNormal) * 0.01f);
-				pTarPhysicsObj->m_pGameObject->GetTransform().m_vPosition = pTarBC->GetCenter();
+				pTarPhysicsObj->GetGameObject()->GetTransform().m_vPosition = pTarBC->GetCenter();
 				pTarRB->m_vVelocity = glm::reflect(pTarRB->m_vVelocity, -rCollisionInfo.m_vHitNormal);
 				pTarRB->m_vVelocity *= glm::min(1.0f, pSrcBC->GetElastic() * pTarBC->GetElastic());
 			}
