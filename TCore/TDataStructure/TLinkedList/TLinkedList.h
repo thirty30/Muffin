@@ -31,11 +31,19 @@ namespace TCore
 		public:
 			TLinkedList()
 			{
+				this->Clear();
+			}
+			~TLinkedList() 
+			{
+				this->Clear();
+			}
+
+			T_INLINE void Clear()
+			{
 				this->m_pHead = NULL;
 				this->m_pTail = NULL;
 				this->m_nCount = 0;
 			}
-			~TLinkedList() {}
 
 			T_INLINE void PushBack(TLinkedNode<T>* a_pNewNode)
 			{
@@ -75,6 +83,27 @@ namespace TCore
 					this->m_pHead = a_pNewNode;
 				}
 				this->m_nCount++;
+			}
+
+			T_INLINE void PushBack(TLinkedList<T>* a_pNewList)
+			{
+				TLinkedNode<T>* pNewHead = a_pNewList->GetHeadNode();
+				TLinkedNode<T>* pNewTail = a_pNewList->GetTailNode();
+				n32 nNewCount = a_pNewList->GetLength();
+
+				if (this->m_pHead == NULL)
+				{
+					this->m_pHead = pNewHead;
+					this->m_pTail = pNewTail;
+					this->m_nCount = nNewCount;
+				}
+				else
+				{
+					this->m_pTail->m_pNext = pNewHead;
+					pNewHead->m_pPrevious = this->m_pTail;
+					this->m_pTail = pNewTail;
+					this->m_nCount += nNewCount;
+				}
 			}
 
 			T_INLINE TLinkedNode<T>* GetHeadNode()

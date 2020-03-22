@@ -32,7 +32,7 @@ tbool CScene1::LoadScene()
 		pCamera->m_fViewDisBegin = 1.0f;
 		pCamera->m_fViewDisEnd = 100000.0f;
 		pCamera->m_vTowards = glm::normalize(glm::vec3(0.0f, -0.3f, 0.7f));
-		this->pCameraObject->GetTransform().m_vPosition = glm::vec3(0, 5, -10);
+		this->pCameraObject->GetTransform().m_vPosition = glm::vec3(0, 500, -1000);
 
 		CCameraControl* pController = static_cast<CCameraControl*>(CGame::GetSingleton().GetControlManager()->CreateController<CCameraControl>());
 		pController->SetCamera(pCamera);
@@ -43,8 +43,7 @@ tbool CScene1::LoadScene()
 	}
 
 	//SkyBox
-	CMesh* pMeshSkyBox = new CMesh();
-	CResourceLoader::LoadMesh("../Assets/Models/BaseModels/SkyBox.ply", pMeshSkyBox);
+	CMesh* pMeshSkyBox = CAssetsLoader::Load<CMesh>("../Assets/Models/BaseModels/SkyBox.ply");
 	this->m_pSkyBox = new CSkyBox();
 	this->m_pSkyBox->Init(pMeshSkyBox, 
 		"../Assets/Shaders/SkyBoxVertexShader.glsl", "../Assets/Shaders/SkyBoxFragmentShader.glsl",
@@ -59,23 +58,17 @@ tbool CScene1::LoadScene()
 
 
 	//Scene Items
-	CGameObject* pRobot = new CGameObject();
-	//pRobot->GetTransform().m_vScale = glm::vec3(1, 1, 1);
-	//pRobot->GetTransform().SetRotation(glm::vec3(-90, 0, 0));
-	CGraphicsComponent* pGraphics = static_cast<CGraphicsComponent*>(pRobot->AddComponent<CGraphicsComponent>());
-	CMesh* pMesh = new CMesh();
-	CResourceLoader::LoadMesh("../Assets/Models/Role1.fbx", pMesh);
-	CMaterial* pMat = new CMaterial();
-	pMat->Init("../Assets/Materials/Role1MapMaterial.json");
-	pGraphics->InitRenderer(pMesh, pMat);
-	CAnimator* pAnimator = static_cast<CAnimator*>(pRobot->AddComponent<CAnimator>());
-	pAnimator->CreateAnimation("jumping", "../Assets/Animation/Role1/Jumping.fbx", pMesh);
-	pAnimator->CreateAnimation("walking", "../Assets/Animation/Role1/WalkingInPlace.fbx", pMesh);
-	pAnimator->SetCurrentAnimation("walking");
-	CMotion* pMotion = static_cast<CMotion*>(pRobot->AddComponent<CMotion>());
-	pMotion->m_vVelocity = glm::vec3(0, 0, 1.0);
+	CMesh* pMesh = CAssetsLoader::Load<CMesh>("../Assets/Models/SM_Ship_Massive_Transport_01.fbx");
+	CMaterial* pMat = CAssetsLoader::Load<CMaterial>("../Assets/Materials/ShipMaterial.json");
 
-	delete pMesh;
+	CGameObject* pNew = new CGameObject();
+	CGraphicsComponent* pGraphics = pNew->AddComponent<CGraphicsComponent>();
+	pGraphics->InitRenderer(pMesh, pMat);
+
+	this->pObj = new CGameObject();
+	this->pObj->GetTransform().m_vPosition = glm::vec3(200, 0, 0);
+	CAssetsLoader::LoadASync<CMesh>("../Assets/Models/SM_Ship_Massive_Transport_01.fbx", NULL, this->LoadAssetsCallBack);
+	CAssetsLoader::LoadASync<CMaterial>("../Assets/Materials/ShipMaterial.json", NULL, this->LoadAssetsCallBack);
 
 	//this->LoadSceneFile("../Assets/Scene/Scene1.json");
 
@@ -97,5 +90,23 @@ void CScene1::Clear()
 
 void CScene1::Loop()
 {
+	this->pObj->GetTransform().m_vPosition += glm::vec3(0, 0, 1.0);
+}
 
+void CScene1::LoadAssetsCallBack(void* a_pCustomData, CAssetObject* a_pObject)
+{
+	CScene1* pScene = (CScene1*)CSceneManager::GetSingleton().GetCurrentScene();
+	if (a_pObject->GetAssetType() == EAT_MESH)
+	{
+		pScene->pMesh = static_cast<CMesh*>(a_pObject);
+	}
+	if (a_pObject->GetAssetType() == EAT_MATERIAL)
+	{
+		pScene->pMat = static_cast<CMaterial*>(a_pObject);
+	}
+	if (pScene->pMesh != NULL && pScene->pMat != NULL)
+	{
+		CGraphicsComponent* pGraphics = pScene->pObj->AddComponent<CGraphicsComponent>();
+		pGraphics->InitRenderer(pScene->pMesh, pScene->pMat);
+	}
 }

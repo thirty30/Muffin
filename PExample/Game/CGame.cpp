@@ -6,7 +6,6 @@ CGame::CGame()
 	this->m_nScreenWidth = 1600;
 	this->m_nScreenHigh = 900;
 	this->m_strWindowName = "pExample";
-	this->m_pResManager = NULL;
 	this->m_pSceneManager = NULL;
 	this->m_pRofManager = NULL;
 	this->m_eGameStatus = E_GAME_STATUS_INIT;
@@ -36,12 +35,6 @@ tbool CGame::InitGame()
 	{
 		return false;
 	}
-
-	this->m_pResManager = new CResourceManager();
-	if (this->m_pResManager->Init() == false)
-	{
-		return false;
-	}
 	
 	this->m_pSceneManager = new CSceneManager();
 	if (this->m_pSceneManager->Init() == false)
@@ -61,11 +54,6 @@ void CGame::ClearGame()
 	{
 		delete this->m_pRofManager;
 		this->m_pRofManager = NULL;
-	}
-	if (this->m_pResManager != NULL)
-	{
-		delete this->m_pResManager;
-		this->m_pResManager = NULL;
 	}
 	if (this->m_pSceneManager != NULL)
 	{

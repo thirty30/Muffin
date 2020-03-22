@@ -6,6 +6,7 @@
 #include "GameObject/CGameObjectManager.h"
 #include "ExportFunction.h"
 #include "Animation/CAnimation.h"
+#include "AssetsLoader/CAssetsPool.h"
 
 CMuffin MUFFIN;
 
@@ -15,6 +16,7 @@ tbool MuffinInit(n32 a_nWinWidth, n32 a_nWinHigh, const tcchar* a_strWinName)
 	{
 		return false;
 	}
+	MUFFIN.GetAssetsPoolMgr()->CreateWorker(3);
 	return true;
 }
 
@@ -31,37 +33,33 @@ void MuffinMainLoop()
 
 		glfwPollEvents();
 
-		MuffinGameLogicLoop();
+		// GameLogic loop
+		{
+			MUFFIN.GetGameObjectMgr()->Init();
+			MUFFIN.GetGameObjectMgr()->Update();
+			if (pExternalGameLogicCallBack != NULL)
+			{
+				pExternalGameLogicCallBack();
+			}
+			MUFFIN.GetAssetsPoolMgr()->Update();
+			MUFFIN.GetAssetsPoolMgr()->UpdateCallBack();
+		}
 
-		MuffinPhysicsLoop();
+		// Physics loop
+		{
+			MUFFIN.GetPhysicsReactor()->PhysicsLoop();
+			if (pExternalPhysicsCallBack != NULL) 
+			{
+				pExternalPhysicsCallBack(); 
+			}
+		}
 
-		MuffinRenderingLoop();
+		// Rendering loop
+		{
+			//MUFFIN.GetParticleEmitterMgr()->Update();
+			MUFFIN.GetWindow()->DrawWindow();
+		}
 	}
-}
-
-void MuffinPhysicsLoop()
-{
-	//MUFFIN.GetPhysicsReactor()->PhysicsLoop();
-	if (pExternalPhysicsCallBack != NULL)
-	{
-		pExternalPhysicsCallBack();
-	}
-}
-
-void MuffinGameLogicLoop()
-{
-	MUFFIN.GetGameObjectMgr()->Init();
-	MUFFIN.GetGameObjectMgr()->Update();
-	if (pExternalGameLogicCallBack != NULL)
-	{
-		pExternalGameLogicCallBack();
-	}
-}
-
-void MuffinRenderingLoop()
-{
-	//MUFFIN.GetParticleEmitterMgr()->Update();
-	MUFFIN.GetWindow()->DrawWindow();
 }
 
 void GLFWErrorCallback(n32 a_nErrorCode, const tcchar* a_strDesc)
@@ -97,15 +95,6 @@ void ScrollCallBack(GLFWwindow* a_pWindow, f64 a_fX, f64 a_fY)
 		pExternalScrollCallBack(a_fX, a_fY);
 	}
 }
-
-
-
-
-
-
-
-
-
 
 
 

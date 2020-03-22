@@ -4,16 +4,11 @@
 #include "./Component/CComponentBase.h"
 #include "./Utility/CGUIDMaker.h"
 #include "./Utility/Utility.h"
-#include "./ShaderHelper/CShaderHelper.h"
+
+#include "AssetsLoader/AssetsInclude.h"
+
 #include "./Light/CLight.h"
 #include "./Light/CLightManager.h"
-#include "./Graphics/Mesh/CMesh.h"
-
-#include "./Graphics/Texture/CTexture.h"
-#include "./Graphics/Material/CMaterialBase.h"
-#include "./Graphics/Material/CMaterial.h"
-#include "./Graphics/Material/CMaterialDefault.h"
-#include "./Graphics/Material/CMaterialStandard.h"
 
 #include "./GameObject/CGameObject.h"
 #include "./GameObject/CGameObjectManager.h"
@@ -53,7 +48,6 @@
 
 
 #include "./Window/CWindow.h"
-#include "./ResourceLoader/CResourceLoader.h"
 #include "./Engine/ExportFunction.h"
 #include "./Engine/Muffin.h"
 #include "./Engine/Engine.h"

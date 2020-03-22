@@ -30,30 +30,30 @@ public:
 	T_INLINE CTransform& GetTransform() { return this->m_pTransform; }
 
 	template<typename T>
-	CComponentBase* AddComponent();
+	T* AddComponent();
 	template<typename T>
-	CComponentBase* GetComponent();
+	T* GetComponent();
 };
 
 template<typename T>
-CComponentBase* CGameObject::AddComponent()
+T* CGameObject::AddComponent()
 {
 	CComponentBase* pComponent = new T();
 	pComponent->m_pGameObect = this;
 	TLinkedNode<CComponentBase*>* pNode = new TLinkedNode<CComponentBase*>(pComponent);
 	this->m_pComponents.PushBack(pNode);
-	return pComponent;
+	return static_cast<T*>(pComponent);
 }
 
 template<typename T>
-CComponentBase* CGameObject::GetComponent()
+T* CGameObject::GetComponent()
 {
 	TLinkedNode<CComponentBase*>* pHead = this->m_pComponents.GetHeadNode();
 	while (pHead != NULL)
 	{
 		if (typeid(*pHead->m_pValue) == typeid(T))
 		{
-			return pHead->m_pValue;
+			return static_cast<T*>(pHead->m_pValue);
 		}
 		pHead = pHead->m_pNext;
 	}

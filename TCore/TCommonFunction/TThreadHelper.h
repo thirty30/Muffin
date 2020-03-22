@@ -40,6 +40,34 @@ namespace TCore
 			}
 		};
 
+		class TThreadCriticalSection
+		{
+		private:
+			CRITICAL_SECTION m_section;
+
+		public:
+			TThreadCriticalSection()
+			{
+				InitializeCriticalSection(&this->m_section);
+			}
+
+			~TThreadCriticalSection()
+			{
+				DeleteCriticalSection(&this->m_section);
+			}
+
+			void Lock()
+			{
+				EnterCriticalSection(&this->m_section);
+			}
+
+			void UnLock()
+			{
+				LeaveCriticalSection(&this->m_section);
+			}
+
+		};
+
 		class TThreadMutexLock
 		{
 		private:

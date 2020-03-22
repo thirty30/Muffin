@@ -8,23 +8,17 @@ uniform mat4 matProj;	//Projection transform
 uniform mat4 matModelInverseTranspose;
 
 //in variables
-in vec4 vColor;
 in vec4 vPosition;
 in vec4 vNormal;
-in vec4 vUVx2;
 
 //out variables
-out vec4 in_fColour;
 out vec4 in_fVertWorldLocation;    //location of the vertex in the world
 out vec4 in_fNormal;
-out vec4 in_fUVx2;
 
 void main()
 {
 	mat4 matMVP = matProj * matView * matModel;
     gl_Position = matMVP * vPosition;
-    in_fColour = vColor;
     in_fVertWorldLocation = matModel * vPosition;
     in_fNormal = matModelInverseTranspose* vNormal;
-    in_fUVx2 = vUVx2;
 }

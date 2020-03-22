@@ -9,12 +9,6 @@
     <ClCompile Include="Window\CWindow.cpp">
       <Filter>Window</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderHelper\CShaderHelper.cpp">
-      <Filter>ShaderHelper</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceLoader\CResourceLoader.cpp">
-      <Filter>ResourceLoader</Filter>
-    </ClCompile>
     <ClCompile Include="Camera\CCameraManager.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
@@ -97,26 +91,8 @@
     <ClCompile Include="Graphics\CGraphicsComponent.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Mesh\CMesh.cpp">
-      <Filter>Mesh</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics\CGraphicsWorld.cpp">
       <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Material\CMaterial.cpp">
-      <Filter>Material</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Material\CMaterialBase.cpp">
-      <Filter>Material</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Material\CMaterialDefault.cpp">
-      <Filter>Material</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Material\CMaterialStandard.cpp">
-      <Filter>Material</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Texture\CTexture.cpp">
-      <Filter>Texture</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\SkyBox\CSkyBox.cpp">
       <Filter>SkyBox</Filter>
@@ -124,6 +100,20 @@
     <ClCompile Include="Graphics\FBO\CFBOComponent.cpp" />
     <ClCompile Include="Animation\CAnimation.cpp" />
     <ClCompile Include="Animation\CAnimator.cpp" />
+    <ClCompile Include="AssetsLoader\CAssetsPool.cpp" />
+    <ClCompile Include="AssetsLoader\CAssetsWorker.cpp" />
+    <ClCompile Include="AssetsLoader\AssetObject\CMesh.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetsLoader\AssetObject\CMaterial.cpp">
+      <Filter>Material</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetsLoader\AssetObject\CTexture.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetsLoader\AssetObject\CShader.cpp">
+      <Filter>ShaderHelper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\CCamera.h">
@@ -134,12 +124,6 @@
     </ClInclude>
     <ClInclude Include="CommonDefine.h" />
     <ClInclude Include="TMuffin.h" />
-    <ClInclude Include="ShaderHelper\CShaderHelper.h">
-      <Filter>ShaderHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceLoader\CResourceLoader.h">
-      <Filter>ResourceLoader</Filter>
-    </ClInclude>
     <ClInclude Include="Camera\CCameraManager.h">
       <Filter>Camera</Filter>
     </ClInclude>
@@ -233,30 +217,11 @@
     <ClInclude Include="Transform\CTransform.h" />
     <ClInclude Include="TMuffinSysInclude.h" />
     <ClInclude Include="Component\CComponentBase.h" />
-    <ClInclude Include="Graphics\GraphicsDefine.h" />
     <ClInclude Include="Graphics\CGraphicsComponent.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Mesh\CMesh.h">
-      <Filter>Mesh</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics\CGraphicsWorld.h">
       <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Material\CMaterial.h">
-      <Filter>Material</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Material\CMaterialBase.h">
-      <Filter>Material</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Material\CMaterialDefault.h">
-      <Filter>Material</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Material\CMaterialStandard.h">
-      <Filter>Material</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Texture\CTexture.h">
-      <Filter>Texture</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\SkyBox\CSkyBox.h">
       <Filter>SkyBox</Filter>
@@ -265,6 +230,24 @@
     <ClInclude Include="Animation\CAnimation.h" />
     <ClInclude Include="Animation\CAnimator.h" />
     <ClInclude Include="Graphics\Stencil\CStencilComponent.h" />
+    <ClInclude Include="AssetsLoader\AssetsDefine.h" />
+    <ClInclude Include="AssetsLoader\CAssetsPool.h" />
+    <ClInclude Include="AssetsLoader\CAssetsWorker.h" />
+    <ClInclude Include="AssetsLoader\AssetObject\CAssetObject.h" />
+    <ClInclude Include="AssetsLoader\AssetObject\CMesh.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetsLoader\AssetObject\CMaterial.h">
+      <Filter>Material</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetsLoader\AssetObject\CTexture.h">
+      <Filter>Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetsLoader\AssetObject\CShader.h">
+      <Filter>ShaderHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetsLoader\CAssetsLoader.h" />
+    <ClInclude Include="AssetsLoader\AssetsInclude.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Camera">

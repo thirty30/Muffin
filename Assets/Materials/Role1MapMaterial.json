@@ -1,0 +1,10 @@
+{
+	"MaterialName":"Role1MapMaterial",
+	"VertexShader":"../Assets/shaders/Role1VertexShade.glsl",
+	"FragmentShader":"../Assets/shaders/Role1FragmentShader.glsl",
+	"MaterialData":
+	[
+		{"ID":1, "Name":"DiffuseMap", "Tag":"Texture", "Value":"../Assets/Textures/Role1.png"}
+	]
+}
+

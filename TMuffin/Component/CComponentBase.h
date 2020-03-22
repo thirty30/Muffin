@@ -11,6 +11,7 @@ class T_DLL_EXPORT CComponentBase
 private:
 	CGameObject* m_pGameObect;
 	tbool m_bIsInit;
+	tbool m_bIsEnable;
 	friend class CGameObject;
 
 protected:
@@ -23,6 +24,7 @@ public:
 	{
 		this->m_pGameObect = NULL;
 		this->m_bIsInit = false;
+		this->m_bIsEnable = true;
 	}
 	virtual ~CComponentBase()
 	{
@@ -30,5 +32,5 @@ public:
 	}
 	virtual void SetProperty(tstring a_strName, ...) {}
 	T_INLINE CGameObject* GetGameObject() { return this->m_pGameObect; }
-
+	void SetEnable(tbool a_bValue) { this->m_bIsEnable = a_bValue; }
 };

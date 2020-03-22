@@ -1,6 +1,6 @@
 #include "CAnimation.h"
 #include "Utility/Utility.h"
-#include "Graphics/Mesh/CMesh.h"
+#include "AssetsLoader/AssetObject/CMesh.h"
 #include "CAnimator.h"
 
 
@@ -90,7 +90,7 @@ void CAnimation::GetBoneTransform(vector<glm::mat4>& a_vecTransform)
 		a_vecTransform[pDetail->boneID] = pDetail->FinalTransformation;
 	}
 
-	this->m_fNowPlayTime += 0.01f;
+	this->m_fNowPlayTime += 0.05f;
 }
 
 void CAnimation::ReadNodeHeirarchy(f32 a_fAnimationTime, const aiNode* a_pNode, const glm::mat4& a_ParentTransform)

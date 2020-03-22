@@ -1,11 +1,10 @@
 #include "CSkyBox.h"
-#include "Graphics/Mesh/CMesh.h"
+#include "AssetsLoader/AssetObject/CMesh.h"
 #include "Graphics/CGraphicsComponent.h"
-#include "Graphics/GraphicsDefine.h"
 
 CSkyBox::CSkyBox()
 {
-	this->m_pDrawMesh = NULL;
+	this->m_pMesh = NULL;
 	this->m_nTextureID = -1;
 	this->m_nULSampler = -1;
 	this->m_vScale = glm::vec3(10000.0f, 10000.0f, 10000.0f);
@@ -13,94 +12,39 @@ CSkyBox::CSkyBox()
 
 CSkyBox::~CSkyBox()
 {
-
+	if (this->m_pMesh != NULL)
+	{
+		delete this->m_pMesh;
+		this->m_pMesh = NULL;
+	}
 }
 
-void CSkyBox::InitMesh(const CMesh* a_pMesh)
+void CSkyBox::InitMesh(CMesh* a_pMesh)
 {
-	this->m_pDrawMesh = new SDrawMesh();
-	this->m_pDrawMesh->m_nVertexCount = a_pMesh->m_nVertexCount;
-	this->m_pDrawMesh->m_pVertices = new SDrawVertex[this->m_pDrawMesh->m_nVertexCount];
-	for (n32 i = 0; i < this->m_pDrawMesh->m_nVertexCount; i++)
-	{
-		const SMeshVertex* pVertex = &a_pMesh->m_pVertices[i];
-		if (pVertex == NULL)
-		{
-			delete this->m_pDrawMesh;
-			return;
-		}
-		this->m_pDrawMesh->m_pVertices[i].x = pVertex->x;
-		this->m_pDrawMesh->m_pVertices[i].y = pVertex->y;
-		this->m_pDrawMesh->m_pVertices[i].z = pVertex->z;
-		this->m_pDrawMesh->m_pVertices[i].w = 1.0f;
+	this->m_pMesh = a_pMesh;
 
-		this->m_pDrawMesh->m_pVertices[i].nx = pVertex->nx;
-		this->m_pDrawMesh->m_pVertices[i].ny = pVertex->ny;
-		this->m_pDrawMesh->m_pVertices[i].nz = pVertex->nz;
-		this->m_pDrawMesh->m_pVertices[i].nw = 1.0f;
-
-		this->m_pDrawMesh->m_pVertices[i].u0 = pVertex->u0;
-		this->m_pDrawMesh->m_pVertices[i].v0 = pVertex->v0;
-		this->m_pDrawMesh->m_pVertices[i].u1 = pVertex->u1;
-		this->m_pDrawMesh->m_pVertices[i].v1 = pVertex->v1;
-	}
-
-	this->m_pDrawMesh->m_nTriangleCount = a_pMesh->m_nTriangleCount;
-	this->m_pDrawMesh->m_nTriangleIndexCount = a_pMesh->m_nTriangleCount * 3;
-	this->m_pDrawMesh->m_pTriangleIndices = new u32[this->m_pDrawMesh->m_nTriangleIndexCount];
-	TMemzero(this->m_pDrawMesh->m_pTriangleIndices, this->m_pDrawMesh->m_nTriangleIndexCount * sizeof(u32));
-	for (n32 i = 0; i < this->m_pDrawMesh->m_nTriangleCount; i++)
-	{
-		const SMeshTriangle* pTriangel = &a_pMesh->m_pTriangles[i];
-		if (pTriangel == NULL)
-		{
-			delete this->m_pDrawMesh;
-			return;
-		}
-		this->m_pDrawMesh->m_pTriangleIndices[(i * 3) + 0] = pTriangel->Vertex1;
-		this->m_pDrawMesh->m_pTriangleIndices[(i * 3) + 1] = pTriangel->Vertex2;
-		this->m_pDrawMesh->m_pTriangleIndices[(i * 3) + 2] = pTriangel->Vertex3;
-	}
-
-	glGenVertexArrays(1, &(this->m_pDrawMesh->m_nVAOID));	// Ask OpenGL for a new buffer ID
-	glBindVertexArray(this->m_pDrawMesh->m_nVAOID);	// "Bind" this buffer: "make this the 'current' VAO buffer
-
-	// Copy the vertices into the video card
-	glGenBuffers(1, &(this->m_pDrawMesh->m_nVertexGLBufferID));
-	glBindBuffer(GL_ARRAY_BUFFER, this->m_pDrawMesh->m_nVertexGLBufferID);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(SDrawVertex) * this->m_pDrawMesh->m_nVertexCount, (GLvoid*)this->m_pDrawMesh->m_pVertices, GL_STATIC_DRAW);
-
-	// Copy the index buffer into the video card
-	glGenBuffers(1, &(this->m_pDrawMesh->m_nTriangleIndexGLBufferID));
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->m_pDrawMesh->m_nTriangleIndexGLBufferID);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(u32) * this->m_pDrawMesh->m_nTriangleIndexCount, (GLvoid*)this->m_pDrawMesh->m_pTriangleIndices, GL_STATIC_DRAW);
+	glBindVertexArray(this->m_pMesh->GetVAOID());
+	glBindBuffer(GL_ARRAY_BUFFER, this->m_pMesh->GetVertexBufferID());
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->m_pMesh->GetTriangleBufferID());
 
 	// Set the vertex attributes.
-	n32 nShaderID = this->m_Shader.GetShaderID();
-	GLint nPositionLocation = glGetAttribLocation(nShaderID, "vPosition");
-	GLint nColorLocation = glGetAttribLocation(nShaderID, "vColor");
-	GLint nNormalLocation = glGetAttribLocation(nShaderID, "vNormal");
-	GLint nUVLocation = glGetAttribLocation(nShaderID, "vUVx2");
+	n32 nShaderID = this->m_ShaderProgram.GetShaderID();
 
 	// Set the vertex attributes for this shader
+	GLint nPositionLocation = glGetAttribLocation(nShaderID, "vPosition");
 	glEnableVertexAttribArray(nPositionLocation);
-	glVertexAttribPointer(nPositionLocation, 4, GL_FLOAT, GL_FALSE, sizeof(SDrawVertex), (void*)(offsetof(SDrawVertex, x)));
+	glVertexAttribPointer(nPositionLocation, 4, GL_FLOAT, GL_FALSE, sizeof(SMeshVertex), (void*)(offsetof(SMeshVertex, x)));
 
-	glEnableVertexAttribArray(nColorLocation);
-	glVertexAttribPointer(nColorLocation, 4, GL_FLOAT, GL_FALSE, sizeof(SDrawVertex), (void*)(offsetof(SDrawVertex, r)));
-
+	GLint nNormalLocation = glGetAttribLocation(nShaderID, "vNormal");
 	glEnableVertexAttribArray(nNormalLocation);
-	glVertexAttribPointer(nNormalLocation, 4, GL_FLOAT, GL_FALSE, sizeof(SDrawVertex), (void*)(offsetof(SDrawVertex, nx)));
-
-	glEnableVertexAttribArray(nUVLocation);
-	glVertexAttribPointer(nUVLocation, 4, GL_FLOAT, GL_FALSE, sizeof(SDrawVertex), (void*)(offsetof(SDrawVertex, u0)));
+	glVertexAttribPointer(nNormalLocation, 4, GL_FLOAT, GL_FALSE, sizeof(SMeshVertex), (void*)(offsetof(SMeshVertex, nx)));
 
 	// Now that all the parts are set up, set the VAO to zero
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glDisableVertexAttribArray(nNormalLocation);
 	glDisableVertexAttribArray(nPositionLocation);
-	glDisableVertexAttribArray(nColorLocation);
 }
 
 tbool CSkyBox::LoadImage(GLenum a_eValue, const tcchar* a_strFileName)
@@ -151,9 +95,13 @@ tbool CSkyBox::LoadImage(GLenum a_eValue, const tcchar* a_strFileName)
 	return true;
 }
 
-tbool CSkyBox::Init(const CMesh* a_pMesh, const tcchar* a_strVertexShader, const tcchar* a_strFragmentShader, const tcchar* a_strXTexture, const tcchar* a_strNegXTexture, const tcchar* a_strYTexture, const tcchar* a_strNegYTexture, const tcchar* a_strZTexture, const tcchar* a_strNegZTexture)
+tbool CSkyBox::Init(CMesh* a_pMesh, const tcchar* a_strVertexShader, const tcchar* a_strFragmentShader, const tcchar* a_strXTexture, const tcchar* a_strNegXTexture, const tcchar* a_strYTexture, const tcchar* a_strNegYTexture, const tcchar* a_strZTexture, const tcchar* a_strNegZTexture)
 {
-	this->m_Shader.Init(a_strVertexShader, a_strFragmentShader);
+	this->m_ShaderProgram.GetShader(E_SHADER_TYPE_VERTEX)->LoadShaderToMemory(a_strVertexShader);
+	this->m_ShaderProgram.GetShader(E_SHADER_TYPE_VERTEX)->InitShader();
+	this->m_ShaderProgram.GetShader(E_SHADER_TYPE_FRAGMENT)->LoadShaderToMemory(a_strFragmentShader);
+	this->m_ShaderProgram.GetShader(E_SHADER_TYPE_FRAGMENT)->InitShader();
+	this->m_ShaderProgram.InitShaderProgram();
 
 	this->InitMesh(a_pMesh);
 
@@ -174,7 +122,7 @@ tbool CSkyBox::Init(const CMesh* a_pMesh, const tcchar* a_strVertexShader, const
 	this->LoadImage(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, a_strZTexture);
 	this->LoadImage(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, a_strNegZTexture);
 
-	this->m_nULSampler = glGetUniformLocation(this->m_Shader.GetShaderID(), "un_Sampler");
+	this->m_nULSampler = glGetUniformLocation(this->m_ShaderProgram.GetShaderID(), "un_Sampler");
 
 	return true;
 }

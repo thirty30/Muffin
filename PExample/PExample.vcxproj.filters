@@ -9,9 +9,6 @@
     <ClInclude Include="Control\CControl.h">
       <Filter>Control</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceManager\CResourceManager.h">
-      <Filter>ResourceManager</Filter>
-    </ClInclude>
     <ClInclude Include="Rof\CRofManager.h">
       <Filter>Rof</Filter>
     </ClInclude>
@@ -43,9 +40,6 @@
     </ClCompile>
     <ClCompile Include="Control\CControl.cpp">
       <Filter>Control</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceManager\CResourceManager.cpp">
-      <Filter>ResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="Scene\CSceneManager.cpp" />
     <ClCompile Include="Scene\Scene1\CScene1.cpp">

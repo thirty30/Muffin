@@ -2,10 +2,10 @@
 #include "CGraphicsComponent.h"
 #include "FBO/CFBOComponent.h"
 #include "SkyBox/CSkyBox.h"
-#include "Mesh/CMesh.h"
+#include "AssetsLoader/AssetObject/CMesh.h"
 #include "Engine/Engine.h"
 #include "Camera/CCameraManager.h"
-#include "Material/CMaterial.h"
+#include "AssetsLoader/AssetObject/CMaterial.h"
 #include "Camera/CCamera.h"
 #include "Utility/CGUIDMaker.h"
 #include "Light/CLightManager.h"
@@ -119,9 +119,9 @@ void CGraphicsWorld::RenderSkyBox(glm::mat4 a_matV, glm::mat4 a_matP)
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-	SDrawMesh* pDrawInfo = this->m_pSkyBox->m_pDrawMesh;
-	glBindVertexArray(pDrawInfo->m_nVAOID);
-	glDrawElements(GL_TRIANGLES, pDrawInfo->m_nTriangleIndexCount, GL_UNSIGNED_INT, NULL);
+	CMesh* pMeshInfo = this->m_pSkyBox->m_pMesh;
+	glBindVertexArray(pMeshInfo->GetVAOID());
+	glDrawElements(GL_TRIANGLES, pMeshInfo->m_nTriangleIndexCount, GL_UNSIGNED_INT, NULL);
 	glBindVertexArray(0);
 }
 
@@ -244,9 +244,8 @@ void CGraphicsWorld::RenderObject(CCamera* a_pCamera)
 			glUniform1f(nIsSkinnedMesh, GL_FALSE);
 		}
 
-		SDrawMesh* pDrawInfo = pGraphicsComponent->m_pDrawMesh;
-		glBindVertexArray(pDrawInfo->m_nVAOID);
-		glDrawElements(GL_TRIANGLES, pDrawInfo->m_nTriangleIndexCount, GL_UNSIGNED_INT, NULL);
+		glBindVertexArray(pGraphicsComponent->m_pMesh->GetVAOID());
+		glDrawElements(GL_TRIANGLES, pGraphicsComponent->m_pMesh->m_nTriangleIndexCount, GL_UNSIGNED_INT, NULL);
 		glBindVertexArray(0);
 
 		if (pStencil != NULL)

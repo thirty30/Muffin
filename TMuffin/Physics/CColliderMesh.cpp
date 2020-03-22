@@ -1,5 +1,5 @@
 #include "CColliderMesh.h"
-#include "Graphics/Mesh/CMesh.h"
+#include "AssetsLoader/AssetObject/CMesh.h"
 
 CColliderMesh::CColliderMesh() : CColliderBase(E_COLLIDER_TYPE_MESH)
 {
@@ -69,19 +69,23 @@ void CColliderMesh::InitColliderMesh(CMesh* a_pMesh)
 	this->m_pTriangleoArray = new SMeshColliderTriangle[this->m_nTriangleCount];
 	for (n32 i = 0; i < this->m_nTriangleCount; i++)
 	{
-		SMeshTriangle* pTriangle = &a_pMesh->m_pTriangles[i];
 		SMeshColliderTriangle* pInfo = &this->m_pTriangleoArray[i];
-		pInfo->m_vPoint1.x = a_pMesh->m_pVertices[pTriangle->Vertex1].x + this->m_vCenter.x;
-		pInfo->m_vPoint1.y = a_pMesh->m_pVertices[pTriangle->Vertex1].y + this->m_vCenter.y;
-		pInfo->m_vPoint1.z = a_pMesh->m_pVertices[pTriangle->Vertex1].z + this->m_vCenter.z;
 
-		pInfo->m_vPoint2.x = a_pMesh->m_pVertices[pTriangle->Vertex2].x + this->m_vCenter.x;
-		pInfo->m_vPoint2.y = a_pMesh->m_pVertices[pTriangle->Vertex2].y + this->m_vCenter.y;
-		pInfo->m_vPoint2.z = a_pMesh->m_pVertices[pTriangle->Vertex2].z + this->m_vCenter.z;
+		n32 nIdx1 = a_pMesh->m_pTriangleIndices[(i * 3) + 0];
+		n32 nIdx2 = a_pMesh->m_pTriangleIndices[(i * 3) + 1];
+		n32 nIdx3 = a_pMesh->m_pTriangleIndices[(i * 3) + 2];
 
-		pInfo->m_vPoint3.x = a_pMesh->m_pVertices[pTriangle->Vertex3].x + this->m_vCenter.x;
-		pInfo->m_vPoint3.y = a_pMesh->m_pVertices[pTriangle->Vertex3].y + this->m_vCenter.y;
-		pInfo->m_vPoint3.z = a_pMesh->m_pVertices[pTriangle->Vertex3].z + this->m_vCenter.z;
+		pInfo->m_vPoint1.x = a_pMesh->m_pVertices[nIdx1].x + this->m_vCenter.x;
+		pInfo->m_vPoint1.y = a_pMesh->m_pVertices[nIdx1].y + this->m_vCenter.y;
+		pInfo->m_vPoint1.z = a_pMesh->m_pVertices[nIdx1].z + this->m_vCenter.z;
+
+		pInfo->m_vPoint2.x = a_pMesh->m_pVertices[nIdx2].x + this->m_vCenter.x;
+		pInfo->m_vPoint2.y = a_pMesh->m_pVertices[nIdx2].y + this->m_vCenter.y;
+		pInfo->m_vPoint2.z = a_pMesh->m_pVertices[nIdx2].z + this->m_vCenter.z;
+
+		pInfo->m_vPoint3.x = a_pMesh->m_pVertices[nIdx3].x + this->m_vCenter.x;
+		pInfo->m_vPoint3.y = a_pMesh->m_pVertices[nIdx3].y + this->m_vCenter.y;
+		pInfo->m_vPoint3.z = a_pMesh->m_pVertices[nIdx3].z + this->m_vCenter.z;
 
 		glm::vec3 vNormal1 = glm::normalize(pInfo->m_vPoint2 - pInfo->m_vPoint1);
 		glm::vec3 vNormal2 = glm::normalize(pInfo->m_vPoint3 - pInfo->m_vPoint1);

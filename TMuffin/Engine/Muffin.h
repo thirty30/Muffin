@@ -10,6 +10,7 @@ class CCameraManager;
 class CLightManager;
 class CPhysicsReactor;
 class CParticleEmitterManager;
+class CAssetsPool;
 
 class CMuffin
 {
@@ -26,6 +27,7 @@ private:
 	CLightManager* m_pLightManager;
 	CPhysicsReactor* m_pPhysicsReactor;
 	CParticleEmitterManager* m_pParticleEmitterManager;
+	CAssetsPool* m_pAssetsPoolManager;
 
 
 public:
@@ -45,6 +47,7 @@ public:
 	T_INLINE CLightManager* GetLightMgr() { return this->m_pLightManager; }
 	T_INLINE CPhysicsReactor* GetPhysicsReactor() { return this->m_pPhysicsReactor; }
 	T_INLINE CParticleEmitterManager* GetParticleEmitterMgr() { return this->m_pParticleEmitterManager; }
+	T_INLINE CAssetsPool* GetAssetsPoolMgr() { return this->m_pAssetsPoolManager; }
 
 
 public:

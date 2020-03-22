@@ -2,7 +2,7 @@
 #include "Window/CWindow.h"
 #include "Graphics/CGraphicsComponent.h"
 #include "GameObject/CGameObject.h"
-#include "Graphics/Material/CMaterial.h"
+#include "AssetsLoader/AssetObject/CMaterial.h"
 #include "Camera/CCamera.h"
 #include "Graphics/CGraphicsWorld.h"
 #include "Engine/Engine.h"
