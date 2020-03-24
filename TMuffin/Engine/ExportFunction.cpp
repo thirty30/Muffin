@@ -38,7 +38,19 @@ f32 TMuffin_GetDeltaFrameTime()
 	return MUFFIN.GetDeltaFrameTime();
 }
 
-T_DLL_EXPORT void TMuffin_SetSkyBox(CSkyBox* a_pSkyBox)
+void TMuffin_SetSkyBox(const tcchar* a_strMeshFile,
+	const tcchar* a_strVertexShader, const tcchar* a_strFragmentShader,
+	const tcchar* a_strXTexture, const tcchar* a_strNegXTexture,
+	const tcchar* a_strYTexture, const tcchar* a_strNegYTexture,
+	const tcchar* a_strZTexture, const tcchar* a_strNegZTexture)
 {
-	MUFFIN.GetGraphicsWorld()->SetSkyBox(a_pSkyBox);
+	CSkyBox* pSkyBox = new CSkyBox();
+	pSkyBox->Init(a_strMeshFile,
+		a_strVertexShader, a_strFragmentShader,
+		a_strXTexture, a_strNegXTexture,
+		a_strYTexture, a_strNegYTexture,
+		a_strZTexture, a_strNegZTexture
+	);
+	MUFFIN.GetGraphicsWorld()->SetSkyBox(pSkyBox);
 }
+

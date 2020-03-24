@@ -4,6 +4,7 @@
 #include "AssetObject/CMesh.h"
 #include "AssetObject/CTexture.h"
 #include "AssetObject/CMaterial.h"
+#include "Engine/Engine.h"
 
 CAssetsWorker::CAssetsWorker()
 {
@@ -67,7 +68,7 @@ void CAssetsWorker::Run()
 
 tbool CAssetsWorker::PickTask()
 {
-	this->m_pCurrentTaskNode = CAssetsPool::GetSingleton().PickATask();
+	this->m_pCurrentTaskNode = MUFFIN.GetAssetsPoolMgr()->PickATask();
 	if (this->m_pCurrentTaskNode == NULL)
 	{
 		return false;
@@ -125,7 +126,7 @@ void CAssetsWorker::ProcessTask()
 
 void CAssetsWorker::FinishTask()
 {
-	CAssetsPool::GetSingleton().PushFinishedTask(this->m_pCurrentTaskNode);
+	MUFFIN.GetAssetsPoolMgr()->PushFinishedTask(this->m_pCurrentTaskNode);
 	this->m_pCurrentTaskNode = NULL;
 }
 

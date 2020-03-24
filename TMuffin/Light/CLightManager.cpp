@@ -1,10 +1,10 @@
 #include "CLightManager.h"
 #include "CLight.h"
+#include "GameObject/CGameObject.h"
 
 CLightManager::CLightManager()
 {
 	this->m_mapID2Light.clear();
-	this->m_nGUIDIDX = 0;
 }
 
 CLightManager::~CLightManager()
@@ -14,15 +14,15 @@ CLightManager::~CLightManager()
 
 void CLightManager::AddLight(CLight* a_pLight)
 {
-	a_pLight->m_nMuffinGUID = this->GetGUID();
+	u64 nGUID = a_pLight->GetGameObject()->GetGameObjectID();
 	n32 nLightCount = this->m_mapID2Light.size();
 	a_pLight->InitGLSLName(nLightCount);
-	this->m_mapID2Light[a_pLight->m_nMuffinGUID] = a_pLight;
+	this->m_mapID2Light[nGUID] = a_pLight;
 }
 
 void CLightManager::DeleteLight(CLight* a_pLight)
 {
-	u64 nGUID = a_pLight->m_nMuffinGUID;
+	u64 nGUID = a_pLight->GetGameObject()->GetGameObjectID();
 	CLight* pLight = this->FindLight(nGUID);
 	if (pLight == NULL)
 	{

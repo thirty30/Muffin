@@ -25,6 +25,11 @@ CGraphicsWorld::~CGraphicsWorld()
 {
 	this->m_mapID2GraphicsObj.clear();
 	this->m_mapID2FBOObj.clear();
+	if (this->m_pSkyBox != NULL)
+	{
+		delete this->m_pSkyBox;
+		this->m_pSkyBox = NULL;
+	}
 }
 
 void CGraphicsWorld::AddGraphicsObject(CGraphicsComponent* a_pComponent)

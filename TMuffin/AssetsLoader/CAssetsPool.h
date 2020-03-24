@@ -5,7 +5,7 @@
 
 extern T_DLL_EXPORT SLoadAssetsTask* CreateLoadAssetsTask();
 
-class CAssetsPool : public CSingleton<CAssetsPool>
+class CAssetsPool
 {
 private:
 	vector<TThreadWorker*> m_vecWorker;

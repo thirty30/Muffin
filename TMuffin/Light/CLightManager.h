@@ -6,10 +6,6 @@ class CLightManager
 {
 private:
 	hash_map<u64, CLight*> m_mapID2Light;
-	u64 m_nGUIDIDX;
-
-private:
-	inline u64 GetGUID() { return ++this->m_nGUIDIDX; }
 
 public:
 	CLightManager();

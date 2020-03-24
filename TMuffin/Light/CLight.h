@@ -1,6 +1,7 @@
 #pragma once
 #include "TMuffinSysInclude.h"
 #include "CommonDefine.h"
+#include "Component/CComponentBase.h"
 
 #define GLSL_STRUCT_NAME_LEN 64
 struct sGLSLLightStructName
@@ -17,36 +18,34 @@ struct sGLSLLightStructName
 	tcchar m_strParm2[GLSL_STRUCT_NAME_LEN];
 };
 
-class T_DLL_EXPORT CLight
+class T_DLL_EXPORT CLight : public CComponentBase
 {
 private:
 	ELightType m_eType;
-	u64 m_nMuffinGUID;
-
-protected:
-	sGLSLLightStructName m_objName;
 
 private:
 	void InitGLSLName(n32 a_nIdx);
+	void InitShader(n32 a_nShaderProgramID);
 
-public:
-	tbool m_bEnable;
-	glm::vec3 m_vPosition;
-	glm::vec4 m_vColor;
-	glm::vec4 m_vSpecularColor;
-	f32 m_fSpecularPower;
+protected:
+	sGLSLLightStructName m_objName;
+	virtual void BindShader(n32 a_nShaderProgramID) T_PURE;
 
 	friend class CLightManager;
 
+public:
+	tbool m_bEnable;
+	glm::vec4 m_vDiffuseColor;
+	glm::vec4 m_vSpecularColor;
+	f32 m_fSpecularPower;
+
 public: 
 	CLight(ELightType a_eType);
-	virtual ~CLight() {}
-	virtual void BindShader(n32 a_nShaderProgramID) T_PURE;
+	virtual ~CLight();
 
 	ELightType GetLightType() { return this->m_eType; }
-	void InitShader(n32 a_nShaderProgramID);
+	virtual void Init() override;
 };
-
 
 class T_DLL_EXPORT CDirectionLight : public CLight
 {
@@ -61,7 +60,6 @@ public:
 	~CDirectionLight() {}
 	virtual void BindShader(n32 a_nShaderProgramID);
 };
-
 
 class T_DLL_EXPORT CPointLight : public CLight
 {

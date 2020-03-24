@@ -1,6 +1,7 @@
 #include "CSkyBox.h"
 #include "AssetsLoader/AssetObject/CMesh.h"
 #include "Graphics/CGraphicsComponent.h"
+#include "AssetsLoader/CAssetsLoader.h"
 
 CSkyBox::CSkyBox()
 {
@@ -19,9 +20,9 @@ CSkyBox::~CSkyBox()
 	}
 }
 
-void CSkyBox::InitMesh(CMesh* a_pMesh)
+void CSkyBox::InitMesh(const tcchar* a_strMeshFile)
 {
-	this->m_pMesh = a_pMesh;
+	this->m_pMesh = CAssetsLoader::Load<CMesh>(a_strMeshFile);
 
 	glBindVertexArray(this->m_pMesh->GetVAOID());
 	glBindBuffer(GL_ARRAY_BUFFER, this->m_pMesh->GetVertexBufferID());
@@ -95,7 +96,7 @@ tbool CSkyBox::LoadImage(GLenum a_eValue, const tcchar* a_strFileName)
 	return true;
 }
 
-tbool CSkyBox::Init(CMesh* a_pMesh, const tcchar* a_strVertexShader, const tcchar* a_strFragmentShader, const tcchar* a_strXTexture, const tcchar* a_strNegXTexture, const tcchar* a_strYTexture, const tcchar* a_strNegYTexture, const tcchar* a_strZTexture, const tcchar* a_strNegZTexture)
+tbool CSkyBox::Init(const tcchar* a_strMeshFile, const tcchar* a_strVertexShader, const tcchar* a_strFragmentShader, const tcchar* a_strXTexture, const tcchar* a_strNegXTexture, const tcchar* a_strYTexture, const tcchar* a_strNegYTexture, const tcchar* a_strZTexture, const tcchar* a_strNegZTexture)
 {
 	this->m_ShaderProgram.GetShader(E_SHADER_TYPE_VERTEX)->LoadShaderToMemory(a_strVertexShader);
 	this->m_ShaderProgram.GetShader(E_SHADER_TYPE_VERTEX)->InitShader();
@@ -103,7 +104,7 @@ tbool CSkyBox::Init(CMesh* a_pMesh, const tcchar* a_strVertexShader, const tccha
 	this->m_ShaderProgram.GetShader(E_SHADER_TYPE_FRAGMENT)->InitShader();
 	this->m_ShaderProgram.InitShaderProgram();
 
-	this->InitMesh(a_pMesh);
+	this->InitMesh(a_strMeshFile);
 
 	glGenTextures(1, &this->m_nTextureID);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, this->m_nTextureID);

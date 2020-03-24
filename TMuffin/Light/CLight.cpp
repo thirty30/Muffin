@@ -1,6 +1,8 @@
 #include "CLight.h"
 #include "Engine/Engine.h"
 #include "Light/CLightManager.h"
+#include "Transform/CTransform.h"
+#include "GameObject/CGameObject.h"
 
 void CLight::InitGLSLName(n32 a_nIdx)
 {
@@ -19,15 +21,21 @@ void CLight::InitGLSLName(n32 a_nIdx)
 CLight::CLight(ELightType a_eType)
 {
 	this->m_eType = a_eType;
-	this->m_nMuffinGUID = 0;
 
 	this->m_bEnable = true;
-	this->m_vPosition = glm::vec3(0.0f, 0.0f, 0.0f);
-	this->m_vColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	this->m_vDiffuseColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	this->m_vSpecularColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	this->m_fSpecularPower = 0;
 	TMemzero(&this->m_objName, sizeof(this->m_objName));
+}
 
+CLight::~CLight()
+{
+	MUFFIN.GetLightMgr()->DeleteLight(this);
+}
+
+void CLight::Init()
+{
 	MUFFIN.GetLightMgr()->AddLight(this);
 }
 
@@ -42,8 +50,9 @@ void CLight::InitShader(n32 a_nShaderProgramID)
 
 	glUniform1i(nType, (n32)this->m_eType);
 	glUniform1i(nEnable, (n32)this->m_bEnable);
-	glUniform4f(nPosition, this->m_vPosition.x, this->m_vPosition.y, this->m_vPosition.z, 1.0f);
-	glUniform4f(nDiffuse, this->m_vColor.r, this->m_vColor.g, this->m_vColor.b, this->m_vColor.a);
+	CTransform& rTrans = this->GetGameObject()->GetTransform();
+	glUniform4f(nPosition, rTrans.m_vPosition.x, rTrans.m_vPosition.y, rTrans.m_vPosition.z, 1.0f);
+	glUniform4f(nDiffuse, this->m_vDiffuseColor.r, this->m_vDiffuseColor.g, this->m_vDiffuseColor.b, this->m_vDiffuseColor.a);
 	glUniform4f(nSpecular, this->m_vSpecularColor.r, this->m_vSpecularColor.g, this->m_vSpecularColor.b, this->m_vSpecularColor.a);
 	glUniform1f(nSpecularPower, this->m_fSpecularPower);
 }

@@ -24,9 +24,12 @@ T_DLL_EXPORT void TMuffin_RegisterGameLogicCallBack(MuffinGameLogicCallBack a_fu
 
 //------------Register call back function end------------//
 
-class CSkyBox;
 T_DLL_EXPORT f64 TMuffin_GetNowFrameTime();
 T_DLL_EXPORT f32 TMuffin_GetDeltaFrameTime();
-T_DLL_EXPORT void TMuffin_SetSkyBox(CSkyBox* a_pSkyBox);
+T_DLL_EXPORT void TMuffin_SetSkyBox(const tcchar* a_strMeshFile,
+	const tcchar* a_strVertexShader, const tcchar* a_strFragmentShader,
+	const tcchar* a_strXTexture, const tcchar* a_strNegXTexture,
+	const tcchar* a_strYTexture, const tcchar* a_strNegYTexture,
+	const tcchar* a_strZTexture, const tcchar* a_strNegZTexture);
 
 

@@ -36,26 +36,30 @@ tbool CScene1::LoadScene()
 
 		CCameraControl* pController = static_cast<CCameraControl*>(CGame::GetSingleton().GetControlManager()->CreateController<CCameraControl>());
 		pController->SetCamera(pCamera);
-		pController->m_fCameraYMoveSpeed = 0.2f;
-		pController->m_fCameraXMoveSpeed = 0.4f;
+		pController->m_fCameraYMoveSpeed = 5.0f;
+		pController->m_fCameraXMoveSpeed = 5.0f;
 		pController->m_fCameraRotationSpeed = 1.0f;
-		pController->m_fCameraScrollSpeed = 0.3f;
+		pController->m_fCameraScrollSpeed = 10.0f;
 	}
 
 	//SkyBox
-	CMesh* pMeshSkyBox = CAssetsLoader::Load<CMesh>("../Assets/Models/BaseModels/SkyBox.ply");
-	this->m_pSkyBox = new CSkyBox();
-	this->m_pSkyBox->Init(pMeshSkyBox, 
+	//TMuffin_SetSkyBox("../Assets/Models/BaseModels/SkyBox.ply",
+	//	"../Assets/Shaders/SkyBoxVertexShader.glsl", "../Assets/Shaders/SkyBoxFragmentShader.glsl",
+	//	"../Assets/Textures/SkyBox/Space/SpaceBoxX.png", "../Assets/Textures/SkyBox/Space/SpaceBoxNegX.png",
+	//	"../Assets/Textures/SkyBox/Space/SpaceBoxY.png", "../Assets/Textures/SkyBox/space/SpaceBoxNegY.png",
+	//	"../Assets/Textures/SkyBox/Space/SpaceBoxZ.png", "../Assets/Textures/SkyBox/space/SpaceBoxNegZ.png"
+	//); 
+	
+	TMuffin_SetSkyBox("../Assets/Models/BaseModels/SkyBox.ply",
 		"../Assets/Shaders/SkyBoxVertexShader.glsl", "../Assets/Shaders/SkyBoxFragmentShader.glsl",
-		"../Assets/Textures/SkyBox/Space/SpaceBoxX.png", "../Assets/Textures/SkyBox/Space/SpaceBoxNegX.png",
-		"../Assets/Textures/SkyBox/Space/SpaceBoxY.png", "../Assets/Textures/SkyBox/space/SpaceBoxNegY.png",
-		"../Assets/Textures/SkyBox/Space/SpaceBoxZ.png", "../Assets/Textures/SkyBox/space/SpaceBoxNegZ.png"
-		);
-	TMuffin_SetSkyBox(this->m_pSkyBox);
+		"../Assets/Textures/SkyBox/BlueSky/BlueSkyX.png", "../Assets/Textures/SkyBox/BlueSky/BlueSkyNegX.png",
+		"../Assets/Textures/SkyBox/BlueSky/BlueSkyY.png", "../Assets/Textures/SkyBox/BlueSky/BlueSkyNegY.png",
+		"../Assets/Textures/SkyBox/BlueSky/BlueSkyZ.png", "../Assets/Textures/SkyBox/BlueSky/BlueSkyNegZ.png"
+	);
 
 	//Scene Light
-	CDirectionLight* pDirectionLight = new CDirectionLight();
-
+	CGameObject* pLight = new CGameObject();
+	pLight->AddComponent<CDirectionLight>();
 
 	//Scene Items
 	CMesh* pMesh = CAssetsLoader::Load<CMesh>("../Assets/Models/SM_Ship_Massive_Transport_01.fbx");

@@ -13,6 +13,7 @@ CGameObjectManager::~CGameObjectManager()
 	while (this->m_listGameObject.GetLength() > 0)
 	{
 		TLinkedNode<CGameObject*>* pNode = this->m_listGameObject.PopBack();
+		delete pNode->m_pValue;
 		delete pNode;
 	}
 	this->m_mapID2Node.clear();

@@ -3,8 +3,6 @@
 #include "AssetObject/CAssetObject.h"
 #include "Engine/Engine.h"
 
-T_IMPLEMENT_SINGLETON(CAssetsPool)
-
 SLoadAssetsTask* CreateLoadAssetsTask()
 {
 	return MUFFIN.GetAssetsPoolMgr()->CreateTask();
