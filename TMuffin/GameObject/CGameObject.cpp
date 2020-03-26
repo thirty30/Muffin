@@ -12,7 +12,12 @@ CGameObject::CGameObject()
 CGameObject::~CGameObject()
 {
 	this->Clear();
+}
+
+void CGameObject::Destory()
+{
 	MUFFIN.GetGameObjectMgr()->RemoveObject(this);
+	delete this;
 }
 
 void CGameObject::Init()

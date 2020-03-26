@@ -2,7 +2,6 @@
 #include "Engine.h"
 #include "Camera/CCamera.h"
 #include "Camera/CCameraManager.h"
-#include "Particle/CParticleEmitterManager.h"
 #include "Graphics/SkyBox/CSkyBox.h"
 #include "Graphics/CGraphicsWorld.h"
 

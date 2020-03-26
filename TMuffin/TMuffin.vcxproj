@@ -47,7 +47,6 @@
     <ClCompile Include="AssetsLoader\AssetObject\CMesh.cpp" />
     <ClCompile Include="Particle\CParticle.cpp" />
     <ClCompile Include="Particle\CParticleEmitter.cpp" />
-    <ClCompile Include="Particle\CParticleEmitterManager.cpp" />
     <ClCompile Include="Physics\CColliderBase.cpp" />
     <ClCompile Include="Physics\CColliderBox.cpp" />
     <ClCompile Include="Physics\CColliderCapsule.cpp" />
@@ -97,7 +96,6 @@
     <ClInclude Include="AssetsLoader\AssetObject\CMesh.h" />
     <ClInclude Include="Particle\CParticle.h" />
     <ClInclude Include="Particle\CParticleEmitter.h" />
-    <ClInclude Include="Particle\CParticleEmitterManager.h" />
     <ClInclude Include="Physics\CColliderBase.h" />
     <ClInclude Include="Physics\CColliderBox.h" />
     <ClInclude Include="Physics\CColliderCapsule.h" />

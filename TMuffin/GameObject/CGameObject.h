@@ -28,6 +28,7 @@ public:
 	T_INLINE tbool IsEnable() { return this->m_bEnable; }
 	T_INLINE void SetEnable(tbool a_bEnable) { this->m_bEnable = a_bEnable; }
 	T_INLINE CTransform& GetTransform() { return this->m_pTransform; }
+	T_INLINE void Destory();
 
 	template<typename T>
 	T* AddComponent();

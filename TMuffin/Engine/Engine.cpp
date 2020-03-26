@@ -1,7 +1,6 @@
 #include "Engine.h"
 #include "Window/CWindow.h"
 #include "Physics/CPhysicsReactor.h"
-#include "Particle/CParticleEmitterManager.h"
 #include "Particle/CParticleEmitter.h"
 #include "GameObject/CGameObjectManager.h"
 #include "ExportFunction.h"
@@ -56,7 +55,6 @@ void MuffinMainLoop()
 
 		// Rendering loop
 		{
-			//MUFFIN.GetParticleEmitterMgr()->Update();
 			MUFFIN.GetWindow()->DrawWindow();
 		}
 	}

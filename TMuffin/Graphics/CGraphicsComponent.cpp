@@ -17,12 +17,12 @@ CGraphicsComponent::~CGraphicsComponent()
 {
 	if (this->m_pMesh != NULL)
 	{
-		delete this->m_pMesh;
+		//delete this->m_pMesh;
 		this->m_pMesh = NULL;
 	}
 	if (this->m_pMaterial != NULL)
 	{
-		delete this->m_pMaterial;
+		//delete this->m_pMaterial;
 		this->m_pMaterial = NULL;
 	}
 	MUFFIN.GetGraphicsWorld()->RemoveGraphicsObject(this);

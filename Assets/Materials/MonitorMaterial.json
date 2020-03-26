@@ -1,10 +1,9 @@
 {
-	"MaterialName":"MonitorMaterial",
 	"VertexShader":"../Assets/shaders/MonitorVertexShader.glsl",
 	"FragmentShader":"../Assets/shaders/MonitorFragmentShader.glsl",
 	"MaterialData":
 	[
-		{"ID":1, "Name":"DiffuseMap", "Tag":"FBOTexture"}
+		{"Name":"DiffuseMap", "Tag":"FBOTexture"}
 	]
 }
 

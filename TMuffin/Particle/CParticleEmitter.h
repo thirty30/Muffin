@@ -18,12 +18,11 @@ private:
 
 protected:
 	virtual void Init() override;
+	virtual void Update() override;
 
 public:
 	friend class CParticleEmitterManager;
 
-	tbool m_bEnable;
-	glm::vec3 m_vPosition;
 	glm::vec3 m_vMinScale;
 	glm::vec3 m_vMaxScale;
 	glm::vec3 m_vMinAcceleration;
@@ -47,10 +46,8 @@ public:
 	CParticleEmitter();
 	~CParticleEmitter();
 
-	void InitializeEmitter();
 	void EmitParticle();
 	void AwakeParticle(CParticle* a_pParticle);
-	void Update();
 
 	void SetParticleMode(EParticleMode a_eMode);
 	void SetCameraPosition(glm::vec3 a_vPosition);

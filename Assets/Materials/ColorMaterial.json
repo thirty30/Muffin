@@ -1,0 +1,9 @@
+{
+	"VertexShader":"../Assets/shaders/DefaultVertexShader.glsl",
+	"FragmentShader":"../Assets/shaders/DefaultFragmentShader.glsl",
+	"MaterialData":
+	[
+		{"Name":"un_vColour", "Tag":"FloatVec4", "Value":[1.0, 0.0, 0.0, 1.0]}
+	]
+}
+

@@ -6,7 +6,6 @@
 #include "Camera/CCameraManager.h"
 #include "Light/CLightManager.h"
 #include "Physics/CPhysicsReactor.h"
-#include "Particle/CParticleEmitterManager.h"
 #include "AssetsLoader/CAssetsPool.h"
 
 CMuffin::CMuffin()
@@ -22,7 +21,6 @@ CMuffin::CMuffin()
 	this->m_pCameraManager = new CCameraManager();
 	this->m_pLightManager = new CLightManager();
 	this->m_pPhysicsReactor = new CPhysicsReactor();
-	this->m_pParticleEmitterManager = new CParticleEmitterManager();
 	this->m_pAssetsPoolManager = new CAssetsPool();
 
 }
@@ -36,7 +34,6 @@ CMuffin::~CMuffin()
 	delete this->m_pCameraManager;
 	delete this->m_pLightManager;
 	delete this->m_pPhysicsReactor;
-	delete this->m_pParticleEmitterManager;
 	delete this->m_pAssetsPoolManager;
 
 	this->m_pGUIDMaker = NULL;
@@ -46,7 +43,6 @@ CMuffin::~CMuffin()
 	this->m_pCameraManager = NULL;
 	this->m_pLightManager = NULL;
 	this->m_pPhysicsReactor = NULL;
-	this->m_pParticleEmitterManager = NULL;
 	this->m_pAssetsPoolManager = NULL;
 }
 

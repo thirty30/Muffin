@@ -1,20 +1,13 @@
 #include "CParticleEmitter.h"
 #include "Engine/Engine.h"
 
-void CParticleEmitter::Init()
-{
-
-}
-
 CParticleEmitter::CParticleEmitter()
 {
-	this->m_bEnable = true;
 	this->m_fLastEmitTime = 0;
 	this->m_eMode = E_PARTICLE_MODE_NORMAL;
 	this->m_vCameraPos = glm::vec3(0.0f, 0.0f, 0.0f);
 	this->m_nEmittedCount = 0;
 
-	this->m_vPosition = glm::vec3(0.0f, 0.0f, 0.0f);
 	this->m_vMinScale = glm::vec3(0.0f, 0.0f, 0.0f);
 	this->m_vMaxScale = glm::vec3(0.0f, 0.0f, 0.0f);
 	this->m_vMinAcceleration = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -40,7 +33,7 @@ CParticleEmitter::~CParticleEmitter()
 
 }
 
-void CParticleEmitter::InitializeEmitter()
+void CParticleEmitter::Init()
 {
 	f32 fPeriod = this->m_fEmitPeriod <= 0 ? 1.0f : this->m_fEmitPeriod;
 	n32 nRatio = (n32)(this->m_fMaxLifeTime / fPeriod) + 1;
@@ -49,9 +42,8 @@ void CParticleEmitter::InitializeEmitter()
 	{
 		CParticle* pParticle = new CParticle();
 		pParticle->SetEnable(false);
-		CGraphicsComponent* pGraphics = static_cast<CGraphicsComponent*>(pParticle->AddComponent<CGraphicsComponent>());
+		CGraphicsComponent* pGraphics = pParticle->AddComponent<CGraphicsComponent>();
 		pGraphics->InitRenderer(this->m_pMesh, this->m_pMaterial);
-		pGraphics->SetRenderMode(E_RENDER_MODE_FILL);
 
 		TLinkedNode<CParticle*>* pNode = new TLinkedNode<CParticle*>(pParticle);
 		this->m_objFreeList.PushBack(pNode);
@@ -71,10 +63,8 @@ void CParticleEmitter::EmitParticle()
 		if (pNode == NULL)
 		{
 			CParticle* pParticle = new CParticle();
-			CGraphicsComponent* pGraphics = static_cast<CGraphicsComponent*>(pParticle->AddComponent<CGraphicsComponent>());
+			CGraphicsComponent* pGraphics = pParticle->AddComponent<CGraphicsComponent>();
 			pGraphics->InitRenderer(this->m_pMesh, this->m_pMaterial);
-			pGraphics->SetRenderMode(E_RENDER_MODE_FILL);
-
 			pNode = new TLinkedNode<CParticle*>(pParticle);
 		}
 		this->AwakeParticle(pNode->m_pValue);
@@ -98,9 +88,10 @@ void CParticleEmitter::AwakeParticle(CParticle* a_pParticle)
 	a_pParticle->m_vAcceleration.z = TRandInRange(this->m_vMinAcceleration.z, this->m_vMaxAcceleration.z);
 
 	CTransform& rTrans = a_pParticle->GetTransform();
-	rTrans.m_vPosition.x = this->m_vPosition.x + TRandInRange(this->m_vMinDeltaPosition.x, this->m_vMaxDeltaPosition.x);
-	rTrans.m_vPosition.y = this->m_vPosition.y + TRandInRange(this->m_vMinDeltaPosition.y, this->m_vMaxDeltaPosition.y);
-	rTrans.m_vPosition.z = this->m_vPosition.z + TRandInRange(this->m_vMinDeltaPosition.z, this->m_vMaxDeltaPosition.z);
+	CTransform& rEmitterTrans = this->GetGameObject()->GetTransform();
+	rTrans.m_vPosition.x = rEmitterTrans.m_vPosition.x + TRandInRange(this->m_vMinDeltaPosition.x, this->m_vMaxDeltaPosition.x);
+	rTrans.m_vPosition.y = rEmitterTrans.m_vPosition.y + TRandInRange(this->m_vMinDeltaPosition.y, this->m_vMaxDeltaPosition.y);
+	rTrans.m_vPosition.z = rEmitterTrans.m_vPosition.z + TRandInRange(this->m_vMinDeltaPosition.z, this->m_vMaxDeltaPosition.z);
 	
 	rTrans.m_vScale.x = TRandInRange(this->m_vMinScale.x, this->m_vMaxScale.x);
 	rTrans.m_vScale.y = TRandInRange(this->m_vMinScale.y, this->m_vMaxScale.y);
@@ -115,10 +106,6 @@ void CParticleEmitter::AwakeParticle(CParticle* a_pParticle)
 
 void CParticleEmitter::Update()
 {
-	if (this->m_bEnable == false)
-	{
-		return;
-	}
 	f32 fDeltaTime = MUFFIN.GetDeltaFrameTime();
 	TLinkedNode<CParticle*>* pNode = this->m_objEmittedList.GetHeadNode();
 	while (pNode != NULL)

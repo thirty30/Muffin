@@ -27,9 +27,6 @@
     <ClCompile Include="GameObject\CGameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject\CGameObjectManager.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="Particle\CParticle.cpp">
       <Filter>Particle</Filter>
     </ClCompile>
@@ -38,9 +35,6 @@
     </ClCompile>
     <ClCompile Include="Engine\Muffin.cpp">
       <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Particle\CParticleEmitterManager.cpp">
-      <Filter>Particle</Filter>
     </ClCompile>
     <ClCompile Include="Physics\PhysicsHelper.cpp">
       <Filter>Physics</Filter>
@@ -114,6 +108,7 @@
     <ClCompile Include="AssetsLoader\AssetObject\CShader.cpp">
       <Filter>ShaderHelper</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\CGameObjectManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\CCamera.h">
@@ -142,9 +137,6 @@
     <ClInclude Include="GameObject\CGameObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject\CGameObjectManager.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="Particle\CParticle.h">
       <Filter>Particle</Filter>
     </ClInclude>
@@ -156,9 +148,6 @@
     </ClInclude>
     <ClInclude Include="Engine\Muffin.h">
       <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Particle\CParticleEmitterManager.h">
-      <Filter>Particle</Filter>
     </ClInclude>
     <ClInclude Include="Physics\PhysicsHelper.h">
       <Filter>Physics</Filter>
@@ -248,6 +237,7 @@
     </ClInclude>
     <ClInclude Include="AssetsLoader\CAssetsLoader.h" />
     <ClInclude Include="AssetsLoader\AssetsInclude.h" />
+    <ClInclude Include="GameObject\CGameObjectManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Camera">

@@ -8,11 +8,6 @@ private:
 	lua_State* m_pLuaState;
 
 public:
-	CGameObject* pObj;
-	CMesh* pMesh;
-	CMaterial* pMat;
-
-public:
 	CScene1(n32 a_nSceneID);
 	~CScene1();
 
@@ -23,8 +18,6 @@ public:
 	virtual void Loop() override;
 
 	CGameObject* GetCamera() { return this->pCameraObject; }
-
-	static void LoadAssetsCallBack(void* a_pCustomData, CAssetObject* a_pObject);
 };
 
 

@@ -37,7 +37,6 @@
 
 #include "./Particle/CParticle.h"
 #include "./Particle/CParticleEmitter.h"
-#include "./Particle/CParticleEmitterManager.h"
 
 #include "./LineTween/CLineTween.h"
 #include "./LineTween/CLineTweenMove.h"
