@@ -147,7 +147,7 @@ void CGraphicsWorld::RenderObject(CCamera* a_pCamera)
 			continue;
 		}
 		
-		CStencilComponent* pStencil = static_cast<CStencilComponent*>(pGameObj->GetComponent<CStencilComponent>());
+		CStencilComponent* pStencil = pGameObj->GetComponent<CStencilComponent>();
 		if (pStencil != NULL)
 		{
 			glEnable(GL_STENCIL_TEST);
@@ -230,7 +230,7 @@ void CGraphicsWorld::RenderObject(CCamera* a_pCamera)
 
 		glPolygonMode(GL_FRONT_AND_BACK, pGraphicsComponent->m_nRenderMode);
 
-		CAnimator* pAnimator = static_cast<CAnimator*>(pGameObj->GetComponent<CAnimator>());
+		CAnimator* pAnimator = pGameObj->GetComponent<CAnimator>();
 		GLint nIsSkinnedMesh = glGetUniformLocation(nShaderProgramID, "isSkinnedMesh");
 		if (pAnimator != NULL)
 		{

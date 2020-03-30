@@ -1,6 +1,8 @@
 #include "CAnimation.h"
 #include "Utility/Utility.h"
 #include "AssetsLoader/AssetObject/CMesh.h"
+#include "Graphics/CGraphicsComponent.h"
+#include "GameObject/CGameObject.h"
 #include "CAnimator.h"
 
 
@@ -18,7 +20,7 @@ CAnimation::~CAnimation()
 
 }
 
-tbool CAnimation::Init(const tcchar* a_pFileName, CMesh* a_pMesh)
+tbool CAnimation::Init(const tcchar* a_pFileName)
 {
 	Assimp::Importer* pImporter = new Assimp::Importer();
 	this->m_pAIScene = pImporter->ReadFile(a_pFileName,
@@ -34,13 +36,14 @@ tbool CAnimation::Init(const tcchar* a_pFileName, CMesh* a_pMesh)
 		return false;
 	}
 
-	if (a_pMesh == NULL)
+	CGraphicsComponent* pGraphics = this->m_pAnimator->GetGameObject()->GetComponent<CGraphicsComponent>();
+	CMesh* pMesh = pGraphics->GetMesh();
+	if (pMesh == NULL)
 	{
 		return false;
 	}
-
-	this->m_matInverseTransformation = a_pMesh->m_matInverseTransformation;
-	for (auto iter : a_pMesh->m_mapName2Bone)
+	this->m_matInverseTransformation = pMesh->m_matInverseTransformation;
+	for (auto iter : pMesh->m_mapName2Bone)
 	{
 		SBoneDetail* pOri = iter.second;
 		SBoneDetail* pNow = new SBoneDetail(*pOri);
@@ -90,7 +93,7 @@ void CAnimation::GetBoneTransform(vector<glm::mat4>& a_vecTransform)
 		a_vecTransform[pDetail->boneID] = pDetail->FinalTransformation;
 	}
 
-	this->m_fNowPlayTime += 0.05f;
+	this->m_fNowPlayTime += 0.01f;
 }
 
 void CAnimation::ReadNodeHeirarchy(f32 a_fAnimationTime, const aiNode* a_pNode, const glm::mat4& a_ParentTransform)

@@ -18,12 +18,7 @@ public:
 	tbool m_bIsLoop;
 	tstring m_strName;
 
-public:
-	CAnimation();
-	~CAnimation();
-
-	tbool Init(const tcchar* a_pFileName, CMesh* a_pMesh);
-	void GetBoneTransform(vector<glm::mat4>& a_vecTransform);
+private:
 	void ReadNodeHeirarchy(f32 a_fAnimationTime, const aiNode* a_pNode, const glm::mat4& a_ParentTransform);
 
 	void CalcGLMInterpolatedRotation(f32 a_fAnimationTime, const aiNodeAnim* a_pNodeAnim, glm::quat& a_qOut);
@@ -33,6 +28,13 @@ public:
 	void CalcInterpolatedRotation(f32 a_fAnimationTime, const aiNodeAnim* a_pNodeAnim, aiQuaternion& out);
 	void CalcInterpolatedPosition(f32 a_fAnimationTime, const aiNodeAnim* a_pNodeAnim, aiVector3D& out);
 	void CalcInterpolatedScaling(f32 a_fAnimationTime, const aiNodeAnim* a_pNodeAnim, aiVector3D& out);
+
+public:
+	CAnimation();
+	~CAnimation();
+
+	tbool Init(const tcchar* a_pFileName);
+	void GetBoneTransform(vector<glm::mat4>& a_vecTransform);
 
 	f32 GetDuration();
 	tbool IsPlaying();

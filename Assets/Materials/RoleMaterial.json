@@ -1,0 +1,8 @@
+{
+	"VertexShader":"../Assets/shaders/RoleVertexShade.glsl",
+	"FragmentShader":"../Assets/shaders/RoleFragmentShader.glsl",
+	"MaterialData":
+	[
+	]
+}
+

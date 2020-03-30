@@ -58,7 +58,7 @@ tbool CScene1::LoadScene()
 	//Scene Light
 	CGameObject* pLight = new CGameObject();
 	pLight->AddComponent<CDirectionLight>();
-
+	/*
 	CGameObject* pObj = new CGameObject();
 	CParticleEmitter* pEmitter = pObj->AddComponent<CParticleEmitter>();
 	pEmitter->m_pMesh = CAssetsLoader::Load<CMesh>("../Assets/Models/Cube.ply");
@@ -97,8 +97,15 @@ tbool CScene1::LoadScene()
 	pEmitter2->m_fEmitPeriod = 0.2f;
 	pEmitter2->m_nMinEmitCount = 3;
 	pEmitter2->m_nMaxEmitCount = 5;
+	*/
+	CGameObject* pRole = new CGameObject();
+	CGraphicsComponent* pRoleGraphics = pRole->AddComponent<CGraphicsComponent>();
+	pRoleGraphics->SetMesh(CAssetsLoader::Load<CMesh>("../Assets/Models/Role.fbx"));
+	pRoleGraphics->SetMaterial(CAssetsLoader::Load<CMaterial>("../Assets/Materials/RoleMaterial.json"));
+	CAnimator* pAnimator = pRole->AddComponent<CAnimator>();
+	pAnimator->CreateAnimation("run", "../Assets/Animation/Role1/RunningInPlace.fbx");
 
-	this->LoadSceneFile("../Assets/Scene/Scene1.json");
+	//this->LoadSceneFile("../Assets/Scene/Scene1.json");
 
 	return true;
 }

@@ -9,6 +9,11 @@ void CAnimator::CallBackEndAnimation()
 	}
 }
 
+void CAnimator::Init()
+{
+
+}
+
 CAnimator::CAnimator()
 {
 	this->m_strFileName.clear();
@@ -29,14 +34,18 @@ CAnimator::~CAnimator()
 	this->m_pCurrentAnimation = NULL;
 }
 
-CAnimation* CAnimator::CreateAnimation(tstring a_strKey, const tcchar* a_pFileName, CMesh* a_pMesh)
+CAnimation* CAnimator::CreateAnimation(tstring a_strKey, const tcchar* a_pFileName)
 {
 	tstring strFileName(a_pFileName);
 	CAnimation* pAnimation = new CAnimation();
-	pAnimation->Init(a_pFileName, a_pMesh);
 	pAnimation->m_strName = a_strKey;
 	pAnimation->SetAnimator(this);
+	pAnimation->Init(a_pFileName);
 	this->m_mapName2Animation[a_strKey] = pAnimation;
+	if (this->m_pCurrentAnimation == NULL)
+	{
+		this->m_pCurrentAnimation = pAnimation;
+	}
 	return pAnimation;
 }
 

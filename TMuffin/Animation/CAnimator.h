@@ -20,11 +20,14 @@ private:
 private:
 	void CallBackEndAnimation();
 
+protected:
+	virtual void Init() override;
+
 public:
 	CAnimator();
 	~CAnimator();
 	
-	CAnimation* CreateAnimation(tstring a_strKey, const tcchar* a_pFileName, CMesh* a_pMesh);
+	CAnimation* CreateAnimation(tstring a_strKey, const tcchar* a_pFileName);
 	CAnimation* GetAnimation(tstring a_strKey);
 	void SetCurrentAnimation(tstring a_strKey);
 	CAnimation* GetCurrentAnimation() { return this->m_pCurrentAnimation; }
