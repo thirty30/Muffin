@@ -4,8 +4,6 @@ class CScene1 : public CSceneBase
 {
 private:
 	CGameObject* pCameraObject;
-	CSkyBox* m_pSkyBox;
-	lua_State* m_pLuaState;
 
 public:
 	CScene1(n32 a_nSceneID);

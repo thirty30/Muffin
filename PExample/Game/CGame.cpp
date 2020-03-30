@@ -24,6 +24,7 @@ tbool CGame::InitGame()
 	TMuffin_RegisterScrollCallback(ControlScrollEvent);
 	TMuffin_RegisterPhysicsCallBack(CGame::PhysicsCallBack);
 	TMuffin_RegisterGameLogicCallBack(CGame::GameLogicCallBack);
+	TMuffin_RegisterComponent(CreateLogicComponent);
 	
 	if (TMuffin_Initialize(this->m_nScreenWidth, this->m_nScreenHigh, this->m_strWindowName.c_str()) == false)
 	{

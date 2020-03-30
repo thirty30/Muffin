@@ -1,6 +1,7 @@
 #pragma once
 #include "TMuffinSysInclude.h"
-#include "Particle/CParticleEmitter.h"
+#include "Component/CComponentBase.h"
+#include "GameObject/CGameObject.h"
 
 T_DLL_EXPORT tbool TMuffin_Initialize(n32 a_nWinWidth, n32 a_nWinHigh, const tcchar* a_strWinName);
 T_DLL_EXPORT void TMuffin_Loop();
@@ -33,3 +34,6 @@ T_DLL_EXPORT void TMuffin_SetSkyBox(const tcchar* a_strMeshFile,
 	const tcchar* a_strZTexture, const tcchar* a_strNegZTexture);
 
 
+typedef CComponentBase* (*MuffinCreateComponent)(CGameObject* a_pObj, tstring a_strClassName);
+extern MuffinCreateComponent pExternalCreateComponent;
+T_DLL_EXPORT void TMuffin_RegisterComponent(MuffinCreateComponent a_fuc);

@@ -1,6 +1,23 @@
 #include "stdafx.h"
 #include <rapidjson/document.h>
 
+CSceneBase::CSceneBase(n32 a_nSceneID) :
+	m_nSceneID(a_nSceneID),
+	m_GUIDMaker(1)
+{
+	this->m_strSceneName = "";
+	this->m_mapID2GameObj.clear();
+}
+
+CSceneBase::~CSceneBase()
+{
+	for (auto iter : this->m_mapID2GameObj)
+	{
+		//delete iter.second;
+	}
+	this->m_mapID2GameObj.clear();
+}
+
 T_INLINE u64 CSceneBase::CreateGUID()
 {
 	return this->m_GUIDMaker.GenerateGUID(0);
@@ -97,13 +114,24 @@ tbool CSceneBase::LoadSceneGameObject(const rapidjson::Value::ConstObject& a_rNo
 		{
 			tstring strKey = iter->name.GetString();
 			const rapidjson::Value::ConstObject& rValue = iter->value.GetObjectA();
-			CComponentBase* pCom = CreateComponent(pObj, strKey);
+			CComponentBase* pCom = NULL;
+			pCom = CreateComponent(pObj, strKey);
+			if (pCom == NULL)
+			{
+				pCom = CreateLogicComponent(pObj, strKey);
+			}
+			if (pCom == NULL)
+			{
+				continue;
+			}
 
 			rapidjson::Value::ConstMemberIterator iterProperty = rValue.MemberBegin();
 			for (; iterProperty != rValue.MemberEnd(); ++iterProperty)
 			{
 				if (iterProperty->value.IsString() == true)
 				{
+					tstring a = iterProperty->name.GetString();
+					tstring b = iterProperty->value.GetString();
 					pCom->SetProperty(iterProperty->name.GetString(), tstring(iterProperty->value.GetString()));
 				}
 				else if(iterProperty->value.IsInt() == true)

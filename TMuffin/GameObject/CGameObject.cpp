@@ -25,12 +25,7 @@ void CGameObject::Init()
 	TLinkedNode<CComponentBase*>* pNode = this->m_pComponents.GetHeadNode();
 	while (pNode != NULL)
 	{
-		CComponentBase* pCom = pNode->m_pValue;
-		if (pCom->m_bIsInit == false)
-		{
-			pCom->Init();
-			pCom->m_bIsInit = true;
-		}
+		pNode->m_pValue->Init();
 		pNode = pNode->m_pNext;
 	}
 }

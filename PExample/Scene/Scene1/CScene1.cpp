@@ -1,10 +1,8 @@
 #include "stdafx.h"
 
-
 CScene1::CScene1(n32 a_nSceneID) : CSceneBase(a_nSceneID)
 {
 	this->pCameraObject = NULL;
-	this->m_pSkyBox = NULL;
 }
 
 CScene1::~CScene1()
@@ -100,8 +98,7 @@ tbool CScene1::LoadScene()
 	pEmitter2->m_nMinEmitCount = 3;
 	pEmitter2->m_nMaxEmitCount = 5;
 
-
-	//this->LoadSceneFile("../Assets/Scene/Scene1.json");
+	this->LoadSceneFile("../Assets/Scene/Scene1.json");
 
 	return true;
 }

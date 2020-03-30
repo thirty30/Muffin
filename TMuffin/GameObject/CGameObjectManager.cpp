@@ -6,6 +6,7 @@
 CGameObjectManager::CGameObjectManager()
 {
 	this->m_mapID2Node.clear();
+	this->m_vecUnsettled.clear();
 }
 
 CGameObjectManager::~CGameObjectManager()
@@ -17,6 +18,7 @@ CGameObjectManager::~CGameObjectManager()
 		delete pNode;
 	}
 	this->m_mapID2Node.clear();
+	this->m_vecUnsettled.clear();
 }
 
 void CGameObjectManager::AddObject(CGameObject* a_pGameObject)
@@ -25,6 +27,7 @@ void CGameObjectManager::AddObject(CGameObject* a_pGameObject)
 	TLinkedNode<CGameObject*>* pNode = new TLinkedNode<CGameObject*>(a_pGameObject);
 	this->m_listGameObject.PushBack(pNode);
 	this->m_mapID2Node[a_pGameObject->m_nMUFFINGUID] = pNode;
+	this->m_vecUnsettled.push_back(a_pGameObject);
 }
 
 CGameObject* CGameObjectManager::FindObject(u64 a_nGUID)
@@ -62,12 +65,11 @@ void CGameObjectManager::RemoveObject(CGameObject* a_pGameObject)
 
 void CGameObjectManager::Init()
 {
-	TLinkedNode<CGameObject*>* pHead = this->m_listGameObject.GetHeadNode();
-	while (pHead != NULL)
+	for (n32 i = 0; i < this->m_vecUnsettled.size(); i++)
 	{
-		pHead->m_pValue->Init();
-		pHead = pHead->m_pNext;
+		this->m_vecUnsettled[i]->Init();
 	}
+	this->m_vecUnsettled.clear();
 }
 
 void CGameObjectManager::Update()

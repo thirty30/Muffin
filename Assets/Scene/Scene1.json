@@ -6,8 +6,8 @@
 		"Transform": { "Position":[0.0, 0.0, -50.0], "Rotation":[0.0, 0.0, 0.0], "Scale":[0.1, 0.1, 0.1] },
 		"Components":{
 			"CGraphicsComponent":{
-				"MeshFile":"../Assets/Models/SM_Ship_Massive_Transport_01.fbx",
-				"MaterialFile":"../Assets/Materials/ShipMaterial.json"
+				"m_strMeshFile":"../Assets/Models/SM_Ship_Massive_Transport_01.fbx",
+				"m_strMaterialFile":"../Assets/Materials/ShipMaterial.json"
 			},
 			"CMotion":{
 				"m_vVelocity":[1.0, 0.0, 0.0]
@@ -20,8 +20,8 @@
 		"Transform": { "Position":[20.0, 0.0, -50.0], "Rotation":[0.0, 0.0, 0.0], "Scale":[0.1, 0.1, 0.1] },
 		"Components":{
 			"CGraphicsComponent":{
-				"MeshFile":"../Assets/Models/SM_Ship_Massive_Transport_01.fbx",
-				"MaterialFile":"../Assets/Materials/PlaneMaterial.json"
+				"m_strMeshFile":"../Assets/Models/SM_Ship_Massive_Transport_01.fbx",
+				"m_strMaterialFile":"../Assets/Materials/PlaneMaterial.json"
 			}
 		}
 	},
@@ -31,8 +31,8 @@
 		"Transform": { "Position":[-20.0, 0.0, -50.0], "Rotation":[0.0, 0.0, 0.0], "Scale":[0.1, 0.1, 0.1] },
 		"Components":{
 			"CGraphicsComponent":{
-				"MeshFile":"../Assets/Models/SM_Ship_Massive_Transport_01.fbx",
-				"MaterialFile":"../Assets/Materials/ShipMaterial.json"
+				"m_strMeshFile":"../Assets/Models/SM_Ship_Massive_Transport_01.fbx",
+				"m_strMaterialFile":"../Assets/Materials/ShipMaterial.json"
 			}
 		}
 	},
@@ -42,8 +42,8 @@
 		"Transform": { "Position":[0.0, 0.0, 0.0], "Rotation":[-90.0, 0.0, 0.0], "Scale":[50.0, 1.0, 50.0] },
 		"Components":{
 			"CGraphicsComponent":{
-				"MeshFile":"../Assets/Models/BaseModels/Plane.ply",
-				"MaterialFile":"../Assets/Materials/MonitorMaterial.json"
+				"m_strMeshFile":"../Assets/Models/BaseModels/Plane.ply",
+				"m_strMaterialFile":"../Assets/Materials/MonitorMaterial.json"
 			},
 			"CFBOComponent":{
 				"m_nWidthSize":512,
@@ -63,8 +63,8 @@
 		"Transform": { "Position":[100.0, 0.0, 0.0], "Rotation":[-90.0, 0.0, 0.0], "Scale":[50.0, 1.0, 50.0] },
 		"Components":{
 			"CGraphicsComponent":{
-				"MeshFile":"../Assets/Models/BaseModels/Plane.ply",
-				"MaterialFile":"../Assets/Materials/MonitorMaterial.json"
+				"m_strMeshFile":"../Assets/Models/BaseModels/Plane.ply",
+				"m_strMaterialFile":"../Assets/Materials/MonitorMaterial.json"
 			},
 			"CFBOComponent":{
 				"m_nWidthSize":512,

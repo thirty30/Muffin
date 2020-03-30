@@ -2,6 +2,7 @@
 #include "CGraphicsWorld.h"
 #include "AssetsLoader/AssetObject/CMaterial.h"
 #include "AssetsLoader/AssetObject/CMesh.h"
+#include "AssetsLoader/CAssetsLoader.h"
 #include "Engine/Engine.h"
 #include "Utility/CGUIDMaker.h"
 #include "Light/CLightManager.h"
@@ -17,12 +18,12 @@ CGraphicsComponent::~CGraphicsComponent()
 {
 	if (this->m_pMesh != NULL)
 	{
-		//delete this->m_pMesh;
+		//delete todo
 		this->m_pMesh = NULL;
 	}
 	if (this->m_pMaterial != NULL)
 	{
-		//delete this->m_pMaterial;
+		//delete todo
 		this->m_pMaterial = NULL;
 	}
 	MUFFIN.GetGraphicsWorld()->RemoveGraphicsObject(this);
@@ -30,26 +31,32 @@ CGraphicsComponent::~CGraphicsComponent()
 
 void CGraphicsComponent::Init()
 {
-	//if (this->m_pDrawMesh == NULL && this->m_pMaterial == NULL)
-	//{
-	//	CMesh* pMesh = new CMesh();
-	//	CResourceLoader::LoadMesh(this->MeshFile.c_str(), pMesh);
-	//	CMaterial* pMat = new CMaterial();
-	//	pMat->Init(this->MaterialFile);
-	//	this->InitRenderer(pMesh, pMat);
-	//	delete pMesh;
-	//}
-	MUFFIN.GetGraphicsWorld()->AddGraphicsObject(this);
-}
-
-tbool CGraphicsComponent::InitRenderer(CMesh* a_pMesh, CMaterial* a_pMaterial)
-{
-	if (a_pMesh == NULL || a_pMaterial == NULL)
+	if (this->m_pMesh == NULL)
 	{
-		return false;
+		if (this->m_strMeshFile.empty() == true)
+		{
+			return;
+		}
+		this->m_pMesh = CAssetsLoader::Load<CMesh>(this->m_strMeshFile.c_str());
+		if (this->m_pMesh == NULL)
+		{
+			return;
+		}
 	}
-	this->m_pMesh = a_pMesh;
-	this->m_pMaterial = a_pMaterial;
+
+	if (this->m_pMaterial == NULL)
+	{
+		if (this->m_strMaterialFile.empty() == true)
+		{
+			return;
+		}
+		this->m_pMaterial = CAssetsLoader::Load<CMaterial>(this->m_strMaterialFile.c_str());
+		if (this->m_pMaterial == NULL)
+		{
+			return;
+		}
+	}
+	MUFFIN.GetGraphicsWorld()->AddGraphicsObject(this);
 	n32 nShaderProgramID = this->m_pMaterial->GetShaderID();
 
 	glBindVertexArray(this->m_pMesh->GetVAOID());
@@ -102,8 +109,6 @@ tbool CGraphicsComponent::InitRenderer(CMesh* a_pMesh, CMaterial* a_pMaterial)
 	glDisableVertexAttribArray(nBiNormal);
 	glDisableVertexAttribArray(nBoneID);
 	glDisableVertexAttribArray(nBoneWeight);
-
-	return true;
 }
 
 void CGraphicsComponent::SetRenderMode(ERenderMode a_eMode)

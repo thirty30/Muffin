@@ -27,7 +27,7 @@ public:
 	{}
 	virtual ~CAssetObject() {}
 
-	EAssetType GetAssetType() { return this->m_eAssetType; }
+	T_INLINE EAssetType GetAssetType() { return this->m_eAssetType; }
 	
 };
 

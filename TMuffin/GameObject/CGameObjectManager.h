@@ -7,6 +7,7 @@ class CGameObjectManager
 public:
 	TLinkedList<CGameObject*> m_listGameObject;
 	hash_map<u64, TLinkedNode<CGameObject*>*> m_mapID2Node;
+	vector<CGameObject*> m_vecUnsettled;
 
 public:
 	CGameObjectManager();

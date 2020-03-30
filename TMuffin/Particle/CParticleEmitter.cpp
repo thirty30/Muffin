@@ -43,7 +43,8 @@ void CParticleEmitter::Init()
 		CParticle* pParticle = new CParticle();
 		pParticle->SetEnable(false);
 		CGraphicsComponent* pGraphics = pParticle->AddComponent<CGraphicsComponent>();
-		pGraphics->InitRenderer(this->m_pMesh, this->m_pMaterial);
+		pGraphics->SetMesh(this->m_pMesh);
+		pGraphics->SetMaterial(this->m_pMaterial);
 
 		TLinkedNode<CParticle*>* pNode = new TLinkedNode<CParticle*>(pParticle);
 		this->m_objFreeList.PushBack(pNode);
@@ -64,7 +65,9 @@ void CParticleEmitter::EmitParticle()
 		{
 			CParticle* pParticle = new CParticle();
 			CGraphicsComponent* pGraphics = pParticle->AddComponent<CGraphicsComponent>();
-			pGraphics->InitRenderer(this->m_pMesh, this->m_pMaterial);
+			pGraphics->SetMesh(this->m_pMesh);
+			pGraphics->SetMaterial(this->m_pMaterial);
+
 			pNode = new TLinkedNode<CParticle*>(pParticle);
 		}
 		this->AwakeParticle(pNode->m_pValue);

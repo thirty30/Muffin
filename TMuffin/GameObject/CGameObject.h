@@ -33,6 +33,8 @@ public:
 	template<typename T>
 	T* AddComponent();
 	template<typename T>
+	T* AddComponent(T* a_pCom);
+	template<typename T>
 	T* GetComponent();
 };
 
@@ -44,6 +46,16 @@ T* CGameObject::AddComponent()
 	TLinkedNode<CComponentBase*>* pNode = new TLinkedNode<CComponentBase*>(pComponent);
 	this->m_pComponents.PushBack(pNode);
 	return static_cast<T*>(pComponent);
+}
+
+template<typename T>
+T* CGameObject::AddComponent(T* a_pCom)
+{
+	CComponentBase* pComponent = static_cast<CComponentBase*>(a_pCom);
+	pComponent->m_pGameObect = this;
+	TLinkedNode<CComponentBase*>* pNode = new TLinkedNode<CComponentBase*>(pComponent);
+	this->m_pComponents.PushBack(pNode);
+	return a_pCom;
 }
 
 template<typename T>

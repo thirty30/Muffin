@@ -15,10 +15,6 @@ CFBOComponent::CFBOComponent()
 
 CFBOComponent::~CFBOComponent()
 {
-	if (this->m_pCameraObject != NULL)
-	{
-		delete m_pCameraObject;
-	}
 	MUFFIN.GetGraphicsWorld()->RemoveFBOObject(this);
 }
 

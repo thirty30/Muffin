@@ -1,11 +1,18 @@
 #include "Engine.h"
 #include "Window/CWindow.h"
 #include "Physics/CPhysicsReactor.h"
-#include "Particle/CParticleEmitter.h"
 #include "GameObject/CGameObjectManager.h"
 #include "ExportFunction.h"
-#include "Animation/CAnimation.h"
 #include "AssetsLoader/CAssetsPool.h"
+
+//components
+#include "Particle/CParticleEmitter.h"
+#include "Light/CLight.h"
+#include "Graphics/FBO/CFBOComponent.h"
+#include "Graphics/CGraphicsComponent.h"
+#include "Graphics/Stencil/CStencilComponent.h"
+#include "Camera/CCamera.h"
+#include "Animation/CAnimation.h"
 
 CMuffin MUFFIN;
 
@@ -17,11 +24,6 @@ tbool MuffinInit(n32 a_nWinWidth, n32 a_nWinHigh, const tcchar* a_strWinName)
 	}
 	MUFFIN.GetAssetsPoolMgr()->CreateWorker(3);
 	return true;
-}
-
-void MuffinClear()
-{
-	MUFFIN.GetWindow()->Clear();
 }
 
 void MuffinMainLoop()
@@ -60,6 +62,11 @@ void MuffinMainLoop()
 	}
 }
 
+void MuffinClear()
+{
+	MUFFIN.GetWindow()->Clear();
+}
+
 void GLFWErrorCallback(n32 a_nErrorCode, const tcchar* a_strDesc)
 {
 	printf("glfw error! error code: %d, error: %s", a_nErrorCode, a_strDesc);
@@ -94,6 +101,22 @@ void ScrollCallBack(GLFWwindow* a_pWindow, f64 a_fX, f64 a_fY)
 	}
 }
 
+CComponentBase* CreateComponent(CGameObject* a_pObj, tstring a_strClassName)
+{
+#define T_REGISTER_COM(v) if (a_strClassName == #v) { return a_pObj->AddComponent<v>(); }
+
+	T_REGISTER_COM(CGraphicsComponent);
+	T_REGISTER_COM(CFBOComponent);
+	T_REGISTER_COM(CStencilComponent);
+	T_REGISTER_COM(CParticleEmitter);
+	T_REGISTER_COM(CDirectionLight);
+	T_REGISTER_COM(CPointLight);
+	T_REGISTER_COM(CSpotLight);
+	T_REGISTER_COM(CCamera);
+
+#undef T_REGISTER_COM
+	return NULL;
+}
 
 
 

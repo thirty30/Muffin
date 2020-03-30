@@ -10,7 +10,6 @@ class T_DLL_EXPORT CComponentBase
 {
 private:
 	CGameObject* m_pGameObect;
-	tbool m_bIsInit;
 	tbool m_bIsEnable;
 	friend class CGameObject;
 
@@ -23,7 +22,6 @@ public:
 	CComponentBase()
 	{
 		this->m_pGameObect = NULL;
-		this->m_bIsInit = false;
 		this->m_bIsEnable = true;
 	}
 	virtual ~CComponentBase()

@@ -11,21 +11,8 @@ protected:
 	hash_map<u64, CGameObject*> m_mapID2GameObj;
 
 public:
-	CSceneBase(n32 a_nSceneID) : 
-		m_nSceneID(a_nSceneID),
-		m_GUIDMaker(1)
-	{
-		this->m_strSceneName = "";
-		this->m_mapID2GameObj.clear();
-	}
-	virtual ~CSceneBase() 
-	{
-		for (auto iter : this->m_mapID2GameObj)
-		{
-			delete iter.second;
-		}
-		this->m_mapID2GameObj.clear();
-	}
+	CSceneBase(n32 a_nSceneID);
+	virtual ~CSceneBase();
 
 public:
 	virtual tbool Init() T_PURE;

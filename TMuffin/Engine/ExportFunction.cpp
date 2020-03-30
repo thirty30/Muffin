@@ -28,6 +28,8 @@ TMUFFIN_REGISTER_CALLBACK(TMuffin_RegisterScrollCallback, MuffinScrollCallBack, 
 TMUFFIN_REGISTER_CALLBACK(TMuffin_RegisterPhysicsCallBack, MuffinPhysicsCallBack, pExternalGameLogicCallBack)
 TMUFFIN_REGISTER_CALLBACK(TMuffin_RegisterGameLogicCallBack, MuffinGameLogicCallBack, pExternalPhysicsCallBack)
 
+#undef TMUFFIN_REGISTER_CALLBACK
+
 f64 TMuffin_GetNowFrameTime()
 {
 	return MUFFIN.GetNowFrameTime();
@@ -51,5 +53,11 @@ void TMuffin_SetSkyBox(const tcchar* a_strMeshFile,
 		a_strZTexture, a_strNegZTexture
 	);
 	MUFFIN.GetGraphicsWorld()->SetSkyBox(pSkyBox);
+}
+
+MuffinCreateComponent pExternalCreateComponent = NULL;
+void TMuffin_RegisterComponent(MuffinCreateComponent a_fuc)
+{
+	pExternalCreateComponent = a_fuc;
 }
 

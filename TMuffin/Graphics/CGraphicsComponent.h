@@ -18,19 +18,23 @@ protected:
 	virtual void Init() override;
 
 public:
-	tstring MeshFile;
-	tstring MaterialFile;
+	tstring m_strMeshFile;
+	tstring m_strMaterialFile;
 	T_SCS
-		T_SCP(MeshFile, tstring)
-		T_SCP(MaterialFile, tstring)
+		T_SCP(m_strMeshFile, tstring)
+		T_SCP(m_strMaterialFile, tstring)
 	T_SCE
 
 public:
 	CGraphicsComponent();
 	~CGraphicsComponent();
 
-	tbool InitRenderer(CMesh* a_pMesh, CMaterial* a_pMaterial);
 	T_INLINE void SetRenderMode(ERenderMode a_eMode);
+
+	T_INLINE void SetMesh(CMesh* a_pMesh) { this->m_pMesh = a_pMesh; }
+	T_INLINE CMesh* GetMesh() { return this->m_pMesh; }
+
+	T_INLINE void SetMaterial(CMaterial* a_pMaterial) { this->m_pMaterial = a_pMaterial; }
 	T_INLINE CMaterial* GetMaterial() { return this->m_pMaterial; }
 };
 
