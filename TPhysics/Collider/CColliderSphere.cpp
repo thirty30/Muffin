@@ -1,6 +1,6 @@
 #include "CColliderSphere.h"
 
-CColliderSphere::CColliderSphere() : CColliderBase(E_COLLIDER_TYPE_SPHERE)
+CColliderSphere::CColliderSphere() : CColliderBase(E_SPHERE_COLLIDER)
 {
 	this->m_fRadius = 1.0f;
 }
@@ -8,16 +8,6 @@ CColliderSphere::CColliderSphere() : CColliderBase(E_COLLIDER_TYPE_SPHERE)
 CColliderSphere::~CColliderSphere()
 {
 
-}
-
-T_INLINE void CColliderSphere::SetRadius(f32 a_fRadius)
-{
-	this->m_fRadius = a_fRadius;
-}
-
-T_INLINE f32 CColliderSphere::GetRadius()
-{
-	return this->m_fRadius;
 }
 
 void CColliderSphere::SetScale(glm::vec3 a_vScale)

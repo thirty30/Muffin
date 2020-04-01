@@ -36,36 +36,6 @@
     <ClCompile Include="Engine\Muffin.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Physics\PhysicsHelper.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics\CPhysicsObject.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics\CPhysicsReactor.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics\CRigidBody.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics\CColliderBase.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics\CColliderBox.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics\CColliderCapsule.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics\CColliderMesh.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics\CColliderPlane.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics\CColliderSphere.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
     <ClCompile Include="LineTween\CLineTweenMove.cpp">
       <Filter>LineTween</Filter>
     </ClCompile>
@@ -109,6 +79,7 @@
       <Filter>ShaderHelper</Filter>
     </ClCompile>
     <ClCompile Include="GameObject\CGameObjectManager.cpp" />
+    <ClCompile Include="Physics\CPhysicsComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\CCamera.h">
@@ -148,39 +119,6 @@
     </ClInclude>
     <ClInclude Include="Engine\Muffin.h">
       <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics\PhysicsHelper.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics\CPhysicsObject.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics\CPhysicsReactor.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics\CRigidBody.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics\CColliderPlane.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics\CColliderSphere.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics\CColliderBox.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics\CColliderCapsule.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics\CColliderMesh.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics\CColliderBase.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics\PhysicsDefine.h">
-      <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="LineTween\CLineTween.h">
       <Filter>LineTween</Filter>
@@ -238,6 +176,7 @@
     <ClInclude Include="AssetsLoader\CAssetsLoader.h" />
     <ClInclude Include="AssetsLoader\AssetsInclude.h" />
     <ClInclude Include="GameObject\CGameObjectManager.h" />
+    <ClInclude Include="Physics\CPhysicsComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Camera">

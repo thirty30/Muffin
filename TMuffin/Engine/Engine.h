@@ -20,3 +20,4 @@ extern void CursorCallBack(GLFWwindow* a_pWindow, f64 a_fX, f64 a_fY);
 extern void ScrollCallBack(GLFWwindow* a_pWindow, f64 a_fX, f64 a_fY);
 
 T_DLL_EXPORT extern CComponentBase* CreateComponent(CGameObject* a_pObj, tstring a_strClassName);
+

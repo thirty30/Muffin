@@ -5,8 +5,8 @@
 #include "Graphics/CGraphicsWorld.h"
 #include "Camera/CCameraManager.h"
 #include "Light/CLightManager.h"
-#include "Physics/CPhysicsReactor.h"
 #include "AssetsLoader/CAssetsPool.h"
+#include "../../TPhysics/PhysicsHelper.h"
 
 CMuffin::CMuffin()
 {
@@ -20,8 +20,8 @@ CMuffin::CMuffin()
 	this->m_pGraphicsWorld = new CGraphicsWorld();
 	this->m_pCameraManager = new CCameraManager();
 	this->m_pLightManager = new CLightManager();
-	this->m_pPhysicsReactor = new CPhysicsReactor();
 	this->m_pAssetsPoolManager = new CAssetsPool();
+	this->m_pPhysicsWorld = new CPhysicsWorld();
 
 }
 
@@ -33,8 +33,8 @@ CMuffin::~CMuffin()
 	delete this->m_pGraphicsWorld;
 	delete this->m_pCameraManager;
 	delete this->m_pLightManager;
-	delete this->m_pPhysicsReactor;
 	delete this->m_pAssetsPoolManager;
+	delete this->m_pPhysicsWorld;
 
 	this->m_pGUIDMaker = NULL;
 	this->m_pWindow = NULL;
@@ -42,8 +42,8 @@ CMuffin::~CMuffin()
 	this->m_pGraphicsWorld = NULL;
 	this->m_pCameraManager = NULL;
 	this->m_pLightManager = NULL;
-	this->m_pPhysicsReactor = NULL;
 	this->m_pAssetsPoolManager = NULL;
+	this->m_pPhysicsWorld = NULL;
 }
 
 void CMuffin::Tick()

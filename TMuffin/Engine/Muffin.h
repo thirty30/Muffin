@@ -1,5 +1,6 @@
 #pragma once
 #include "TMuffinSysInclude.h"
+#include "../TPhysics/TPhysics.h"
 
 class CGUIDMaker;
 class CGUIDMaker;
@@ -24,8 +25,8 @@ private:
 	CGraphicsWorld* m_pGraphicsWorld;
 	CCameraManager* m_pCameraManager;
 	CLightManager* m_pLightManager;
-	CPhysicsReactor* m_pPhysicsReactor;
 	CAssetsPool* m_pAssetsPoolManager;
+	CPhysicsWorld* m_pPhysicsWorld;
 
 
 public:
@@ -43,8 +44,8 @@ public:
 	T_INLINE CGraphicsWorld* GetGraphicsWorld() { return this->m_pGraphicsWorld; }
 	T_INLINE CCameraManager* GetCameraMgr() { return this->m_pCameraManager; }
 	T_INLINE CLightManager* GetLightMgr() { return this->m_pLightManager; }
-	T_INLINE CPhysicsReactor* GetPhysicsReactor() { return this->m_pPhysicsReactor; }
 	T_INLINE CAssetsPool* GetAssetsPoolMgr() { return this->m_pAssetsPoolManager; }
+	T_INLINE CPhysicsWorld* GetPhysicsWorld() { return this->m_pPhysicsWorld; }
 
 
 public:

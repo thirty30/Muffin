@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../TCore/TCore.h"
+#include "../TPhysics/TPhysics.h"
 #include "../TMuffin/TMuffin.h"
 #include <lua/lua.hpp>
 

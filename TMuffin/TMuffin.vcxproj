@@ -47,21 +47,12 @@
     <ClCompile Include="AssetsLoader\AssetObject\CMesh.cpp" />
     <ClCompile Include="Particle\CParticle.cpp" />
     <ClCompile Include="Particle\CParticleEmitter.cpp" />
-    <ClCompile Include="Physics\CColliderBase.cpp" />
-    <ClCompile Include="Physics\CColliderBox.cpp" />
-    <ClCompile Include="Physics\CColliderCapsule.cpp" />
-    <ClCompile Include="Physics\CColliderMesh.cpp" />
-    <ClCompile Include="Physics\CColliderPlane.cpp" />
-    <ClCompile Include="Physics\CColliderSphere.cpp" />
-    <ClCompile Include="Physics\CPhysicsReactor.cpp" />
-    <ClCompile Include="Physics\CPhysicsObject.cpp" />
-    <ClCompile Include="Physics\CRigidBody.cpp" />
-    <ClCompile Include="Physics\PhysicsHelper.cpp" />
     <ClCompile Include="AssetsLoader\AssetObject\CShader.cpp" />
     <ClCompile Include="Graphics\SkyBox\CSkyBox.cpp" />
     <ClCompile Include="AssetsLoader\AssetObject\CTexture.cpp" />
     <ClCompile Include="AssetsLoader\CAssetsPool.cpp" />
     <ClCompile Include="AssetsLoader\CAssetsWorker.cpp" />
+    <ClCompile Include="Physics\CPhysicsComponent.cpp" />
     <ClCompile Include="Transform\CTransform.cpp" />
     <ClCompile Include="Window\CWindow.cpp" />
   </ItemGroup>
@@ -96,23 +87,13 @@
     <ClInclude Include="AssetsLoader\AssetObject\CMesh.h" />
     <ClInclude Include="Particle\CParticle.h" />
     <ClInclude Include="Particle\CParticleEmitter.h" />
-    <ClInclude Include="Physics\CColliderBase.h" />
-    <ClInclude Include="Physics\CColliderBox.h" />
-    <ClInclude Include="Physics\CColliderCapsule.h" />
-    <ClInclude Include="Physics\CColliderMesh.h" />
-    <ClInclude Include="Physics\CColliderSphere.h" />
-    <ClInclude Include="Physics\CPhysicsReactor.h" />
-    <ClInclude Include="Physics\CPhysicsObject.h" />
-    <ClInclude Include="Physics\CColliderPlane.h" />
-    <ClInclude Include="Physics\CRigidBody.h" />
-    <ClInclude Include="Physics\PhysicsDefine.h" />
-    <ClInclude Include="Physics\PhysicsHelper.h" />
     <ClInclude Include="AssetsLoader\AssetObject\CShader.h" />
     <ClInclude Include="Graphics\SkyBox\CSkyBox.h" />
     <ClInclude Include="AssetsLoader\AssetObject\CTexture.h" />
     <ClInclude Include="AssetsLoader\CAssetsPool.h" />
     <ClInclude Include="AssetsLoader\CAssetsWorker.h" />
     <ClInclude Include="AssetsLoader\AssetsDefine.h" />
+    <ClInclude Include="Physics\CPhysicsComponent.h" />
     <ClInclude Include="TMuffin.h" />
     <ClInclude Include="Transform\CTransform.h" />
     <ClInclude Include="TMuffinSysInclude.h" />
@@ -204,7 +185,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;FreeImage.lib;assimp-vc142-mt.lib;TCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;FreeImage.lib;assimp-vc142-mt.lib;TCore.lib;TPhysics.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy /y "$(SolutionDir)Dependence\dll\x64\*.dll" "$(SolutionDir)bin_debug_x64"</Command>
@@ -264,7 +245,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;FreeImage.lib;assimp-vc142-mt.lib;TCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;FreeImage.lib;assimp-vc142-mt.lib;TCore.lib;TPhysics.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy /y $(SolutionDir)Dependence\dll\x64\*.dll $(SolutionDir)bin_release_x64</Command>

@@ -19,21 +19,10 @@
 #include "./Graphics/SkyBox/CSkyBox.h"
 #include "./Graphics/Stencil/CStencilComponent.h"
 
+#include "./Physics/CPhysicsComponent.h"
+
 #include "./Animation/CAnimation.h"
 #include "./Animation/CAnimator.h"
-
-
-#include "./Physics/CRigidBody.h"
-#include "./Physics/PhysicsDefine.h"
-#include "./Physics/CColliderBase.h"
-#include "./Physics/CColliderPlane.h"
-#include "./Physics/CColliderSphere.h"
-#include "./Physics/CColliderBox.h"
-#include "./Physics/CColliderCapsule.h"
-#include "./Physics/CColliderMesh.h"
-#include "./Physics/PhysicsHelper.h"
-#include "./Physics/CPhysicsObject.h"
-#include "./Physics/CPhysicsReactor.h"
 
 #include "./Particle/CParticle.h"
 #include "./Particle/CParticleEmitter.h"

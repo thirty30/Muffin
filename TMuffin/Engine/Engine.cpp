@@ -1,6 +1,5 @@
 #include "Engine.h"
 #include "Window/CWindow.h"
-#include "Physics/CPhysicsReactor.h"
 #include "GameObject/CGameObjectManager.h"
 #include "ExportFunction.h"
 #include "AssetsLoader/CAssetsPool.h"
@@ -13,6 +12,7 @@
 #include "Graphics/Stencil/CStencilComponent.h"
 #include "Camera/CCamera.h"
 #include "Animation/CAnimation.h"
+#include "Physics/CPhysicsComponent.h"
 
 CMuffin MUFFIN;
 
@@ -48,7 +48,7 @@ void MuffinMainLoop()
 
 		// Physics loop
 		{
-			MUFFIN.GetPhysicsReactor()->PhysicsLoop();
+			MUFFIN.GetPhysicsWorld()->PhysicsLoop(MUFFIN.GetDeltaFrameTime());
 			if (pExternalPhysicsCallBack != NULL) 
 			{
 				pExternalPhysicsCallBack(); 
@@ -106,6 +106,7 @@ CComponentBase* CreateComponent(CGameObject* a_pObj, tstring a_strClassName)
 #define T_REGISTER_COM(v) if (a_strClassName == #v) { return a_pObj->AddComponent<v>(); }
 
 	T_REGISTER_COM(CGraphicsComponent);
+	T_REGISTER_COM(CPhysicsComponent);
 	T_REGISTER_COM(CFBOComponent);
 	T_REGISTER_COM(CStencilComponent);
 	T_REGISTER_COM(CParticleEmitter);
