@@ -1,5 +1,8 @@
 #include "CParticleEmitter.h"
 #include "Engine/Engine.h"
+#include "AssetsLoader/AssetObject/CMaterial.h"
+#include "AssetsLoader/AssetObject/CMesh.h"
+#include "AssetsLoader/CAssetsLoader.h"
 
 CParticleEmitter::CParticleEmitter()
 {
@@ -35,6 +38,32 @@ CParticleEmitter::~CParticleEmitter()
 
 void CParticleEmitter::Init()
 {
+	if (this->m_pMesh == NULL)
+	{
+		if (this->m_strMeshFile.empty() == true)
+		{
+			return;
+		}
+		this->m_pMesh = CAssetsLoader::Load<CMesh>(this->m_strMeshFile.c_str());
+		if (this->m_pMesh == NULL)
+		{
+			return;
+		}
+	}
+
+	if (this->m_pMaterial == NULL)
+	{
+		if (this->m_strMaterialFile.empty() == true)
+		{
+			return;
+		}
+		this->m_pMaterial = CAssetsLoader::Load<CMaterial>(this->m_strMaterialFile.c_str());
+		if (this->m_pMaterial == NULL)
+		{
+			return;
+		}
+	}
+
 	f32 fPeriod = this->m_fEmitPeriod <= 0 ? 1.0f : this->m_fEmitPeriod;
 	n32 nRatio = (n32)(this->m_fMaxLifeTime / fPeriod) + 1;
 	n32 nParticleNum = nRatio * this->m_nMaxEmitCount;

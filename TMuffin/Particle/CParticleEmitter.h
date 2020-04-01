@@ -39,8 +39,31 @@ public:
 	n32 m_nMaxEmitCount;
 	f32 m_fEmitPeriod;
 	tbool m_bIsPeriod;
+	tstring m_strMeshFile;
+	tstring m_strMaterialFile;
 	CMaterial* m_pMaterial;
 	CMesh* m_pMesh;
+
+	T_SCS
+		T_SCP(m_vMinScale, glm::vec3)
+		T_SCP(m_vMaxScale, glm::vec3)
+		T_SCP(m_vMinAcceleration, glm::vec3)
+		T_SCP(m_vMaxAcceleration, glm::vec3)
+		T_SCP(m_vMinVelocity, glm::vec3)
+		T_SCP(m_vMaxVelocity, glm::vec3)
+		T_SCP(m_vMinDeltaPosition, glm::vec3)
+		T_SCP(m_vMaxDeltaPosition, glm::vec3)
+		T_SCP(m_vMinColor, glm::vec4)
+		T_SCP(m_vMaxColor, glm::vec4)
+		T_SCP(m_fMinLifeTime, f32)
+		T_SCP(m_fMaxLifeTime, f32)
+		T_SCP(m_nMinEmitCount, n32)
+		T_SCP(m_nMaxEmitCount, n32)
+		T_SCP(m_fEmitPeriod, f32)
+		T_SCP(m_bIsPeriod, tbool)
+		T_SCP(m_strMeshFile, tstring)
+		T_SCP(m_strMaterialFile, tstring)
+	T_SCE
 
 public:
 	CParticleEmitter();
