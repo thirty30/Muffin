@@ -31,19 +31,19 @@ CPhysicsObject::~CPhysicsObject()
 
 void CPhysicsObject::RefreshColliderPostion()
 {
-	if (this->m_pCollider == NULL)
-	{
-		return;
-	}
-	this->m_pCollider->m_vCenter = this->m_vNowPosition;
-	if (this->m_pCollider->GetType() == E_CLOTH_COLLIDER)
-	{
-		CSoftBody* pSB = (CSoftBody*)this->m_pBody;
-		for (n32 i = 0; i < pSB->m_vecNodes.size(); i++)
-		{
-			((CColliderCloth*)this->m_pCollider)->SetPostion(i, pSB->m_vecNodes[i].m_vPosition);
-		}
-	}
+	//if (this->m_pCollider == NULL)
+	//{
+	//	return;
+	//}
+	//this->m_pCollider->m_vCenter = this->m_vNowPosition;
+	//if (this->m_pCollider->GetType() == E_CLOTH_COLLIDER)
+	//{
+	//	CSoftBody* pSB = (CSoftBody*)this->m_pBody;
+	//	for (n32 i = 0; i < pSB->m_vecNodes.size(); i++)
+	//	{
+	//		((CColliderCloth*)this->m_pCollider)->SetPostion(i, pSB->m_vecNodes[i].m_vPosition);
+	//	}
+	//}
 }
 
 EBodyType CPhysicsObject::GetBodyType()

@@ -10,9 +10,8 @@ namespace TPhysics
 	{
 	private:
 		u64 m_nGUID;
-		glm::vec3 m_vPrePosition;
-		glm::vec3 m_vNowPosition;
 		CBodyBase* m_pBody;
+		glm::vec3 m_vPrePosition;
 		CColliderBase* m_pCollider;
 
 	private:
@@ -22,7 +21,11 @@ namespace TPhysics
 		friend class CPhysicsWorld;
 
 	public:
+		glm::vec3 m_vNowPosition;
+
+	public:
 		void* m_pCustomData;
+		tstring m_strTag;
 
 		CPhysicsObject();
 		~CPhysicsObject();
