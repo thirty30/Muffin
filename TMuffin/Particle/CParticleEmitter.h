@@ -76,6 +76,9 @@ public:
 	void SetCameraPosition(glm::vec3 a_vPosition);
 
 	void Reset();
+
+	virtual void Disable() override;
+	virtual void Enable() override;
 };
 
 

@@ -12,6 +12,7 @@ private:
 	tbool m_bEnable;
 	CTransform m_pTransform;
 	TLinkedList<CComponentBase*> m_pComponents;
+	tbool m_bIsInited;
 
 	friend class CGameObjectManager;
 
@@ -26,9 +27,10 @@ public:
 
 	T_INLINE u64 GetGameObjectID() { return this->m_nMUFFINGUID; }
 	T_INLINE tbool IsEnable() { return this->m_bEnable; }
-	T_INLINE void SetEnable(tbool a_bEnable) { this->m_bEnable = a_bEnable; }
+	T_INLINE void SetEnable(tbool a_bEnable);
 	T_INLINE CTransform& GetTransform() { return this->m_pTransform; }
 	T_INLINE void Destory();
+	void CallBackCollision(const SCollisionInfo& a_rCollision);
 
 	template<typename T>
 	T* AddComponent();

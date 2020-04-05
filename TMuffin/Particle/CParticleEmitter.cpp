@@ -173,6 +173,10 @@ void CParticleEmitter::Update()
 		return;
 	}
 	this->m_fLastEmitTime = MUFFIN.GetNowFrameTime();
+	if (this->GetGameObject()->IsEnable() == false)
+	{
+		return;
+	}
 	this->EmitParticle();
 }
 
@@ -190,5 +194,25 @@ void CParticleEmitter::Reset()
 {
 	this->m_fLastEmitTime = 0;
 	this->m_nEmittedCount = 0;
+}
+
+void CParticleEmitter::Disable()
+{
+	//TLinkedNode<CParticle*>* pNode = this->m_objEmittedList.GetHeadNode();
+	//while (pNode != NULL)
+	//{
+	//	pNode->m_pValue->SetEnable(false);
+	//	pNode = pNode->m_pNext;
+	//}
+}
+
+void CParticleEmitter::Enable()
+{
+	//TLinkedNode<CParticle*>* pNode = this->m_objEmittedList.GetHeadNode();
+	//while (pNode != NULL)
+	//{
+	//	pNode->m_pValue->SetEnable(true);
+	//	pNode = pNode->m_pNext;
+	//}
 }
 

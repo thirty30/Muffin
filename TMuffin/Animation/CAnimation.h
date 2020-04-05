@@ -17,6 +17,7 @@ private:
 public:
 	tbool m_bIsLoop;
 	tstring m_strName;
+	f32 m_fFrameTime;
 
 private:
 	void ReadNodeHeirarchy(f32 a_fAnimationTime, const aiNode* a_pNode, const glm::mat4& a_ParentTransform);

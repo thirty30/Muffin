@@ -77,7 +77,10 @@ void CGameObjectManager::Update()
 	TLinkedNode<CGameObject*>* pHead = this->m_listGameObject.GetHeadNode();
 	while (pHead != NULL)
 	{
-		pHead->m_pValue->Update();
+		if (pHead->m_pValue->m_bIsInited == true)
+		{
+			pHead->m_pValue->Update();
+		}
 		pHead = pHead->m_pNext;
 	}
 }

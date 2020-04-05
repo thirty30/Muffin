@@ -1,5 +1,6 @@
 #pragma once
 #include "TMuffinSysInclude.h"
+#include "../TPhysics/TPhysics.h"
 
 #define T_SCS void SetProperty(tstring a_strName, ...) { va_list parms; va_start(parms, a_strName);
 #define T_SCE va_end(parms); }
@@ -17,6 +18,9 @@ protected:
 	virtual void Init() {}
 	virtual void Update() {}
 	virtual void Clear() {}
+	virtual void OnCollider(const SCollisionInfo& a_rCollision) {}
+	virtual void Disable() {}
+	virtual void Enable() {}
 
 public:
 	CComponentBase()

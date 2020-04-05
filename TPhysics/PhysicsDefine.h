@@ -50,6 +50,7 @@ namespace TPhysics
 
 	struct SCollisionInfo
 	{
+		CPhysicsObject* m_pSrc;
 		CPhysicsObject* m_pTarget;
 		glm::vec3 m_vHitNormal;
 		glm::vec3 m_vHitPoint;
@@ -66,6 +67,9 @@ namespace TPhysics
 		f32 m_fNodeMass;
 		f32 m_fSpringConstant;
 	};
+
+	typedef void (*TPhyOnCollision)(const SCollisionInfo& a_rCollision);
+
 }
 
 using namespace TPhysics;

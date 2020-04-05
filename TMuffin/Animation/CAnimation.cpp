@@ -13,6 +13,7 @@ CAnimation::CAnimation()
 	this->m_bIsLoop = true;
 	this->m_bIsEnd = false;
 	this->m_pAnimator = NULL;
+	this->m_fFrameTime = 0.02f;
 }
 
 CAnimation::~CAnimation()
@@ -93,7 +94,7 @@ void CAnimation::GetBoneTransform(vector<glm::mat4>& a_vecTransform)
 		a_vecTransform[pDetail->boneID] = pDetail->FinalTransformation;
 	}
 
-	this->m_fNowPlayTime += 0.01f;
+	this->m_fNowPlayTime += this->m_fFrameTime;
 }
 
 void CAnimation::ReadNodeHeirarchy(f32 a_fAnimationTime, const aiNode* a_pNode, const glm::mat4& a_ParentTransform)

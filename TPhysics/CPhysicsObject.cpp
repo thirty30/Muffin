@@ -14,6 +14,8 @@ CPhysicsObject::CPhysicsObject()
 	this->m_pBody = NULL;
 	this->m_pCollider = NULL;
 	this->m_pCustomData = NULL;
+	this->m_bIsEnable = true;
+	this->m_funcCallBack = NULL;
 }
 
 CPhysicsObject::~CPhysicsObject()

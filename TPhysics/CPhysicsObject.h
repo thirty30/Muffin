@@ -13,9 +13,16 @@ namespace TPhysics
 		CBodyBase* m_pBody;
 		glm::vec3 m_vPrePosition;
 		CColliderBase* m_pCollider;
+		TPhyOnCollision m_funcCallBack;
 
 	private:
-		virtual void OnCollision(SCollisionInfo& a_rCollision) {}
+		virtual void OnCollision(SCollisionInfo& a_rCollision) 
+		{
+			if (this->m_funcCallBack != NULL)
+			{
+				this->m_funcCallBack(a_rCollision);
+			}
+		}
 		void RefreshColliderPostion();
 
 		friend class CPhysicsWorld;
@@ -24,6 +31,7 @@ namespace TPhysics
 		glm::vec3 m_vNowPosition;
 
 	public:
+		tbool m_bIsEnable;
 		void* m_pCustomData;
 		tstring m_strTag;
 
@@ -36,7 +44,7 @@ namespace TPhysics
 		EColliderType GetColliderType();
 		glm::vec3 GetPosition() { return this->m_vNowPosition; }
 		void SetPosition(glm::vec3 a_vPosition) { this->m_vNowPosition = a_vPosition; }
-
+		void SetOnCollisionCallBack(TPhyOnCollision a_func) { this->m_funcCallBack = a_func; }
 
 		template<typename T>
 		T* CreateCollider();

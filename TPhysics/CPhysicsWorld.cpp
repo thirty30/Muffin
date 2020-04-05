@@ -54,7 +54,7 @@ void CPhysicsWorld::RefreshColliderPosition()
 	for (; iter != this->m_mapID2PhysicsObj.end(); iter++)
 	{
 		CPhysicsObject* pObj = iter->second;
-		if (pObj != NULL)
+		if (pObj != NULL && pObj->m_bIsEnable == true)
 		{
 			pObj->RefreshColliderPostion();
 		}
@@ -84,7 +84,7 @@ void CPhysicsWorld::CalcRigidBodyMotion(f32 a_fDeltaTime)
 	for (; iter != this->m_mapID2PhysicsObj.end(); iter++)
 	{
 		CPhysicsObject* pPhysicsObj = iter->second;
-		if (pPhysicsObj == NULL)
+		if (pPhysicsObj == NULL || pPhysicsObj->m_bIsEnable == false)
 		{
 			continue;
 		}
@@ -123,18 +123,17 @@ void CPhysicsWorld::CalcCollision()
 	for (; iterSrc != this->m_mapID2PhysicsObj.end(); iterSrc++)
 	{
 		CPhysicsObject* pSrcPhysicsObj = iterSrc->second;
-		if (pSrcPhysicsObj == NULL)
+		if (pSrcPhysicsObj == NULL || pSrcPhysicsObj->m_bIsEnable == false)
 		{
 			continue;
 		}
 
-		//hash_map<u64, CPhysicsObject*>::iterator iterTar = this->m_mapID2PhysicsObj.begin();
 		hash_map<u64, CPhysicsObject*>::iterator iterTar = iterSrc;
 		iterTar++;
 		for (; iterTar != this->m_mapID2PhysicsObj.end(); iterTar++)
 		{
 			CPhysicsObject* pTarPhysicsObj = iterTar->second;
-			if (pTarPhysicsObj == NULL)
+			if (pTarPhysicsObj == NULL || pTarPhysicsObj->m_bIsEnable == false)
 			{
 				continue;
 			}
@@ -164,6 +163,7 @@ void CPhysicsWorld::CollisionCallBack()
 	{
 		SCollisionCallBackInfo* pInfo = this->m_vecCallBackArray[i];
 		SCollisionInfo rParm1;
+		rParm1.m_pSrc = pInfo->m_pSrc;
 		rParm1.m_pTarget = pInfo->m_pTar;
 		rParm1.m_vHitPoint = pInfo->m_vHitPoint;
 		rParm1.m_vHitNormal = pInfo->m_vHitNormal;
@@ -171,6 +171,7 @@ void CPhysicsWorld::CollisionCallBack()
 		pInfo->m_pSrc->OnCollision(rParm1);
 
 		SCollisionInfo rParm2;
+		rParm2.m_pSrc = pInfo->m_pTar;
 		rParm2.m_pTarget = pInfo->m_pSrc;
 		rParm2.m_vHitPoint = pInfo->m_vHitPoint;
 		rParm2.m_vHitNormal = pInfo->m_vHitNormal;
