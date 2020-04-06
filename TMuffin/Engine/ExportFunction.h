@@ -25,6 +25,7 @@ T_DLL_EXPORT void TMuffin_RegisterGameLogicCallBack(MuffinGameLogicCallBack a_fu
 
 //------------Register call back function end------------//
 
+T_DLL_EXPORT f64 TMuffin_GetAppTime();
 T_DLL_EXPORT f64 TMuffin_GetNowFrameTime();
 T_DLL_EXPORT f32 TMuffin_GetDeltaFrameTime();
 T_DLL_EXPORT void TMuffin_SetSkyBox(const tcchar* a_strMeshFile,

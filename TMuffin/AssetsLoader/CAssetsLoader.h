@@ -10,15 +10,24 @@ class T_DLL_EXPORT CAssetsLoader
 {
 public:
 	template <typename T>
-	static T* Load(const tcchar* a_strFilePath);
+	static T* Load(const tcchar* a_strFilePath, tbool a_bLoadNew = false);
 
 	template <typename T>
 	static void LoadASync(const tcchar* a_strFilePath, void* a_pCustomData, LoadAssetsCallBack a_funcCallback);
 };
 
 template <typename T>
-T* CAssetsLoader::Load(const tcchar* a_strFilePath)
+T* CAssetsLoader::Load(const tcchar* a_strFilePath, tbool a_bLoadNew)
 {
+	//if (a_bLoadNew == false)
+	//{
+	//	CAssetObject* pAsset = FindExistedAsset(a_strFilePath);
+	//	if (pAsset != NULL)
+	//	{
+	//		return static_cast<T*>(pAsset);
+	//	}
+	//}
+
 	CAssetObject* pObj = new T();
 	if (pObj->LoadToMemory(a_strFilePath) == false)
 	{
@@ -30,7 +39,7 @@ T* CAssetsLoader::Load(const tcchar* a_strFilePath)
 		delete pObj;
 		return NULL;
 	}
-
+	AddExistedAsset(a_strFilePath, pObj);
 	return static_cast<T*>(pObj);
 }
 

@@ -8,9 +8,20 @@ SLoadAssetsTask* CreateLoadAssetsTask()
 	return MUFFIN.GetAssetsPoolMgr()->CreateTask();
 }
 
+extern T_DLL_EXPORT CAssetObject* FindExistedAsset(tstring a_strFileName)
+{
+	return MUFFIN.GetAssetsPoolMgr()->FindAsset(a_strFileName);
+}
+
+extern T_DLL_EXPORT void AddExistedAsset(tstring a_strFileName, CAssetObject* a_pAsset)
+{
+	MUFFIN.GetAssetsPoolMgr()->AddAsset(a_strFileName, a_pAsset);
+}
+
 CAssetsPool::CAssetsPool()
 {
 	this->m_vecWorker.clear();
+	this->m_mapExistedAssets.clear();
 }
 
 CAssetsPool::~CAssetsPool()
@@ -107,5 +118,35 @@ void CAssetsPool::PushFinishedTask(TLinkedNode<SLoadAssetsTask*>* a_pNode)
 	this->m_Lock2Finished.Lock();
 	this->m_TaskFinishedList.PushBack(a_pNode);
 	this->m_Lock2Finished.UnLock();
+}
+
+void CAssetsPool::AddAsset(tstring a_strFileName, CAssetObject* a_pAsset)
+{
+	this->m_Lock2ExistedMap.Lock();
+
+	hash_map<tstring, CAssetObject*>::const_iterator iter = this->m_mapExistedAssets.find(a_strFileName);
+	if (iter == this->m_mapExistedAssets.end())
+	{
+		this->m_mapExistedAssets[a_strFileName] = a_pAsset;
+	}
+	
+	this->m_Lock2ExistedMap.UnLock();
+}
+
+CAssetObject* CAssetsPool::FindAsset(tstring a_strFileName)
+{
+	CAssetObject* pAsset = NULL;
+
+	this->m_Lock2ExistedMap.Lock();
+
+	hash_map<tstring, CAssetObject*>::const_iterator iter = this->m_mapExistedAssets.find(a_strFileName);
+	if (iter != this->m_mapExistedAssets.end())
+	{
+		pAsset = iter->second;
+	}
+
+	this->m_Lock2ExistedMap.UnLock();
+
+	return pAsset;
 }
 

@@ -4,6 +4,8 @@
 #include "AssetsDefine.h"
 
 extern T_DLL_EXPORT SLoadAssetsTask* CreateLoadAssetsTask();
+extern T_DLL_EXPORT CAssetObject* FindExistedAsset(tstring a_strFileName);
+extern T_DLL_EXPORT void AddExistedAsset(tstring a_strFileName, CAssetObject* a_pAsset);
 
 class CAssetsPool
 {
@@ -19,6 +21,8 @@ private:
 	TThreadCriticalSection m_Lock2Waitting;
 	TThreadCriticalSection m_Lock2Finished;
 
+	hash_map<tstring, CAssetObject*> m_mapExistedAssets;
+	TThreadCriticalSection m_Lock2ExistedMap;
 
 public:
 	CAssetsPool();
@@ -31,5 +35,8 @@ public:
 
 	TLinkedNode<SLoadAssetsTask*>* PickATask();
 	void PushFinishedTask(TLinkedNode<SLoadAssetsTask*>* a_pNode);
+
+	void AddAsset(tstring a_strFileName, CAssetObject* a_pAsset);
+	CAssetObject* FindAsset(tstring a_strFileName);
 };
 

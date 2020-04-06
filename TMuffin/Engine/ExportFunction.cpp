@@ -30,6 +30,11 @@ TMUFFIN_REGISTER_CALLBACK(TMuffin_RegisterGameLogicCallBack, MuffinGameLogicCall
 
 #undef TMUFFIN_REGISTER_CALLBACK
 
+T_DLL_EXPORT f64 TMuffin_GetAppTime()
+{
+	return glfwGetTime();
+}
+
 f64 TMuffin_GetNowFrameTime()
 {
 	return MUFFIN.GetNowFrameTime();
