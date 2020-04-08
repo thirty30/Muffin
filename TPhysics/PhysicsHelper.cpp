@@ -211,6 +211,17 @@ void doSphere2Cloth(CPhysicsObject* a_pSrcObj, CPhysicsObject* a_pTarObj, SColli
 		{
 			return;
 		}
+		if (pSrcCollider->m_bIsTrigger == true || pTarCollider->m_bIsTrigger == true)
+		{
+			return;
+		}
+		if (pRB == NULL || pSB == NULL)
+		{
+			return;
+		}
+
+
+
 		CSoftBodyNode* pNode = pSB->GetNode(nIdx);
 		glm::vec3 vSrcV = pRB->m_vVelocity;
 		glm::vec3 vTarV = pNode->m_vVelocity;

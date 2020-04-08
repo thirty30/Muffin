@@ -48,7 +48,8 @@ void MuffinMainLoop()
 
 		// Physics loop
 		{
-			MUFFIN.GetPhysicsWorld()->PhysicsLoop(MUFFIN.GetDeltaFrameTime());
+			//MUFFIN.GetPhysicsWorld()->PhysicsLoop(MUFFIN.GetDeltaFrameTime());
+			MUFFIN.GetPhysicsWorld()->PhysicsLoop(0.02f);
 			if (pExternalPhysicsCallBack != NULL) 
 			{
 				pExternalPhysicsCallBack(); 

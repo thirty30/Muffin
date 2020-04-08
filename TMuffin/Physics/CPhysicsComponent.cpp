@@ -24,7 +24,15 @@ void CPhysicsComponent::Init()
 		}
 		if (this->m_strBodyName == "SoftBody")
 		{
-			this->m_phyObj.CreateBody<CSoftBody>();
+			SClothInfo info;
+			info.m_fNodeMass = this->m_fMass;
+			info.m_fSpringConstant = this->m_fSpringConstant;
+			info.m_nNodeNumAcross = this->m_nAcrossNodeNum;
+			info.m_nNodeNumDown = this->m_nDownNodeNum;
+			info.m_vCornerA = this->m_vCornerA;
+			info.m_vCornerB = this->m_vCornerB;
+			info.m_vDownDir = this->m_vDownDir;
+			this->m_phyObj.CreateBody<CSoftBody>()->Init(info);
 		}
 	}
 	if (this->m_phyObj.GetColliderType() == E_NULL_COLLIDER)
@@ -50,6 +58,21 @@ void CPhysicsComponent::Init()
 			pCollider->m_vSize = this->m_vSize;
 			pCollider->m_bIsTrigger = this->m_bIsTrigger;
 			pCollider->m_fElastic = this->m_fElastic;
+		}
+		if (this->m_strColliderName == "Cloth")
+		{
+			SClothInfo info;
+			info.m_fNodeMass = this->m_fMass;
+			info.m_fSpringConstant = this->m_fSpringConstant;
+			info.m_nNodeNumAcross = this->m_nAcrossNodeNum;
+			info.m_nNodeNumDown = this->m_nDownNodeNum;
+			info.m_vCornerA = this->m_vCornerA;
+			info.m_vCornerB = this->m_vCornerB;
+			info.m_vDownDir = this->m_vDownDir;
+			CColliderCloth* pCollider = this->m_phyObj.CreateCollider<CColliderCloth>();
+			pCollider->m_bIsTrigger = this->m_bIsTrigger;
+			pCollider->m_fElastic = this->m_fElastic;
+			pCollider->Init(info);
 		}
 	}
 	this->m_phyObj.m_strTag = this->m_strTag;

@@ -22,6 +22,13 @@ public:
 	f32 m_fElastic;
 	tbool m_bIsTrigger;
 	tstring m_strTag;
+	f32 m_fMass;
+	f32 m_fSpringConstant;
+	n32 m_nAcrossNodeNum;
+	n32 m_nDownNodeNum;
+	glm::vec3 m_vCornerA;
+	glm::vec3 m_vCornerB;
+	glm::vec3 m_vDownDir;
 
 	T_SCS
 		T_SCP(m_strBodyName, tstring)
@@ -36,6 +43,13 @@ public:
 		T_SCP(m_fElastic, f64)
 		T_SCP(m_bIsTrigger, tbool)
 		T_SCP(m_strTag, tstring)
+		T_SCP(m_fMass, f64)
+		T_SCP(m_fSpringConstant, f64)
+		T_SCP(m_nAcrossNodeNum, n32)
+		T_SCP(m_nDownNodeNum, n32)
+		T_SCP(m_vCornerA, glm::vec3)
+		T_SCP(m_vCornerB, glm::vec3)
+		T_SCP(m_vDownDir, glm::vec3)
 	T_SCE
 
 public:

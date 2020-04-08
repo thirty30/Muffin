@@ -126,3 +126,31 @@ void CGraphicsComponent::SetRenderMode(ERenderMode a_eMode)
 		this->m_nRenderMode = GL_FILL;
 	}
 }
+
+void CGraphicsComponent::BindMesh()
+{
+	glGenVertexArrays(1, &(this->m_pMesh->m_nVAOID));	// Ask OpenGL for a new buffer ID
+	glBindVertexArray(this->m_pMesh->m_nVAOID);	// "Bind" this buffer: "make this the 'current' VAO buffer
+
+	// Copy the vertices into the video card
+	glGenBuffers(1, &(this->m_pMesh->m_nVertexBufferID));
+	glBindBuffer(GL_ARRAY_BUFFER, this->m_pMesh->m_nVertexBufferID);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(SMeshVertex) * this->m_pMesh->m_nVertexCount, (GLvoid*)this->m_pMesh->m_pVertices, GL_STATIC_DRAW);
+
+	// Copy the index buffer into the video card
+	glGenBuffers(1, &(this->m_pMesh->m_nTriangleBufferID));
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->m_pMesh->m_nTriangleBufferID);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(u32) * this->m_pMesh->m_nTriangleIndexCount, (GLvoid*)this->m_pMesh->m_pTriangleIndices, GL_STATIC_DRAW);
+
+	// Now that all the parts are set up, set the VAO to zero
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
+void CGraphicsComponent::ReBindVertices()
+{
+	glBindBuffer(GL_ARRAY_BUFFER, this->m_pMesh->GetVertexBufferID());
+	glBufferData(GL_ARRAY_BUFFER, sizeof(SMeshVertex) * this->m_pMesh->m_nVertexCount, (GLvoid*)this->m_pMesh->m_pVertices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}

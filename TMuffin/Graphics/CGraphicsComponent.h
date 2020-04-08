@@ -36,6 +36,9 @@ public:
 
 	T_INLINE void SetMaterial(CMaterial* a_pMaterial) { this->m_pMaterial = a_pMaterial; }
 	T_INLINE CMaterial* GetMaterial() { return this->m_pMaterial; }
+
+	void BindMesh();
+	void ReBindVertices();
 };
 
 
