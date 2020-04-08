@@ -146,7 +146,9 @@ void CGraphicsWorld::RenderObject(CCamera* a_pCamera)
 		{
 			continue;
 		}
-		
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 		CStencilComponent* pStencil = pGameObj->GetComponent<CStencilComponent>();
 		if (pStencil != NULL)
 		{
