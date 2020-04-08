@@ -1,0 +1,13 @@
+{
+	"VertexShader":"../Assets/shaders/UVAnimationVertexShader.glsl",
+	"FragmentShader":"../Assets/shaders/UVAnimationFragmentShader.glsl",
+	"MaterialData":
+	[
+		{"Name":"DiffuseMap", "Tag":"Texture", "Value":"../Assets/Textures/fire2.png"},
+		{"Name":"AutoFloatOffset", "Tag":"AutoFloat", "Value":0.02},
+		{"Name":"AcrossNum", "Tag":"Int", "Value":4},
+		{"Name":"DownNum", "Tag":"Int", "Value":4},
+		{"Name":"FramePerSecond", "Tag":"Int", "Value":15}
+	]
+}
+

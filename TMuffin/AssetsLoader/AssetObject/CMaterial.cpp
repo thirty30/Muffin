@@ -2,6 +2,7 @@
 #include "GameObject/CGameObject.h"
 #include "Graphics/FBO/CFBOComponent.h"
 #include "CTexture.h"
+#include "Engine/Engine.h"
 
 CMaterialParam::CMaterialParam()
 {
@@ -10,6 +11,8 @@ CMaterialParam::CMaterialParam()
 	TMemzero(this->m_nData, 0);
 	TMemzero(this->m_fData, 0);
 	this->m_nULID = -1;
+	this->m_nInc = 0;
+	this->m_fInc = 0.0f;
 }
 
 CMaterialParam::~CMaterialParam()
@@ -172,6 +175,30 @@ tbool CMaterial::LoadToMemory(const tcchar* a_strFileName)
 			pParam->m_fData[2] = (tIter + 2)->GetFloat();
 			pParam->m_fData[3] = (tIter + 3)->GetFloat();
 		}
+		else if (strTag == "AutoFloat")
+		{
+			if (rValue.IsFloat() == false) { return false; }
+			pParam->m_eType = E_MPVT_AUTO_FLOAT;
+			pParam->m_fData[0] = rValue.GetFloat();
+		}
+		else if (strTag == "AutoInt")
+		{
+			if (rValue.IsInt() == false) { return false; }
+			pParam->m_eType = E_MPVT_AUTO_INT;
+			pParam->m_nData[0] = rValue.GetInt();
+		}
+		else if (strTag == "AutoDeltaTime")
+		{
+			pParam->m_eType = E_MPVT_AUTO_DLETA_TIME;
+		}
+		else if (strTag == "FrameDeltaTime")
+		{
+			pParam->m_eType = E_MPVT_FRAME_DLETA_TIME;
+		}
+		else if (strTag == "GameNowTime")
+		{
+			pParam->m_eType = E_MPVT_GAME_NOW_TIME;
+		}
 #pragma endregion regionName
 
 	}
@@ -267,6 +294,30 @@ T_INLINE void CMaterial::RenderMaterial(CGameObject* a_pGameObject, GLuint a_nSk
 			break;
 		case E_MPVT_FLOAT_VEC4:
 			glUniform4f(pParam->m_nULID, pParam->m_fData[0], pParam->m_fData[1], pParam->m_fData[2], pParam->m_fData[3]);
+			break;
+		case E_MPVT_AUTO_FLOAT:
+		{
+			glUniform1f(pParam->m_nULID, pParam->m_fInc);
+			pParam->m_fInc += pParam->m_fData[0];
+		}
+		break;
+		case E_MPVT_AUTO_INT:
+		{
+			glUniform1i(pParam->m_nULID, pParam->m_nInc);
+			pParam->m_nInc += pParam->m_nData[0];
+		}
+		break;
+		case E_MPVT_AUTO_DLETA_TIME:
+		{
+			pParam->m_fInc += MUFFIN.GetDeltaFrameTime();
+			glUniform1f(pParam->m_nULID, pParam->m_fInc);
+		}
+		break;
+		case E_MPVT_FRAME_DLETA_TIME:
+			glUniform1f(pParam->m_nULID, MUFFIN.GetDeltaFrameTime());
+			break;
+		case E_MPVT_GAME_NOW_TIME:
+			glUniform1f(pParam->m_nULID, (f32)MUFFIN.GetNowFrameTime());
 			break;
 		default:
 			break;

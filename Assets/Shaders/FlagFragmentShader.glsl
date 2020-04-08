@@ -34,22 +34,11 @@ uniform vec4 un_vSpecularColour;
 uniform vec4 un_vEyeLocation;
 uniform int un_nLightNum;
 uniform sLight un_LightArray[80];
-
-///////////////////////
 uniform sampler2D DiffuseMap;
-uniform sampler2D EffectMap;
-uniform float Time1;
-uniform vec2 Time2;
-uniform vec3 Time3;
-uniform vec4 Time4;
-uniform int Time5;
-uniform vec2 Time6;
-uniform vec3 Time7;
-uniform vec4 Time8;
 
 void main()  
 {
-	vec3 vVertexMaterialColour = in_fColour.rgb;
+	vec3 vVertexMaterialColour = texture( DiffuseMap, in_fUVx2.st ).rgb;
 	vec3 vVertexNormal = normalize(in_fNormal.xyz);
 	vec3 vVertexWorldPos = in_fVertWorldLocation.xyz;
 	vec4 vFinalObjectColour = vec4( 0.0f, 0.0f, 0.0f, 1.0f );
@@ -68,9 +57,9 @@ void main()
 		if (objCurLight.nLightType == LIGHT_TYPE_DIRECTIONAL)	// ONLY direction, No position
 		{
 			float fDotProduct = dot((-objCurLight.vDirection.xyz), vVertexNormal.xyz);
-			vLightDiffuse = objCurLight.vDiffuse.rgb * max(0.0f, fDotProduct);
+			vLightDiffuse = objCurLight.vDiffuse.rgb * max(0.15f, fDotProduct);
 			//vLightDiffuse *= objCurLight.vDiffuse.rgb;
-			vFinalObjectColour.rgb += (vVertexMaterialColour.rgb * vLightDiffuse.rgb) + (un_vSpecularColour.rgb  * vLightSpecular.rgb);
+			vFinalObjectColour.rgb += (vVertexMaterialColour.rgb * vLightDiffuse.rgb * 1.15f) + (un_vSpecularColour.rgb  * vLightSpecular.rgb);
 		}
 		else if (objCurLight.nLightType == LIGHT_TYPE_POINT)
 		{
@@ -146,5 +135,6 @@ void main()
 			vFinalObjectColour.rgb += (vVertexMaterialColour.rgb * vLightDiffuse.rgb) + (un_vSpecularColour.rgb * vLightSpecular.rgb);
 		}
 	}
+
 	out_pixelColour = vFinalObjectColour;
 }

@@ -5,6 +5,8 @@
 	[
 		{"Name":"DiffuseMap", "Tag":"Texture", "Value":"../Assets/Textures/Diffuse.png"},
 		{"Name":"EffectMap", "Tag":"Texture", "Value":"../Assets/Textures/circle.png"},
+		{"Name":"FBOMap", "Tag":"FBOTexture"},
+		{"Name":"SkyBoxMap", "Tag":"SkyBoxCubeMap"},
 		{"Name":"Value1", "Tag":"Float", "Value":1.0},
 		{"Name":"Value2", "Tag":"FloatVec2", "Value":[1.0, 2.0]},
 		{"Name":"Value3", "Tag":"FloatVec3", "Value":[1.0, 2.0, 3.0]},
@@ -12,7 +14,12 @@
 		{"Name":"Value5", "Tag":"Int", "Value":1},
 		{"Name":"Value6", "Tag":"IntVec2", "Value":[1, 2]},
 		{"Name":"Value7", "Tag":"IntVec3", "Value":[1, 2, 3]},
-		{"Name":"Value8", "Tag":"IntVec4", "Value":[1, 2, 3, 4]}
+		{"Name":"Value8", "Tag":"IntVec4", "Value":[1, 2, 3, 4]},
+		{"Name":"Value9", "Tag":"AutoFloat", "Value":0.1},
+		{"Name":"Value10", "Tag":"AutoInt", "Value":1},
+		{"Name":"Value11", "Tag":"AutoDeltaTime"},
+		{"Name":"Value11", "Tag":"FrameDeltaTime"},
+		{"Name":"Value12", "Tag":"GameNowTime"}
 	]
 }
 

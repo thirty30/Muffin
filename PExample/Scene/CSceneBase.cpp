@@ -130,8 +130,6 @@ tbool CSceneBase::LoadSceneGameObject(const rapidjson::Value::ConstObject& a_rNo
 			{
 				if (iterProperty->value.IsString() == true)
 				{
-					tstring a = iterProperty->name.GetString();
-					tstring b = iterProperty->value.GetString();
 					pCom->SetProperty(iterProperty->name.GetString(), tstring(iterProperty->value.GetString()));
 				}
 				else if(iterProperty->value.IsInt() == true)
@@ -140,17 +138,39 @@ tbool CSceneBase::LoadSceneGameObject(const rapidjson::Value::ConstObject& a_rNo
 				}
 				else if (iterProperty->value.IsFloat() == true)
 				{
-					f32 a = iterProperty->value.GetFloat();
-					tstring b = iterProperty->name.GetString();
-					pCom->SetProperty(iterProperty->name.GetString(), a);
+					pCom->SetProperty(iterProperty->name.GetString(), iterProperty->value.GetFloat());
+				}
+				else if (iterProperty->value.IsBool() == true)
+				{
+					pCom->SetProperty(iterProperty->name.GetString(), iterProperty->value.GetBool());
 				}
 				else if (iterProperty->value.IsArray() == true)
 				{
-					glm::vec3 v;
-					v.x = iterProperty->value.GetArray().Begin()->GetFloat();
-					v.y = (iterProperty->value.GetArray().Begin()+1)->GetFloat();
-					v.z = (iterProperty->value.GetArray().Begin()+2)->GetFloat();
-					pCom->SetProperty(iterProperty->name.GetString(), v);
+					n32 nLen = iterProperty->value.GetArray().Size();
+					if (nLen == 2)
+					{
+						glm::vec2 v;
+						v.x = iterProperty->value.GetArray().Begin()->GetFloat();
+						v.y = (iterProperty->value.GetArray().Begin() + 1)->GetFloat();
+						pCom->SetProperty(iterProperty->name.GetString(), v);
+					}
+					else if (nLen == 3)
+					{
+						glm::vec3 v;
+						v.x = iterProperty->value.GetArray().Begin()->GetFloat();
+						v.y = (iterProperty->value.GetArray().Begin() + 1)->GetFloat();
+						v.z = (iterProperty->value.GetArray().Begin() + 2)->GetFloat();
+						pCom->SetProperty(iterProperty->name.GetString(), v);
+					}
+					else if (nLen == 4)
+					{
+						glm::vec4 v;
+						v.x = iterProperty->value.GetArray().Begin()->GetFloat();
+						v.y = (iterProperty->value.GetArray().Begin() + 1)->GetFloat();
+						v.z = (iterProperty->value.GetArray().Begin() + 2)->GetFloat();
+						v.w = (iterProperty->value.GetArray().Begin() + 3)->GetFloat();
+						pCom->SetProperty(iterProperty->name.GetString(), v);
+					}
 				}
 			}
 		}

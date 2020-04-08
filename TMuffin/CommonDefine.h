@@ -71,6 +71,12 @@ enum EMaterialParamVariableType
 	E_MPVT_FLOAT_VEC2,
 	E_MPVT_FLOAT_VEC3,
 	E_MPVT_FLOAT_VEC4,
+
+	E_MPVT_AUTO_FLOAT,
+	E_MPVT_AUTO_INT,
+	E_MPVT_AUTO_DLETA_TIME,
+	E_MPVT_FRAME_DLETA_TIME,
+	E_MPVT_GAME_NOW_TIME,
 };
 
 typedef void (*MuffinKeyCallBack)(n32 a_nKey, n32 a_nScancode, n32 a_nAction, n32 a_nMods);

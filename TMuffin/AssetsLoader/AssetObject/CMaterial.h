@@ -15,6 +15,8 @@ public:
 	CTexture* m_pTexture;
 	n32 m_nData[4];
 	f32 m_fData[4];
+	n32 m_nInc;
+	f32 m_fInc;
 
 	CMaterialParam();
 	~CMaterialParam();

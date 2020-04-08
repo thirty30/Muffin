@@ -14,7 +14,7 @@ in vec4 vNormal;
 in vec4 vUVx2;
 
 //out variables
-flat out vec4 in_fColour;
+out vec4 in_fColour;
 out vec4 in_fVertWorldLocation;    //location of the vertex in the world
 out vec4 in_fNormal;
 out vec4 in_fUVx2;
