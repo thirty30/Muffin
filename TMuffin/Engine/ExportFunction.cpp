@@ -4,6 +4,7 @@
 #include "Camera/CCameraManager.h"
 #include "Graphics/SkyBox/CSkyBox.h"
 #include "Graphics/CGraphicsWorld.h"
+#include "Audio/CAudioManager.h"
 
 tbool TMuffin_Initialize(n32 a_nWinWidth, n32 a_nWinHigh, const tcchar* a_strWinName)
 {
@@ -64,5 +65,25 @@ MuffinCreateComponent pExternalCreateComponent = NULL;
 void TMuffin_RegisterComponent(MuffinCreateComponent a_fuc)
 {
 	pExternalCreateComponent = a_fuc;
+}
+
+T_DLL_EXPORT void TMuffin_LoadAudio(tstring a_strName, const tcchar* a_strFilePath)
+{
+	MUFFIN.GetAudioMgr()->LoadAudio(a_strName, a_strFilePath);
+}
+
+T_DLL_EXPORT void TMuffin_LoadAudioASync(tstring a_strName, const tcchar* a_strFilePath)
+{
+	MUFFIN.GetAudioMgr()->LoadAudio(a_strName, a_strFilePath);
+}
+
+T_DLL_EXPORT void TMuffin_PlayAudio(tstring a_strName, tbool a_bIsLoop, f32 a_fVolume)
+{
+	MUFFIN.GetAudioMgr()->Play(a_strName, a_bIsLoop, a_fVolume);
+}
+
+T_DLL_EXPORT void TMuffin_StopAudio(tstring a_strName)
+{
+	MUFFIN.GetAudioMgr()->Stop(a_strName);
 }
 

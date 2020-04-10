@@ -6,6 +6,7 @@ enum EAssetType
 	EAT_TEXTURE,
 	EAT_MATERIAL,
 	EAT_ANIMATION,
+	EAT_AUDIO,
 };
 
 class T_DLL_EXPORT CAssetObject

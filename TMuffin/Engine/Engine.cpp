@@ -13,6 +13,7 @@
 #include "Camera/CCamera.h"
 #include "Animation/CAnimation.h"
 #include "Physics/CPhysicsComponent.h"
+#include "Audio/CAudioManager.h"
 
 CMuffin MUFFIN;
 
@@ -23,6 +24,7 @@ tbool MuffinInit(n32 a_nWinWidth, n32 a_nWinHigh, const tcchar* a_strWinName)
 		return false;
 	}
 	MUFFIN.GetAssetsPoolMgr()->CreateWorker(3);
+	MUFFIN.GetAudioMgr()->Init();
 	return true;
 }
 
@@ -65,6 +67,7 @@ void MuffinMainLoop()
 
 void MuffinClear()
 {
+	MUFFIN.GetAudioMgr()->Clear();
 	MUFFIN.GetWindow()->Clear();
 }
 

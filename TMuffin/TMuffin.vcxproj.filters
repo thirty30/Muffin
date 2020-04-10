@@ -80,6 +80,8 @@
     </ClCompile>
     <ClCompile Include="GameObject\CGameObjectManager.cpp" />
     <ClCompile Include="Physics\CPhysicsComponent.cpp" />
+    <ClCompile Include="Audio\CAudioManager.cpp" />
+    <ClCompile Include="AssetsLoader\AssetObject\CAudio.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\CCamera.h">
@@ -177,6 +179,8 @@
     <ClInclude Include="AssetsLoader\AssetsInclude.h" />
     <ClInclude Include="GameObject\CGameObjectManager.h" />
     <ClInclude Include="Physics\CPhysicsComponent.h" />
+    <ClInclude Include="Audio\CAudioManager.h" />
+    <ClInclude Include="AssetsLoader\AssetObject\CAudio.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Camera">

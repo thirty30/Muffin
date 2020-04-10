@@ -7,6 +7,7 @@
 #include "Light/CLightManager.h"
 #include "AssetsLoader/CAssetsPool.h"
 #include "../../TPhysics/PhysicsHelper.h"
+#include "Audio/CAudioManager.h"
 
 CMuffin::CMuffin()
 {
@@ -22,6 +23,7 @@ CMuffin::CMuffin()
 	this->m_pLightManager = new CLightManager();
 	this->m_pAssetsPoolManager = new CAssetsPool();
 	this->m_pPhysicsWorld = new CPhysicsWorld();
+	this->m_pAudioManager = new CAudioManager();
 
 }
 
@@ -35,6 +37,7 @@ CMuffin::~CMuffin()
 	delete this->m_pLightManager;
 	delete this->m_pAssetsPoolManager;
 	delete this->m_pPhysicsWorld;
+	delete this->m_pAudioManager;
 
 	this->m_pGUIDMaker = NULL;
 	this->m_pWindow = NULL;
@@ -44,6 +47,7 @@ CMuffin::~CMuffin()
 	this->m_pLightManager = NULL;
 	this->m_pAssetsPoolManager = NULL;
 	this->m_pPhysicsWorld = NULL;
+	this->m_pAudioManager = NULL;
 }
 
 void CMuffin::Tick()

@@ -5,3 +5,4 @@
 #include "AssetObject/CMesh.h"
 #include "AssetObject/CTexture.h"
 #include "AssetObject/CMaterial.h"
+#include "AssetObject/CAudio.h"

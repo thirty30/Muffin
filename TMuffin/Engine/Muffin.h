@@ -11,6 +11,7 @@ class CCameraManager;
 class CLightManager;
 class CPhysicsReactor;
 class CAssetsPool;
+class CAudioManager;
 
 class CMuffin
 {
@@ -27,6 +28,7 @@ private:
 	CLightManager* m_pLightManager;
 	CAssetsPool* m_pAssetsPoolManager;
 	CPhysicsWorld* m_pPhysicsWorld;
+	CAudioManager* m_pAudioManager;
 
 
 public:
@@ -46,6 +48,7 @@ public:
 	T_INLINE CLightManager* GetLightMgr() { return this->m_pLightManager; }
 	T_INLINE CAssetsPool* GetAssetsPoolMgr() { return this->m_pAssetsPoolManager; }
 	T_INLINE CPhysicsWorld* GetPhysicsWorld() { return this->m_pPhysicsWorld; }
+	T_INLINE CAudioManager* GetAudioMgr() { return this->m_pAudioManager; }
 
 
 public:

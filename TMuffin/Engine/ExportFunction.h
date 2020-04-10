@@ -38,3 +38,9 @@ T_DLL_EXPORT void TMuffin_SetSkyBox(const tcchar* a_strMeshFile,
 typedef CComponentBase* (*MuffinCreateComponent)(CGameObject* a_pObj, tstring a_strClassName);
 extern MuffinCreateComponent pExternalCreateComponent;
 T_DLL_EXPORT void TMuffin_RegisterComponent(MuffinCreateComponent a_fuc);
+
+T_DLL_EXPORT void TMuffin_LoadAudio(tstring a_strName, const tcchar* a_strFilePath);
+T_DLL_EXPORT void TMuffin_LoadAudioASync(tstring a_strName, const tcchar* a_strFilePath);
+T_DLL_EXPORT void TMuffin_PlayAudio(tstring a_strName, tbool a_bIsLoop, f32 a_fVolume = 0.2f);
+T_DLL_EXPORT void TMuffin_StopAudio(tstring a_strName);
+

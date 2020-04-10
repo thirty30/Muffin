@@ -21,6 +21,8 @@
   <ItemGroup>
     <ClCompile Include="Animation\CAnimation.cpp" />
     <ClCompile Include="Animation\CAnimator.cpp" />
+    <ClCompile Include="AssetsLoader\AssetObject\CAudio.cpp" />
+    <ClCompile Include="Audio\CAudioManager.cpp" />
     <ClCompile Include="Camera\CCamera.cpp" />
     <ClCompile Include="Camera\CCameraManager.cpp" />
     <ClCompile Include="dllmain.cpp" />
@@ -60,8 +62,10 @@
     <ClInclude Include="Animation\CAnimation.h" />
     <ClInclude Include="Animation\CAnimator.h" />
     <ClInclude Include="AssetsLoader\AssetObject\CAssetObject.h" />
+    <ClInclude Include="AssetsLoader\AssetObject\CAudio.h" />
     <ClInclude Include="AssetsLoader\AssetsInclude.h" />
     <ClInclude Include="AssetsLoader\CAssetsLoader.h" />
+    <ClInclude Include="Audio\CAudioManager.h" />
     <ClInclude Include="Camera\CCamera.h" />
     <ClInclude Include="Camera\CCameraManager.h" />
     <ClInclude Include="CommonDefine.h" />
@@ -185,7 +189,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;FreeImage.lib;assimp-vc142-mt.lib;TCore.lib;TPhysics.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;FreeImage.lib;assimp-vc142-mt.lib;TCore.lib;TPhysics.lib;fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy /y "$(SolutionDir)Dependence\dll\x64\*.dll" "$(SolutionDir)bin_debug_x64"</Command>
@@ -245,7 +249,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;FreeImage.lib;assimp-vc142-mt.lib;TCore.lib;TPhysics.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;FreeImage.lib;assimp-vc142-mt.lib;TCore.lib;TPhysics.lib;fmod_vc.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy /y $(SolutionDir)Dependence\dll\x64\*.dll $(SolutionDir)bin_release_x64</Command>

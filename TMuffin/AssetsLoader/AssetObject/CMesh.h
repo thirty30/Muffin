@@ -74,9 +74,5 @@ public:
 protected:
 	virtual tbool LoadToMemory(const tcchar* a_strFileName) override;
 	virtual tbool InitAfterLoad() override;
-	
-	friend class CAssetsLoader;
-	friend class CAssetsWorker;
-	friend class CAssetsPool;
 };
 

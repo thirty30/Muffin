@@ -47,7 +47,7 @@ tbool CMaterial::LoadToMemory(const tcchar* a_strFileName)
 #define JSON_TEXT_LENGTH 12040
 	tcchar* pJsonText = new tcchar[JSON_TEXT_LENGTH];
 	TMemzero(pJsonText, JSON_TEXT_LENGTH);
-	ifstream jsonFile(a_strFileName);
+	ifstream jsonFile(a_strFileName, ifstream::in | ios::binary);
 	if (jsonFile.is_open() == false)
 	{
 		return false;
