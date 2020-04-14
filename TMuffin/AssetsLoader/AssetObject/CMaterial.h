@@ -38,7 +38,8 @@ public:
 
 	CMaterialParam* CreateAMaterialParam();
 	template<typename T>
-	void SetParam(n32 a_nID, T a_v1, T a_v2, T a_v3, T a_v4);
+	void SetParam(n32 a_nIDX, T a_v1, T a_v2, T a_v3, T a_v4);
+	void ResetParam(n32 a_nIDX);
 
 protected:
 	virtual tbool LoadToMemory(const tcchar* a_strFileName) override;
