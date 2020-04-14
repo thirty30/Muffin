@@ -331,3 +331,14 @@ CMaterialParam* CMaterial::CreateAMaterialParam()
 	this->m_vecParams.push_back(pNew);
 	return pNew;
 }
+
+void CMaterial::ResetParam(n32 a_nIDX)
+{
+	if (a_nIDX < 0 || a_nIDX >= this->m_vecParams.size())
+	{
+		return;
+	}
+	CMaterialParam* pParam = this->m_vecParams[a_nIDX];
+	pParam->m_fInc = 0.0f;
+	pParam->m_nInc - 0;
+}
