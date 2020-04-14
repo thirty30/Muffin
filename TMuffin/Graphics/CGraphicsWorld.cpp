@@ -19,6 +19,7 @@ CGraphicsWorld::CGraphicsWorld()
 	this->m_mapID2GraphicsObj.clear();
 	this->m_mapID2FBOObj.clear();
 	this->m_pSkyBox = NULL;
+	this->m_vecGizmo.clear();
 }
 
 CGraphicsWorld::~CGraphicsWorld()
@@ -30,6 +31,7 @@ CGraphicsWorld::~CGraphicsWorld()
 		delete this->m_pSkyBox;
 		this->m_pSkyBox = NULL;
 	}
+	this->m_vecGizmo.clear();
 }
 
 void CGraphicsWorld::AddGraphicsObject(CGraphicsComponent* a_pComponent)
@@ -89,6 +91,13 @@ void CGraphicsWorld::GraphicsLoop()
 	}
 	this->RenderObject(pCamera);
 	this->RenderFBO();
+
+
+	for (int i = 0; i < this->m_vecGizmo.size(); i++)
+	{
+		this->m_vecGizmo[i].Draw();
+	}
+	this->m_vecGizmo.clear();
 }
 
 void CGraphicsWorld::RenderSkyBox(glm::mat4 a_matV, glm::mat4 a_matP)
@@ -288,5 +297,16 @@ void CGraphicsWorld::RenderFBO()
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
+}
+
+void CGraphicsWorld::DrawLine(glm::vec3 a_vStartPoint, glm::vec3 a_vEndPoint, glm::vec3 a_vColor, f32 a_fLineWidth /*= 1.0f*/)
+{
+	CGizmo gizmo;
+	gizmo.m_eType = GL_LINES;
+	gizmo.m_vColor = a_vColor;
+	gizmo.m_vecPoint.push_back(a_vStartPoint);
+	gizmo.m_vecPoint.push_back(a_vEndPoint);
+	gizmo.m_fLineWidth = a_fLineWidth;
+	this->m_vecGizmo.push_back(gizmo);
 }
 

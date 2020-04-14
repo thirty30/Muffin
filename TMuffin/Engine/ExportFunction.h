@@ -43,4 +43,5 @@ T_DLL_EXPORT void TMuffin_LoadAudio(tstring a_strName, const tcchar* a_strFilePa
 T_DLL_EXPORT void TMuffin_LoadAudioASync(tstring a_strName, const tcchar* a_strFilePath);
 T_DLL_EXPORT void TMuffin_PlayAudio(tstring a_strName, tbool a_bIsLoop, f32 a_fVolume = 0.2f);
 T_DLL_EXPORT void TMuffin_StopAudio(tstring a_strName);
+T_DLL_EXPORT void TMuffin_DrawLine(glm::vec3 a_vStartPoint, glm::vec3 a_vEndPoint, glm::vec3 a_vColor, f32 a_fLineWidth = 1.0f);
 

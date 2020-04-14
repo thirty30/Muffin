@@ -38,6 +38,7 @@
     <ClCompile Include="Graphics\CGraphicsComponent.cpp" />
     <ClCompile Include="Graphics\CGraphicsWorld.cpp" />
     <ClCompile Include="Graphics\FBO\CFBOComponent.cpp" />
+    <ClCompile Include="Graphics\Gizmo\CGizmo.cpp" />
     <ClCompile Include="Light\CLight.cpp" />
     <ClCompile Include="Light\CLightManager.cpp" />
     <ClCompile Include="LineTween\CLineTweenCurve.cpp" />
@@ -78,6 +79,7 @@
     <ClInclude Include="Graphics\CGraphicsComponent.h" />
     <ClInclude Include="Graphics\CGraphicsWorld.h" />
     <ClInclude Include="Graphics\FBO\CFBOComponent.h" />
+    <ClInclude Include="Graphics\Gizmo\CGizmo.h" />
     <ClInclude Include="Graphics\Stencil\CStencilComponent.h" />
     <ClInclude Include="Light\CLight.h" />
     <ClInclude Include="Light\CLightManager.h" />

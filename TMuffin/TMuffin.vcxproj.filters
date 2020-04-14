@@ -82,6 +82,7 @@
     <ClCompile Include="Physics\CPhysicsComponent.cpp" />
     <ClCompile Include="Audio\CAudioManager.cpp" />
     <ClCompile Include="AssetsLoader\AssetObject\CAudio.cpp" />
+    <ClCompile Include="Graphics\Gizmo\CGizmo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\CCamera.h">
@@ -181,6 +182,7 @@
     <ClInclude Include="Physics\CPhysicsComponent.h" />
     <ClInclude Include="Audio\CAudioManager.h" />
     <ClInclude Include="AssetsLoader\AssetObject\CAudio.h" />
+    <ClInclude Include="Graphics\Gizmo\CGizmo.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Camera">

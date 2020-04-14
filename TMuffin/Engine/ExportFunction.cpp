@@ -87,3 +87,8 @@ T_DLL_EXPORT void TMuffin_StopAudio(tstring a_strName)
 	MUFFIN.GetAudioMgr()->Stop(a_strName);
 }
 
+T_DLL_EXPORT void TMuffin_DrawLine(glm::vec3 a_vStartPoint, glm::vec3 a_vEndPoint, glm::vec3 a_vColor, f32 a_fLineWidth)
+{
+	MUFFIN.GetGraphicsWorld()->DrawLine(a_vStartPoint, a_vEndPoint, a_vColor, a_fLineWidth);
+}
+
